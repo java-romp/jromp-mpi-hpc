@@ -1,2 +1,2 @@
-rootProject.name = "java-mpi-template"
+rootProject.name = "java-mpi-hpc-calendula"
 
