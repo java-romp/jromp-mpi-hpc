@@ -73,6 +73,7 @@ fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
     }
 }
 
+createTaskWithNumProcesses("HelloMPI", 4, false)
 createTaskWithNumProcesses("Blocking", 6, true)
 createTaskWithNumProcesses("Burro", 6, true)
 createTaskWithNumProcesses("Cross", 4, true)

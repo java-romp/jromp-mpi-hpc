@@ -5,7 +5,7 @@
 # The script must be run from the root of the project.
 
 # Command to create a node allocation to run this script:
-# salloc --account=ule_formacion_9 --partition=formacion --qos=formacion --time=00:25:00 --cpus-per-task=32 --mem-per-cpu=1500
+# salloc --account=ule_formacion_9 --partition=formacion --qos=formacion --time=00:25:00 --cpus-per-task=32 --mem-per-cpu=1500 --nodelist=cn6001
 
 CURRENT_DIR=$PWD
 
@@ -17,9 +17,9 @@ cd 3rd-party/ompi &&
   ./configure \
     --prefix="$CURRENT_DIR"/libs/ompi \
     --enable-mpi-java \
-    --with-libevent=external \
-    --with-hwloc=external \
-    --with-pmix=external \
+    --with-libevent=internal \
+    --with-hwloc=internal \
+    --with-pmix=internal \
     --with-prrte=internal &&
   echo "Building Open MPI" &&
   make -j 8 all &&
