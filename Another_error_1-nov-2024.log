@@ -1,0 +1,179 @@
+Starting a Gradle Daemon, 6 busy and 4 incompatible and 19 stopped Daemons could not be reused, use --status for details
+> Task :compileJava
+
+BUILD SUCCESSFUL in 29s
+1 actionable task: 1 executed
+[1730463489.823001] [cn6009:2770695:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.823099] [cn6009:2770694:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.823166] [cn6009:2770708:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.845945] [cn6009:2770697:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.851008] [cn6009:2770702:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.854405] [cn6009:2770692:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.854480] [cn6009:2770701:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.855965] [cn6009:2770699:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.858627] [cn6009:2770696:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.864829] [cn6009:2770700:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.866078] [cn6009:2770690:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.869393] [cn6009:2770698:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.872785] [cn6009:2770706:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.872838] [cn6009:2770689:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.872976] [cn6009:2770693:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730463489.873019] [cn6009:2770691:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Number of threads: 4
+Rank 5: Before bcast
+Rank 3: Before bcast
+Rank 7: Before bcast
+Rank 10: Before bcast
+Rank 13: Before bcast
+Rank 11: Before bcast
+Number of threads: 4
+Rank 2: Before bcast
+Rank 6: Before bcast
+Rank 4: Before bcast
+Number of threads: 4
+Rank 12: Before bcast
+Number of threads: 4
+Rank 0: Before bcast
+Rank 1: Before bcast
+Rank 9: Before bcast
+Rank 14: Before bcast
+Rank 15: Before bcast
+Rank 8: Before bcast
+Rank 8: After bcast
+Rank 0: After bcast
+Rank 10: After bcast
+Rank 2: After bcast
+Rank 14: After bcast
+Rank 12: After bcast
+Rank 6: After bcast
+Rank 4: After bcast
+Rank 9: After bcast
+Rank 1: After bcast
+Rank 13: After bcast
+Rank 11: After bcast
+Rank 3: After bcast
+Rank 5: After bcast
+Rank 15: After bcast
+Rank 7: After bcast
+Rank 8: Inside single
+Rank 3: Inside single
+Rank 14: Inside single
+Rank 11: Inside single
+Rank 9: Inside single
+Rank 0: Inside single
+Rank 15: Inside single
+Rank 10: Inside single
+Rank 4: Inside single
+Rank 12: Inside single
+Rank 2: Inside single
+Rank 6: Inside single
+Rank 5: Inside single
+Rank 13: Inside single
+Rank 7: Inside single
+Rank 1: Inside single
+Rank 2: test = 0
+Rank 12: test = 0
+Rank 7: test = 0
+Rank 7: test = 0
+Rank 12: test = 0
+Rank 12: test = 0
+Rank 7: test = 0
+Rank 6: test = 0
+Rank 6: test = 0
+Rank 6: test = 0
+Rank 6: test = 0
+Rank 6: After parallel for
+Rank 12: test = 0
+Rank 12: After parallel for
+Rank 0: test = 0
+Rank 5: test = 0
+Rank 5: test = 0
+Rank 0: test = 0
+Rank 5: test = 0
+Rank 0: test = 0
+Rank 0: test = 0
+Rank 5: test = 0
+Rank 0: After parallel for
+Rank 5: After parallel for
+Rank 14: test = 0
+Rank 14: test = 0
+Rank 7: test = 0
+Rank 7: After parallel for
+Rank 13: test = 0
+Rank 13: test = 0
+Rank 13: test = 0
+Rank 13: test = 0
+Rank 13: After parallel for
+Rank 11: test = 0
+Rank 11: test = 0
+Rank 11: test = 0
+Rank 11: test = 0
+Rank 11: After parallel for
+Rank 1: test = 0
+Rank 2: test = 0
+Rank 2: test = 0
+Rank 9: test = 0
+Rank 9: test = 0
+Rank 3: test = 0
+Rank 3: test = 0
+Rank 3: test = 0
+Rank 3: test = 0
+Rank 3: After parallel for
+Rank 10: test = 0
+Rank 15: test = 0
+Rank 10: test = 0
+Rank 10: test = 0
+Rank 14: test = 0
+Rank 2: test = 0
+Rank 14: test = 0
+Rank 2: After parallel for
+Rank 14: After parallel for
+Rank 9: test = 0
+Rank 10: test = 0
+Rank 9: test = 0
+Rank 9: After parallel for
+Rank 10: After parallel for
+Rank 15: test = 0
+Rank 15: test = 0
+Rank 15: test = 0
+Rank 15: After parallel for
+Rank 1: test = 0
+Rank 1: test = 0
+Rank 1: test = 0
+Rank 1: After parallel for
+Rank 4: test = 0
+Rank 4: test = 0
+Rank 4: test = 0
+Rank 4: test = 0
+Rank 4: After parallel for
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x000014d37c90dd31 (sent by kill), pid=2770697, tid=2770713
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.2+13 (21.0.2+13) (build 21.0.2+13-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.2+13 (21.0.2+13-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, linux-amd64)
+# Problematic frame:
+# J 262 c1 jdk.internal.org.objectweb.asm.ByteVector.putUTF8(Ljava/lang/String;)Ljdk/internal/org/objectweb/asm/ByteVector; java.base@21.0.2 (144 bytes) @ 0x000014d37c90dd31 [0x000014d37c90d680+0x00000000000006b1]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/core.2770697)
+#
+# An error report file with more information is saved as:
+# /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/hs_err_pid2770697.log
+[5.559s][warning][os] Loading hsdis library failed
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+#

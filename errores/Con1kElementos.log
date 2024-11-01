@@ -1,0 +1,72 @@
+Starting a Gradle Daemon, 6 busy and 5 incompatible and 6 stopped Daemons could not be reused, use --status for details
+> Task :compileJava
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 executed
+1 node
+[1730474326.321700] [cn6009:2787627:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.321721] [cn6009:2787626:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.322461] [cn6009:2787623:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.328255] [cn6009:2787628:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.336304] [cn6009:2787625:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.336687] [cn6009:2787630:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.337948] [cn6009:2787624:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730474326.338075] [cn6009:2787629:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 1: Before bcast
+Rank 2: Before bcast
+Rank 3: Before bcast
+Rank 4: Before bcast
+Rank 7: Before bcast
+Rank 6: Before bcast
+Rank 5: Before bcast
+Rank 0: Before bcast
+Rank 7: After bcast
+Rank 0: After bcast
+Rank 2: After bcast
+Rank 4: After bcast
+Rank 6: After bcast
+Rank 5: After bcast
+Rank 3: After bcast
+Rank 1: After bcast
+Rank 7: Inside single
+Rank 2: Inside single
+Rank 0: Inside single
+Rank 4: Inside single
+Rank 6: Inside single
+Rank 5: Inside single
+Rank 3: Inside single
+Rank 1: Inside single
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x000014894c8d1c8d (sent by kill), pid=2787626, tid=2787634
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.2+13 (21.0.2+13) (build 21.0.2+13-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.2+13 (21.0.2+13-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, linux-amd64)
+# Problematic frame:
+# J 54 c1 java.lang.StringLatin1.indexOf([BIII)I java.base@21.0.2 (37 bytes) @ 0x000014894c8d1c8d [0x000014894c8d1980+0x000000000000030d]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/core.2787626)
+#
+# An error report file with more information is saved as:
+# /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/hs_err_pid2787626.log
+[2.105s][warning][os] Loading hsdis library failed
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+#
+Rank 2: After parallel for
+Rank 0: After parallel for
+Rank 4: After parallel for
+Rank 1: After parallel for
+Rank 6: After parallel for
+Rank 7: After parallel for
+Rank 5: After parallel for

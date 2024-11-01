@@ -60,20 +60,16 @@ public class FullParallel {
                  double[] localA = vars.<double[]>get("A").value();
                  double[] localB = vars.<double[]>get("B").value();
                  double[] localC = vars.<double[]>get("C").value();
-                 int test = 0;
 
                  for (int i = start; i < end; i++) {
                      for (int j = 0; j < N; j++) {
                          localC[i * N + j] = 0.0;
 
                          for (int k = 0; k < N; k++) {
-                             //localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
-                             test++;
+                             localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
                          }
                      }
                  }
-
-                 printf("Rank %d: test = %d\n", rank, test);
              })
              .single(false, vars -> printf("Rank %d: After parallel for\n", rank))
              .join();

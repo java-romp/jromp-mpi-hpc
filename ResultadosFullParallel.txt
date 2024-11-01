@@ -1,0 +1,3 @@
+Local:
+    - 3 procesos, 4 hilos, sin -Xint: 20.111639
+    - 3 procesos, 4 hilos, con -Xint: mucho

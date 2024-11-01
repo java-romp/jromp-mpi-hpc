@@ -14,6 +14,7 @@ module use /soft/calendula/icelake/rocky8/modules/
 module use /soft/calendula/icelake/rocky8/EB/modules/all/ &&
   module use /soft/calendula/icelake/rocky8/modules/ &&
   module load Java/21.0.2 &&
+  module load gradle_8.10.2 &&
   module load GCC/11.2.0 &&
   module load GCCcore/11.2.0 &&
   module load Autoconf/2.71-GCCcore-11.2.0 &&
@@ -21,7 +22,6 @@ module use /soft/calendula/icelake/rocky8/EB/modules/all/ &&
   module load libtool/2.4.6-GCCcore-11.2.0 &&
   module load flex/2.6.4-GCCcore-11.2.0 &&
   module load UCX/1.11.2-GCCcore-11.2.0 &&
-  module load gradle_8.10.2 &&
   module load Maven/3.9.7
 
 
