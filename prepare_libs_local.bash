@@ -6,20 +6,19 @@
 
 CURRENT_DIR=$PWD
 
-# Build ompi
-cd 3rd-party/ompi &&
-  echo "Building Open MPI" &&
-  ./autogen.pl &&
+# Build openmpi
+cd 3rd-party/openmpi-5.0.5 &&
   echo "Configuring Open MPI" &&
   ./configure \
     --prefix="$CURRENT_DIR"/libs/ompi \
+    --disable-mpi-fortran \
     --enable-mpi-java \
-    --with-libevent=external \
-    --with-hwloc=external \
+    --with-libevent=internal \
+    --with-hwloc=internal \
     --with-pmix=internal \
     --with-prrte=internal &&
   echo "Building Open MPI" &&
-  make -j 4 all &&
+  make -j 8 all &&
   echo "Installing Open MPI" &&
   make install &&
   echo "Open MPI built and installed"

@@ -1,0 +1,138 @@
+[cn6009:2730337] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730340] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730336] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730342] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730339] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730343] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730341] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2730338] pml_ucx.c:313  Error: Failed to create UCP worker
+cn6009:rank5:  Mismatched version of EPID - 4
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank2:  Mismatched version of EPID - 4
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank3:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank4:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank7:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank0:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+[cn6009:2730341] *** Process received signal ***
+[cn6009:2730341] Signal: Aborted (6)
+[cn6009:2730341] Signal code:  (-6)
+[cn6009:2730341] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x14a6e4a35ce0]
+[cn6009:2730341] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x14a6e44a8a9f]
+[cn6009:2730341] [ 2] /lib64/libc.so.6(abort+0x127)[0x14a6e447be05]
+[cn6009:2730341] [ 3] /lib64/libfabric.so.1(+0x1c8f5)[0x14a68c18b8f5]
+[cn6009:2730341] [ 4] /lib64/libfabric.so.1(+0x15936a)[0x14a68c2c836a]
+[cn6009:2730341] [ 5] /lib64/libfabric.so.1(+0x15787d)[0x14a68c2c687d]
+[cn6009:2730341] [ 6] /lib64/libfabric.so.1(+0x1360d6)[0x14a68c2a50d6]
+[cn6009:2730341] [ 7] /lib64/libfabric.so.1(+0x1495f7)[0x14a68c2b85f7]
+[cn6009:2730341] [ 8] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1de9ab)[0x14a68c8b39ab]
+[cn6009:2730341] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279abe)[0x14a68c94eabe]
+[cn6009:2730341] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_barrier_intra_recursivedoubling+0x120)[0x14a68c7e9940]
+[cn6009:2730341] [11] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x14a68c785159]
+[cn6009:2730341] [12] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14a6e0022e5c]
+[cn6009:2730341] [13] [0x14a6cbc98a80]
+[cn6009:2730341] *** End of error message ***
+[cn6009:2730338] *** Process received signal ***
+[cn6009:2730338] Signal: Aborted (6)
+[cn6009:2730338] Signal code:  (-6)
+[cn6009:2730338] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x1521d5694ce0]
+[cn6009:2730338] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1521d5107a9f]
+[cn6009:2730338] [ 2] /lib64/libc.so.6(abort+0x127)[0x1521d50dae05]
+[cn6009:2730338] [ 3] /lib64/libfabric.so.1(+0x1c8f5)[0x15217cdf58f5]
+[cn6009:2730338] [ 4] /lib64/libfabric.so.1(+0x15936a)[0x15217cf3236a]
+[cn6009:2730338] [ 5] /lib64/libfabric.so.1(+0x15787d)[0x15217cf3087d]
+[cn6009:2730338] [ 6] /lib64/libfabric.so.1(+0x1360d6)[0x15217cf0f0d6]
+[cn6009:2730338] [ 7] /lib64/libfabric.so.1(+0x1495f7)[0x15217cf225f7]
+[cn6009:2730338] [ 8] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1de9ab)[0x15217d51d9ab]
+[cn6009:2730338] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279abe)[0x15217d5b8abe]
+[cn6009:2730338] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_barrier_intra_recursivedoubling+0x120)[0x15217d453940]
+[cn6009:2730338] [11] [cn6009:2730339] *** Process received signal ***
+[cn6009:2730339] Signal: Aborted (6)
+[cn6009:2730339] Signal code:  (-6)
+/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x15217d3ef159]
+[cn6009:2730338] [12] [cn6009:2730340] *** Process received signal ***
+/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x15217d6f4e5c]
+[cn6009:2730338] [13] [0x1521bbc98a80]
+[cn6009:2730338] *** End of error message ***
+[cn6009:2730340] Signal: Aborted (6)
+[cn6009:2730340] Signal code:  (-6)
+[cn6009:2730340] [ 0] [cn6009:2730339] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x15441495dce0]
+[cn6009:2730340] [ 1] /lib64/libpthread.so.0(+0x12ce0)[0x1472bb065ce0]
+[cn6009:2730339] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1544143d0a9f]
+[cn6009:2730340] [ 2] /lib64/libc.so.6(gsignal+0x10f)[0x1472baad8a9f]
+[cn6009:2730339] [ 2] /lib64/libc.so.6(abort+0x127)[0x1544143a3e05]
+[cn6009:2730340] [ 3] /lib64/libfabric.so.1(+0x1c8f5)[0x1543bc0c18f5]
+[cn6009:2730340] [ 4] /lib64/libc.so.6(abort+0x127)[0x1472baaabe05]
+[cn6009:2730339] [ 3] /lib64/libfabric.so.1(+0x1c8f5)[0x1472627c88f5]
+[cn6009:2730339] [ 4] /lib64/libfabric.so.1(+0x15936a)[0x1543bc1fe36a]
+[cn6009:2730340] [ 5] /lib64/libfabric.so.1(+0x15787d)[0x1543bc1fc87d]
+[cn6009:2730340] [ 6] /lib64/libfabric.so.1(+0x1360d6)[0x1543bc1db0d6]
+[cn6009:2730340] [ 7] /lib64/libfabric.so.1(+0x1495f7)[0x1543bc1ee5f7]
+/lib64/libfabric.so.1(+0x15936a)[0x14726290536a]
+[cn6009:2730339] [ 5] /lib64/libfabric.so.1(+0x15787d)[0x14726290387d]
+[cn6009:2730339] [ 6] /lib64/libfabric.so.1(+0x1360d6)[0x1472628e20d6]
+[cn6009:2730339] [ 7] /lib64/libfabric.so.1(+0x1495f7)[0x1472628f55f7]
+[cn6009:2730339] [ 8] [cn6009:2730340] [ 8] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1de9ab)[0x1543bc7f89ab]
+[cn6009:2730340] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1de9ab)[0x147262eff9ab]
+[cn6009:2730339] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279abe)[0x1543bc893abe]
+[cn6009:2730340] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279abe)[0x147262f9aabe]
+[cn6009:2730339] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_barrier_intra_recursivedoubling+0x120)[0x1543bc72e940]
+[cn6009:2730340] [11] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_barrier_intra_recursivedoubling+0x120)[0x147262e35940]
+[cn6009:2730339] [11] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x1543bc6ca159]
+[cn6009:2730340] [12] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x147262dd1159]
+[cn6009:2730339] [12] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x1543bc9cfe5c]
+[cn6009:2730340] [13] [0x1543fbc98a80]
+/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x1472630d6e5c]
+[cn6009:2730339] [13] [0x1472a3c98a80]
+[cn6009:2730340] *** End of error message ***
+[cn6009:2730339] *** End of error message ***
+[cn6009:2730343] *** Process received signal ***
+[cn6009:2730343] Signal: Aborted (6)
+[cn6009:2730343] Signal code:  (-6)
+[cn6009:2730343] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x1474a82ccce0]
+[cn6009:2730343] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1474a7d3fa9f]
+[cn6009:2730343] [ 2] /lib64/libc.so.6(abort+0x127)[0x1474a7d12e05]
+[cn6009:2730343] [ 3] /lib64/libfabric.so.1(+0x1c8f5)[0x1473fe84b8f5]
+[cn6009:2730343] [ 4] /lib64/libfabric.so.1(+0x15936a)[0x1473fe98836a]
+[cn6009:2730343] [ 5] /lib64/libfabric.so.1(+0x15787d)[0x1473fe98687d]
+[cn6009:2730343] [ 6] /lib64/libfabric.so.1(+0x1360d6)[0x1473fe9650d6]
+[cn6009:2730343] [ 7] /lib64/libfabric.so.1(+0x1495f7)[0x1473fe9785f7]
+[cn6009:2730343] [ 8] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1de9ab)[0x1473fee399ab]
+[cn6009:2730343] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279abe)[0x1473feed4abe]
+[cn6009:2730343] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_barrier_intra_recursivedoubling+0x120)[0x1473fed6f940]
+[cn6009:2730343] [11] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x1473fed0b159]
+[cn6009:2730343] [12] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14745031ee5c]
+[cn6009:2730343] [13] [0x14748fc98a80]
+[cn6009:2730343] *** End of error message ***
+[cn6009:2730336] *** Process received signal ***
+[cn6009:2730336] Signal: Aborted (6)
+[cn6009:2730336] Signal code:  (-6)
+[cn6009:2730336] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x14db800f9ce0]
+[cn6009:2730336] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x14db7fb6ca9f]
+[cn6009:2730336] [ 2] /lib64/libc.so.6(abort+0x127)[0x14db7fb3fe05]
+[cn6009:2730336] [ 3] /lib64/libfabric.so.1(+0x1c8f5)[0x14dad684b8f5]
+[cn6009:2730336] [ 4] /lib64/libfabric.so.1(+0x15936a)[0x14dad698836a]
+[cn6009:2730336] [ 5] /lib64/libfabric.so.1(+0x15787d)[0x14dad698687d]
+[cn6009:2730336] [ 6] /lib64/libfabric.so.1(+0x1360d6)[0x14dad69650d6]
+[cn6009:2730336] [ 7] /lib64/libfabric.so.1(+0x1495f7)[0x14dad69785f7]
+[cn6009:2730336] [ 8] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1de9ab)[0x14dad6e399ab]
+[cn6009:2730336] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279abe)[0x14dad6ed4abe]
+[cn6009:2730336] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_barrier_intra_recursivedoubling+0x120)[0x14dad6d6f940]
+[cn6009:2730336] [11] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x14dad6d0b159]
+[cn6009:2730336] [12] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14db28159e5c]
+[cn6009:2730336] [13] [0x14db67c98a80]
+[cn6009:2730336] *** End of error message ***
+--------------------------------------------------------------------------
+prterun noticed that process rank 0 with PID 2730336 on node cn6009 exited on
+signal 6 (Aborted).
+--------------------------------------------------------------------------

@@ -73,8 +73,10 @@ fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
     }
 }
 
-createTaskWithNumProcesses("HelloMPI", 4, false)
+createTaskWithNumProcesses("HelloMPI", 4, true)
 createTaskWithNumProcesses("Blocking", 6, true)
 createTaskWithNumProcesses("Burro", 6, true)
 createTaskWithNumProcesses("Cross", 4, true)
 createTaskWithNumProcesses("FullParallel", 3, true)
+createTaskWithNumProcesses("SimpleJROMP", 1, true)
+createTaskWithNumProcesses("JrompMPI", 2, true)

@@ -1,0 +1,14 @@
+make[2]: se entra en el directorio '/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/ompi/tools/ompi_info'
+  CC       ompi_info.o
+  CC       param.o
+  CCLD     ompi_info
+/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/opal/.libs/libopen-pal.so: error: undefined reference to 'ucm_vm_munmap'
+/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/opal/.libs/libopen-pal.so: error: undefined reference to 'ucm_set_external_event'
+/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/opal/.libs/libopen-pal.so: error: undefined reference to 'ucm_test_external_events'
+/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/opal/.libs/libopen-pal.so: error: undefined reference to 'ucm_test_events'
+collect2: error: ld returned 1 exit status
+make[2]: *** [Makefile:1449: ompi_info] Error 1
+make[2]: se sale del directorio '/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/ompi/tools/ompi_info'
+make[1]: *** [Makefile:2684: all-recursive] Error 1
+make[1]: se sale del directorio '/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_compilation_rocky/3rd-party/ompi/ompi'
+make: *** [Makefile:1507: all-recursive] Error 1
