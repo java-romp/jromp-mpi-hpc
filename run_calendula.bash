@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function main() {
-  local nodes=2                                  # Number of nodes
+  local nodes=8                                  # Number of nodes
   local n_tasks=8                                # Number of processes (MPI ranks)
   local cpus_per_task=8                          # Threads that JROMP will use
   local n_tasks_per_node=$((n_tasks / nodes))    # Number of processes per node
