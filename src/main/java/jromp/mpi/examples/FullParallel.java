@@ -57,19 +57,24 @@ public class FullParallel {
              .withVariables(variables)
              .single(false, vars -> printf("Rank %d: Inside single\n", rank))
              .parallelFor(0, N, false, (start, end, vars) -> {
+                 // Esta es la tarea dónde da el fallo (byte 253)
                  double[] localA = vars.<double[]>get("A").value();
                  double[] localB = vars.<double[]>get("B").value();
                  double[] localC = vars.<double[]>get("C").value();
+                 int count = 0;
 
                  for (int i = start; i < end; i++) {
                      for (int j = 0; j < N; j++) {
                          localC[i * N + j] = 0.0;
 
                          for (int k = 0; k < N; k++) {
-                             localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
+                             // localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
+                             count++;
                          }
                      }
                  }
+
+                 printf("Rank %d: Count = %d\n", rank, count);
              })
              .single(false, vars -> printf("Rank %d: After parallel for\n", rank))
              .join();

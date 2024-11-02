@@ -52,7 +52,7 @@ fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
                 "$mpiBinPath/mpirun",
                 *mpiRunParameters.toTypedArray(),
                 "-np", "$processes",
-                "java", "-Xint", "-cp", classpath, "jromp.mpi.examples.$name"
+                "java", "-cp", classpath, "jromp.mpi.examples.$name"
             )
 
         environment("LD_LIBRARY_PATH", mpiLibPath)

@@ -1,0 +1,274 @@
+[ule_formacion_9_4@cn6009 main]$ javap -c -p jromp/mpi/examples/FullParallel.class
+Compiled from "FullParallel.java"
+public class jromp.mpi.examples.FullParallel {
+  private static final int N;
+
+  public jromp.mpi.examples.FullParallel();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]) throws mpi.MPIException;
+    Code:
+       0: aload_0
+       1: invokestatic  #7                  // Method mpi/MPI.Init:([Ljava/lang/String;)[Ljava/lang/String;
+       4: pop
+       5: getstatic     #13                 // Field mpi/MPI.COMM_WORLD:Lmpi/Intracomm;
+       8: invokevirtual #17                 // Method mpi/Intracomm.getRank:()I
+      11: istore_1
+      12: getstatic     #13                 // Field mpi/MPI.COMM_WORLD:Lmpi/Intracomm;
+      15: invokevirtual #23                 // Method mpi/Intracomm.getSize:()I
+      18: istore_2
+      19: invokestatic  #26                 // Method jromp/JROMP.allThreads:()Ljromp/JROMP;
+      22: iconst_0
+      23: invokedynamic #32,  0             // InvokeDynamic #0:run:()Ljromp/task/Task;
+      28: invokevirtual #36                 // Method jromp/JROMP.single:(ZLjromp/task/Task;)Ljromp/JROMP;
+      31: invokevirtual #40                 // Method jromp/JROMP.join:()V
+      34: ldc           #45                 // int 810000
+      36: newarray       double
+      38: astore_3
+      39: ldc           #45                 // int 810000
+      41: newarray       double
+      43: astore        4
+      45: ldc           #45                 // int 810000
+      47: newarray       double
+      49: astore        5
+      51: iload_1
+      52: ifne          114
+      55: iconst_0
+      56: istore        6
+      58: iload         6
+      60: sipush        900
+      63: if_icmpge     114
+      66: iconst_0
+      67: istore        7
+      69: iload         7
+      71: sipush        900
+      74: if_icmpge     108
+      77: aload_3
+      78: iload         6
+      80: sipush        900
+      83: imul
+      84: iload         7
+      86: iadd
+      87: dconst_1
+      88: dastore
+      89: aload         4
+      91: iload         6
+      93: sipush        900
+      96: imul
+      97: iload         7
+      99: iadd
+     100: dconst_1
+     101: dastore
+     102: iinc          7, 1
+     105: goto          69
+     108: iinc          6, 1
+     111: goto          58
+     114: ldc           #46                 // String Rank %d: Before bcast\n
+     116: iconst_1
+     117: anewarray     #2                  // class java/lang/Object
+     120: dup
+     121: iconst_0
+     122: iload_1
+     123: invokestatic  #48                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     126: aastore
+     127: invokestatic  #54                 // Method jromp/mpi/examples/Utils.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+     130: getstatic     #13                 // Field mpi/MPI.COMM_WORLD:Lmpi/Intracomm;
+     133: invokevirtual #60                 // Method mpi/Intracomm.barrier:()V
+     136: invokestatic  #63                 // Method mpi/MPI.wtime:()D
+     139: dstore        6
+     141: getstatic     #13                 // Field mpi/MPI.COMM_WORLD:Lmpi/Intracomm;
+     144: aload_3
+     145: ldc           #45                 // int 810000
+     147: getstatic     #67                 // Field mpi/MPI.DOUBLE:Lmpi/Datatype;
+     150: iconst_0
+     151: invokevirtual #71                 // Method mpi/Intracomm.bcast:(Ljava/lang/Object;ILmpi/Datatype;I)V
+     154: getstatic     #13                 // Field mpi/MPI.COMM_WORLD:Lmpi/Intracomm;
+     157: aload         4
+     159: ldc           #45                 // int 810000
+     161: getstatic     #67                 // Field mpi/MPI.DOUBLE:Lmpi/Datatype;
+     164: iconst_0
+     165: invokevirtual #71                 // Method mpi/Intracomm.bcast:(Ljava/lang/Object;ILmpi/Datatype;I)V
+     168: ldc           #75                 // String Rank %d: After bcast\n
+     170: iconst_1
+     171: anewarray     #2                  // class java/lang/Object
+     174: dup
+     175: iconst_0
+     176: iload_1
+     177: invokestatic  #48                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+     180: aastore
+     181: invokestatic  #54                 // Method jromp/mpi/examples/Utils.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+     184: invokestatic  #77                 // Method jromp/var/Variables.create:()Ljromp/var/Variables;
+     187: ldc           #83                 // String A
+     189: new           #85                 // class jromp/var/SharedVariable
+     192: dup
+     193: aload_3
+     194: invokespecial #87                 // Method jromp/var/SharedVariable."<init>":(Ljava/io/Serializable;)V
+     197: invokevirtual #90                 // Method jromp/var/Variables.add:(Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+     200: ldc           #94                 // String B
+     202: new           #85                 // class jromp/var/SharedVariable
+     205: dup
+     206: aload         4
+     208: invokespecial #87                 // Method jromp/var/SharedVariable."<init>":(Ljava/io/Serializable;)V
+     211: invokevirtual #90                 // Method jromp/var/Variables.add:(Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+     214: ldc           #96                 // String C
+     216: new           #85                 // class jromp/var/SharedVariable
+     219: dup
+     220: aload         5
+     222: invokespecial #87                 // Method jromp/var/SharedVariable."<init>":(Ljava/io/Serializable;)V
+     225: invokevirtual #90                 // Method jromp/var/Variables.add:(Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+     228: astore        8
+     230: invokestatic  #26                 // Method jromp/JROMP.allThreads:()Ljromp/JROMP;
+     233: aload         8
+     235: invokevirtual #98                 // Method jromp/JROMP.withVariables:(Ljromp/var/Variables;)Ljromp/JROMP;
+     238: iconst_0
+     239: iload_1
+     240: invokedynamic #102,  0            // InvokeDynamic #1:run:(I)Ljromp/task/Task;
+     245: invokevirtual #36                 // Method jromp/JROMP.single:(ZLjromp/task/Task;)Ljromp/JROMP;
+     248: iconst_0
+     249: sipush        900
+     252: iconst_0
+     253: invokedynamic #105,  0            // InvokeDynamic #2:run:()Ljromp/task/ForTask;
+     258: invokevirtual #108                // Method jromp/JROMP.parallelFor:(IIZLjromp/task/ForTask;)Ljromp/JROMP;
+     261: iconst_0
+     262: iload_1
+     263: invokedynamic #112,  0            // InvokeDynamic #3:run:(I)Ljromp/task/Task;
+     268: invokevirtual #36                 // Method jromp/JROMP.single:(ZLjromp/task/Task;)Ljromp/JROMP;
+     271: invokevirtual #40                 // Method jromp/JROMP.join:()V
+     274: getstatic     #13                 // Field mpi/MPI.COMM_WORLD:Lmpi/Intracomm;
+     277: invokevirtual #60                 // Method mpi/Intracomm.barrier:()V
+     280: invokestatic  #63                 // Method mpi/MPI.wtime:()D
+     283: dstore        9
+     285: iload_1
+     286: ifne          309
+     289: ldc           #113                // String Time: %f\n
+     291: iconst_1
+     292: anewarray     #2                  // class java/lang/Object
+     295: dup
+     296: iconst_0
+     297: dload         9
+     299: dload         6
+     301: dsub
+     302: invokestatic  #115                // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+     305: aastore
+     306: invokestatic  #54                 // Method jromp/mpi/examples/Utils.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+     309: invokestatic  #120                // Method mpi/MPI.Finalize:()V
+     312: return
+
+  private static void lambda$main$3(int, jromp.var.Variables);
+    Code:
+       0: ldc           #123                // String Rank %d: After parallel for\n
+       2: iconst_1
+       3: anewarray     #2                  // class java/lang/Object
+       6: dup
+       7: iconst_0
+       8: iload_0
+       9: invokestatic  #48                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      12: aastore
+      13: invokestatic  #54                 // Method jromp/mpi/examples/Utils.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+      16: return
+
+  private static void lambda$main$2(int, int, jromp.var.Variables);
+    Code:
+       0: aload_2
+       1: ldc           #83                 // String A
+       3: invokevirtual #125                // Method jromp/var/Variables.get:(Ljava/lang/String;)Ljromp/var/Variable;
+       6: invokeinterface #129,  1          // InterfaceMethod jromp/var/Variable.value:()Ljava/io/Serializable;
+      11: checkcast     #135                // class "[D"
+      14: astore_3
+      15: aload_2
+      16: ldc           #94                 // String B
+      18: invokevirtual #125                // Method jromp/var/Variables.get:(Ljava/lang/String;)Ljromp/var/Variable;
+      21: invokeinterface #129,  1          // InterfaceMethod jromp/var/Variable.value:()Ljava/io/Serializable;
+      26: checkcast     #135                // class "[D"
+      29: astore        4
+      31: aload_2
+      32: ldc           #96                 // String C
+      34: invokevirtual #125                // Method jromp/var/Variables.get:(Ljava/lang/String;)Ljromp/var/Variable;
+      37: invokeinterface #129,  1          // InterfaceMethod jromp/var/Variable.value:()Ljava/io/Serializable;
+      42: checkcast     #135                // class "[D"
+      45: astore        5
+      47: iload_0
+      48: istore        6
+      50: iload         6
+      52: iload_1
+      53: if_icmpge     148
+      56: iconst_0
+      57: istore        7
+      59: iload         7
+      61: sipush        900
+      64: if_icmpge     142
+      67: aload         5
+      69: iload         6
+      71: sipush        900
+      74: imul
+      75: iload         7
+      77: iadd
+      78: dconst_0
+      79: dastore
+      80: iconst_0
+      81: istore        8
+      83: iload         8
+      85: sipush        900
+      88: if_icmpge     136
+      91: aload         5
+      93: iload         6
+      95: sipush        900
+      98: imul
+      99: iload         7
+     101: iadd
+     102: dup2
+     103: daload
+     104: aload_3
+     105: iload         6
+     107: sipush        900
+     110: imul
+     111: iload         8
+     113: iadd
+     114: daload
+     115: aload         4
+     117: iload         8
+     119: sipush        900
+     122: imul
+     123: iload         7
+     125: iadd
+     126: daload
+     127: dmul
+     128: dadd
+     129: dastore
+     130: iinc          8, 1
+     133: goto          83
+     136: iinc          7, 1
+     139: goto          59
+     142: iinc          6, 1
+     145: goto          50
+     148: return
+
+  private static void lambda$main$1(int, jromp.var.Variables);
+    Code:
+       0: ldc           #137                // String Rank %d: Inside single\n
+       2: iconst_1
+       3: anewarray     #2                  // class java/lang/Object
+       6: dup
+       7: iconst_0
+       8: iload_0
+       9: invokestatic  #48                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      12: aastore
+      13: invokestatic  #54                 // Method jromp/mpi/examples/Utils.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+      16: return
+
+  private static void lambda$main$0(jromp.var.Variables);
+    Code:
+       0: ldc           #139                // String Number of threads: %d\n
+       2: iconst_1
+       3: anewarray     #2                  // class java/lang/Object
+       6: dup
+       7: iconst_0
+       8: invokestatic  #141                // Method jromp/JROMP.getNumThreads:()I
+      11: invokestatic  #48                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+      14: aastore
+      15: invokestatic  #54                 // Method jromp/mpi/examples/Utils.printf:(Ljava/lang/String;[Ljava/lang/Object;)V
+      18: return
+}
