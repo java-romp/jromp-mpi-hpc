@@ -6,9 +6,11 @@ group = "io.github.mpi"
 version = "1.0-SNAPSHOT"
 
 val ompiLibPath = "${project.projectDir}/libs/ompi"
+val dependencyJarsPath = "${project.projectDir}/libs/java"
 val mpiBinPath = "$ompiLibPath/bin"
 val mpiLibPath = "$ompiLibPath/lib"
-val dependencyJarsPath = "${project.projectDir}/libs/java"
+val mpiRun = "$mpiBinPath/mpirun"
+val mpiJavac = "$mpiBinPath/mpijavac.pl"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -30,7 +32,7 @@ dependencies {
 }
 
 tasks.compileJava {
-    options.forkOptions.executable = "$mpiBinPath/mpijavac.pl"
+    options.forkOptions.executable = mpiJavac
 }
 
 fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
@@ -41,21 +43,24 @@ fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
         description = "Run $name with mpirun"
 
         val classpath = sourceSets.main.get().runtimeClasspath.asPath
-        val mpiRunParameters = mutableListOf("--bind-to", "none")
+        val mpiRunParameters = mutableListOf("--mca", "pml", "ob1", "--bind-to", "none")
+        val jvmParameters = listOf("-XX:+UseParallelGC", "-XX:-TieredCompilation")
 
         if (debug) {
             mpiRunParameters.add("--report-bindings")
         }
 
+        // Disable SLURM warnings (not really needed in local environment)
+        environment("PRTE_MCA_plm_slurm_disable_warning", true)
+        environment("PRTE_MCA_plm_slurm_ignore_args", true)
+
         commandLine =
             listOf(
-                "$mpiBinPath/mpirun",
+                mpiRun,
                 *mpiRunParameters.toTypedArray(),
                 "-np", "$processes",
-                "java", "-cp", classpath, "jromp.mpi.examples.$name"
+                "java", *jvmParameters.toTypedArray(), "-cp", classpath, "jromp.mpi.examples.$name"
             )
-
-        environment("LD_LIBRARY_PATH", mpiLibPath)
 
         standardOutput = System.out
         errorOutput = System.err
