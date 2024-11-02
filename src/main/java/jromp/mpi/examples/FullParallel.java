@@ -42,15 +42,11 @@ public class FullParallel {
             }
         }
 
-        printf("Rank %d: Before bcast\n", rank);
-
         MPI.COMM_WORLD.barrier();
         double start_time = MPI.wtime();
 
         MPI.COMM_WORLD.bcast(A, N * N, MPI.DOUBLE, 0);
         MPI.COMM_WORLD.bcast(B, N * N, MPI.DOUBLE, 0);
-
-        printf("Rank %d: After bcast\n", rank);
 
         Variables variables = Variables.create()
                                        .add("A", new SharedVariable<>(A))
@@ -60,12 +56,10 @@ public class FullParallel {
 
         JROMP.allThreads()
              .withVariables(variables)
-             .single(false, vars -> printf("Rank %d: Inside single\n", rank))
              .parallelFor(0, N, false, (start, end, vars) -> {
                  double[] localA = vars.<double[]>get("A").value();
                  double[] localB = vars.<double[]>get("B").value();
                  double[] localC = vars.<double[]>get("C").value();
-                 int count = 0;
 
                  for (int i = start; i < end; i++) {
                      for (int j = 0; j < N; j++) {
@@ -73,14 +67,10 @@ public class FullParallel {
 
                          for (int k = 0; k < N; k++) {
                              localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
-                             //count++;
                          }
                      }
                  }
-
-                 printf("Rank %d: Count = %d\n", rank, count);
              })
-             .single(false, vars -> printf("Rank %d: After parallel for\n", rank))
              .parallelFor(0, N * N, false, (start, end, vars) -> {
                  double[] cInternal = vars.<double[]>get("C").value();
                  Variable<Double> sumInternal = vars.get("sum");
