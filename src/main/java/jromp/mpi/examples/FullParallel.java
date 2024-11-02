@@ -57,7 +57,6 @@ public class FullParallel {
              .withVariables(variables)
              .single(false, vars -> printf("Rank %d: Inside single\n", rank))
              .parallelFor(0, N, false, (start, end, vars) -> {
-                 // Esta es la tarea dónde da el fallo (byte 253)
                  double[] localA = vars.<double[]>get("A").value();
                  double[] localB = vars.<double[]>get("B").value();
                  double[] localC = vars.<double[]>get("C").value();

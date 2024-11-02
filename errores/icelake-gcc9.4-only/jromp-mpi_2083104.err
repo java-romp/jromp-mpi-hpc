@@ -1,0 +1,33 @@
+[cn6009:2983659] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983658] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983656] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983657] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983661] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983662] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983655] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983660] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2983661:0:2983669] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x152df81c1000)
+==== backtrace (tid:2983669) ====
+ 0  /lib64/libucs.so.0(ucs_handle_error+0x2a4) [0x152d4dc94a54]
+ 1  /lib64/libucs.so.0(+0x26c2c) [0x152d4dc94c2c]
+ 2  /lib64/libucs.so.0(+0x26dfa) [0x152d4dc94dfa]
+ 3  [0x152dd88f8556]
+=================================
+[cn6009:2983661] *** Process received signal ***
+[cn6009:2983661] Signal: Aborted (6)
+[cn6009:2983661] Signal code:  (-6)
+[cn6009:2983661] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x152df7da7ce0]
+[cn6009:2983661] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x152df781aa9f]
+[cn6009:2983661] [ 2] /lib64/libc.so.6(abort+0x127)[0x152df77ede05]
+[cn6009:2983661] [ 3] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0x298603)[0x152df6530603]
+[cn6009:2983661] [ 4] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfed9e9)[0x152df72859e9]
+[cn6009:2983661] [ 5] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee13b)[0x152df728613b]
+[cn6009:2983661] [ 6] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee15e)[0x152df728615e]
+[cn6009:2983661] [ 7] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(JVM_handle_linux_signal+0x2e6)[0x152df70ec1c6]
+[cn6009:2983661] [ 8] /lib64/libpthread.so.0(+0x12ce0)[0x152df7da7ce0]
+[cn6009:2983661] [ 9] [0x152dd88f8556]
+[cn6009:2983661] *** End of error message ***
+--------------------------------------------------------------------------
+prterun noticed that process rank 6 with PID 2983661 on node cn6009 exited on
+signal 6 (Aborted).
+--------------------------------------------------------------------------

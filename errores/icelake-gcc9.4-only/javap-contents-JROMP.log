@@ -1,0 +1,1562 @@
+Warning: File ./classes/jromp/JROMP.class does not contain class classes.jromp.JROMP
+Classfile /home/samuel/IdeaProjects/IntelliJ/jromp/target/classes/jromp/JROMP.class
+  Last modified Oct 21, 2024; size 9689 bytes
+  SHA-256 checksum fea2808fadccc3af3c20f3159f745c2bbe72f24af323259d4d242232105b4360
+  Compiled from "JROMP.java"
+public class jromp.JROMP
+  minor version: 0
+  major version: 65
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #11                         // jromp/JROMP
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 3, methods: 34, attributes: 4
+Constant pool:
+    #1 = Methodref          #2.#3         // java/lang/Object."<init>":()V
+    #2 = Class              #4            // java/lang/Object
+    #3 = NameAndType        #5:#6         // "<init>":()V
+    #4 = Utf8               java/lang/Object
+    #5 = Utf8               <init>
+    #6 = Utf8               ()V
+    #7 = Class              #8            // java/util/ArrayList
+    #8 = Utf8               java/util/ArrayList
+    #9 = Methodref          #7.#3         // java/util/ArrayList."<init>":()V
+   #10 = Fieldref           #11.#12       // jromp/JROMP.variablesList:Ljava/util/List;
+   #11 = Class              #13           // jromp/JROMP
+   #12 = NameAndType        #14:#15       // variablesList:Ljava/util/List;
+   #13 = Utf8               jromp/JROMP
+   #14 = Utf8               variablesList
+   #15 = Utf8               Ljava/util/List;
+   #16 = Fieldref           #11.#17       // jromp/JROMP.context:Ljromp/JROMP$Context;
+   #17 = NameAndType        #18:#19       // context:Ljromp/JROMP$Context;
+   #18 = Utf8               context
+   #19 = Utf8               Ljromp/JROMP$Context;
+   #20 = Methodref          #21.#22       // jromp/Utils.checkThreads:(I)I
+   #21 = Class              #23           // jromp/Utils
+   #22 = NameAndType        #24:#25       // checkThreads:(I)I
+   #23 = Utf8               jromp/Utils
+   #24 = Utf8               checkThreads
+   #25 = Utf8               (I)I
+   #26 = Fieldref           #27.#28       // jromp/JROMP$Context.threads:I
+   #27 = Class              #29           // jromp/JROMP$Context
+   #28 = NameAndType        #30:#31       // threads:I
+   #29 = Utf8               jromp/JROMP$Context
+   #30 = Utf8               threads
+   #31 = Utf8               I
+   #32 = Methodref          #21.#33       // jromp/Utils.checkThreadsPerTeam:(II)I
+   #33 = NameAndType        #34:#35       // checkThreadsPerTeam:(II)I
+   #34 = Utf8               checkThreadsPerTeam
+   #35 = Utf8               (II)I
+   #36 = Fieldref           #27.#37       // jromp/JROMP$Context.threadsPerTeam:I
+   #37 = NameAndType        #38:#31       // threadsPerTeam:I
+   #38 = Utf8               threadsPerTeam
+   #39 = Class              #40           // jromp/concurrent/JrompExecutorWrapper
+   #40 = Utf8               jromp/concurrent/JrompExecutorWrapper
+   #41 = Methodref          #42.#43       // jromp/concurrent/JrompThread.newThreadFactory:(I)Ljava/util/concurrent/ThreadFactory;
+   #42 = Class              #44           // jromp/concurrent/JrompThread
+   #43 = NameAndType        #45:#46       // newThreadFactory:(I)Ljava/util/concurrent/ThreadFactory;
+   #44 = Utf8               jromp/concurrent/JrompThread
+   #45 = Utf8               newThreadFactory
+   #46 = Utf8               (I)Ljava/util/concurrent/ThreadFactory;
+   #47 = Methodref          #39.#48       // jromp/concurrent/JrompExecutorWrapper."<init>":(ILjava/util/concurrent/ThreadFactory;)V
+   #48 = NameAndType        #5:#49        // "<init>":(ILjava/util/concurrent/ThreadFactory;)V
+   #49 = Utf8               (ILjava/util/concurrent/ThreadFactory;)V
+   #50 = Fieldref           #11.#51       // jromp/JROMP.executor:Ljromp/concurrent/JrompExecutorWrapper;
+   #51 = NameAndType        #52:#53       // executor:Ljromp/concurrent/JrompExecutorWrapper;
+   #52 = Utf8               executor
+   #53 = Utf8               Ljromp/concurrent/JrompExecutorWrapper;
+   #54 = Methodref          #55.#56       // jromp/var/Variables.create:()Ljromp/var/Variables;
+   #55 = Class              #57           // jromp/var/Variables
+   #56 = NameAndType        #58:#59       // create:()Ljromp/var/Variables;
+   #57 = Utf8               jromp/var/Variables
+   #58 = Utf8               create
+   #59 = Utf8               ()Ljromp/var/Variables;
+   #60 = Methodref          #11.#61       // jromp/JROMP.withVariables:(Ljromp/var/Variables;)Ljromp/JROMP;
+   #61 = NameAndType        #62:#63       // withVariables:(Ljromp/var/Variables;)Ljromp/JROMP;
+   #62 = Utf8               withVariables
+   #63 = Utf8               (Ljromp/var/Variables;)Ljromp/JROMP;
+   #64 = Fieldref           #65.#66       // jromp/Constants.DEFAULT_THREADS:I
+   #65 = Class              #67           // jromp/Constants
+   #66 = NameAndType        #68:#31       // DEFAULT_THREADS:I
+   #67 = Utf8               jromp/Constants
+   #68 = Utf8               DEFAULT_THREADS
+   #69 = Methodref          #11.#70       // jromp/JROMP."<init>":(II)V
+   #70 = NameAndType        #5:#71        // "<init>":(II)V
+   #71 = Utf8               (II)V
+   #72 = Methodref          #73.#74       // java/lang/Thread.sleep:(J)V
+   #73 = Class              #75           // java/lang/Thread
+   #74 = NameAndType        #76:#77       // sleep:(J)V
+   #75 = Utf8               java/lang/Thread
+   #76 = Utf8               sleep
+   #77 = Utf8               (J)V
+   #78 = Class              #79           // java/lang/InterruptedException
+   #79 = Utf8               java/lang/InterruptedException
+   #80 = Fieldref           #27.#81       // jromp/JROMP$Context.variables:Ljromp/var/Variables;
+   #81 = NameAndType        #82:#83       // variables:Ljromp/var/Variables;
+   #82 = Utf8               variables
+   #83 = Utf8               Ljromp/var/Variables;
+   #84 = Methodref          #39.#85       // jromp/concurrent/JrompExecutorWrapper.shutdown:()V
+   #85 = NameAndType        #86:#6        // shutdown:()V
+   #86 = Utf8               shutdown
+   #87 = Methodref          #39.#88       // jromp/concurrent/JrompExecutorWrapper.isTerminated:()Z
+   #88 = NameAndType        #89:#90       // isTerminated:()Z
+   #89 = Utf8               isTerminated
+   #90 = Utf8               ()Z
+   #91 = Methodref          #11.#92       // jromp/JROMP.waitForFinish:()V
+   #92 = NameAndType        #93:#6        // waitForFinish:()V
+   #93 = Utf8               waitForFinish
+   #94 = InterfaceMethodref #95.#96       // java/util/List.add:(Ljava/lang/Object;)Z
+   #95 = Class              #97           // java/util/List
+   #96 = NameAndType        #98:#99       // add:(Ljava/lang/Object;)Z
+   #97 = Utf8               java/util/List
+   #98 = Utf8               add
+   #99 = Utf8               (Ljava/lang/Object;)Z
+  #100 = InterfaceMethodref #95.#101      // java/util/List.iterator:()Ljava/util/Iterator;
+  #101 = NameAndType        #102:#103     // iterator:()Ljava/util/Iterator;
+  #102 = Utf8               iterator
+  #103 = Utf8               ()Ljava/util/Iterator;
+  #104 = InterfaceMethodref #105.#106     // java/util/Iterator.hasNext:()Z
+  #105 = Class              #107          // java/util/Iterator
+  #106 = NameAndType        #108:#90      // hasNext:()Z
+  #107 = Utf8               java/util/Iterator
+  #108 = Utf8               hasNext
+  #109 = InterfaceMethodref #105.#110     // java/util/Iterator.next:()Ljava/lang/Object;
+  #110 = NameAndType        #111:#112     // next:()Ljava/lang/Object;
+  #111 = Utf8               next
+  #112 = Utf8               ()Ljava/lang/Object;
+  #113 = Class              #114          // jromp/var/ReductionVariable
+  #114 = Utf8               jromp/var/ReductionVariable
+  #115 = Methodref          #55.#116      // jromp/var/Variables.getVariablesOfType:(Ljava/lang/Class;)Ljava/util/List;
+  #116 = NameAndType        #117:#118     // getVariablesOfType:(Ljava/lang/Class;)Ljava/util/List;
+  #117 = Utf8               getVariablesOfType
+  #118 = Utf8               (Ljava/lang/Class;)Ljava/util/List;
+  #119 = InvokeDynamic      #0:#120       // #0:accept:()Ljava/util/function/Consumer;
+  #120 = NameAndType        #121:#122     // accept:()Ljava/util/function/Consumer;
+  #121 = Utf8               accept
+  #122 = Utf8               ()Ljava/util/function/Consumer;
+  #123 = InterfaceMethodref #95.#124      // java/util/List.forEach:(Ljava/util/function/Consumer;)V
+  #124 = NameAndType        #125:#126     // forEach:(Ljava/util/function/Consumer;)V
+  #125 = Utf8               forEach
+  #126 = Utf8               (Ljava/util/function/Consumer;)V
+  #127 = Methodref          #55.#128      // jromp/var/Variables.end:()V
+  #128 = NameAndType        #129:#6       // end:()V
+  #129 = Utf8               end
+  #130 = Methodref          #55.#131      // jromp/var/Variables.copy:()Ljromp/var/Variables;
+  #131 = NameAndType        #132:#59      // copy:()Ljromp/var/Variables;
+  #132 = Utf8               copy
+  #133 = InvokeDynamic      #1:#134       // #1:run:(Ljromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+  #134 = NameAndType        #135:#136     // run:(Ljromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+  #135 = Utf8               run
+  #136 = Utf8               (Ljromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+  #137 = Methodref          #39.#138      // jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+  #138 = NameAndType        #139:#140     // execute:(Ljava/lang/Runnable;)V
+  #139 = Utf8               execute
+  #140 = Utf8               (Ljava/lang/Runnable;)V
+  #141 = Class              #142          // jromp/Barrier
+  #142 = Utf8               jromp/Barrier
+  #143 = String             #144          // ParallelFor
+  #144 = Utf8               ParallelFor
+  #145 = Methodref          #141.#146     // jromp/Barrier."<init>":(Ljava/lang/String;I)V
+  #146 = NameAndType        #5:#147       // "<init>":(Ljava/lang/String;I)V
+  #147 = Utf8               (Ljava/lang/String;I)V
+  #148 = Methodref          #141.#149     // jromp/Barrier.setNowait:(Z)V
+  #149 = NameAndType        #150:#151     // setNowait:(Z)V
+  #150 = Utf8               setNowait
+  #151 = Utf8               (Z)V
+  #152 = InvokeDynamic      #2:#153       // #2:run:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #153 = NameAndType        #135:#154     // run:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #154 = Utf8               (Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #155 = Methodref          #11.#156      // jromp/JROMP.parallelFor:(IIZLjromp/task/ForTask;)Ljromp/JROMP;
+  #156 = NameAndType        #157:#158     // parallelFor:(IIZLjromp/task/ForTask;)Ljromp/JROMP;
+  #157 = Utf8               parallelFor
+  #158 = Utf8               (IIZLjromp/task/ForTask;)Ljromp/JROMP;
+  #159 = String             #160          // Sections
+  #160 = Utf8               Sections
+  #161 = InvokeDynamic      #3:#162       // #3:run:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #162 = NameAndType        #135:#163     // run:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #163 = Utf8               (Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #164 = Methodref          #165.#166     // java/lang/Math.min:(II)I
+  #165 = Class              #167          // java/lang/Math
+  #166 = NameAndType        #168:#35      // min:(II)I
+  #167 = Utf8               java/lang/Math
+  #168 = Utf8               min
+  #169 = Class              #170          // jromp/task/Task
+  #170 = Utf8               jromp/task/Task
+  #171 = Methodref          #172.#173     // java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+  #172 = Class              #174          // java/lang/System
+  #173 = NameAndType        #175:#176     // arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+  #174 = Utf8               java/lang/System
+  #175 = Utf8               arraycopy
+  #176 = Utf8               (Ljava/lang/Object;ILjava/lang/Object;II)V
+  #177 = Methodref          #11.#178      // jromp/JROMP.sections:(ZLjromp/var/Variables;[Ljromp/task/Task;)Ljromp/JROMP;
+  #178 = NameAndType        #179:#180     // sections:(ZLjromp/var/Variables;[Ljromp/task/Task;)Ljromp/JROMP;
+  #179 = Utf8               sections
+  #180 = Utf8               (ZLjromp/var/Variables;[Ljromp/task/Task;)Ljromp/JROMP;
+  #181 = Methodref          #11.#182      // jromp/JROMP.sections:(Z[Ljromp/task/Task;)Ljromp/JROMP;
+  #182 = NameAndType        #179:#183     // sections:(Z[Ljromp/task/Task;)Ljromp/JROMP;
+  #183 = Utf8               (Z[Ljromp/task/Task;)Ljromp/JROMP;
+  #184 = InvokeDynamic      #4:#185       // #4:apply:()Ljava/util/function/IntFunction;
+  #185 = NameAndType        #186:#187     // apply:()Ljava/util/function/IntFunction;
+  #186 = Utf8               apply
+  #187 = Utf8               ()Ljava/util/function/IntFunction;
+  #188 = InterfaceMethodref #95.#189      // java/util/List.toArray:(Ljava/util/function/IntFunction;)[Ljava/lang/Object;
+  #189 = NameAndType        #190:#191     // toArray:(Ljava/util/function/IntFunction;)[Ljava/lang/Object;
+  #190 = Utf8               toArray
+  #191 = Utf8               (Ljava/util/function/IntFunction;)[Ljava/lang/Object;
+  #192 = Class              #193          // "[Ljromp/task/Task;"
+  #193 = Utf8               [Ljromp/task/Task;
+  #194 = Methodref          #11.#195      // jromp/JROMP.sections:(ZLjava/util/List;)Ljromp/JROMP;
+  #195 = NameAndType        #179:#196     // sections:(ZLjava/util/List;)Ljromp/JROMP;
+  #196 = Utf8               (ZLjava/util/List;)Ljromp/JROMP;
+  #197 = Class              #198          // java/util/concurrent/atomic/AtomicBoolean
+  #198 = Utf8               java/util/concurrent/atomic/AtomicBoolean
+  #199 = Methodref          #197.#200     // java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+  #200 = NameAndType        #5:#151       // "<init>":(Z)V
+  #201 = String             #202          // Single
+  #202 = Utf8               Single
+  #203 = InvokeDynamic      #5:#204       // #5:run:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #204 = NameAndType        #135:#205     // run:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #205 = Utf8               (Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)Ljava/lang/Runnable;
+  #206 = Methodref          #11.#207      // jromp/JROMP.single:(ZLjromp/task/Task;)Ljromp/JROMP;
+  #207 = NameAndType        #208:#209     // single:(ZLjromp/task/Task;)Ljromp/JROMP;
+  #208 = Utf8               single
+  #209 = Utf8               (ZLjromp/task/Task;)Ljromp/JROMP;
+  #210 = InvokeDynamic      #6:#211       // #6:run:(ILjromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+  #211 = NameAndType        #135:#212     // run:(ILjromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+  #212 = Utf8               (ILjromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+  #213 = Methodref          #11.#214      // jromp/JROMP.masked:(ILjromp/task/Task;)Ljromp/JROMP;
+  #214 = NameAndType        #215:#216     // masked:(ILjromp/task/Task;)Ljromp/JROMP;
+  #215 = Utf8               masked
+  #216 = Utf8               (ILjromp/task/Task;)Ljromp/JROMP;
+  #217 = String             #218          // Barrier
+  #218 = Utf8               Barrier
+  #219 = Methodref          #220.#221     // java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+  #220 = Class              #222          // java/util/Objects
+  #221 = NameAndType        #223:#224     // requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+  #222 = Utf8               java/util/Objects
+  #223 = Utf8               requireNonNull
+  #224 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+  #225 = InvokeDynamic      #7:#226       // #7:run:(Ljromp/Barrier;)Ljava/lang/Runnable;
+  #226 = NameAndType        #135:#227     // run:(Ljromp/Barrier;)Ljava/lang/Runnable;
+  #227 = Utf8               (Ljromp/Barrier;)Ljava/lang/Runnable;
+  #228 = Methodref          #172.#229     // java/lang/System.nanoTime:()J
+  #229 = NameAndType        #230:#231     // nanoTime:()J
+  #230 = Utf8               nanoTime
+  #231 = Utf8               ()J
+  #232 = Double             1.0E9d
+  #234 = Methodref          #73.#235      // java/lang/Thread.currentThread:()Ljava/lang/Thread;
+  #235 = NameAndType        #236:#237     // currentThread:()Ljava/lang/Thread;
+  #236 = Utf8               currentThread
+  #237 = Utf8               ()Ljava/lang/Thread;
+  #238 = Methodref          #42.#239      // jromp/concurrent/JrompThread.getTid:()I
+  #239 = NameAndType        #240:#241     // getTid:()I
+  #240 = Utf8               getTid
+  #241 = Utf8               ()I
+  #242 = Methodref          #42.#243      // jromp/concurrent/JrompThread.getTeam:()Ljromp/concurrent/ThreadTeam;
+  #243 = NameAndType        #244:#245     // getTeam:()Ljromp/concurrent/ThreadTeam;
+  #244 = Utf8               getTeam
+  #245 = Utf8               ()Ljromp/concurrent/ThreadTeam;
+  #246 = Methodref          #11.#247      // jromp/JROMP.isInParallelContext:()Z
+  #247 = NameAndType        #248:#90      // isInParallelContext:()Z
+  #248 = Utf8               isInParallelContext
+  #249 = Methodref          #11.#250      // jromp/JROMP.getThreadTeam:()Ljromp/concurrent/ThreadTeam;
+  #250 = NameAndType        #251:#245     // getThreadTeam:()Ljromp/concurrent/ThreadTeam;
+  #251 = Utf8               getThreadTeam
+  #252 = Methodref          #11.#253      // jromp/JROMP.getThreadNum:()I
+  #253 = NameAndType        #254:#241     // getThreadNum:()I
+  #254 = Utf8               getThreadNum
+  #255 = InterfaceMethodref #169.#256     // jromp/task/Task.run:(Ljromp/var/Variables;)V
+  #256 = NameAndType        #135:#257     // run:(Ljromp/var/Variables;)V
+  #257 = Utf8               (Ljromp/var/Variables;)V
+  #258 = Methodref          #197.#259     // java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+  #259 = NameAndType        #260:#261     // compareAndSet:(ZZ)Z
+  #260 = Utf8               compareAndSet
+  #261 = Utf8               (ZZ)Z
+  #262 = Methodref          #141.#263     // jromp/Barrier.await:()V
+  #263 = NameAndType        #264:#6       // await:()V
+  #264 = Utf8               await
+  #265 = InterfaceMethodref #266.#267     // jromp/task/ForTask.run:(IILjromp/var/Variables;)V
+  #266 = Class              #268          // jromp/task/ForTask
+  #267 = NameAndType        #135:#269     // run:(IILjromp/var/Variables;)V
+  #268 = Utf8               jromp/task/ForTask
+  #269 = Utf8               (IILjromp/var/Variables;)V
+  #270 = Methodref          #27.#3        // jromp/JROMP$Context."<init>":()V
+  #271 = Utf8               Signature
+  #272 = Utf8               Ljava/util/List<Ljromp/var/Variables;>;
+  #273 = Utf8               Code
+  #274 = Utf8               LineNumberTable
+  #275 = Utf8               LocalVariableTable
+  #276 = Utf8               this
+  #277 = Utf8               Ljromp/JROMP;
+  #278 = Utf8               allThreads
+  #279 = Utf8               ()Ljromp/JROMP;
+  #280 = Utf8               withThreads
+  #281 = Utf8               (I)Ljromp/JROMP;
+  #282 = Utf8               (II)Ljromp/JROMP;
+  #283 = Utf8               StackMapTable
+  #284 = Utf8               join
+  #285 = Utf8               vars
+  #286 = Utf8               parallel
+  #287 = Utf8               (Ljromp/task/Task;)Ljromp/JROMP;
+  #288 = Utf8               finalVariables
+  #289 = Utf8               i
+  #290 = Utf8               task
+  #291 = Utf8               Ljromp/task/Task;
+  #292 = Utf8               chunkEnd
+  #293 = Utf8               chunkSize
+  #294 = Utf8               chunkStart
+  #295 = Utf8               start
+  #296 = Utf8               nowait
+  #297 = Utf8               Z
+  #298 = Utf8               Ljromp/task/ForTask;
+  #299 = Utf8               barrier
+  #300 = Utf8               Ljromp/Barrier;
+  #301 = Utf8               (IILjromp/task/ForTask;)Ljromp/JROMP;
+  #302 = Utf8               batchSize
+  #303 = Utf8               batch
+  #304 = Utf8               tasks
+  #305 = Utf8               ([Ljromp/task/Task;)Ljromp/JROMP;
+  #306 = Utf8               LocalVariableTypeTable
+  #307 = Utf8               Ljava/util/List<Ljromp/task/Task;>;
+  #308 = Utf8               (ZLjava/util/List<Ljromp/task/Task;>;)Ljromp/JROMP;
+  #309 = Utf8               (Ljava/util/List;)Ljromp/JROMP;
+  #310 = Utf8               (Ljava/util/List<Ljromp/task/Task;>;)Ljromp/JROMP;
+  #311 = Utf8               executed
+  #312 = Utf8               Ljava/util/concurrent/atomic/AtomicBoolean;
+  #313 = Utf8               filter
+  #314 = Utf8               isMaster
+  #315 = Utf8               (I)Z
+  #316 = Utf8               id
+  #317 = Utf8               getWTime
+  #318 = Utf8               ()D
+  #319 = Utf8               jt
+  #320 = Utf8               Ljromp/concurrent/JrompThread;
+  #321 = Utf8               getNumThreads
+  #322 = Utf8               getNumThreadsPerTeam
+  #323 = Utf8               lambda$masked$5
+  #324 = Utf8               (ILjromp/task/Task;Ljromp/var/Variables;)V
+  #325 = Utf8               lambda$single$4
+  #326 = Utf8               (Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)V
+  #327 = Utf8               lambda$sections$3
+  #328 = Utf8               (I)[Ljromp/task/Task;
+  #329 = Utf8               x$0
+  #330 = Utf8               lambda$sections$2
+  #331 = Utf8               (Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)V
+  #332 = Utf8               lambda$parallelFor$1
+  #333 = Utf8               (Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)V
+  #334 = Utf8               lambda$parallel$0
+  #335 = Utf8               (Ljromp/task/Task;Ljromp/var/Variables;)V
+  #336 = Utf8               <clinit>
+  #337 = Utf8               SourceFile
+  #338 = Utf8               JROMP.java
+  #339 = Utf8               NestMembers
+  #340 = Utf8               BootstrapMethods
+  #341 = MethodType         #342          //  (Ljava/lang/Object;)V
+  #342 = Utf8               (Ljava/lang/Object;)V
+  #343 = MethodHandle       5:#344        // REF_invokeVirtual jromp/var/ReductionVariable.merge:()V
+  #344 = Methodref          #113.#345     // jromp/var/ReductionVariable.merge:()V
+  #345 = NameAndType        #346:#6       // merge:()V
+  #346 = Utf8               merge
+  #347 = MethodType         #348          //  (Ljromp/var/ReductionVariable;)V
+  #348 = Utf8               (Ljromp/var/ReductionVariable;)V
+  #349 = MethodType         #6            //  ()V
+  #350 = MethodHandle       6:#351        // REF_invokeStatic jromp/JROMP.lambda$parallel$0:(Ljromp/task/Task;Ljromp/var/Variables;)V
+  #351 = Methodref          #11.#352      // jromp/JROMP.lambda$parallel$0:(Ljromp/task/Task;Ljromp/var/Variables;)V
+  #352 = NameAndType        #334:#335     // lambda$parallel$0:(Ljromp/task/Task;Ljromp/var/Variables;)V
+  #353 = MethodHandle       6:#354        // REF_invokeStatic jromp/JROMP.lambda$parallelFor$1:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)V
+  #354 = Methodref          #11.#355      // jromp/JROMP.lambda$parallelFor$1:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)V
+  #355 = NameAndType        #332:#333     // lambda$parallelFor$1:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)V
+  #356 = MethodHandle       6:#357        // REF_invokeStatic jromp/JROMP.lambda$sections$2:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)V
+  #357 = Methodref          #11.#358      // jromp/JROMP.lambda$sections$2:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)V
+  #358 = NameAndType        #330:#331     // lambda$sections$2:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)V
+  #359 = MethodType         #360          //  (I)Ljava/lang/Object;
+  #360 = Utf8               (I)Ljava/lang/Object;
+  #361 = MethodHandle       6:#362        // REF_invokeStatic jromp/JROMP.lambda$sections$3:(I)[Ljromp/task/Task;
+  #362 = Methodref          #11.#363      // jromp/JROMP.lambda$sections$3:(I)[Ljromp/task/Task;
+  #363 = NameAndType        #327:#328     // lambda$sections$3:(I)[Ljromp/task/Task;
+  #364 = MethodType         #328          //  (I)[Ljromp/task/Task;
+  #365 = MethodHandle       6:#366        // REF_invokeStatic jromp/JROMP.lambda$single$4:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)V
+  #366 = Methodref          #11.#367      // jromp/JROMP.lambda$single$4:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)V
+  #367 = NameAndType        #325:#326     // lambda$single$4:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)V
+  #368 = MethodHandle       6:#369        // REF_invokeStatic jromp/JROMP.lambda$masked$5:(ILjromp/task/Task;Ljromp/var/Variables;)V
+  #369 = Methodref          #11.#370      // jromp/JROMP.lambda$masked$5:(ILjromp/task/Task;Ljromp/var/Variables;)V
+  #370 = NameAndType        #323:#324     // lambda$masked$5:(ILjromp/task/Task;Ljromp/var/Variables;)V
+  #371 = MethodHandle       5:#262        // REF_invokeVirtual jromp/Barrier.await:()V
+  #372 = MethodHandle       6:#373        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #373 = Methodref          #374.#375     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #374 = Class              #376          // java/lang/invoke/LambdaMetafactory
+  #375 = NameAndType        #377:#378     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #376 = Utf8               java/lang/invoke/LambdaMetafactory
+  #377 = Utf8               metafactory
+  #378 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #379 = Utf8               InnerClasses
+  #380 = Utf8               Context
+  #381 = Class              #382          // java/lang/invoke/MethodHandles$Lookup
+  #382 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #383 = Class              #384          // java/lang/invoke/MethodHandles
+  #384 = Utf8               java/lang/invoke/MethodHandles
+  #385 = Utf8               Lookup
+{
+  private static final jromp.JROMP$Context context;
+    descriptor: Ljromp/JROMP$Context;
+    flags: (0x001a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL
+
+  private final jromp.concurrent.JrompExecutorWrapper executor;
+    descriptor: Ljromp/concurrent/JrompExecutorWrapper;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+
+  private final java.util.List<jromp.var.Variables> variablesList;
+    descriptor: Ljava/util/List;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+    Signature: #272                         // Ljava/util/List<Ljromp/var/Variables;>;
+
+  private jromp.JROMP(int, int);
+    descriptor: (II)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=5, locals=3, args_size=3
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/ArrayList
+         8: dup
+         9: invokespecial #9                  // Method java/util/ArrayList."<init>":()V
+        12: putfield      #10                 // Field variablesList:Ljava/util/List;
+        15: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        18: iload_1
+        19: invokestatic  #20                 // Method jromp/Utils.checkThreads:(I)I
+        22: putfield      #26                 // Field jromp/JROMP$Context.threads:I
+        25: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        28: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        31: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        34: iload_2
+        35: invokestatic  #32                 // Method jromp/Utils.checkThreadsPerTeam:(II)I
+        38: putfield      #36                 // Field jromp/JROMP$Context.threadsPerTeam:I
+        41: aload_0
+        42: new           #39                 // class jromp/concurrent/JrompExecutorWrapper
+        45: dup
+        46: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        49: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        52: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        55: getfield      #36                 // Field jromp/JROMP$Context.threadsPerTeam:I
+        58: invokestatic  #41                 // Method jromp/concurrent/JrompThread.newThreadFactory:(I)Ljava/util/concurrent/ThreadFactory;
+        61: invokespecial #47                 // Method jromp/concurrent/JrompExecutorWrapper."<init>":(ILjava/util/concurrent/ThreadFactory;)V
+        64: putfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        67: aload_0
+        68: invokestatic  #54                 // Method jromp/var/Variables.create:()Ljromp/var/Variables;
+        71: invokevirtual #60                 // Method withVariables:(Ljromp/var/Variables;)Ljromp/JROMP;
+        74: pop
+        75: return
+      LineNumberTable:
+        line 45: 0
+        line 37: 4
+        line 46: 15
+        line 47: 25
+        line 48: 41
+        line 50: 58
+        line 53: 67
+        line 54: 75
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      76     0  this   Ljromp/JROMP;
+            0      76     1 threads   I
+            0      76     2 threadsPerTeam   I
+
+  public static jromp.JROMP allThreads();
+    descriptor: ()Ljromp/JROMP;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: new           #11                 // class jromp/JROMP
+         3: dup
+         4: getstatic     #64                 // Field jromp/Constants.DEFAULT_THREADS:I
+         7: getstatic     #64                 // Field jromp/Constants.DEFAULT_THREADS:I
+        10: invokespecial #69                 // Method "<init>":(II)V
+        13: areturn
+      LineNumberTable:
+        line 62: 0
+
+  public static jromp.JROMP withThreads(int);
+    descriptor: (I)Ljromp/JROMP;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=1, args_size=1
+         0: new           #11                 // class jromp/JROMP
+         3: dup
+         4: iload_0
+         5: iload_0
+         6: invokespecial #69                 // Method "<init>":(II)V
+         9: areturn
+      LineNumberTable:
+        line 73: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0 threads   I
+
+  public static jromp.JROMP withThreads(int, int);
+    descriptor: (II)Ljromp/JROMP;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=2, args_size=2
+         0: new           #11                 // class jromp/JROMP
+         3: dup
+         4: iload_0
+         5: iload_1
+         6: invokespecial #69                 // Method "<init>":(II)V
+         9: areturn
+      LineNumberTable:
+        line 85: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0 threads   I
+            0      10     1 threadsPerTeam   I
+
+  private static void waitForFinish();
+    descriptor: ()V
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=0
+         0: lconst_0
+         1: invokestatic  #72                 // Method java/lang/Thread.sleep:(J)V
+         4: goto          8
+         7: astore_0
+         8: return
+      Exception table:
+         from    to  target type
+             0     4     7   Class java/lang/InterruptedException
+      LineNumberTable:
+        line 93: 0
+        line 96: 4
+        line 94: 7
+        line 97: 8
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+      StackMapTable: number_of_entries = 2
+        frame_type = 71 /* same_locals_1_stack_item */
+          stack = [ class java/lang/InterruptedException ]
+        frame_type = 0 /* same */
+
+  public jromp.JROMP withVariables(jromp.var.Variables);
+    descriptor: (Ljromp/var/Variables;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         3: aload_1
+         4: putfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+         7: aload_0
+         8: areturn
+      LineNumberTable:
+        line 107: 0
+        line 108: 7
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       9     0  this   Ljromp/JROMP;
+            0       9     1 variables   Ljromp/var/Variables;
+
+  public void join();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: aload_0
+         1: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+         4: invokevirtual #84                 // Method jromp/concurrent/JrompExecutorWrapper.shutdown:()V
+         7: aload_0
+         8: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        11: invokevirtual #87                 // Method jromp/concurrent/JrompExecutorWrapper.isTerminated:()Z
+        14: ifne          23
+        17: invokestatic  #91                 // Method waitForFinish:()V
+        20: goto          7
+        23: aload_0
+        24: getfield      #10                 // Field variablesList:Ljava/util/List;
+        27: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        30: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+        33: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        38: pop
+        39: aload_0
+        40: getfield      #10                 // Field variablesList:Ljava/util/List;
+        43: invokeinterface #100,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        48: astore_1
+        49: aload_1
+        50: invokeinterface #104,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+        55: ifeq          91
+        58: aload_1
+        59: invokeinterface #109,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        64: checkcast     #55                 // class jromp/var/Variables
+        67: astore_2
+        68: aload_2
+        69: ldc           #113                // class jromp/var/ReductionVariable
+        71: invokevirtual #115                // Method jromp/var/Variables.getVariablesOfType:(Ljava/lang/Class;)Ljava/util/List;
+        74: invokedynamic #119,  0            // InvokeDynamic #0:accept:()Ljava/util/function/Consumer;
+        79: invokeinterface #123,  2          // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+        84: aload_2
+        85: invokevirtual #127                // Method jromp/var/Variables.end:()V
+        88: goto          49
+        91: return
+      LineNumberTable:
+        line 115: 0
+        line 117: 7
+        line 118: 17
+        line 121: 23
+        line 124: 39
+        line 126: 68
+        line 127: 79
+        line 130: 84
+        line 131: 88
+        line 132: 91
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           68      20     2  vars   Ljromp/var/Variables;
+            0      92     0  this   Ljromp/JROMP;
+      StackMapTable: number_of_entries = 4
+        frame_type = 7 /* same */
+        frame_type = 15 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 25
+          locals = [ class java/util/Iterator ]
+        frame_type = 250 /* chop */
+          offset_delta = 41
+
+  public jromp.JROMP parallel(jromp.task.Task);
+    descriptor: (Ljromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=4, args_size=2
+         0: iconst_0
+         1: istore_2
+         2: iload_2
+         3: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         6: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+         9: if_icmpge     53
+        12: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        15: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+        18: invokevirtual #130                // Method jromp/var/Variables.copy:()Ljromp/var/Variables;
+        21: astore_3
+        22: aload_0
+        23: getfield      #10                 // Field variablesList:Ljava/util/List;
+        26: aload_3
+        27: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        32: pop
+        33: aload_0
+        34: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        37: aload_1
+        38: aload_3
+        39: invokedynamic #133,  0            // InvokeDynamic #1:run:(Ljromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+        44: invokevirtual #137                // Method jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+        47: iinc          2, 1
+        50: goto          2
+        53: aload_0
+        54: areturn
+      LineNumberTable:
+        line 142: 0
+        line 143: 12
+        line 144: 22
+        line 146: 33
+        line 142: 47
+        line 149: 53
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           22      25     3 finalVariables   Ljromp/var/Variables;
+            2      51     2     i   I
+            0      55     0  this   Ljromp/JROMP;
+            0      55     1  task   Ljromp/task/Task;
+      StackMapTable: number_of_entries = 2
+        frame_type = 252 /* append */
+          offset_delta = 2
+          locals = [ int ]
+        frame_type = 250 /* chop */
+          offset_delta = 50
+
+  public jromp.JROMP parallelFor(int, int, boolean, jromp.task.ForTask);
+    descriptor: (IIZLjromp/task/ForTask;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=6, locals=11, args_size=5
+         0: new           #141                // class jromp/Barrier
+         3: dup
+         4: ldc           #143                // String ParallelFor
+         6: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         9: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        12: invokespecial #145                // Method jromp/Barrier."<init>":(Ljava/lang/String;I)V
+        15: astore        5
+        17: aload         5
+        19: iload_3
+        20: invokevirtual #148                // Method jromp/Barrier.setNowait:(Z)V
+        23: iconst_0
+        24: istore        6
+        26: iload         6
+        28: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        31: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        34: if_icmpge     135
+        37: iload_2
+        38: iload_1
+        39: isub
+        40: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        43: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        46: idiv
+        47: istore        7
+        49: iload_1
+        50: iload         6
+        52: iload         7
+        54: imul
+        55: iadd
+        56: istore        8
+        58: iload         6
+        60: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        63: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        66: iconst_1
+        67: isub
+        68: if_icmpne     77
+        71: iload_2
+        72: istore        9
+        74: goto          84
+        77: iload         8
+        79: iload         7
+        81: iadd
+        82: istore        9
+        84: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        87: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+        90: invokevirtual #130                // Method jromp/var/Variables.copy:()Ljromp/var/Variables;
+        93: astore        10
+        95: aload_0
+        96: getfield      #10                 // Field variablesList:Ljava/util/List;
+        99: aload         10
+       101: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+       106: pop
+       107: aload_0
+       108: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+       111: aload         4
+       113: iload         8
+       115: iload         9
+       117: aload         10
+       119: aload         5
+       121: invokedynamic #152,  0            // InvokeDynamic #2:run:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+       126: invokevirtual #137                // Method jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+       129: iinc          6, 1
+       132: goto          26
+       135: aload_0
+       136: areturn
+      LineNumberTable:
+        line 164: 0
+        line 165: 17
+        line 167: 23
+        line 169: 37
+        line 170: 49
+        line 174: 58
+        line 175: 71
+        line 177: 77
+        line 180: 84
+        line 181: 95
+        line 182: 107
+        line 167: 129
+        line 188: 135
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           74       3     9 chunkEnd   I
+           49      80     7 chunkSize   I
+           58      71     8 chunkStart   I
+           84      45     9 chunkEnd   I
+           95      34    10 finalVariables   Ljromp/var/Variables;
+           26     109     6     i   I
+            0     137     0  this   Ljromp/JROMP;
+            0     137     1 start   I
+            0     137     2   end   I
+            0     137     3 nowait   Z
+            0     137     4  task   Ljromp/task/ForTask;
+           17     120     5 barrier   Ljromp/Barrier;
+      StackMapTable: number_of_entries = 4
+        frame_type = 253 /* append */
+          offset_delta = 26
+          locals = [ class jromp/Barrier, int ]
+        frame_type = 253 /* append */
+          offset_delta = 50
+          locals = [ int, int ]
+        frame_type = 252 /* append */
+          offset_delta = 6
+          locals = [ int ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 50
+          locals = [ class jromp/JROMP, int, int, int, class jromp/task/ForTask, class jromp/Barrier ]
+          stack = []
+
+  public jromp.JROMP parallelFor(int, int, jromp.task.ForTask);
+    descriptor: (IILjromp/task/ForTask;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=5, locals=4, args_size=4
+         0: aload_0
+         1: iload_1
+         2: iload_2
+         3: iconst_0
+         4: aload_3
+         5: invokevirtual #155                // Method parallelFor:(IIZLjromp/task/ForTask;)Ljromp/JROMP;
+         8: areturn
+      LineNumberTable:
+        line 202: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       9     0  this   Ljromp/JROMP;
+            0       9     1 start   I
+            0       9     2   end   I
+            0       9     3  task   Ljromp/task/ForTask;
+
+  private jromp.JROMP sections(boolean, jromp.var.Variables, jromp.task.Task...);
+    descriptor: (ZLjromp/var/Variables;[Ljromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0082) ACC_PRIVATE, ACC_VARARGS
+    Code:
+      stack=5, locals=9, args_size=4
+         0: aload_3
+         1: arraylength
+         2: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         5: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+         8: if_icmpgt     81
+        11: new           #141                // class jromp/Barrier
+        14: dup
+        15: ldc           #159                // String Sections
+        17: aload_3
+        18: arraylength
+        19: invokespecial #145                // Method jromp/Barrier."<init>":(Ljava/lang/String;I)V
+        22: astore        4
+        24: aload         4
+        26: iload_1
+        27: invokevirtual #148                // Method jromp/Barrier.setNowait:(Z)V
+        30: aload_3
+        31: astore        5
+        33: aload         5
+        35: arraylength
+        36: istore        6
+        38: iconst_0
+        39: istore        7
+        41: iload         7
+        43: iload         6
+        45: if_icmpge     78
+        48: aload         5
+        50: iload         7
+        52: aaload
+        53: astore        8
+        55: aload_0
+        56: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        59: aload         8
+        61: aload_2
+        62: aload         4
+        64: invokedynamic #161,  0            // InvokeDynamic #3:run:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)Ljava/lang/Runnable;
+        69: invokevirtual #137                // Method jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+        72: iinc          7, 1
+        75: goto          41
+        78: goto          155
+        81: iconst_0
+        82: istore        4
+        84: iload         4
+        86: aload_3
+        87: arraylength
+        88: if_icmpge     155
+        91: iload         4
+        93: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        96: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        99: iadd
+       100: aload_3
+       101: arraylength
+       102: invokestatic  #164                // Method java/lang/Math.min:(II)I
+       105: istore        5
+       107: iload         5
+       109: iload         4
+       111: isub
+       112: istore        6
+       114: iload         6
+       116: anewarray     #169                // class jromp/task/Task
+       119: astore        7
+       121: aload_3
+       122: iload         4
+       124: aload         7
+       126: iconst_0
+       127: iload         6
+       129: invokestatic  #171                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+       132: aload_0
+       133: iload_1
+       134: aload_2
+       135: aload         7
+       137: invokevirtual #177                // Method sections:(ZLjromp/var/Variables;[Ljromp/task/Task;)Ljromp/JROMP;
+       140: pop
+       141: iload         4
+       143: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+       146: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+       149: iadd
+       150: istore        4
+       152: goto          84
+       155: aload_0
+       156: areturn
+      LineNumberTable:
+        line 215: 0
+        line 216: 11
+        line 217: 24
+        line 219: 30
+        line 220: 55
+        line 219: 72
+        line 225: 78
+        line 227: 81
+        line 228: 91
+        line 229: 107
+        line 230: 114
+        line 232: 121
+        line 233: 132
+        line 227: 141
+        line 237: 155
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           55      17     8  task   Ljromp/task/Task;
+           24      54     4 barrier   Ljromp/Barrier;
+          107      34     5   end   I
+          114      27     6 batchSize   I
+          121      20     7 batch   [Ljromp/task/Task;
+           84      71     4     i   I
+            0     157     0  this   Ljromp/JROMP;
+            0     157     1 nowait   Z
+            0     157     2 variables   Ljromp/var/Variables;
+            0     157     3 tasks   [Ljromp/task/Task;
+      StackMapTable: number_of_entries = 5
+        frame_type = 255 /* full_frame */
+          offset_delta = 41
+          locals = [ class jromp/JROMP, int, class jromp/var/Variables, class "[Ljromp/task/Task;", class jromp/Barrier, class "[Ljromp/task/Task;", int, int ]
+          stack = []
+        frame_type = 255 /* full_frame */
+          offset_delta = 36
+          locals = [ class jromp/JROMP, int, class jromp/var/Variables, class "[Ljromp/task/Task;" ]
+          stack = []
+        frame_type = 2 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 2
+          locals = [ int ]
+        frame_type = 250 /* chop */
+          offset_delta = 70
+
+  public jromp.JROMP sections(boolean, jromp.task.Task...);
+    descriptor: (Z[Ljromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0081) ACC_PUBLIC, ACC_VARARGS
+    Code:
+      stack=4, locals=4, args_size=3
+         0: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         3: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+         6: invokevirtual #130                // Method jromp/var/Variables.copy:()Ljromp/var/Variables;
+         9: astore_3
+        10: aload_0
+        11: getfield      #10                 // Field variablesList:Ljava/util/List;
+        14: aload_3
+        15: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        20: pop
+        21: aload_0
+        22: iload_1
+        23: aload_3
+        24: aload_2
+        25: invokevirtual #177                // Method sections:(ZLjromp/var/Variables;[Ljromp/task/Task;)Ljromp/JROMP;
+        28: areturn
+      LineNumberTable:
+        line 249: 0
+        line 250: 10
+        line 252: 21
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      29     0  this   Ljromp/JROMP;
+            0      29     1 nowait   Z
+            0      29     2 tasks   [Ljromp/task/Task;
+           10      19     3  vars   Ljromp/var/Variables;
+
+  public jromp.JROMP sections(jromp.task.Task...);
+    descriptor: ([Ljromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0081) ACC_PUBLIC, ACC_VARARGS
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: iconst_0
+         2: aload_1
+         3: invokevirtual #181                // Method sections:(Z[Ljromp/task/Task;)Ljromp/JROMP;
+         6: areturn
+      LineNumberTable:
+        line 263: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ljromp/JROMP;
+            0       7     1 tasks   [Ljromp/task/Task;
+
+  public jromp.JROMP sections(boolean, java.util.List<jromp.task.Task>);
+    descriptor: (ZLjava/util/List;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=4, locals=3, args_size=3
+         0: aload_0
+         1: iload_1
+         2: aload_2
+         3: invokedynamic #184,  0            // InvokeDynamic #4:apply:()Ljava/util/function/IntFunction;
+         8: invokeinterface #188,  2          // InterfaceMethod java/util/List.toArray:(Ljava/util/function/IntFunction;)[Ljava/lang/Object;
+        13: checkcast     #192                // class "[Ljromp/task/Task;"
+        16: invokevirtual #181                // Method sections:(Z[Ljromp/task/Task;)Ljromp/JROMP;
+        19: areturn
+      LineNumberTable:
+        line 275: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0  this   Ljromp/JROMP;
+            0      20     1 nowait   Z
+            0      20     2 tasks   Ljava/util/List;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      20     2 tasks   Ljava/util/List<Ljromp/task/Task;>;
+    Signature: #308                         // (ZLjava/util/List<Ljromp/task/Task;>;)Ljromp/JROMP;
+
+  public jromp.JROMP sections(java.util.List<jromp.task.Task>);
+    descriptor: (Ljava/util/List;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: iconst_0
+         2: aload_1
+         3: invokevirtual #194                // Method sections:(ZLjava/util/List;)Ljromp/JROMP;
+         6: areturn
+      LineNumberTable:
+        line 286: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ljromp/JROMP;
+            0       7     1 tasks   Ljava/util/List;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       7     1 tasks   Ljava/util/List<Ljromp/task/Task;>;
+    Signature: #310                         // (Ljava/util/List<Ljromp/task/Task;>;)Ljromp/JROMP;
+
+  public jromp.JROMP single(boolean, jromp.task.Task);
+    descriptor: (ZLjromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=4, locals=6, args_size=3
+         0: new           #197                // class java/util/concurrent/atomic/AtomicBoolean
+         3: dup
+         4: iconst_0
+         5: invokespecial #199                // Method java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+         8: astore_3
+         9: new           #141                // class jromp/Barrier
+        12: dup
+        13: ldc           #201                // String Single
+        15: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        18: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        21: invokespecial #145                // Method jromp/Barrier."<init>":(Ljava/lang/String;I)V
+        24: astore        4
+        26: aload         4
+        28: iload_1
+        29: invokevirtual #148                // Method jromp/Barrier.setNowait:(Z)V
+        32: iconst_0
+        33: istore        5
+        35: iload         5
+        37: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        40: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        43: if_icmpge     84
+        46: aload_0
+        47: getfield      #10                 // Field variablesList:Ljava/util/List;
+        50: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        53: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+        56: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        61: pop
+        62: aload_0
+        63: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        66: aload_3
+        67: aload_2
+        68: aload         4
+        70: invokedynamic #203,  0            // InvokeDynamic #5:run:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)Ljava/lang/Runnable;
+        75: invokevirtual #137                // Method jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+        78: iinc          5, 1
+        81: goto          35
+        84: aload_0
+        85: areturn
+      LineNumberTable:
+        line 298: 0
+        line 299: 9
+        line 300: 26
+        line 302: 32
+        line 303: 46
+        line 305: 62
+        line 302: 78
+        line 316: 84
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           35      49     5     i   I
+            0      86     0  this   Ljromp/JROMP;
+            0      86     1 nowait   Z
+            0      86     2  task   Ljromp/task/Task;
+            9      77     3 executed   Ljava/util/concurrent/atomic/AtomicBoolean;
+           26      60     4 barrier   Ljromp/Barrier;
+      StackMapTable: number_of_entries = 2
+        frame_type = 254 /* append */
+          offset_delta = 35
+          locals = [ class java/util/concurrent/atomic/AtomicBoolean, class jromp/Barrier, int ]
+        frame_type = 250 /* chop */
+          offset_delta = 48
+
+  public jromp.JROMP single(jromp.task.Task);
+    descriptor: (Ljromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: iconst_0
+         2: aload_1
+         3: invokevirtual #206                // Method single:(ZLjromp/task/Task;)Ljromp/JROMP;
+         6: areturn
+      LineNumberTable:
+        line 327: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ljromp/JROMP;
+            0       7     1  task   Ljromp/task/Task;
+
+  public jromp.JROMP masked(int, jromp.task.Task);
+    descriptor: (ILjromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=4, locals=5, args_size=3
+         0: iconst_0
+         1: istore_3
+         2: iload_3
+         3: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         6: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+         9: if_icmpge     57
+        12: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        15: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+        18: invokevirtual #130                // Method jromp/var/Variables.copy:()Ljromp/var/Variables;
+        21: astore        4
+        23: aload_0
+        24: getfield      #10                 // Field variablesList:Ljava/util/List;
+        27: aload         4
+        29: invokeinterface #94,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        34: pop
+        35: aload_0
+        36: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        39: iload_1
+        40: aload_2
+        41: aload         4
+        43: invokedynamic #210,  0            // InvokeDynamic #6:run:(ILjromp/task/Task;Ljromp/var/Variables;)Ljava/lang/Runnable;
+        48: invokevirtual #137                // Method jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+        51: iinc          3, 1
+        54: goto          2
+        57: aload_0
+        58: areturn
+      LineNumberTable:
+        line 339: 0
+        line 340: 12
+        line 341: 23
+        line 343: 35
+        line 339: 51
+        line 350: 57
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           23      28     4 finalVariables   Ljromp/var/Variables;
+            2      55     3     i   I
+            0      59     0  this   Ljromp/JROMP;
+            0      59     1 filter   I
+            0      59     2  task   Ljromp/task/Task;
+      StackMapTable: number_of_entries = 2
+        frame_type = 252 /* append */
+          offset_delta = 2
+          locals = [ int ]
+        frame_type = 250 /* chop */
+          offset_delta = 54
+
+  public jromp.JROMP masked(jromp.task.Task);
+    descriptor: (Ljromp/task/Task;)Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: iconst_0
+         2: aload_1
+         3: invokevirtual #213                // Method masked:(ILjromp/task/Task;)Ljromp/JROMP;
+         6: areturn
+      LineNumberTable:
+        line 361: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Ljromp/JROMP;
+            0       7     1  task   Ljromp/task/Task;
+
+  public jromp.JROMP barrier();
+    descriptor: ()Ljromp/JROMP;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=4, locals=3, args_size=1
+         0: new           #141                // class jromp/Barrier
+         3: dup
+         4: ldc           #217                // String Barrier
+         6: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         9: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        12: invokespecial #145                // Method jromp/Barrier."<init>":(Ljava/lang/String;I)V
+        15: astore_1
+        16: iconst_0
+        17: istore_2
+        18: iload_2
+        19: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        22: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        25: if_icmpge     52
+        28: aload_0
+        29: getfield      #50                 // Field executor:Ljromp/concurrent/JrompExecutorWrapper;
+        32: aload_1
+        33: dup
+        34: invokestatic  #219                // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        37: pop
+        38: invokedynamic #225,  0            // InvokeDynamic #7:run:(Ljromp/Barrier;)Ljava/lang/Runnable;
+        43: invokevirtual #137                // Method jromp/concurrent/JrompExecutorWrapper.execute:(Ljava/lang/Runnable;)V
+        46: iinc          2, 1
+        49: goto          18
+        52: aload_0
+        53: areturn
+      LineNumberTable:
+        line 370: 0
+        line 372: 16
+        line 373: 28
+        line 372: 46
+        line 376: 52
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           18      34     2     i   I
+            0      54     0  this   Ljromp/JROMP;
+           16      38     1 barrier   Ljromp/Barrier;
+      StackMapTable: number_of_entries = 2
+        frame_type = 253 /* append */
+          offset_delta = 18
+          locals = [ class jromp/Barrier, int ]
+        frame_type = 250 /* chop */
+          offset_delta = 33
+
+  public static boolean isMaster(int);
+    descriptor: (I)Z
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: iload_0
+         1: ifne          8
+         4: iconst_1
+         5: goto          9
+         8: iconst_0
+         9: ireturn
+      LineNumberTable:
+        line 389: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0    id   I
+      StackMapTable: number_of_entries = 2
+        frame_type = 8 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+
+  public static double getWTime();
+    descriptor: ()D
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: invokestatic  #228                // Method java/lang/System.nanoTime:()J
+         3: l2d
+         4: ldc2_w        #232                // double 1.0E9d
+         7: ddiv
+         8: dreturn
+      LineNumberTable:
+        line 398: 0
+
+  public static int getThreadNum();
+    descriptor: ()I
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=0
+         0: invokestatic  #234                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+         3: astore_1
+         4: aload_1
+         5: instanceof    #42                 // class jromp/concurrent/JrompThread
+         8: ifeq          21
+        11: aload_1
+        12: checkcast     #42                 // class jromp/concurrent/JrompThread
+        15: astore_0
+        16: aload_0
+        17: invokevirtual #238                // Method jromp/concurrent/JrompThread.getTid:()I
+        20: ireturn
+        21: iconst_0
+        22: ireturn
+      LineNumberTable:
+        line 407: 0
+        line 408: 16
+        line 411: 21
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           16       5     0    jt   Ljromp/concurrent/JrompThread;
+      StackMapTable: number_of_entries = 1
+        frame_type = 21 /* same */
+
+  public static jromp.concurrent.ThreadTeam getThreadTeam();
+    descriptor: ()Ljromp/concurrent/ThreadTeam;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=0
+         0: invokestatic  #234                // Method java/lang/Thread.currentThread:()Ljava/lang/Thread;
+         3: astore_1
+         4: aload_1
+         5: instanceof    #42                 // class jromp/concurrent/JrompThread
+         8: ifeq          21
+        11: aload_1
+        12: checkcast     #42                 // class jromp/concurrent/JrompThread
+        15: astore_0
+        16: aload_0
+        17: invokevirtual #242                // Method jromp/concurrent/JrompThread.getTeam:()Ljromp/concurrent/ThreadTeam;
+        20: areturn
+        21: aconst_null
+        22: areturn
+      LineNumberTable:
+        line 420: 0
+        line 421: 16
+        line 424: 21
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           16       5     0    jt   Ljromp/concurrent/JrompThread;
+      StackMapTable: number_of_entries = 1
+        frame_type = 21 /* same */
+
+  public static int getNumThreads();
+    descriptor: ()I
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: invokestatic  #246                // Method isInParallelContext:()Z
+         3: ifeq          15
+         6: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         9: getfield      #26                 // Field jromp/JROMP$Context.threads:I
+        12: goto          16
+        15: iconst_1
+        16: ireturn
+      LineNumberTable:
+        line 434: 0
+      StackMapTable: number_of_entries = 2
+        frame_type = 15 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+
+  public static int getNumThreadsPerTeam();
+    descriptor: ()I
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: invokestatic  #246                // Method isInParallelContext:()Z
+         3: ifeq          15
+         6: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+         9: getfield      #36                 // Field jromp/JROMP$Context.threadsPerTeam:I
+        12: goto          16
+        15: iconst_1
+        16: ireturn
+      LineNumberTable:
+        line 444: 0
+      StackMapTable: number_of_entries = 2
+        frame_type = 15 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+
+  private static boolean isInParallelContext();
+    descriptor: ()Z
+    flags: (0x000a) ACC_PRIVATE, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: invokestatic  #249                // Method getThreadTeam:()Ljromp/concurrent/ThreadTeam;
+         3: ifnull        10
+         6: iconst_1
+         7: goto          11
+        10: iconst_0
+        11: ireturn
+      LineNumberTable:
+        line 453: 0
+      StackMapTable: number_of_entries = 2
+        frame_type = 10 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+
+  private static void lambda$masked$5(int, jromp.task.Task, jromp.var.Variables);
+    descriptor: (ILjromp/task/Task;Ljromp/var/Variables;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: invokestatic  #252                // Method getThreadNum:()I
+         3: iload_0
+         4: if_icmpne     14
+         7: aload_1
+         8: aload_2
+         9: invokeinterface #255,  2          // InterfaceMethod jromp/task/Task.run:(Ljromp/var/Variables;)V
+        14: return
+      LineNumberTable:
+        line 344: 0
+        line 345: 7
+        line 347: 14
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      15     0 filter   I
+            0      15     1  task   Ljromp/task/Task;
+            0      15     2 finalVariables   Ljromp/var/Variables;
+      StackMapTable: number_of_entries = 1
+        frame_type = 14 /* same */
+
+  private static void lambda$single$4(java.util.concurrent.atomic.AtomicBoolean, jromp.task.Task, jromp.Barrier);
+    descriptor: (Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: iconst_0
+         2: iconst_1
+         3: invokevirtual #258                // Method java/util/concurrent/atomic/AtomicBoolean.compareAndSet:(ZZ)Z
+         6: ifeq          21
+         9: aload_1
+        10: getstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        13: getfield      #80                 // Field jromp/JROMP$Context.variables:Ljromp/var/Variables;
+        16: invokeinterface #255,  2          // InterfaceMethod jromp/task/Task.run:(Ljromp/var/Variables;)V
+        21: aload_2
+        22: invokevirtual #262                // Method jromp/Barrier.await:()V
+        25: return
+      LineNumberTable:
+        line 306: 0
+        line 308: 9
+        line 312: 21
+        line 313: 25
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      26     0 executed   Ljava/util/concurrent/atomic/AtomicBoolean;
+            0      26     1  task   Ljromp/task/Task;
+            0      26     2 barrier   Ljromp/Barrier;
+      StackMapTable: number_of_entries = 1
+        frame_type = 21 /* same */
+
+  private static jromp.task.Task[] lambda$sections$3(int);
+    descriptor: (I)[Ljromp/task/Task;
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: iload_0
+         1: anewarray     #169                // class jromp/task/Task
+         4: areturn
+      LineNumberTable:
+        line 275: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0   x$0   I
+
+  private static void lambda$sections$2(jromp.task.Task, jromp.var.Variables, jromp.Barrier);
+    descriptor: (Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #255,  2          // InterfaceMethod jromp/task/Task.run:(Ljromp/var/Variables;)V
+         7: aload_2
+         8: invokevirtual #262                // Method jromp/Barrier.await:()V
+        11: return
+      LineNumberTable:
+        line 221: 0
+        line 222: 7
+        line 223: 11
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      12     0  task   Ljromp/task/Task;
+            0      12     1 variables   Ljromp/var/Variables;
+            0      12     2 barrier   Ljromp/Barrier;
+
+  private static void lambda$parallelFor$1(jromp.task.ForTask, int, int, jromp.var.Variables, jromp.Barrier);
+    descriptor: (Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=4, locals=5, args_size=5
+         0: aload_0
+         1: iload_1
+         2: iload_2
+         3: aload_3
+         4: invokeinterface #265,  4          // InterfaceMethod jromp/task/ForTask.run:(IILjromp/var/Variables;)V
+         9: aload         4
+        11: invokevirtual #262                // Method jromp/Barrier.await:()V
+        14: return
+      LineNumberTable:
+        line 183: 0
+        line 184: 9
+        line 185: 14
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      15     0  task   Ljromp/task/ForTask;
+            0      15     1 chunkStart   I
+            0      15     2 chunkEnd   I
+            0      15     3 finalVariables   Ljromp/var/Variables;
+            0      15     4 barrier   Ljromp/Barrier;
+
+  private static void lambda$parallel$0(jromp.task.Task, jromp.var.Variables);
+    descriptor: (Ljromp/task/Task;Ljromp/var/Variables;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: invokeinterface #255,  2          // InterfaceMethod jromp/task/Task.run:(Ljromp/var/Variables;)V
+         7: return
+      LineNumberTable:
+        line 146: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0  task   Ljromp/task/Task;
+            0       8     1 finalVariables   Ljromp/var/Variables;
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: new           #27                 // class jromp/JROMP$Context
+         3: dup
+         4: invokespecial #270                // Method jromp/JROMP$Context."<init>":()V
+         7: putstatic     #16                 // Field context:Ljromp/JROMP$Context;
+        10: return
+      LineNumberTable:
+        line 26: 0
+}
+SourceFile: "JROMP.java"
+NestMembers:
+  jromp/JROMP$Context
+BootstrapMethods:
+  0: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #341 (Ljava/lang/Object;)V
+      #343 REF_invokeVirtual jromp/var/ReductionVariable.merge:()V
+      #347 (Ljromp/var/ReductionVariable;)V
+  1: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #349 ()V
+      #350 REF_invokeStatic jromp/JROMP.lambda$parallel$0:(Ljromp/task/Task;Ljromp/var/Variables;)V
+      #349 ()V
+  2: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #349 ()V
+      #353 REF_invokeStatic jromp/JROMP.lambda$parallelFor$1:(Ljromp/task/ForTask;IILjromp/var/Variables;Ljromp/Barrier;)V
+      #349 ()V
+  3: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #349 ()V
+      #356 REF_invokeStatic jromp/JROMP.lambda$sections$2:(Ljromp/task/Task;Ljromp/var/Variables;Ljromp/Barrier;)V
+      #349 ()V
+  4: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #359 (I)Ljava/lang/Object;
+      #361 REF_invokeStatic jromp/JROMP.lambda$sections$3:(I)[Ljromp/task/Task;
+      #364 (I)[Ljromp/task/Task;
+  5: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #349 ()V
+      #365 REF_invokeStatic jromp/JROMP.lambda$single$4:(Ljava/util/concurrent/atomic/AtomicBoolean;Ljromp/task/Task;Ljromp/Barrier;)V
+      #349 ()V
+  6: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #349 ()V
+      #368 REF_invokeStatic jromp/JROMP.lambda$masked$5:(ILjromp/task/Task;Ljromp/var/Variables;)V
+      #349 ()V
+  7: #372 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #349 ()V
+      #371 REF_invokeVirtual jromp/Barrier.await:()V
+      #349 ()V
+InnerClasses:
+  private static #380= #27 of #11;        // Context=class jromp/JROMP$Context of class jromp/JROMP
+  public static final #385= #381 of #383; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles

@@ -1,0 +1,181 @@
+Starting a Gradle Daemon, 7 busy and 6 incompatible and 3 stopped Daemons could not be reused, use --status for details
+> Task :compileJava
+
+BUILD SUCCESSFUL in 9s
+1 actionable task: 1 executed
+1 node
+[1730508836.579719] [cn6009:2807660:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579735] [cn6009:2807660:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579743] [cn6009:2807660:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579746] [cn6009:2807660:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579751] [cn6009:2807660:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579753] [cn6009:2807660:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579742] [cn6009:2807658:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579756] [cn6009:2807658:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579763] [cn6009:2807658:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579766] [cn6009:2807658:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579769] [cn6009:2807658:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579772] [cn6009:2807658:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579754] [cn6009:2807661:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579769] [cn6009:2807661:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579775] [cn6009:2807661:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579778] [cn6009:2807661:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579766] [cn6009:2807656:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579780] [cn6009:2807656:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579771] [cn6009:2807662:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579784] [cn6009:2807662:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579783] [cn6009:2807661:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579786] [cn6009:2807661:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579778] [cn6009:2807663:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579792] [cn6009:2807663:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579801] [cn6009:2807663:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579805] [cn6009:2807663:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579810] [cn6009:2807663:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579787] [cn6009:2807656:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579789] [cn6009:2807656:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579794] [cn6009:2807656:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579801] [cn6009:2807656:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579781] [cn6009:2807657:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579794] [cn6009:2807657:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579805] [cn6009:2807657:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579808] [cn6009:2807657:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579812] [cn6009:2807657:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579815] [cn6009:2807657:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579782] [cn6009:2807659:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579798] [cn6009:2807659:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579806] [cn6009:2807659:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579809] [cn6009:2807659:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579813] [cn6009:2807659:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579816] [cn6009:2807659:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579790] [cn6009:2807662:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579795] [cn6009:2807662:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579799] [cn6009:2807662:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508836.579801] [cn6009:2807662:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508836.579813] [cn6009:2807663:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.908096] [cn6009:2807661:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.908105] [cn6009:2807661:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.912737] [cn6009:2807663:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.912745] [cn6009:2807663:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.914251] [cn6009:2807656:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.914260] [cn6009:2807656:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.916283] [cn6009:2807657:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.916291] [cn6009:2807657:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.916301] [cn6009:2807660:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.916315] [cn6009:2807660:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.916355] [cn6009:2807659:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.916364] [cn6009:2807659:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.916597] [cn6009:2807658:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.916605] [cn6009:2807658:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+[1730508837.918177] [cn6009:2807662:0]          parser.c:1067 UCX  ERROR Invalid value for MEM_REG_GROWTH: '0.06ns'. Expected: time value: <number>[s|us|ms|ns]
+[1730508837.918186] [cn6009:2807662:0]          uct_md.c:289  UCX  ERROR Failed to read MD config
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 4: Before bcast
+Rank 1: Before bcast
+Rank 6: Before bcast
+Rank 5: Before bcast
+Rank 3: Before bcast
+Rank 2: Before bcast
+Rank 7: Before bcast
+Rank 0: Before bcast
+Rank 6: After bcast
+Rank 4: After bcast
+Rank 1: After bcast
+Rank 6: Inside single
+Rank 4: Inside single
+Rank 1: Inside single
+Rank 0: After bcast
+Rank 3: After bcast
+Rank 7: After bcast
+Rank 2: After bcast
+Rank 5: After bcast
+Rank 3: Inside single
+Rank 7: Inside single
+Rank 2: Inside single
+Rank 0: Inside single
+Rank 5: Inside single
+Rank 7: Count = 1000000000
+Rank 7: Count = 1000000000
+Rank 7: Count = 1000000000
+Rank 7: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 1: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 1: After parallel for
+Rank 4: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 7: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 4: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 4: After parallel for
+Rank 3: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 3: Count = 1000000000
+Rank 3: After parallel for
+Rank 7: Count = 1000000000
+Rank 7: Count = 1000000000
+Rank 7: Count = 1000000000
+Rank 7: After parallel for
+Rank 2: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: Count = 1000000000
+Rank 0: After parallel for
+Time: 0,151301
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: Count = 1000000000
+Rank 6: After parallel for
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: Count = 1000000000
+Rank 5: After parallel for
+Rank 2: Count = 1000000000
+Rank 2: Count = 1000000000
+Rank 2: Count = 1000000000
+Rank 2: Count = 1000000000
+Rank 2: Count = 1000000000
+Rank 2: Count = 1000000000
+Rank 2: Count = 1000000000
+Rank 2: After parallel for
+
+
+#####
+Funciona, pero no como debería, porque el tiempo solo concuerda con el maestro,
+no ha esperado por el resto de los nodos.
+#####

@@ -1,0 +1,602 @@
+Warning: File ./target/classes/jromp/var/Variables.class does not contain class target.classes.jromp.var.Variables
+Classfile /home/samuel/IdeaProjects/IntelliJ/jromp/target/classes/jromp/var/Variables.class
+  Last modified Oct 21, 2024; size 5101 bytes
+  SHA-256 checksum dad87b8d5c2b22580086a1e5dc0477f1ad83478a873a81455d99825d035d9512
+  Compiled from "Variables.java"
+public class jromp.var.Variables
+  minor version: 0
+  major version: 65
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #11                         // jromp/var/Variables
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 1, methods: 14, attributes: 3
+Constant pool:
+    #1 = Methodref          #2.#3         // java/lang/Object."<init>":()V
+    #2 = Class              #4            // java/lang/Object
+    #3 = NameAndType        #5:#6         // "<init>":()V
+    #4 = Utf8               java/lang/Object
+    #5 = Utf8               <init>
+    #6 = Utf8               ()V
+    #7 = Class              #8            // java/util/HashMap
+    #8 = Utf8               java/util/HashMap
+    #9 = Methodref          #7.#3         // java/util/HashMap."<init>":()V
+   #10 = Fieldref           #11.#12       // jromp/var/Variables.variableMap:Ljava/util/Map;
+   #11 = Class              #13           // jromp/var/Variables
+   #12 = NameAndType        #14:#15       // variableMap:Ljava/util/Map;
+   #13 = Utf8               jromp/var/Variables
+   #14 = Utf8               variableMap
+   #15 = Utf8               Ljava/util/Map;
+   #16 = Methodref          #11.#3        // jromp/var/Variables."<init>":()V
+   #17 = InterfaceMethodref #18.#19       // java/util/Map.putAll:(Ljava/util/Map;)V
+   #18 = Class              #20           // java/util/Map
+   #19 = NameAndType        #21:#22       // putAll:(Ljava/util/Map;)V
+   #20 = Utf8               java/util/Map
+   #21 = Utf8               putAll
+   #22 = Utf8               (Ljava/util/Map;)V
+   #23 = InterfaceMethodref #18.#24       // java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+   #24 = NameAndType        #25:#26       // put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+   #25 = Utf8               put
+   #26 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+   #27 = InterfaceMethodref #18.#28       // java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+   #28 = NameAndType        #29:#30       // get:(Ljava/lang/Object;)Ljava/lang/Object;
+   #29 = Utf8               get
+   #30 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+   #31 = Class              #32           // jromp/var/Variable
+   #32 = Utf8               jromp/var/Variable
+   #33 = InterfaceMethodref #18.#34       // java/util/Map.isEmpty:()Z
+   #34 = NameAndType        #35:#36       // isEmpty:()Z
+   #35 = Utf8               isEmpty
+   #36 = Utf8               ()Z
+   #37 = InterfaceMethodref #18.#38       // java/util/Map.size:()I
+   #38 = NameAndType        #39:#40       // size:()I
+   #39 = Utf8               size
+   #40 = Utf8               ()I
+   #41 = InterfaceMethodref #18.#42       // java/util/Map.containsKey:(Ljava/lang/Object;)Z
+   #42 = NameAndType        #43:#44       // containsKey:(Ljava/lang/Object;)Z
+   #43 = Utf8               containsKey
+   #44 = Utf8               (Ljava/lang/Object;)Z
+   #45 = String             #46           // No variables
+   #46 = Utf8               No variables
+   #47 = Class              #48           // java/lang/StringBuilder
+   #48 = Utf8               java/lang/StringBuilder
+   #49 = Methodref          #47.#3        // java/lang/StringBuilder."<init>":()V
+   #50 = InvokeDynamic      #0:#51        // #0:accept:(Ljava/lang/StringBuilder;)Ljava/util/function/BiConsumer;
+   #51 = NameAndType        #52:#53       // accept:(Ljava/lang/StringBuilder;)Ljava/util/function/BiConsumer;
+   #52 = Utf8               accept
+   #53 = Utf8               (Ljava/lang/StringBuilder;)Ljava/util/function/BiConsumer;
+   #54 = InterfaceMethodref #18.#55       // java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+   #55 = NameAndType        #56:#57       // forEach:(Ljava/util/function/BiConsumer;)V
+   #56 = Utf8               forEach
+   #57 = Utf8               (Ljava/util/function/BiConsumer;)V
+   #58 = Methodref          #47.#59       // java/lang/StringBuilder.length:()I
+   #59 = NameAndType        #60:#40       // length:()I
+   #60 = Utf8               length
+   #61 = Methodref          #47.#62       // java/lang/StringBuilder.delete:(II)Ljava/lang/StringBuilder;
+   #62 = NameAndType        #63:#64       // delete:(II)Ljava/lang/StringBuilder;
+   #63 = Utf8               delete
+   #64 = Utf8               (II)Ljava/lang/StringBuilder;
+   #65 = Methodref          #47.#66       // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #66 = NameAndType        #67:#68       // toString:()Ljava/lang/String;
+   #67 = Utf8               toString
+   #68 = Utf8               ()Ljava/lang/String;
+   #69 = Methodref          #11.#70       // jromp/var/Variables.create:()Ljromp/var/Variables;
+   #70 = NameAndType        #71:#72       // create:()Ljromp/var/Variables;
+   #71 = Utf8               create
+   #72 = Utf8               ()Ljromp/var/Variables;
+   #73 = InvokeDynamic      #1:#74        // #1:accept:(Ljromp/var/Variables;)Ljava/util/function/BiConsumer;
+   #74 = NameAndType        #52:#75       // accept:(Ljromp/var/Variables;)Ljava/util/function/BiConsumer;
+   #75 = Utf8               (Ljromp/var/Variables;)Ljava/util/function/BiConsumer;
+   #76 = InterfaceMethodref #18.#77       // java/util/Map.values:()Ljava/util/Collection;
+   #77 = NameAndType        #78:#79       // values:()Ljava/util/Collection;
+   #78 = Utf8               values
+   #79 = Utf8               ()Ljava/util/Collection;
+   #80 = InterfaceMethodref #81.#82       // java/util/Collection.stream:()Ljava/util/stream/Stream;
+   #81 = Class              #83           // java/util/Collection
+   #82 = NameAndType        #84:#85       // stream:()Ljava/util/stream/Stream;
+   #83 = Utf8               java/util/Collection
+   #84 = Utf8               stream
+   #85 = Utf8               ()Ljava/util/stream/Stream;
+   #86 = Methodref          #87.#88       // java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+   #87 = Class              #89           // java/util/Objects
+   #88 = NameAndType        #90:#30       // requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+   #89 = Utf8               java/util/Objects
+   #90 = Utf8               requireNonNull
+   #91 = InvokeDynamic      #2:#92        // #2:test:(Ljava/lang/Class;)Ljava/util/function/Predicate;
+   #92 = NameAndType        #93:#94       // test:(Ljava/lang/Class;)Ljava/util/function/Predicate;
+   #93 = Utf8               test
+   #94 = Utf8               (Ljava/lang/Class;)Ljava/util/function/Predicate;
+   #95 = InterfaceMethodref #96.#97       // java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+   #96 = Class              #98           // java/util/stream/Stream
+   #97 = NameAndType        #99:#100      // filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+   #98 = Utf8               java/util/stream/Stream
+   #99 = Utf8               filter
+  #100 = Utf8               (Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+  #101 = InvokeDynamic      #3:#102       // #3:apply:(Ljava/lang/Class;)Ljava/util/function/Function;
+  #102 = NameAndType        #103:#104     // apply:(Ljava/lang/Class;)Ljava/util/function/Function;
+  #103 = Utf8               apply
+  #104 = Utf8               (Ljava/lang/Class;)Ljava/util/function/Function;
+  #105 = InterfaceMethodref #96.#106      // java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+  #106 = NameAndType        #107:#108     // map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+  #107 = Utf8               map
+  #108 = Utf8               (Ljava/util/function/Function;)Ljava/util/stream/Stream;
+  #109 = InterfaceMethodref #96.#110      // java/util/stream/Stream.toList:()Ljava/util/List;
+  #110 = NameAndType        #111:#112     // toList:()Ljava/util/List;
+  #111 = Utf8               toList
+  #112 = Utf8               ()Ljava/util/List;
+  #113 = InvokeDynamic      #4:#114       // #4:accept:()Ljava/util/function/Consumer;
+  #114 = NameAndType        #52:#115      // accept:()Ljava/util/function/Consumer;
+  #115 = Utf8               ()Ljava/util/function/Consumer;
+  #116 = InterfaceMethodref #81.#117      // java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+  #117 = NameAndType        #56:#118      // forEach:(Ljava/util/function/Consumer;)V
+  #118 = Utf8               (Ljava/util/function/Consumer;)V
+  #119 = InterfaceMethodref #31.#120      // jromp/var/Variable.copy:()Ljromp/var/Variable;
+  #120 = NameAndType        #121:#122     // copy:()Ljromp/var/Variable;
+  #121 = Utf8               copy
+  #122 = Utf8               ()Ljromp/var/Variable;
+  #123 = Methodref          #11.#124      // jromp/var/Variables.add:(Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+  #124 = NameAndType        #125:#126     // add:(Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+  #125 = Utf8               add
+  #126 = Utf8               (Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+  #127 = String             #128          // %s -> %s%n
+  #128 = Utf8               %s -> %s%n
+  #129 = Methodref          #130.#131     // java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+  #130 = Class              #132          // java/lang/String
+  #131 = NameAndType        #133:#134     // format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+  #132 = Utf8               java/lang/String
+  #133 = Utf8               format
+  #134 = Utf8               (Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+  #135 = Methodref          #47.#136      // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #136 = NameAndType        #137:#138     // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #137 = Utf8               append
+  #138 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #139 = Utf8               Signature
+  #140 = Utf8               Ljava/util/Map<Ljava/lang/String;Ljromp/var/Variable<*>;>;
+  #141 = Utf8               Code
+  #142 = Utf8               LineNumberTable
+  #143 = Utf8               LocalVariableTable
+  #144 = Utf8               this
+  #145 = Utf8               Ljromp/var/Variables;
+  #146 = Utf8               (Ljava/util/Map;)Ljromp/var/Variables;
+  #147 = Utf8               varMap
+  #148 = Utf8               variables
+  #149 = Utf8               LocalVariableTypeTable
+  #150 = Utf8               (Ljava/util/Map<Ljava/lang/String;Ljromp/var/Variable<*>;>;)Ljromp/var/Variables;
+  #151 = Utf8               name
+  #152 = Utf8               Ljava/lang/String;
+  #153 = Utf8               variable
+  #154 = Utf8               Ljromp/var/Variable;
+  #155 = Utf8               Ljromp/var/Variable<*>;
+  #156 = Utf8               (Ljava/lang/String;Ljromp/var/Variable<*>;)Ljromp/var/Variables;
+  #157 = Utf8               (Ljava/lang/String;)Ljromp/var/Variable;
+  #158 = Utf8               <T::Ljava/io/Serializable;>(Ljava/lang/String;)Ljromp/var/Variable<TT;>;
+  #159 = Utf8               contains
+  #160 = Utf8               (Ljava/lang/String;)Z
+  #161 = Utf8               sb
+  #162 = Utf8               Ljava/lang/StringBuilder;
+  #163 = Utf8               I
+  #164 = Utf8               StackMapTable
+  #165 = Utf8               getVariablesOfType
+  #166 = Utf8               (Ljava/lang/Class;)Ljava/util/List;
+  #167 = Utf8               type
+  #168 = Utf8               Ljava/lang/Class;
+  #169 = Utf8               Ljava/lang/Class<TT;>;
+  #170 = Utf8               <T::Ljromp/var/Variable<*>;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;
+  #171 = Utf8               end
+  #172 = Utf8               lambda$copy$1
+  #173 = Utf8               (Ljromp/var/Variables;Ljava/lang/String;Ljromp/var/Variable;)V
+  #174 = Utf8               key
+  #175 = Utf8               value
+  #176 = Utf8               lambda$toString$0
+  #177 = Utf8               (Ljava/lang/StringBuilder;Ljava/lang/String;Ljromp/var/Variable;)V
+  #178 = Utf8               SourceFile
+  #179 = Utf8               Variables.java
+  #180 = Utf8               BootstrapMethods
+  #181 = MethodType         #182          //  (Ljava/lang/Object;Ljava/lang/Object;)V
+  #182 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)V
+  #183 = MethodHandle       6:#184        // REF_invokeStatic jromp/var/Variables.lambda$toString$0:(Ljava/lang/StringBuilder;Ljava/lang/String;Ljromp/var/Variable;)V
+  #184 = Methodref          #11.#185      // jromp/var/Variables.lambda$toString$0:(Ljava/lang/StringBuilder;Ljava/lang/String;Ljromp/var/Variable;)V
+  #185 = NameAndType        #176:#177     // lambda$toString$0:(Ljava/lang/StringBuilder;Ljava/lang/String;Ljromp/var/Variable;)V
+  #186 = MethodType         #187          //  (Ljava/lang/String;Ljromp/var/Variable;)V
+  #187 = Utf8               (Ljava/lang/String;Ljromp/var/Variable;)V
+  #188 = MethodHandle       6:#189        // REF_invokeStatic jromp/var/Variables.lambda$copy$1:(Ljromp/var/Variables;Ljava/lang/String;Ljromp/var/Variable;)V
+  #189 = Methodref          #11.#190      // jromp/var/Variables.lambda$copy$1:(Ljromp/var/Variables;Ljava/lang/String;Ljromp/var/Variable;)V
+  #190 = NameAndType        #172:#173     // lambda$copy$1:(Ljromp/var/Variables;Ljava/lang/String;Ljromp/var/Variable;)V
+  #191 = MethodType         #44           //  (Ljava/lang/Object;)Z
+  #192 = MethodHandle       5:#193        // REF_invokeVirtual java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+  #193 = Methodref          #194.#195     // java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+  #194 = Class              #196          // java/lang/Class
+  #195 = NameAndType        #197:#44      // isInstance:(Ljava/lang/Object;)Z
+  #196 = Utf8               java/lang/Class
+  #197 = Utf8               isInstance
+  #198 = MethodType         #199          //  (Ljromp/var/Variable;)Z
+  #199 = Utf8               (Ljromp/var/Variable;)Z
+  #200 = MethodType         #30           //  (Ljava/lang/Object;)Ljava/lang/Object;
+  #201 = MethodHandle       5:#202        // REF_invokeVirtual java/lang/Class.cast:(Ljava/lang/Object;)Ljava/lang/Object;
+  #202 = Methodref          #194.#203     // java/lang/Class.cast:(Ljava/lang/Object;)Ljava/lang/Object;
+  #203 = NameAndType        #204:#30      // cast:(Ljava/lang/Object;)Ljava/lang/Object;
+  #204 = Utf8               cast
+  #205 = MethodType         #206          //  (Ljromp/var/Variable;)Ljromp/var/Variable;
+  #206 = Utf8               (Ljromp/var/Variable;)Ljromp/var/Variable;
+  #207 = MethodType         #208          //  (Ljava/lang/Object;)V
+  #208 = Utf8               (Ljava/lang/Object;)V
+  #209 = MethodHandle       9:#210        // REF_invokeInterface jromp/var/Variable.end:()V
+  #210 = InterfaceMethodref #31.#211      // jromp/var/Variable.end:()V
+  #211 = NameAndType        #171:#6       // end:()V
+  #212 = MethodType         #213          //  (Ljromp/var/Variable;)V
+  #213 = Utf8               (Ljromp/var/Variable;)V
+  #214 = MethodHandle       6:#215        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #215 = Methodref          #216.#217     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #216 = Class              #218          // java/lang/invoke/LambdaMetafactory
+  #217 = NameAndType        #219:#220     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #218 = Utf8               java/lang/invoke/LambdaMetafactory
+  #219 = Utf8               metafactory
+  #220 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #221 = Utf8               InnerClasses
+  #222 = Class              #223          // java/lang/invoke/MethodHandles$Lookup
+  #223 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #224 = Class              #225          // java/lang/invoke/MethodHandles
+  #225 = Utf8               java/lang/invoke/MethodHandles
+  #226 = Utf8               Lookup
+{
+  private final java.util.Map<java.lang.String, jromp.var.Variable<?>> variableMap;
+    descriptor: Ljava/util/Map;
+    flags: (0x0012) ACC_PRIVATE, ACC_FINAL
+    Signature: #140                         // Ljava/util/Map<Ljava/lang/String;Ljromp/var/Variable<*>;>;
+
+  private jromp.var.Variables();
+    descriptor: ()V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #7                  // class java/util/HashMap
+         8: dup
+         9: invokespecial #9                  // Method java/util/HashMap."<init>":()V
+        12: putfield      #10                 // Field variableMap:Ljava/util/Map;
+        15: return
+      LineNumberTable:
+        line 17: 0
+        line 15: 4
+        line 19: 15
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      16     0  this   Ljromp/var/Variables;
+
+  public static jromp.var.Variables create();
+    descriptor: ()Ljromp/var/Variables;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: new           #11                 // class jromp/var/Variables
+         3: dup
+         4: invokespecial #16                 // Method "<init>":()V
+         7: areturn
+      LineNumberTable:
+        line 27: 0
+
+  public static jromp.var.Variables create(java.util.Map<java.lang.String, jromp.var.Variable<?>>);
+    descriptor: (Ljava/util/Map;)Ljromp/var/Variables;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=2, args_size=1
+         0: new           #11                 // class jromp/var/Variables
+         3: dup
+         4: invokespecial #16                 // Method "<init>":()V
+         7: astore_1
+         8: aload_1
+         9: getfield      #10                 // Field variableMap:Ljava/util/Map;
+        12: aload_0
+        13: invokeinterface #17,  2           // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+        18: aload_1
+        19: areturn
+      LineNumberTable:
+        line 38: 0
+        line 39: 8
+        line 40: 18
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0 varMap   Ljava/util/Map;
+            8      12     1 variables   Ljromp/var/Variables;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0 varMap   Ljava/util/Map<Ljava/lang/String;Ljromp/var/Variable<*>;>;
+    Signature: #150                         // (Ljava/util/Map<Ljava/lang/String;Ljromp/var/Variable<*>;>;)Ljromp/var/Variables;
+
+  public jromp.var.Variables add(java.lang.String, jromp.var.Variable<?>);
+    descriptor: (Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: aload_1
+         5: aload_2
+         6: invokeinterface #23,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        11: pop
+        12: aload_0
+        13: areturn
+      LineNumberTable:
+        line 52: 0
+        line 53: 12
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      14     0  this   Ljromp/var/Variables;
+            0      14     1  name   Ljava/lang/String;
+            0      14     2 variable   Ljromp/var/Variable;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      14     2 variable   Ljromp/var/Variable<*>;
+    Signature: #156                         // (Ljava/lang/String;Ljromp/var/Variable<*>;)Ljromp/var/Variables;
+
+  public <T extends java.io.Serializable> jromp.var.Variable<T> get(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljromp/var/Variable;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: aload_1
+         5: invokeinterface #27,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: checkcast     #31                 // class jromp/var/Variable
+        13: areturn
+      LineNumberTable:
+        line 66: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      14     0  this   Ljromp/var/Variables;
+            0      14     1  name   Ljava/lang/String;
+    Signature: #158                         // <T::Ljava/io/Serializable;>(Ljava/lang/String;)Ljromp/var/Variable<TT;>;
+
+  public boolean isEmpty();
+    descriptor: ()Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: invokeinterface #33,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+         9: ireturn
+      LineNumberTable:
+        line 75: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Ljromp/var/Variables;
+
+  public int size();
+    descriptor: ()I
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: invokeinterface #37,  1           // InterfaceMethod java/util/Map.size:()I
+         9: ireturn
+      LineNumberTable:
+        line 84: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Ljromp/var/Variables;
+
+  public boolean contains(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: aload_1
+         5: invokeinterface #41,  2           // InterfaceMethod java/util/Map.containsKey:(Ljava/lang/Object;)Z
+        10: ireturn
+      LineNumberTable:
+        line 96: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      11     0  this   Ljromp/var/Variables;
+            0      11     1  name   Ljava/lang/String;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: invokeinterface #33,  1           // InterfaceMethod java/util/Map.isEmpty:()Z
+         9: ifeq          15
+        12: ldc           #45                 // String No variables
+        14: areturn
+        15: new           #47                 // class java/lang/StringBuilder
+        18: dup
+        19: invokespecial #49                 // Method java/lang/StringBuilder."<init>":()V
+        22: astore_1
+        23: aload_0
+        24: getfield      #10                 // Field variableMap:Ljava/util/Map;
+        27: aload_1
+        28: invokedynamic #50,  0             // InvokeDynamic #0:accept:(Ljava/lang/StringBuilder;)Ljava/util/function/BiConsumer;
+        33: invokeinterface #54,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+        38: aload_1
+        39: invokevirtual #58                 // Method java/lang/StringBuilder.length:()I
+        42: istore_2
+        43: aload_1
+        44: iload_2
+        45: iconst_1
+        46: isub
+        47: iload_2
+        48: invokevirtual #61                 // Method java/lang/StringBuilder.delete:(II)Ljava/lang/StringBuilder;
+        51: invokevirtual #65                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        54: areturn
+      LineNumberTable:
+        line 109: 0
+        line 110: 12
+        line 113: 15
+        line 115: 23
+        line 117: 38
+        line 118: 43
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      55     0  this   Ljromp/var/Variables;
+           23      32     1    sb   Ljava/lang/StringBuilder;
+           43      12     2 length   I
+      StackMapTable: number_of_entries = 1
+        frame_type = 15 /* same */
+
+  public jromp.var.Variables copy();
+    descriptor: ()Ljromp/var/Variables;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=1
+         0: invokestatic  #69                 // Method create:()Ljromp/var/Variables;
+         3: astore_1
+         4: aload_0
+         5: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         8: aload_1
+         9: invokedynamic #73,  0             // InvokeDynamic #1:accept:(Ljromp/var/Variables;)Ljava/util/function/BiConsumer;
+        14: invokeinterface #54,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+        19: aload_1
+        20: areturn
+      LineNumberTable:
+        line 127: 0
+        line 129: 4
+        line 131: 19
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      21     0  this   Ljromp/var/Variables;
+            4      17     1  copy   Ljromp/var/Variables;
+
+  public <T extends jromp.var.Variable<?>> java.util.List<T> getVariablesOfType(java.lang.Class<T>);
+    descriptor: (Ljava/lang/Class;)Ljava/util/List;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: invokeinterface #76,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: invokeinterface #80,  1           // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+        14: aload_1
+        15: dup
+        16: invokestatic  #86                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        19: pop
+        20: invokedynamic #91,  0             // InvokeDynamic #2:test:(Ljava/lang/Class;)Ljava/util/function/Predicate;
+        25: invokeinterface #95,  2           // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+        30: aload_1
+        31: dup
+        32: invokestatic  #86                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;)Ljava/lang/Object;
+        35: pop
+        36: invokedynamic #101,  0            // InvokeDynamic #3:apply:(Ljava/lang/Class;)Ljava/util/function/Function;
+        41: invokeinterface #105,  2          // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+        46: invokeinterface #109,  1          // InterfaceMethod java/util/stream/Stream.toList:()Ljava/util/List;
+        51: areturn
+      LineNumberTable:
+        line 143: 0
+        line 144: 9
+        line 145: 16
+        line 146: 32
+        line 147: 46
+        line 143: 51
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      52     0  this   Ljromp/var/Variables;
+            0      52     1  type   Ljava/lang/Class;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      52     1  type   Ljava/lang/Class<TT;>;
+    Signature: #170                         // <T::Ljromp/var/Variable<*>;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;
+
+  public void end();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field variableMap:Ljava/util/Map;
+         4: invokeinterface #76,  1           // InterfaceMethod java/util/Map.values:()Ljava/util/Collection;
+         9: invokedynamic #113,  0            // InvokeDynamic #4:accept:()Ljava/util/function/Consumer;
+        14: invokeinterface #116,  2          // InterfaceMethod java/util/Collection.forEach:(Ljava/util/function/Consumer;)V
+        19: return
+      LineNumberTable:
+        line 154: 0
+        line 155: 19
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      20     0  this   Ljromp/var/Variables;
+
+  private static void lambda$copy$1(jromp.var.Variables, java.lang.String, jromp.var.Variable);
+    descriptor: (Ljromp/var/Variables;Ljava/lang/String;Ljromp/var/Variable;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: invokeinterface #119,  1          // InterfaceMethod jromp/var/Variable.copy:()Ljromp/var/Variable;
+         8: invokevirtual #123                // Method add:(Ljava/lang/String;Ljromp/var/Variable;)Ljromp/var/Variables;
+        11: pop
+        12: return
+      LineNumberTable:
+        line 129: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  copy   Ljromp/var/Variables;
+            0      13     1   key   Ljava/lang/String;
+            0      13     2 value   Ljromp/var/Variable;
+
+  private static void lambda$toString$0(java.lang.StringBuilder, java.lang.String, jromp.var.Variable);
+    descriptor: (Ljava/lang/StringBuilder;Ljava/lang/String;Ljromp/var/Variable;)V
+    flags: (0x100a) ACC_PRIVATE, ACC_STATIC, ACC_SYNTHETIC
+    Code:
+      stack=6, locals=3, args_size=3
+         0: aload_0
+         1: ldc           #127                // String %s -> %s%n
+         3: iconst_2
+         4: anewarray     #2                  // class java/lang/Object
+         7: dup
+         8: iconst_0
+         9: aload_1
+        10: aastore
+        11: dup
+        12: iconst_1
+        13: aload_2
+        14: aastore
+        15: invokestatic  #129                // Method java/lang/String.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+        18: invokevirtual #135                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        21: pop
+        22: return
+      LineNumberTable:
+        line 115: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      23     0    sb   Ljava/lang/StringBuilder;
+            0      23     1   key   Ljava/lang/String;
+            0      23     2 value   Ljromp/var/Variable;
+}
+SourceFile: "Variables.java"
+BootstrapMethods:
+  0: #214 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #181 (Ljava/lang/Object;Ljava/lang/Object;)V
+      #183 REF_invokeStatic jromp/var/Variables.lambda$toString$0:(Ljava/lang/StringBuilder;Ljava/lang/String;Ljromp/var/Variable;)V
+      #186 (Ljava/lang/String;Ljromp/var/Variable;)V
+  1: #214 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #181 (Ljava/lang/Object;Ljava/lang/Object;)V
+      #188 REF_invokeStatic jromp/var/Variables.lambda$copy$1:(Ljromp/var/Variables;Ljava/lang/String;Ljromp/var/Variable;)V
+      #186 (Ljava/lang/String;Ljromp/var/Variable;)V
+  2: #214 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #191 (Ljava/lang/Object;)Z
+      #192 REF_invokeVirtual java/lang/Class.isInstance:(Ljava/lang/Object;)Z
+      #198 (Ljromp/var/Variable;)Z
+  3: #214 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #200 (Ljava/lang/Object;)Ljava/lang/Object;
+      #201 REF_invokeVirtual java/lang/Class.cast:(Ljava/lang/Object;)Ljava/lang/Object;
+      #205 (Ljromp/var/Variable;)Ljromp/var/Variable;
+  4: #214 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #207 (Ljava/lang/Object;)V
+      #209 REF_invokeInterface jromp/var/Variable.end:()V
+      #212 (Ljromp/var/Variable;)V
+InnerClasses:
+  public static final #226= #222 of #224; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles

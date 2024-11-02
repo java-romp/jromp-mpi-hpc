@@ -1,0 +1,48 @@
+[cn6009:2805929] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805930] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805934] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805928] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805933] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805932] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805931] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805927] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:2805932:0:2805940] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x15192c99e000)
+[cn6009:2805928:0:2805937] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x14df50577000)
+==== backtrace (tid:2805937) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:2805940) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+[cn6009:2805928] *** Process received signal ***
+[cn6009:2805928] Signal: Aborted (6)
+[cn6009:2805928] Signal code:  (-6)
+[cn6009:2805932] *** Process received signal ***
+[cn6009:2805932] Signal: Aborted (6)
+[cn6009:2805932] Signal code:  (-6)
+[cn6009:2805928] [ 0] [cn6009:2805932] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x14df5015dce0]
+[cn6009:2805928] [ 1] /lib64/libpthread.so.0(+0x12ce0)[0x15192c584ce0]
+[cn6009:2805932] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x14df4fbd0a9f]
+[cn6009:2805928] [ 2] /lib64/libc.so.6(gsignal+0x10f)[0x15192bff7a9f]
+[cn6009:2805932] [ 2] /lib64/libc.so.6(abort+0x127)[0x14df4fba3e05]
+[cn6009:2805928] [ 3] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0x298603)[0x14df4e8e6603]
+[cn6009:2805928] [ 4] /lib64/libc.so.6(abort+0x127)[0x15192bfcae05]
+[cn6009:2805932] [ 3] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0x298603)[0x15192ad0d603]
+[cn6009:2805932] [ 4] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfed9e9)[0x15192ba629e9]
+[cn6009:2805932] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfed9e9)[0x14df4f63b9e9]
+[cn6009:2805928] [ 5] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee13b)[0x14df4f63c13b]
+[cn6009:2805928] [ 6] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee15e)[0x14df4f63c15e]
+[cn6009:2805928] [ 7] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(JVM_handle_linux_signal+0x2e6)[0x14df4f4a21c6]
+[cn6009:2805928] [ 8] [ 5] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee13b)[0x15192ba6313b]
+[cn6009:2805932] [ 6] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee15e)[0x15192ba6315e]
+[cn6009:2805932] [ 7] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(JVM_handle_linux_signal+0x2e6)[0x15192b8c91c6]
+[cn6009:2805932] [ 8] /lib64/libpthread.so.0(+0x12ce0)[0x15192c584ce0]
+[cn6009:2805932] [ 9] /lib64/libpthread.so.0(+0x12ce0)[0x14df5015dce0]
+[cn6009:2805928] [ 9] [0x14df384f2104]
+[cn6009:2805928] *** End of error message ***
+[0x15190c90e3b1]
+[cn6009:2805932] *** End of error message ***
+--------------------------------------------------------------------------
+prterun noticed that process rank 1 with PID 2805928 on node cn6009 exited on
+signal 6 (Aborted).
+--------------------------------------------------------------------------

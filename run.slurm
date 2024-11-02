@@ -42,13 +42,14 @@ MPI_RUN_EXECUTABLE="$PROJECT_PATH"/libs/ompi/bin/mpirun
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
 export PRTE_MCA_plm_slurm_ignore_args=true
+export LD_LIBRARY_PATH="$PROJECT_PATH"/libs/ompi/lib
 
 # Compile the Java classes
 ./gradlew compileJava
 
 if [ "$SLURM_NNODES" == 1 ]; then
     echo "1 node"
-    export FI_PROVIDER=tcp
+    #export FI_PROVIDER=tcp
     #export FI_PSM3_CONN_TIMEOUT=60
 fi
 
