@@ -1,0 +1,58 @@
+[cn6009:3212207] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212206] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212203] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212200] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212201] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212204] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212202] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212205] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3212206:3:3212484] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:7:3212488] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:5:3212460] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:4:3212470] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:6:3212474] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:8:3212479] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:2:3212489] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+[cn6009:3212206:1:3212465] Caught signal 11 (Segmentation fault: invalid permissions for mapped object at address 0x151442522000)
+==== backtrace (tid:3212474) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212470) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212465) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212488) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212484) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212460) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212489) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+==== backtrace (tid:3212479) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+=================================
+[cn6009:3212206] *** Process received signal ***
+[cn6009:3212206] Signal: Aborted (6)
+[cn6009:3212206] Signal code:  (-6)
+[cn6009:3212206] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x151442108ce0]
+[cn6009:3212206] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x151441b7ba9f]
+[cn6009:3212206] [ 2] /lib64/libc.so.6(abort+0x127)[0x151441b4ee05]
+[cn6009:3212206] [ 3] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0x298603)[0x151440891603]
+[cn6009:3212206] [ 4] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfed9e9)[0x1514415e69e9]
+[cn6009:3212206] [ 5] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee13b)[0x1514415e713b]
+[cn6009:3212206] [ 6] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee15e)[0x1514415e715e]
+[cn6009:3212206] [ 7] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(JVM_handle_linux_signal+0x2e6)[0x15144144d1c6]
+[cn6009:3212206] [ 8] /lib64/libpthread.so.0(+0x12ce0)[0x151442108ce0]
+[cn6009:3212206] [ 9] [0x15142fe9d6cd]
+[cn6009:3212206] *** End of error message ***
+--------------------------------------------------------------------------
+prterun noticed that process rank 6 with PID 3212206 on node cn6009 exited on
+signal 6 (Aborted).
+--------------------------------------------------------------------------

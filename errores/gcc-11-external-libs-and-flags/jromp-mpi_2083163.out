@@ -1,0 +1,165 @@
+Starting a Gradle Daemon, 7 busy and 6 incompatible and 8 stopped Daemons could not be reused, use --status for details
+> Task :compileJava UP-TO-DATE
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 up-to-date
+1 node
+[1730558806.588898] [cn6009:3212207:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.597582] [cn6009:3212206:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.598172] [cn6009:3212203:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.598296] [cn6009:3212200:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.602669] [cn6009:3212201:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.605567] [cn6009:3212204:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.605686] [cn6009:3212202:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730558806.606516] [cn6009:3212205:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 1: Before bcast
+Rank 2: Before bcast
+Rank 4: Before bcast
+Rank 7: Before bcast
+Rank 3: Before bcast
+Rank 6: Before bcast
+Rank 5: Before bcast
+Rank 0: Before bcast
+Rank 1: After bcast
+Rank 2: After bcast
+Rank 4: After bcast
+Rank 1: Inside single
+Rank 2: Inside single
+Rank 4: Inside single
+Rank 0: After bcast
+Rank 3: After bcast
+Rank 7: After bcast
+Rank 6: After bcast
+Rank 5: After bcast
+Rank 3: Inside single
+Rank 7: Inside single
+Rank 0: Inside single
+Rank 6: Inside single
+Rank 5: Inside single
+[1730558807.669662] [cn6009:3212206:1]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669706] [cn6009:3212206:2]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669746] [cn6009:3212206:3]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669772] [cn6009:3212206:4]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669796] [cn6009:3212206:1]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 1 was not set in ucs
+[1730558807.669813] [cn6009:3212206:5]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669837] [cn6009:3212206:6]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669858] [cn6009:3212206:7]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 8 was not set in ucs
+[1730558807.669880] [cn6009:3212206:7]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 7 was not set in ucs
+[1730558807.669891] [cn6009:3212206:4]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 11 was not set in ucs
+[1730558807.669904] [cn6009:3212206:6]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 7 was not set in ucs
+[1730558807.669916] [cn6009:3212206:5]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 7 was not set in ucs
+[1730558807.669925] [cn6009:3212206:3]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.669894] [cn6009:3212206:7]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.670012] [cn6009:3212206:7]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.670015] [cn6009:3212206:5]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.670281] [cn6009:3212206:4]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.673211] [cn6009:3212206:6]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.669927] [cn6009:3212206:1]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 4 was not set in ucs
+[1730558807.682270] [cn6009:3212206:1]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.682270] [cn6009:3212206:2]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 11 was not set in ucs
+[1730558807.682311] [cn6009:3212206:2]        spinlock.c:29   UCX  WARN  ucs_recursive_spinlock_destroy() failed: busy
+[1730558807.682314] [cn6009:3212206:8]           debug.c:1376 UCX  WARN  ucs_debug_disable_signal: signal 11 was not set in ucs
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+[thread 3212474 also had an error]
+#  SIGSEGV (0xb) at pc=0x000015142fe9d6cd (sent by kill), pid=3212206, tid=3212470
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.2+13 (21.0.2+13) (build 21.0.2+13-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.2+13 (21.0.2+13-LTS, mixed mode, sharing, compressed oops, compressed class ptrs, parallel gc, linux-amd64)
+# Problematic frame:
+# J 157% c2 jromp.mpi.examples.FullParallel.lambda$main$2(IIILjromp/var/Variables;)V (178 bytes) @ 0x000015142fe9d6cd [0x000015142fe9d300+0x00000000000003cd]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/core.3212206)
+#
+# An error report file with more information is saved as:
+# /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/hs_err_pid3212206.log
+[thread 3212465 also had an error]
+[thread 3212488 also had an error]
+[thread 3212484 also had an error]
+[thread 3212460 also had an error]
+[thread 3212489 also had an error]
+[thread 3212479 also had an error]
+[3.195s][warning][os] Loading hsdis library failed
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+#
+Rank 4: Count = 0
+Rank 4: Count = 0
+Rank 4: Count = 0
+Rank 4: Count = 0
+Rank 4: Count = 0
+Rank 4: Count = 0
+Rank 4: Count = 0
+Rank 1: Count = 0
+Rank 1: Count = 0
+Rank 1: Count = 0
+Rank 1: Count = 0
+Rank 1: Count = 0
+Rank 4: Count = 0
+Rank 4: After parallel for
+Total sum: 8000000000.000000
+Rank 1: Count = 0
+Rank 0: Count = 0
+Rank 0: Count = 0
+Rank 0: Count = 0
+Rank 0: Count = 0
+Rank 0: Count = 0
+Rank 1: Count = 0
+Rank 7: Count = 0
+Rank 7: Count = 0
+Rank 7: Count = 0
+Rank 7: Count = 0
+Rank 7: Count = 0
+Rank 7: Count = 0
+Rank 1: Count = 0
+Rank 1: After parallel for
+Rank 2: Count = 0
+Rank 2: Count = 0
+Rank 2: Count = 0
+Rank 2: Count = 0
+Rank 2: Count = 0
+Rank 2: Count = 0
+Total sum: 8000000000.000000
+Rank 2: Count = 0
+Rank 2: Count = 0
+Rank 2: After parallel for
+Rank 5: Count = 0
+Rank 0: Count = 0
+Rank 0: Count = 0
+Total sum: 8000000000.000000
+Rank 0: Count = 0
+Rank 0: After parallel for
+Rank 5: Count = 0
+Rank 5: Count = 0
+Total sum: 8000000000.000000
+Rank 3: Count = 0
+Rank 3: Count = 0
+Rank 3: Count = 0
+Rank 3: Count = 0
+Rank 3: Count = 0
+Rank 3: Count = 0
+Rank 3: Count = 0
+Rank 7: Count = 0
+Rank 7: Count = 0
+Rank 7: After parallel for
+Rank 5: Count = 0
+Rank 5: Count = 0
+Rank 5: Count = 0
+Rank 5: Count = 0
+Rank 3: Count = 0
+Rank 3: After parallel for
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Rank 5: Count = 0
+Rank 5: After parallel for
+Total sum: 8000000000.000000
