@@ -33,6 +33,20 @@
 # Parameters:
 # 1: Main class to execute (e.g. "jromp.examples.pi.Pi")
 
+function print_slurm_info() {
+    echo ""
+    echo ""
+    echo "##################################################"
+    echo "Date: $(date +'%d/%m/%Y %H:%M:%S')"
+    echo "Job ID: $SLURM_JOB_ID"
+    echo "Job Nodes: $SLURM_NNODES ($SLURM_JOB_NODELIST)"
+    echo "Tasks: $SLURM_NTASKS ($SLURM_NTASKS_PER_NODE task(s)/node)"
+    echo "CPUs: $((SLURM_NTASKS * SLURM_CPUS_PER_TASK)) ($SLURM_CPUS_PER_TASK CPU(s)/task)"
+    echo "##################################################"
+    echo ""
+    echo ""
+}
+
 # Configure the variables to execute the job and keep it clean
 PROJECT_PATH="$(pwd)"
 LIBS_CLASSPATH="$PROJECT_PATH"/libs/java/commons-lang3-3.16.0.jar:"$PROJECT_PATH"/libs/java/jromp-2.2.0.jar:"$PROJECT_PATH"/libs/ompi/lib/mpi.jar
@@ -47,7 +61,8 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 # Compile the Java classes
 ./gradlew compileJava
 
-echo "Nodes: $SLURM_NNODES"
+# Print the SLURM info
+print_slurm_info
 
 # Execute the job
 $MPI_RUN_EXECUTABLE --mca pml ob1 --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
