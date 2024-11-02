@@ -1,0 +1,168 @@
+[cn6009:3218274] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3218271] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3218272] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3218273] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632287] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632286] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632289] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632288] pml_ucx.c:313  Error: Failed to create UCP worker
+cn6009:rank3:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank2:  Mismatched version of EPID - 4
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6009:rank0:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6010:rank7:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6010:rank6:  Mismatched version of EPID - 4
+Confirm all nodes are running the same interconnect HW and PSM version
+
+cn6010:rank4:  Mismatched version of EPID - 3
+Confirm all nodes are running the same interconnect HW and PSM version
+
+[cn6009:3218274] *** Process received signal ***
+[cn6009:3218273] *** Process received signal ***
+[cn6009:3218273] Signal: Aborted (6)
+[cn6009:3218273] Signal code:  (-6)
+[cn6009:3218274] Signal: Aborted (6)
+[cn6009:3218274] Signal code:  (-6)
+[cn6009:3218274] [ 0] [cn6009:3218273] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x147be0f28ce0]
+[cn6009:3218274] [ 1] /lib64/libpthread.so.0(+0x12ce0)[0x1482cff0ace0]
+[cn6009:3218273] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1482cf97da9f]
+[cn6009:3218273] [ 2] /lib64/libc.so.6(gsignal+0x10f)[0x147be099ba9f]
+[cn6009:3218274] [ 2] /lib64/libc.so.6(abort+0x127)[0x147be096ee05]
+[cn6009:3218274] [ 3] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0x1704d)[0x147b3de0604d]
+[cn6009:3218274] [ 4] /lib64/libc.so.6(abort+0x127)[0x1482cf950e05]
+[cn6009:3218273] [ 3] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0x1704d)[0x14822cded04d]
+[cn6009:3218273] [ 4] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfd88d)[0x14822ced388d]
+[cn6009:3218273] [ 5] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfba3a)[0x14822ced1a3a]
+[cn6009:3218273] [ 6] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfd88d)[0x147b3deec88d]
+[cn6009:3218274] [ 5] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfba3a)[0x147b3deeaa3a]
+[cn6009:3218274] [ 6] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xddd53)[0x147b3deccd53]
+[cn6009:3218274] [ 7] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedc5e)[0x147b3dedcc5e]
+[cn6009:3218274] [ 8] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedd1d)[0x147b3dedcd1d]
+[cn6009:3218274] [ 9] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xddd53)[0x14822ceb3d53]
+[cn6009:3218273] [ 7] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedc5e)[0x14822cec3c5e]
+[cn6009:3218273] [ 8] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedd1d)[0x14822cec3d1d]
+[cn6009:3218273] [ 9] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1dec2b)[0x147b3e2bdc2b]
+[cn6009:3218274] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1dec2b)[0x14822d2a4c2b]
+[cn6009:3218273] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279d3e)[0x147b3e358d3e]
+[cn6009:3218274] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279d3e)[0x14822d33fd3e]
+[cn6009:3218273] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_sendrecv_actual+0x66)[0x14822d1cdb56]
+[cn6009:3218273] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_sendrecv_actual+0x66)[0x147b3e1e6b56]
+[cn6009:3218274] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_allreduce_intra_recursivedoubling+0x25a)[0x14822d1cf0ca]
+[cn6009:3218273] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_allreduce_intra_recursivedoubling+0x25a)[0x147b3e1e80ca]
+[cn6009:3218274] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_allreduce_intra_dec_fixed+0x4b)[0x14822d1fde9b]
+[cn6009:3218273] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_allreduce_intra_dec_fixed+0x4b)[0x147b3e216e9b]
+[cn6009:3218274] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_comm_create_new+0x1f8)[0x14822d2311f8]
+[cn6009:3218273] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_comm_create_new+0x1f8)[0x147b3e24a1f8]
+[cn6009:3218274] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_barrier_intra_simple+0xf)[0x14822d21f3ef]
+[cn6009:3218273] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_barrier_intra_simple+0xf)[0x147b3e2383ef]
+[cn6009:3218274] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x14822d1763d9]
+[cn6009:3218273] [17] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x147b3e18f3d9]
+[cn6009:3218274] [17] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14822d47d0dc]
+[cn6009:3218273] [18] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x147b3e4960dc]
+[cn6009:3218274] [18] [0x147bcc8c94c0]
+[cn6009:3218274] *** End of error message ***
+[0x1482bc8c94c0]
+[cn6009:3218273] *** End of error message ***
+[cn6009:3218271] *** Process received signal ***
+[cn6009:3218271] Signal: Aborted (6)
+[cn6009:3218271] Signal code:  (-6)
+[cn6009:3218271] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x15010fccace0]
+[cn6009:3218271] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x15010f73da9f]
+[cn6009:3218271] [ 2] /lib64/libc.so.6(abort+0x127)[0x15010f710e05]
+[cn6009:3218271] [ 3] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0x1704d)[0x15006cba904d]
+[cn6009:3218271] [ 4] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfd88d)[0x15006cc8f88d]
+[cn6009:3218271] [ 5] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfba3a)[0x15006cc8da3a]
+[cn6009:3218271] [ 6] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xddd53)[0x15006cc6fd53]
+[cn6009:3218271] [ 7] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedc5e)[0x15006cc7fc5e]
+[cn6009:3218271] [ 8] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedd1d)[0x15006cc7fd1d]
+[cn6009:3218271] [ 9] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1dec2b)[0x15006d060c2b]
+[cn6009:3218271] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279d3e)[0x15006d0fbd3e]
+[cn6009:3218271] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_sendrecv_actual+0x66)[0x15006cf89b56]
+[cn6009:3218271] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_allreduce_intra_recursivedoubling+0x25a)[0x15006cf8b0ca]
+[cn6009:3218271] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_allreduce_intra_dec_fixed+0x4b)[0x15006cfb9e9b]
+[cn6009:3218271] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_comm_create_new+0x1f8)[0x15006cfed1f8]
+[cn6009:3218271] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_barrier_intra_simple+0xf)[0x15006cfdb3ef]
+[cn6009:3218271] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x15006cf323d9]
+[cn6009:3218271] [17] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x15006d2390dc]
+[cn6009:3218271] [18] [0x1500fc8c94c0]
+[cn6009:3218271] *** End of error message ***
+[cn6010:632289] *** Process received signal ***
+[cn6010:632288] *** Process received signal ***
+[cn6010:632288] Signal: Aborted (6)
+[cn6010:632288] Signal code:  (-6)
+[cn6010:632289] Signal: Aborted (6)
+[cn6010:632289] Signal code:  (-6)
+[cn6010:632286] *** Process received signal ***
+[cn6010:632286] Signal: Aborted (6)
+[cn6010:632286] Signal code:  (-6)
+[cn6010:632286] [ 0] [cn6010:632288] [ 0] [cn6010:632289] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x14eb905a4ce0]
+[cn6010:632289] [ 1] /lib64/libpthread.so.0(+0x12ce0)[0x14c9144ecce0]
+[cn6010:632286] [ 1] /lib64/libpthread.so.0(+0x12ce0)[0x14b0dc8d9ce0]
+[cn6010:632288] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x14c913f5fa9f]
+[cn6010:632286] [ 2] /lib64/libc.so.6(gsignal+0x10f)[0x14eb90017a9f]
+[cn6010:632289] [ 2] /lib64/libc.so.6(gsignal+0x10f)[0x14b0dc34ca9f]
+[cn6010:632288] [ 2] /lib64/libc.so.6(abort+0x127)[0x14b0dc31fe05]
+/lib64/libc.so.6(abort+0x127)[0x14eb8ffeae05]
+[cn6010:632289] [ 3] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0x1704d)[0x14eaed48c04d]
+[cn6010:632289] [ 4] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfd88d)[0x14eaed57288d]
+[cn6010:632289] [ 5] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfba3a)[0x14eaed570a3a]
+[cn6010:632289] [ 6] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xddd53)[0x14eaed552d53]
+[cn6010:632289] [ 7] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedc5e)[0x14eaed562c5e]
+[cn6010:632288] [ 3] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0x1704d)[0x14b03978f04d]
+[cn6010:632288] [ 4] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfd88d)[0x14b03987588d]
+[cn6010:632288] [ 5] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfba3a)[0x14b039873a3a]
+[cn6010:632288] [ 6] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xddd53)[0x14b039855d53]
+[cn6010:632288] [ 7] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedc5e)[0x14b039865c5e]
+[cn6010:632288] [ 8] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedd1d)[0x14b039865d1d]
+[cn6010:632288] [ 9] /lib64/libc.so.6(abort+0x127)[0x14c913f32e05]
+[cn6010:632286] [ 3] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0x1704d)[0x14c87138b04d]
+[cn6010:632286] [ 4] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfd88d)[0x14c87147188d]
+[cn6010:632286] [ 5] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xfba3a)[0x14c87146fa3a]
+[cn6010:632286] [ 6] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xddd53)[0x14c871451d53]
+[cn6010:632286] [ 7] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedc5e)[0x14c871461c5e]
+[cn6010:632286] [ 8] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedd1d)[0x14c871461d1d]
+[cn6010:632286] [ 9] [cn6010:632289] [ 8] /soft/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1(+0xedd1d)[0x14eaed562d1d]
+[cn6010:632289] [ 9] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1dec2b)[0x14eaed943c2b]
+[cn6010:632289] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1dec2b)[0x14b039c46c2b]
+[cn6010:632288] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x1dec2b)[0x14c871842c2b]
+[cn6010:632286] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279d3e)[0x14eaed9ded3e]
+[cn6010:632289] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279d3e)[0x14b039ce1d3e]
+[cn6010:632288] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x279d3e)[0x14c8718ddd3e]
+[cn6010:632286] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_sendrecv_actual+0x66)[0x14eaed86cb56]
+[cn6010:632289] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_sendrecv_actual+0x66)[0x14b039b6fb56]
+[cn6010:632288] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_allreduce_intra_recursivedoubling+0x25a)[0x14b039b710ca]
+[cn6010:632288] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_allreduce_intra_recursivedoubling+0x25a)[0x14eaed86e0ca]
+[cn6010:632289] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_sendrecv_actual+0x66)[0x14c87176bb56]
+[cn6010:632286] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_allreduce_intra_dec_fixed+0x4b)[0x14b039b9fe9b]
+[cn6010:632288] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_allreduce_intra_dec_fixed+0x4b)[0x14eaed89ce9b]
+[cn6010:632289] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_allreduce_intra_recursivedoubling+0x25a)[0x14c87176d0ca]
+[cn6010:632286] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_comm_create_new+0x1f8)[0x14eaed8d01f8]
+[cn6010:632289] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_comm_create_new+0x1f8)[0x14b039bd31f8]
+[cn6010:632288] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_allreduce_intra_dec_fixed+0x4b)[0x14c87179be9b]
+[cn6010:632286] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_barrier_intra_simple+0xf)[0x14eaed8be3ef]
+[cn6010:632289] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_barrier_intra_simple+0xf)[0x14b039bc13ef]
+[cn6010:632288] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_comm_create_new+0x1f8)[0x14c8717cf1f8]
+[cn6010:632286] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x14b039b183d9]
+[cn6010:632288] [17] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x14eaed8153d9]
+[cn6010:632289] [17] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14eb310120dc]
+[cn6010:632289] [18] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14b07d0450dc]
+[cn6010:632288] [18] [0x14b0c88c94c0]
+[cn6010:632288] *** End of error message ***
+[0x14eb7c8c94c0]
+[cn6010:632289] *** End of error message ***
+/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_barrier_intra_simple+0xf)[0x14c8717bd3ef]
+[cn6010:632286] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(PMPI_Barrier+0x79)[0x14c8717143d9]
+[cn6010:632286] [17] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_barrier+0xc)[0x14c8b505d0dc]
+[cn6010:632286] [18] [0x14c9008c94c0]
+[cn6010:632286] *** End of error message ***
+--------------------------------------------------------------------------
+prterun noticed that process rank 4 with PID 632286 on node cn6010 exited on
+signal 6 (Aborted).
+--------------------------------------------------------------------------

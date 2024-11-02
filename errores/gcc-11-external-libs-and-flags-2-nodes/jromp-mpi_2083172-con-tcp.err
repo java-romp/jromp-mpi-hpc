@@ -1,0 +1,48 @@
+[cn6009:3218748] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3218747] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3218749] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6009:3218746] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632548] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632549] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632547] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632546] pml_ucx.c:313  Error: Failed to create UCP worker
+[cn6010:632546:0:632551] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x10)
+==== backtrace (tid: 632551) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+ 1 0x0000000000275c14 mca_pml_ob1_send_request_start_rdma()  ???:0
+ 2 0x0000000000262bea mca_pml_ob1_send_request_start_seq.constprop.0()  pml_ob1_isend.c:0
+ 3 0x0000000000263f83 mca_pml_ob1_isend()  ???:0
+ 4 0x000000000010367b ompi_coll_base_bcast_intra_basic_linear()  ???:0
+ 5 0x000000000013863c ompi_coll_tuned_bcast_intra_dec_fixed()  ???:0
+ 6 0x0000000000159ba7 mca_coll_han_bcast_t1_task()  coll_han_bcast.c:0
+ 7 0x0000000000159ff9 mca_coll_han_bcast_intra()  ???:0
+ 8 0x00000000000b0835 MPI_Bcast()  ???:0
+ 9 0x0000000000011184 Java_mpi_Comm_bcast()  ???:0
+=================================
+[cn6010:632546] *** Process received signal ***
+[cn6010:632546] Signal: Aborted (6)
+[cn6010:632546] Signal code:  (-6)
+[cn6010:632546] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x1487f88c6ce0]
+[cn6010:632546] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1487f8339a9f]
+[cn6010:632546] [ 2] /lib64/libc.so.6(abort+0x127)[0x1487f830ce05]
+[cn6010:632546] [ 3] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0x298603)[0x1487f704f603]
+[cn6010:632546] [ 4] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfed9e9)[0x1487f7da49e9]
+[cn6010:632546] [ 5] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee13b)[0x1487f7da513b]
+[cn6010:632546] [ 6] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(+0xfee15e)[0x1487f7da515e]
+[cn6010:632546] [ 7] /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so(JVM_handle_linux_signal+0x2e6)[0x1487f7c0b1c6]
+[cn6010:632546] [ 8] /lib64/libpthread.so.0(+0x12ce0)[0x1487f88c6ce0]
+[cn6010:632546] [ 9] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_pml_ob1_send_request_start_rdma+0x94)[0x148755cddc14]
+[cn6010:632546] [10] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x262bea)[0x148755ccabea]
+[cn6010:632546] [11] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_pml_ob1_isend+0x3a3)[0x148755ccbf83]
+[cn6010:632546] [12] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_base_bcast_intra_basic_linear+0xeb)[0x148755b6b67b]
+[cn6010:632546] [13] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(ompi_coll_tuned_bcast_intra_dec_fixed+0x3c)[0x148755ba063c]
+[cn6010:632546] [14] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(+0x159ba7)[0x148755bc1ba7]
+[cn6010:632546] [15] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(mca_coll_han_bcast_intra+0x399)[0x148755bc1ff9]
+[cn6010:632546] [16] /home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi.so.40(MPI_Bcast+0x135)[0x148755b18835]
+[cn6010:632546] [17] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/libs/ompi/lib/libmpi_java.so.40.40.0(Java_mpi_Comm_bcast+0x64)[0x148799033184]
+[cn6010:632546] [18] [0x1487e48c94c0]
+[cn6010:632546] *** End of error message ***
+--------------------------------------------------------------------------
+prterun noticed that process rank 4 with PID 632546 on node cn6010 exited on
+signal 6 (Aborted).
+--------------------------------------------------------------------------

@@ -1,0 +1,49 @@
+Starting a Gradle Daemon, 7 busy and 6 incompatible and 17 stopped Daemons could not be reused, use --status for details
+> Task :compileJava UP-TO-DATE
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 up-to-date
+[1730559888.025826] [cn6009:3218748:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.025916] [cn6009:3218747:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.031911] [cn6009:3218749:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.032019] [cn6009:3218746:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.657239] [cn6010:632548:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.668118] [cn6010:632549:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.668468] [cn6010:632547:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559888.672509] [cn6010:632546:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 3: Before bcast
+Rank 1: Before bcast
+Rank 2: Before bcast
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 0: Before bcast
+Rank 4: Before bcast
+Rank 6: Before bcast
+Rank 7: Before bcast
+Rank 5: Before bcast
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x0000148755cddc14 (sent by kill), pid=632546, tid=632551
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.2+13 (21.0.2+13) (build 21.0.2+13-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.2+13 (21.0.2+13-LTS, mixed mode, sharing, compressed oops, compressed class ptrs, parallel gc, linux-amd64)
+# Problematic frame:
+# C  [libmpi.so.40+0x275c14]  mca_pml_ob1_send_request_start_rdma+0x94
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/core.632546)
+#
+# An error report file with more information is saved as:
+# /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc-calendula_icelake_rocky/hs_err_pid632546.log
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#

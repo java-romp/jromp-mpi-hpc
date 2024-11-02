@@ -1,0 +1,29 @@
+Starting a Gradle Daemon, 7 busy and 6 incompatible and 16 stopped Daemons could not be reused, use --status for details
+> Task :compileJava UP-TO-DATE
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 up-to-date
+[1730559684.120000] [cn6009:3218274:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.120957] [cn6009:3218271:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.127949] [cn6009:3218272:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.133975] [cn6009:3218273:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.781016] [cn6010:632287:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.788946] [cn6010:632286:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.796402] [cn6010:632289:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+[1730559684.798842] [cn6010:632288:0]        rc_iface.c:492  UCX  ERROR ibv_create_srq() failed: Operation not supported
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 1: Before bcast
+Rank 3: Before bcast
+Rank 2: Before bcast
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Number of threads: 8
+Rank 0: Before bcast
+Rank 4: Before bcast
+Rank 6: Before bcast
+Rank 7: Before bcast
+Rank 5: Before bcast
