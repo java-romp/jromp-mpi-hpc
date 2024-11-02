@@ -21,9 +21,12 @@ module use /soft/calendula/icelake/rocky8/EB/modules/all/ &&
   module load Automake/1.16.4-GCCcore-11.2.0 &&
   module load libtool/2.4.6-GCCcore-11.2.0 &&
   module load flex/2.6.4-GCCcore-11.2.0 &&
+  module load libevent/2.1.12-GCCcore-11.2.0 &&
+  module load hwloc/2.5.0-GCCcore-11.2.0 &&
+  module load PMIx/4.1.0-GCCcore-11.2.0 &&
+  module load libfabric/1.13.2-GCCcore-11.2.0 &&
   module load UCX/1.11.2-GCCcore-11.2.0 &&
   module load Maven/3.9.7
-
 
 # Con la 10.3 se podría llegar a compilar, todas las deps están para esa versión
 salloc --account=ule_formacion_9 --partition=formacion --qos=formacion --time=00:25:00 --cpus-per-task=8 --nodelist=cn6010

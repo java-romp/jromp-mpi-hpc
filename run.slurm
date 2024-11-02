@@ -6,7 +6,7 @@
 #SBATCH --partition=formacion                          # Partition where the Jobs are sent
 #SBATCH --account=ule_formacion_9                      # Account to charge the job
 #SBATCH --qos=formacion                                # QOS to launch this partition
-#SBATCH --time=00:25:00                                # Estimated maximum time for the job
+#SBATCH --time=01:00:00                                # Estimated maximum time for the job
 #SBATCH --mail-user=scastd00@estudiantes.unileon.es    # Mail to receive info (start/cancel/end)
 #SBATCH --mail-type=FAIL                               # We want to receive all the failures
 #SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
@@ -38,23 +38,23 @@ PROJECT_PATH="$(pwd)"
 LIBS_CLASSPATH="$PROJECT_PATH"/libs/java/commons-lang3-3.16.0.jar:"$PROJECT_PATH"/libs/java/jromp-2.2.0.jar:"$PROJECT_PATH"/libs/ompi/lib/mpi.jar
 CLASSPATH="$PROJECT_PATH"/build/classes/java/main:"$PROJECT_PATH"/build/resources/main:"$LIBS_CLASSPATH"
 MPI_RUN_EXECUTABLE="$PROJECT_PATH"/libs/ompi/bin/mpirun
+JAVA_OPTS="-XX:+UseParallelGC -XX:-TieredCompilation"
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
 export PRTE_MCA_plm_slurm_ignore_args=true
-export LD_LIBRARY_PATH="$PROJECT_PATH"/libs/ompi/lib
 
 # Compile the Java classes
 ./gradlew compileJava
 
 if [ "$SLURM_NNODES" == 1 ]; then
     echo "1 node"
-    #export FI_PROVIDER=tcp
+    export FI_PROVIDER=tcp
     #export FI_PSM3_CONN_TIMEOUT=60
 fi
 
 # Execute the job
-$MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java -Xint -cp "$CLASSPATH" "$1"
+$MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
 
 # -Xint: Disable JIT compilation. This is needed to prevent errors to occur when running the program.
 

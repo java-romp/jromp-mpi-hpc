@@ -5,6 +5,7 @@
 # The script must be run from the root of the project.
 
 CURRENT_DIR=$PWD
+icelake_modules_path=/soft/calendula/icelake/rocky8/EB/software
 
 # Build openmpi
 cd 3rd-party/openmpi-5.0.5 &&
@@ -14,12 +15,14 @@ cd 3rd-party/openmpi-5.0.5 &&
     --enable-mpi-thread-multiple \
     --disable-mpi-fortran \
     --enable-mpi-java \
-    --with-libevent=internal \
-    --with-hwloc=internal \
+    --with-libevent=$icelake_modules_path/libevent/2.1.12-GCCcore-11.2.0 \
+    --with-hwloc=$icelake_modules_path/hwloc/2.5.0-GCCcore-11.2.0 \
     --with-pmix=internal \
-    --with-prrte=internal &&
+    --with-prrte=internal \
+    --with-libfabric=$icelake_modules_path/libfabric/1.13.2-GCCcore-11.2.0 \
+    --with-ucx=$icelake_modules_path/UCX/1.11.2-GCCcore-11.2.0 &&
   echo "Building Open MPI" &&
-  make -j 8 all &&
+  make -j 16 all &&
   echo "Installing Open MPI" &&
   make install &&
   echo "Open MPI built and installed"

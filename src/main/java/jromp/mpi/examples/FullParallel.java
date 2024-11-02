@@ -1,8 +1,12 @@
 package jromp.mpi.examples;
 
 import jromp.JROMP;
+import jromp.operation.Operations;
+import jromp.var.ReductionVariable;
 import jromp.var.SharedVariable;
+import jromp.var.Variable;
 import jromp.var.Variables;
+import jromp.var.reduction.ReductionOperations;
 import mpi.MPI;
 import mpi.MPIException;
 
@@ -51,7 +55,8 @@ public class FullParallel {
         Variables variables = Variables.create()
                                        .add("A", new SharedVariable<>(A))
                                        .add("B", new SharedVariable<>(B))
-                                       .add("C", new SharedVariable<>(C));
+                                       .add("C", new SharedVariable<>(C))
+                                       .add("sum", new ReductionVariable<>(ReductionOperations.sum(), 0.0));
 
         JROMP.allThreads()
              .withVariables(variables)
@@ -67,8 +72,8 @@ public class FullParallel {
                          localC[i * N + j] = 0.0;
 
                          for (int k = 0; k < N; k++) {
-                             // localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
-                             count++;
+                             localC[i * N + j] += localA[i * N + k] * localB[k * N + j];
+                             //count++;
                          }
                      }
                  }
@@ -76,7 +81,17 @@ public class FullParallel {
                  printf("Rank %d: Count = %d\n", rank, count);
              })
              .single(false, vars -> printf("Rank %d: After parallel for\n", rank))
+             .parallelFor(0, N * N, false, (start, end, vars) -> {
+                 double[] cInternal = vars.<double[]>get("C").value();
+                 Variable<Double> sumInternal = vars.get("sum");
+
+                 for (int i = start; i < end; i++) {
+                     sumInternal.update(Operations.add(cInternal[i]));
+                 }
+             })
              .join();
+
+        System.out.println(String.format("Total sum: %f", variables.<Double>get("sum").value()));
 
         MPI.COMM_WORLD.barrier();
         double end_time = MPI.wtime();
