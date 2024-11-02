@@ -21,7 +21,7 @@ import static jromp.mpi.examples.mandelbrot.Mandelbrot.X_MIN;
 import static jromp.mpi.examples.mandelbrot.Mandelbrot.Y_MAX;
 import static jromp.mpi.examples.mandelbrot.Mandelbrot.Y_MIN;
 
-@SuppressWarnings("all") // Hide warnings in the IDE.
+@SuppressWarnings("all")
 public class MandelbrotParallel {
     public static void main(String[] args) throws IOException {
         new MandelbrotParallel().$main(args);
