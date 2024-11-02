@@ -48,7 +48,6 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 ./gradlew compileJava
 
 echo "Nodes: $SLURM_NNODES"
-export FI_PROVIDER=tcp
 
 # Execute the job
 $MPI_RUN_EXECUTABLE --mca pml ob1 --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
