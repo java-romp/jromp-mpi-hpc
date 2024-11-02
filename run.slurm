@@ -47,15 +47,10 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 # Compile the Java classes
 ./gradlew compileJava
 
-if [ "$SLURM_NNODES" == 1 ]; then
-    echo "1 node"
-    export FI_PROVIDER=tcp
-    #export FI_PSM3_CONN_TIMEOUT=60
-fi
+echo "Nodes: $SLURM_NNODES"
+export FI_PROVIDER=tcp
 
 # Execute the job
-$MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
-
-# -Xint: Disable JIT compilation. This is needed to prevent errors to occur when running the program.
+$MPI_RUN_EXECUTABLE --mca pml ob1 --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
 
 # See why I execute mpirun directly: https://docs.open-mpi.org/en/main/launching-apps/slurm.html
