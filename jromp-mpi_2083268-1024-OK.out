@@ -1,0 +1,81 @@
+Starting a Gradle Daemon, 7 busy and 6 incompatible and 28 stopped Daemons could not be reused, use --status for details
+> Task :compileJava UP-TO-DATE
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 up-to-date
+
+
+##################################################
+Date: 03/11/2024 00:35:32
+Job ID: 2083268
+Job Nodes: 16 (cn[6009-6024])
+Tasks: 32 (2 task(s)/node)
+CPUs: 1024 (32 CPU(s)/task)
+##################################################
+
+
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Number of threads: 32
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Total sum: 8000000000.000000
+Time: 1.538832

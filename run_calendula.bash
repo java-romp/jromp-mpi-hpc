@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function main() {
-  local nodes=8                                  # Number of nodes
-  local n_tasks=8                                # Number of processes (MPI ranks)
-  local cpus_per_task=8                          # Threads that JROMP will use
+  local nodes=16                                  # Number of nodes
+  local n_tasks=32                                # Number of processes (MPI ranks)
+  local cpus_per_task=32                          # Threads that JROMP will use
   local n_tasks_per_node=$((n_tasks / nodes))    # Number of processes per node
   local base_node_name="cn6"                     # Base name of the nodes
   local first_node=9                             # First node number. IMPORTANT NOTE: IceLake Rocky 8 nodes start at 9

@@ -52,7 +52,7 @@ PROJECT_PATH="$(pwd)"
 LIBS_CLASSPATH="$PROJECT_PATH"/libs/java/commons-lang3-3.16.0.jar:"$PROJECT_PATH"/libs/java/jromp-2.2.0.jar:"$PROJECT_PATH"/libs/ompi/lib/mpi.jar
 CLASSPATH="$PROJECT_PATH"/build/classes/java/main:"$PROJECT_PATH"/build/resources/main:"$LIBS_CLASSPATH"
 MPI_RUN_EXECUTABLE="$PROJECT_PATH"/libs/ompi/bin/mpirun
-JAVA_OPTS="-XX:+UseParallelGC -XX:-TieredCompilation"
+JAVA_OPTS="-XX:+UseParallelGC -XX:-TieredCompilation -Xmx32g -Xms32g"
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
