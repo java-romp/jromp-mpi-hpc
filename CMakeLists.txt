@@ -22,5 +22,6 @@ add_executable(full_parallel ${EXAMPLES_DIR}/full_parallel.c)
 add_executable(mandelbrot_parallel ${EXAMPLES_DIR}/mandelbrot/mandelbrot_parallel.c)
 add_executable(mandelbrot_parallel_with_openmp ${EXAMPLES_DIR}/mandelbrot/mandelbrot_parallel_with_openmp.c)
 add_executable(genome ${EXAMPLES_DIR}/genome/genome.c
+        ${EXAMPLES_DIR}/genome/genome.h
         ${EXAMPLES_DIR}/genome/cvector.h
         ${EXAMPLES_DIR}/genome/cvector_utils.h)

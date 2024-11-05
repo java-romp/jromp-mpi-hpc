@@ -9,3 +9,5 @@ Puedo hacer un programa que recopile los nombres de todas las bacterias en el cu
 
 Como podemos llegar a usar 1024 procesadores, podemos hacer un programa que asigne a cada procesador una bacteria
 distinta y que cada procesador cuente cuántas veces aparece cada secuencia de 10 nucleótidos en su bacteria.
+
+La lectura de ficheros se hace en paralelo, luego ya haremos un mpi reduce para contar las secuencias.

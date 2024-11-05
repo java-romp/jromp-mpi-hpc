@@ -1,28 +1,6 @@
-#include <dirent.h>
-#include <mpi.h>
-#include <omp.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <time.h>
+#include "genome.h"
 
-#include "cvector.h"
-
-#define MAX_PATH_SIZE 1024
-#define string char *
-#define print_master(...)                                                                                              \
-    if (rank == 0) {                                                                                                   \
-        printf("    Master: " __VA_ARGS__);                                                                            \
-    }
-#define print_worker(...)                                                                                              \
-    if (rank != 0) {                                                                                                   \
-        printf("Worker %03d: ", rank);                                                                                 \
-        printf(__VA_ARGS__);                                                                                           \
-    }
-
-int list_directory(const string directory_path, cvector(string) * directories) {
+int get_dirs(const string directory_path, cvector(string) * directories) {
     DIR *dir;
     struct dirent *dir_entry;
     struct stat dir_stat;
@@ -33,7 +11,7 @@ int list_directory(const string directory_path, cvector(string) * directories) {
         return -1;
     }
 
-    int num_files = 0;
+    int num_dirs = 0;
     *directories = NULL;
 
     // Iterate over the directory entries
@@ -46,13 +24,13 @@ int list_directory(const string directory_path, cvector(string) * directories) {
             if (strcmp(dir_entry->d_name, ".") != 0 && strcmp(dir_entry->d_name, "..") != 0) {
                 // Add the full directory path to the list
                 cvector_push_back(*directories, strdup(full_path));
-                num_files++; // Increment the number of directories
+                num_dirs++;
             }
         }
     }
 
     closedir(dir);
-    return num_files;
+    return num_dirs;
 }
 
 int main(int argc, string argv[]) {
@@ -64,6 +42,14 @@ int main(int argc, string argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+#ifdef DEBUG_LOGGING
+    // Initialize the print lock, to prevent interleaved output
+    omp_lock_t print_lock;
+    omp_init_lock(&print_lock);
+#endif
+
+    cvector(string) directories;
+
     // Only execute on master node
     if (rank == 0) {
         if (argc != 2) {
@@ -72,24 +58,69 @@ int main(int argc, string argv[]) {
         }
 
         const string dir = argv[1];
-        cvector(string) directories;
-        const int num_dirs = list_directory(dir, &directories);
+        const int num_dirs = get_dirs(dir, &directories);
 
         if (num_dirs == -1) {
             return 1;
         }
 
-        // string *it;
-        // cvector_for_each_in(it, directories) {
-        //     printf("Directory %s\n", *it);
-        // }
+        // Divide the directories among the worker nodes (excluding the master node)
+        const int num_workers = size - 1;
+        const int num_dirs_per_worker = num_dirs / num_workers;
+        const int num_dirs_remainder = num_dirs % num_workers;
+        int start = 0;
+        int end = num_dirs_per_worker;
 
-        print_master("Number of directories: %d\n", num_dirs);
+        // Send the directories to the worker nodes
+        for (int i = 1; i < size; i++) {
+            // Adjust the end index if there are remaining directories, by sending them to the first workers.
+            // This ensures that the directories are evenly distributed among the workers.
+            if (i <= num_dirs_remainder) {
+                end++;
+            }
+
+            const int num_dirs_to_send = end - start;
+            LOG_MASTER("Sending %d directories to worker %d\n", num_dirs_to_send, i);
+
+            // Send the number of directories to expect
+            MPI_Send(&num_dirs_to_send, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+
+            // Send the directories
+            for (int j = start; j < end; j++) {
+                const string directory = directories[j];
+                const int directory_size = (int) strlen(directory) + 1;
+
+                MPI_Send(&directory_size, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+                MPI_Send(directory, directory_size, MPI_CHAR, i, 0, MPI_COMM_WORLD);
+            }
+
+            start = end;
+            end += num_dirs_per_worker;
+        }
+
         cvector_free(directories);
     } else {
-        print_worker("Hello, world!\n");
+        // Receive the number of directories to expect
+        int num_dirs_to_receive;
+        MPI_Recv(&num_dirs_to_receive, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        // Receive the directories
+        for (int i = 0; i < num_dirs_to_receive; i++) {
+            int directory_size;
+            MPI_Recv(&directory_size, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+            string directory = malloc(directory_size);
+            MPI_Recv(directory, directory_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+            cvector_push_back(directories, directory);
+        }
+
+        LOG_WORKER("Received %d directories\n", num_dirs_to_receive);
     }
 
+#ifdef DEBUG_LOGGING
+    omp_destroy_lock(&print_lock);
+#endif
     MPI_Finalize();
     return 0;
 }
