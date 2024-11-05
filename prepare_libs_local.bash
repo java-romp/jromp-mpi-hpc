@@ -11,7 +11,6 @@ cd 3rd-party/openmpi-5.0.5 &&
   echo "Configuring Open MPI" &&
   ./configure \
     --prefix="$CURRENT_DIR"/libs/ompi \
-    --enable-mpi-thread-multiple \
     --disable-mpi-fortran \
     --enable-mpi-java \
     --with-libevent=internal \

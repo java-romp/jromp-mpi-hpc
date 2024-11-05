@@ -23,10 +23,10 @@ module use /soft/calendula/icelake/rocky8/EB/modules/all/ &&
   module load flex/2.6.4-GCCcore-11.2.0 &&
   module load libevent/2.1.12-GCCcore-11.2.0 &&
   module load hwloc/2.5.0-GCCcore-11.2.0 &&
-  module load PMIx/4.1.0-GCCcore-11.2.0 &&
   module load libfabric/1.13.2-GCCcore-11.2.0 &&
-  module load UCX/1.11.2-GCCcore-11.2.0 &&
-  module load Maven/3.9.7
+  module load UCX/1.11.2-GCCcore-11.2.0
+
+module load Maven/3.9.7
 
 # Use Java and Gradle
 module use /soft/calendula/icelake/rocky8/EB/modules/all/ /soft/calendula/icelake/rocky8/modules/ && module load Java/21.0.2 gradle_8.10.2

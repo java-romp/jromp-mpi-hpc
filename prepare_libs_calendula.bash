@@ -12,7 +12,6 @@ cd 3rd-party/openmpi-5.0.5 &&
   echo "Configuring Open MPI" &&
   ./configure \
     --prefix="$CURRENT_DIR"/libs/ompi \
-    --enable-mpi-thread-multiple \
     --disable-mpi-fortran \
     --enable-mpi-java \
     --with-libevent=$icelake_modules_path/libevent/2.1.12-GCCcore-11.2.0 \
