@@ -13,10 +13,11 @@ find_package(OpenMP REQUIRED)
 set(MPI_HOME ${CMAKE_SOURCE_DIR}/libs/ompi)
 include_directories(${MPI_HOME}/include)
 
-add_executable(all_c
-        src/main/c/jromp/mpi/examples/blocking.c
-        src/main/c/jromp/mpi/examples/burro.c
-        src/main/c/jromp/mpi/examples/cross.c
-        src/main/c/jromp/mpi/examples/full_parallel.c
-        src/main/c/jromp/mpi/examples/mandelbrot/mandelbrot_parallel.c
-        src/main/c/jromp/mpi/examples/mandelbrot/mandelbrot_parallel_with_openmp.c)
+set(EXAMPLES_DIR ${CMAKE_SOURCE_DIR}/src/main/c/jromp/mpi/examples)
+
+add_executable(blocking ${EXAMPLES_DIR}/blocking.c)
+add_executable(burro ${EXAMPLES_DIR}/burro.c)
+add_executable(cross ${EXAMPLES_DIR}/cross.c)
+add_executable(full_parallel ${EXAMPLES_DIR}/full_parallel.c)
+add_executable(mandelbrot_parallel ${EXAMPLES_DIR}/mandelbrot/mandelbrot_parallel.c)
+add_executable(mandelbrot_parallel_with_openmp ${EXAMPLES_DIR}/mandelbrot/mandelbrot_parallel_with_openmp.c)
