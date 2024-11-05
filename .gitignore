@@ -47,3 +47,4 @@ libs/ompi
 3rd-party/openmpi-5.0.5
 cmake-build-project
 data
+*.o
