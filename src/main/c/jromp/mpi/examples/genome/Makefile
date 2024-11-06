@@ -14,18 +14,18 @@ TASKS=$(or $(MPI_TASKS), 6)
 DATA_DIR=/home/samuel/IdeaProjects/IntelliJ/jromp-mpi-hpc/data/dna
 
 all: genome.o main_genome.o
-	$(CC) $(CFLAGS) -o genome.out genome.o main_genome.o $(LDFLAGS)
+	@$(CC) $(CFLAGS) -o genome.out genome.o main_genome.o $(LDFLAGS)
 
 genome.o: genome.c genome.h
-	$(CC) $(CFLAGS) -c genome.c
+	@$(CC) $(CFLAGS) -c genome.c
 
 main_genome.o: main_genome.c genome.h
-	$(CC) $(CFLAGS) -c main_genome.c
+	@$(CC) $(CFLAGS) -c main_genome.c
 
 run: all
-	$(MPI_BIN)/mpirun -np $(TASKS) ./genome.out $(DATA_DIR)
+	@$(MPI_BIN)/mpirun -np $(TASKS) ./genome.out $(DATA_DIR)
 
 clean:
-	rm -f genome.o main_genome.o genome.out
+	@rm -f genome.o main_genome.o genome.out
 
 .PHONY: all run clean
