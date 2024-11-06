@@ -52,7 +52,6 @@ void process_directory(const string directory) {
             // Ignore the current and parent directories
             if (strcmp(dir_entry->d_name, ".") != 0 && strcmp(dir_entry->d_name, "..") != 0) {
                 // Process the subdirectory
-                LOG_WORKER("Processing subdirectory")
                 process_directory(full_path);
             }
         } else {
