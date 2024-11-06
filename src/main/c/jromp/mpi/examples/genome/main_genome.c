@@ -81,13 +81,21 @@ int main(int argc, string argv[]) {
         cvector_clib_assert(directories); // Ensure that the directories vector is not NULL
 
         // Process the directories
+        int files = 0;
         for (int i = 0; i < cvector_size(directories); i++) {
             const string directory = directories[i];
 
+            const int dir_files = process_directory(directory);
+
+            if (dir_files == -1) {
+                return EXIT_FAILURE;
+            }
+
             // Process the directory
-            process_directory(directory);
+            files += dir_files;
         }
 
+        LOG_WORKER("Files processed: %d\n", files);
         cvector_free(directories);
     }
 
@@ -95,5 +103,5 @@ int main(int argc, string argv[]) {
     omp_destroy_lock(&print_lock);
 #endif
     MPI_Finalize();
-    return 0;
+    return EXIT_SUCCESS;
 }

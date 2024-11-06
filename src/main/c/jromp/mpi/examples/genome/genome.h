@@ -78,7 +78,7 @@ struct dna_sequence {
 } __attribute__((aligned(64)));
 
 int get_dirs(const string directory_path, cvector(string) * directories);
-void process_directory(const string directory);
+int process_directory(const string directory);
 void process_file(const string file);
 
 #endif // GENOME_H

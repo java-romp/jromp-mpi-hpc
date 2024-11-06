@@ -32,16 +32,18 @@ int get_dirs(const string directory_path, cvector(string) * directories) {
     return num_dirs;
 }
 
-void process_directory(const string directory) {
+int process_directory(const string directory) { // NOLINT(*-no-recursion)
     DIR *dir;
-    struct dirent *dir_entry;
-    struct stat dir_stat;
 
     // Open the directory (if possible). If not, return
     if ((dir = opendir(directory)) == NULL) {
         fprintf(stderr, "Error: Could not open directory %s\n", directory);
-        return;
+        return -1;
     }
+
+    int num_files = 0;
+    struct dirent *dir_entry;
+    struct stat dir_stat;
 
     // Iterate over the directory entries
     while ((dir_entry = readdir(dir)) != NULL) {
@@ -52,15 +54,25 @@ void process_directory(const string directory) {
             // Ignore the current and parent directories
             if (strcmp(dir_entry->d_name, ".") != 0 && strcmp(dir_entry->d_name, "..") != 0) {
                 // Process the subdirectory
-                process_directory(full_path);
+                const int dir_files = process_directory(full_path);
+
+                // If an error occurred, return
+                if (dir_files == -1) {
+                    return -1;
+                }
+
+                // Increment the counter with the number of files in the subdirectory
+                num_files += dir_files;
             }
         } else {
             // Process the file
             process_file(full_path);
+            num_files++;
         }
     }
 
     closedir(dir);
+    return num_files;
 }
 
 void process_file(const string file) {
