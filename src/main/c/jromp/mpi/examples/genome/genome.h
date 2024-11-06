@@ -53,6 +53,30 @@ omp_lock_t print_lock;
     #define LOG_WORKER(...)
 #endif
 
+/**
+ * Represents a DNA sequence. It contains the number of occurrences of each nucleotide:
+ * - A: Adenine.
+ * - C: Cytosine.
+ * - G: Guanine.
+ * - T: Thymine.
+ * - U: Uracil.
+ * - N: Nucleic acid (any nucleotide).
+ */
+struct dna_sequence {
+    /** Adenine (A) nucleotide count. */
+    ssize_t A;
+    /** Cytosine (C) nucleotide count. */
+    ssize_t C;
+    /** Guanine (G) nucleotide count. */
+    ssize_t G;
+    /** Thymine (T) nucleotide count. */
+    ssize_t T;
+    /** Uracil (U) nucleotide count. */
+    ssize_t U;
+    /** Nucleic acid (N) nucleotide count. */
+    ssize_t N;
+} __attribute__((aligned(64)));
+
 int get_dirs(const string directory_path, cvector(string) * directories);
 void process_directory(const string directory);
 void process_file(const string file);
