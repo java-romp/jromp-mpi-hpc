@@ -2,8 +2,6 @@
 
 int get_dirs(const string directory_path, cvector(string) * directories) {
     DIR *dir;
-    struct dirent *dir_entry;
-    struct stat dir_stat;
 
     // Open the directory (if possible). If not, return -1 (error)
     if ((dir = opendir(directory_path)) == NULL) {
@@ -12,7 +10,8 @@ int get_dirs(const string directory_path, cvector(string) * directories) {
     }
 
     int num_dirs = 0;
-    *directories = NULL;
+    struct dirent *dir_entry;
+    struct stat dir_stat;
 
     // Iterate over the directory entries
     while ((dir_entry = readdir(dir)) != NULL) {
@@ -33,94 +32,61 @@ int get_dirs(const string directory_path, cvector(string) * directories) {
     return num_dirs;
 }
 
-int main(int argc, string argv[]) {
-    MPI_Init(&argc, &argv);
+void process_directory(const string directory) {
+    DIR *dir;
+    struct dirent *dir_entry;
+    struct stat dir_stat;
 
-    int rank;
-    int size;
-
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-#ifdef DEBUG_LOGGING
-    // Initialize the print lock, to prevent interleaved output
-    omp_lock_t print_lock;
-    omp_init_lock(&print_lock);
-#endif
-
-    cvector(string) directories;
-
-    // Only execute on master node
-    if (rank == 0) {
-        if (argc != 2) {
-            fprintf(stderr, "Usage: %s <directory>\n", argv[0]);
-            return 1;
-        }
-
-        const string dir = argv[1];
-        const int num_dirs = get_dirs(dir, &directories);
-
-        if (num_dirs == -1) {
-            return 1;
-        }
-
-        // Divide the directories among the worker nodes (excluding the master node)
-        const int num_workers = size - 1;
-        const int num_dirs_per_worker = num_dirs / num_workers;
-        const int num_dirs_remainder = num_dirs % num_workers;
-        int start = 0;
-        int end = num_dirs_per_worker;
-
-        // Send the directories to the worker nodes
-        for (int i = 1; i < size; i++) {
-            // Adjust the end index if there are remaining directories, by sending them to the first workers.
-            // This ensures that the directories are evenly distributed among the workers.
-            if (i <= num_dirs_remainder) {
-                end++;
-            }
-
-            const int num_dirs_to_send = end - start;
-            LOG_MASTER("Sending %d directories to worker %d\n", num_dirs_to_send, i);
-
-            // Send the number of directories to expect
-            MPI_Send(&num_dirs_to_send, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
-
-            // Send the directories
-            for (int j = start; j < end; j++) {
-                const string directory = directories[j];
-                const int directory_size = (int) strlen(directory) + 1;
-
-                MPI_Send(&directory_size, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
-                MPI_Send(directory, directory_size, MPI_CHAR, i, 0, MPI_COMM_WORLD);
-            }
-
-            start = end;
-            end += num_dirs_per_worker;
-        }
-
-        cvector_free(directories);
-    } else {
-        // Receive the number of directories to expect
-        int num_dirs_to_receive;
-        MPI_Recv(&num_dirs_to_receive, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-        // Receive the directories
-        for (int i = 0; i < num_dirs_to_receive; i++) {
-            int directory_size;
-            MPI_Recv(&directory_size, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-            string directory = malloc(directory_size);
-            MPI_Recv(directory, directory_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-            cvector_push_back(directories, directory);
-        }
-
-        LOG_WORKER("Received %d directories\n", num_dirs_to_receive);
+    // Open the directory (if possible). If not, return
+    if ((dir = opendir(directory)) == NULL) {
+        fprintf(stderr, "Error: Could not open directory %s\n", directory);
+        return;
     }
 
-#ifdef DEBUG_LOGGING
-    omp_destroy_lock(&print_lock);
-#endif
-    MPI_Finalize();
-    return 0;
+    // Iterate over the directory entries
+    while ((dir_entry = readdir(dir)) != NULL) {
+        char full_path[MAX_PATH_SIZE];
+        snprintf(full_path, sizeof(full_path), "%s/%s", directory, dir_entry->d_name);
+
+        if (stat(full_path, &dir_stat) == 0 && S_ISDIR(dir_stat.st_mode)) {
+            // Ignore the current and parent directories
+            if (strcmp(dir_entry->d_name, ".") != 0 && strcmp(dir_entry->d_name, "..") != 0) {
+                // Process the subdirectory
+                LOG_WORKER("Processing subdirectory")
+                process_directory(full_path);
+            }
+        } else {
+            // Process the file
+            process_file(full_path);
+        }
+    }
+
+    closedir(dir);
+}
+
+void process_file(const string file) {
+    // Open the file
+    FILE *fp;
+    if ((fp = fopen(file, "r")) == NULL) {
+        fprintf(stderr, "Error: Could not open file %s\n", file);
+        return;
+    }
+
+    char header[MAX_FASTA_HEADER_LENGTH];
+    char line[MAX_FASTA_DNA_SEQUENCE_LENGTH];
+
+    // Ignore the first line
+    fgets(header, sizeof(header), fp);
+
+    // Read the remaining lines
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        // If it ends with a newline character, remove it
+        const size_t line_length = strlen(line);
+        if (line[line_length - 1] == '\n') {
+            line[line_length - 1] = '\0';
+        }
+    }
+
+    // Close the file
+    fclose(fp);
 }

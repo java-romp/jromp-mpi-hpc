@@ -11,7 +11,8 @@ set(CMAKE_C_STANDARD 11)
 find_package(OpenMP REQUIRED)
 
 set(MPI_HOME ${CMAKE_SOURCE_DIR}/libs/ompi)
-include_directories(${MPI_HOME}/include)
+set(CMAKE_PREFIX_PATH ${MPI_HOME})
+find_package(MPI REQUIRED)
 
 set(EXAMPLES_DIR ${CMAKE_SOURCE_DIR}/src/main/c/jromp/mpi/examples)
 
@@ -24,4 +25,7 @@ add_executable(mandelbrot_parallel_with_openmp ${EXAMPLES_DIR}/mandelbrot/mandel
 add_executable(genome ${EXAMPLES_DIR}/genome/genome.c
         ${EXAMPLES_DIR}/genome/genome.h
         ${EXAMPLES_DIR}/genome/cvector.h
-        ${EXAMPLES_DIR}/genome/cvector_utils.h)
+        ${EXAMPLES_DIR}/genome/cvector_utils.h
+        ${EXAMPLES_DIR}/genome/main_genome.c)
+
+target_link_libraries(genome PUBLIC MPI::MPI_C OpenMP::OpenMP_C)

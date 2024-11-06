@@ -11,11 +11,17 @@
 #include <sys/types.h>
 #include <time.h>
 
+#define CVECTOR_LOGARITHMIC_GROWTH
 #include "cvector.h"
 
-#define MAX_PATH_SIZE 1024
-#define string char *
+int rank;
+int size;
+omp_lock_t print_lock;
 
+#define MAX_PATH_SIZE 1024
+#define MAX_FASTA_HEADER_LENGTH 1024
+#define MAX_FASTA_DNA_SEQUENCE_LENGTH 80
+#define string char *
 #define DEBUG_LOGGING 1
 
 #if DEBUG_LOGGING == 1
@@ -46,5 +52,9 @@
     #define LOG_MASTER(...)
     #define LOG_WORKER(...)
 #endif
+
+int get_dirs(const string directory_path, cvector(string) * directories);
+void process_directory(const string directory);
+void process_file(const string file);
 
 #endif // GENOME_H

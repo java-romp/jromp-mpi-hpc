@@ -11,3 +11,6 @@ Como podemos llegar a usar 1024 procesadores, podemos hacer un programa que asig
 distinta y que cada procesador cuente cuántas veces aparece cada secuencia de 10 nucleótidos en su bacteria.
 
 La lectura de ficheros se hace en paralelo, luego ya haremos un mpi reduce para contar las secuencias.
+
+https://www.dnabaser.com/download/DNA-Counter/index.html
+https://es.wikipedia.org/wiki/Formato_FASTA
