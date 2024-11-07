@@ -1,14 +1,17 @@
-# Generated from CLion C/C++ Code Style settings
 ---
 Language: Cpp
 BasedOnStyle: LLVM
 AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Right
 AlignOperands: true
 AlignTrailingComments: false
+AlwaysBreakAfterReturnType: None
 AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: true
+BinPackParameters: true
 BraceWrapping:
     AfterCaseLabel: false
     AfterClass: false
@@ -27,12 +30,16 @@ BraceWrapping:
     SplitEmptyRecord: false
     SplitEmptyNamespace: false
 BreakBeforeBraces: Custom
+BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: AfterColon
 BreakConstructorInitializersBeforeComma: false
 ColumnLimit: 120
+CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ContinuationIndentWidth: 8
 Cpp11BracedListStyle: false
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: LogicalBlock
 IncludeBlocks: Regroup
 IncludeCategories:
     -   Regex: '^<.*'
@@ -42,22 +49,36 @@ IncludeCategories:
     -   Regex: '.*'
         Priority: 3
 IncludeIsMainRegex: '([-_](test|unittest))?$'
+IndentCaseBlocks: false
 IndentCaseLabels: true
+IndentGotoLabels: true
 IndentPPDirectives: BeforeHash
 IndentWidth: 4
+IndentWrappedFunctionNames: false
 InsertNewlineAtEOF: true
 MacroBlockBegin: ''
 MacroBlockEnd: ''
+MaxEmptyLinesToKeep: 1
 NamespaceIndentation: All
+PointerAlignment: Right
+PPIndentWidth: 4
 SortIncludes: CaseSensitive
 SpaceAfterCStyleCast: true
+SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: false
+SpaceBeforeSquareBrackets: false
 SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
 SpacesInAngles: false
 SpacesInConditionalStatement: false
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
+SpacesInSquareBrackets: false
+Standard: c++20
 TabWidth: 4
+UseTab: Never
 ...
