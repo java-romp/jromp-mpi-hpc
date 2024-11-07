@@ -10,7 +10,7 @@ int main(int argc, string argv[]) {
     omp_init_lock(&print_lock);
 #endif
 
-    cvector(string) directories = NULL;
+    SHARED cvector(string) directories = NULL;
 
     // Only execute on master node
     if (rank == 0) {
@@ -81,21 +81,37 @@ int main(int argc, string argv[]) {
         cvector_clib_assert(directories); // Ensure that the directories vector is not NULL
 
         // Process the directories
-        int files = 0;
+        SHARED int files = 0;
+        PRIVATE string directory;
+        SHARED struct dna_sequence dna_sequence = { 0 };
+        bool error = false;
+
+#pragma omp parallel for reduction(+ : files) private(directory) shared(directories, dna_sequence, error)
         for (int i = 0; i < cvector_size(directories); i++) {
-            const string directory = directories[i];
+            if (LIKELY(!error)) {
+                directory = directories[i];
 
-            const int dir_files = process_directory(directory);
+                const int dir_files = process_directory(PRIVATE directory, SHARED & dna_sequence);
+                if (dir_files == -1) {
+#pragma omp atomic write
+                    error = true;
+                    continue; // Do not update the files counter and exit the loop immediately
+                }
 
-            if (dir_files == -1) {
-                return EXIT_FAILURE;
+                // Process the directory
+                files += dir_files;
             }
+        }
 
-            // Process the directory
-            files += dir_files;
+        if (UNLIKELY(error)) {
+            LOG_WORKER("An error occurred while processing the directories\n");
+            LOG_WORKER("Files processed: %d\n", files);
+            cvector_free(directories);
+            return EXIT_FAILURE;
         }
 
         LOG_WORKER("Files processed: %d\n", files);
+        pretty_print_dna_sequence(&dna_sequence);
         cvector_free(directories);
     }
 

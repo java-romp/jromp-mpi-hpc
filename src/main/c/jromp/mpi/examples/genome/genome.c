@@ -32,7 +32,7 @@ int get_dirs(const string directory_path, cvector(string) * directories) {
     return num_dirs;
 }
 
-int process_directory(const string directory) { // NOLINT(*-no-recursion)
+PARALLEL_FN int process_directory(PRIVATE const string directory, SHARED struct dna_sequence *dna_sequence) {
     DIR *dir;
 
     // Open the directory (if possible). If not, return
@@ -54,7 +54,7 @@ int process_directory(const string directory) { // NOLINT(*-no-recursion)
             // Ignore the current and parent directories
             if (strcmp(dir_entry->d_name, ".") != 0 && strcmp(dir_entry->d_name, "..") != 0) {
                 // Process the subdirectory
-                const int dir_files = process_directory(full_path);
+                const int dir_files = process_directory(full_path, dna_sequence);
 
                 // If an error occurred, return
                 if (dir_files == -1) {
@@ -66,7 +66,7 @@ int process_directory(const string directory) { // NOLINT(*-no-recursion)
             }
         } else {
             // Process the file
-            process_file(full_path);
+            process_file(full_path, SHARED dna_sequence);
             num_files++;
         }
     }
@@ -75,7 +75,7 @@ int process_directory(const string directory) { // NOLINT(*-no-recursion)
     return num_files;
 }
 
-void process_file(const string file) {
+PARALLEL_FN void process_file(const string file, SHARED struct dna_sequence *dna_sequence) {
     // Open the file
     FILE *fp;
     if ((fp = fopen(file, "r")) == NULL) {
@@ -91,13 +91,48 @@ void process_file(const string file) {
 
     // Read the remaining lines
     while (fgets(line, sizeof(line), fp) != NULL) {
-        // If it ends with a newline character, remove it
         const size_t line_length = strlen(line);
-        if (line[line_length - 1] == '\n') {
-            line[line_length - 1] = '\0';
+
+        // Iterate over the line
+        for (size_t i = 0; i < line_length; i++) {
+            const char nucleotide = line[i];
+
+#pragma omp critical(nucleotide_update)
+            switch (nucleotide) {
+                case 'A':
+                    dna_sequence->A++;
+                    break;
+                case 'C':
+                    dna_sequence->C++;
+                    break;
+                case 'G':
+                    dna_sequence->G++;
+                    break;
+                case 'T':
+                    dna_sequence->T++;
+                    break;
+                case 'U':
+                    dna_sequence->U++;
+                    break;
+                case 'N':
+                    dna_sequence->N++;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     // Close the file
     fclose(fp);
+}
+
+void pretty_print_dna_sequence(const struct dna_sequence *dna_sequence) {
+    printf("\tAdenine (A): %ld\n"
+           "\tCytosine (C): %ld\n"
+           "\tGuanine (G): %ld\n"
+           "\tThymine (T): %ld\n"
+           "\tUracil (U): %ld\n"
+           "\tNucleic acid (N): %ld\n",
+           dna_sequence->A, dna_sequence->C, dna_sequence->G, dna_sequence->T, dna_sequence->U, dna_sequence->N);
 }

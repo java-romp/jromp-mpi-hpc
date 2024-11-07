@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <mpi.h>
 #include <omp.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,6 +25,13 @@ omp_lock_t print_lock;
 #define string char *
 #define DEBUG_LOGGING 1
 
+#define LIKELY(x) __builtin_expect(!!(x), 1)
+#define UNLIKELY(x) __builtin_expect(!!(x), 0)
+
+#define PARALLEL_FN
+#define SHARED
+#define PRIVATE
+
 #if DEBUG_LOGGING == 1
     /**
      * Prints the given message if the current rank is 0 (Master process).
@@ -32,6 +40,7 @@ omp_lock_t print_lock;
         if (rank == 0) {                                                                                               \
             printf("       Master: " __VA_ARGS__);                                                                     \
         }
+
     /**
      * Prints the given message if the current rank is not 0 (Worker process).
      * In addition, if the context is parallel, the thread number is also printed synchronously.
@@ -78,7 +87,11 @@ struct dna_sequence {
 } __attribute__((aligned(64)));
 
 int get_dirs(const string directory_path, cvector(string) * directories);
-int process_directory(const string directory);
-void process_file(const string file);
+
+PARALLEL_FN int process_directory(PRIVATE const string directory, SHARED struct dna_sequence *dna_sequence);
+
+void process_file(const string file, SHARED struct dna_sequence *dna_sequence);
+
+void pretty_print_dna_sequence(SHARED const struct dna_sequence *dna_sequence);
 
 #endif // GENOME_H
