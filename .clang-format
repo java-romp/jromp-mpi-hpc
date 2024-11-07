@@ -3,8 +3,9 @@
 Language: Cpp
 BasedOnStyle: LLVM
 AccessModifierOffset: -4
-AlignConsecutiveAssignments: true
+AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Right
 AlignOperands: true
 AlignTrailingComments: false
 AlwaysBreakTemplateDeclarations: Yes
@@ -32,6 +33,7 @@ ColumnLimit: 120
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ContinuationIndentWidth: 8
 Cpp11BracedListStyle: false
+IncludeBlocks: Regroup
 IncludeCategories:
     -   Regex: '^<.*'
         Priority: 1
@@ -47,8 +49,10 @@ InsertNewlineAtEOF: true
 MacroBlockBegin: ''
 MacroBlockEnd: ''
 NamespaceIndentation: All
+SortIncludes: CaseSensitive
 SpaceAfterCStyleCast: true
 SpaceAfterTemplateKeyword: false
+SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: false
 SpaceInEmptyParentheses: false
 SpacesInAngles: false
