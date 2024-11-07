@@ -14,3 +14,12 @@ La lectura de ficheros se hace en paralelo, luego ya haremos un mpi reduce para 
 
 https://www.dnabaser.com/download/DNA-Counter/index.html
 https://es.wikipedia.org/wiki/Formato_FASTA
+
+13GB de datos
+https://ftp.ncbi.nih.gov/genomes/Viruses/AlphaFold2NR.map.gz
+
+256MB de datos
+https://ftp.ncbi.nih.gov/genomes/Viruses/AllNuclMetadata/AllNuclMetadata.csv.gz
+
+267GB de datos
+https://ftp.ncbi.nih.gov/genomes/Viruses/AllNucleotide/AllNucleotide.fa
