@@ -1,2 +1,2 @@
-rootProject.name = "java-mpi-hpc"
+rootProject.name = "jromp-mpi-hpc"
 
