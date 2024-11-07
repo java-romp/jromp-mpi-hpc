@@ -1,6 +1,6 @@
 #include "genome.h"
 
-int get_dirs(const string directory_path, cvector(string) * directories) {
+int get_dirs(const string directory_path, cvector(string) *directories) {
     DIR *dir;
 
     // Open the directory (if possible). If not, return -1 (error)
@@ -97,24 +97,29 @@ PARALLEL_FN void process_file(const string file, SHARED struct dna_sequence *dna
         for (size_t i = 0; i < line_length; i++) {
             const char nucleotide = line[i];
 
-#pragma omp critical(nucleotide_update)
             switch (nucleotide) {
                 case 'A':
+                    #pragma omp atomic update
                     dna_sequence->A++;
                     break;
                 case 'C':
+                    #pragma omp atomic update
                     dna_sequence->C++;
                     break;
                 case 'G':
+                    #pragma omp atomic update
                     dna_sequence->G++;
                     break;
                 case 'T':
+                    #pragma omp atomic update
                     dna_sequence->T++;
                     break;
                 case 'U':
+                    #pragma omp atomic update
                     dna_sequence->U++;
                     break;
                 case 'N':
+                    #pragma omp atomic update
                     dna_sequence->N++;
                     break;
                 default:

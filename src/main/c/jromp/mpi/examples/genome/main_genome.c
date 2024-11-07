@@ -5,10 +5,10 @@ int main(int argc, string argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-#ifdef DEBUG_LOGGING
+    #ifdef DEBUG_LOGGING
     // Initialize the print lock, to prevent interleaved output
     omp_init_lock(&print_lock);
-#endif
+    #endif
 
     SHARED cvector(string) directories = NULL;
 
@@ -84,16 +84,20 @@ int main(int argc, string argv[]) {
         SHARED int files = 0;
         PRIVATE string directory;
         SHARED struct dna_sequence dna_sequence = { 0 };
-        bool error = false;
+        SHARED bool error = false;
+        const size_t size = cvector_size(directories);
 
-#pragma omp parallel for reduction(+ : files) private(directory) shared(directories, dna_sequence, error)
-        for (int i = 0; i < cvector_size(directories); i++) {
+        #pragma omp parallel for \
+            reduction(+ : files) \
+            private(directory) \
+            shared(directories, dna_sequence, error)
+        for (int i = 0; i < size; i++) {
             if (LIKELY(!error)) {
                 directory = directories[i];
 
-                const int dir_files = process_directory(PRIVATE directory, SHARED & dna_sequence);
+                const int dir_files = process_directory(PRIVATE directory, SHARED &dna_sequence);
                 if (dir_files == -1) {
-#pragma omp atomic write
+                    #pragma omp atomic write
                     error = true;
                     continue; // Do not update the files counter and exit the loop immediately
                 }
@@ -115,9 +119,9 @@ int main(int argc, string argv[]) {
         cvector_free(directories);
     }
 
-#ifdef DEBUG_LOGGING
+    #ifdef DEBUG_LOGGING
     omp_destroy_lock(&print_lock);
-#endif
+    #endif
     MPI_Finalize();
     return EXIT_SUCCESS;
 }
