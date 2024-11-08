@@ -19,8 +19,10 @@ int main(int argc, string argv[]) {
             return 1;
         }
 
-        const string dir = argv[1];
-        const int num_dirs = get_dirs(dir, &directories);
+        START_MPI_TIMER(total)
+        START_MPI_TIMER(get_dirs)
+        const int num_dirs = get_dirs(argv[1], &directories);
+        STOP_MPI_TIMER_PRINT(get_dirs, LOG_MASTER)
 
         if (num_dirs == -1) {
             return 1;
@@ -81,10 +83,13 @@ int main(int argc, string argv[]) {
             dna_sequence.N += worker_dna_sequence.N;
         }
 
+        STOP_MPI_TIMER(total)
+
         // Print the results
         LOG_MASTER("################## Results ##################\n");
         LOG_MASTER("Files processed: %d\n", total_files);
         LOG_MASTER("Total DNA sequence:\n");
+        LOG_MASTER("Time spent in total: %f seconds\n", total_mpi_elapsed);
         pretty_print_dna_sequence(&dna_sequence);
         LOG_MASTER("################## End of Results ##################\n");
     } else {
@@ -113,6 +118,8 @@ int main(int argc, string argv[]) {
         SHARED bool error = false;
         const size_t size = cvector_size(directories);
 
+        START_OMP_TIMER(process_dirs)
+
         #pragma omp parallel for \
             reduction(+ : files) \
             private(directory) \
@@ -132,6 +139,8 @@ int main(int argc, string argv[]) {
                 files += dir_files;
             }
         }
+
+        STOP_OMP_TIMER_PRINT(process_dirs, LOG_WORKER)
 
         if (UNLIKELY(error)) {
             LOG_WORKER("An error occurred while processing the directories\n");

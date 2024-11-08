@@ -57,9 +57,37 @@ omp_lock_t print_lock;
             omp_unset_lock(&print_lock);                              \
         }                                                             \
     }
+
+#define START_MPI_TIMER(name) \
+    double name##_mpi_start = MPI_Wtime();
+
+#define STOP_MPI_TIMER(name) \
+    double name##_mpi_end = MPI_Wtime(); \
+    double name##_mpi_elapsed = name##_mpi_end - name##_mpi_start;
+
+#define STOP_MPI_TIMER_PRINT(name, fn__) \
+    STOP_MPI_TIMER(name) \
+    fn__("Time to " #name ": %f seconds\n", name##_mpi_elapsed);
+
+#define START_OMP_TIMER(name) \
+    double name##_omp_start = omp_get_wtime();
+
+#define STOP_OMP_TIMER(name) \
+    double name##_omp_end = omp_get_wtime(); \
+    double name##_omp_elapsed = name##_omp_end - name##_omp_start;
+
+#define STOP_OMP_TIMER_PRINT(name, fn__) \
+    STOP_OMP_TIMER(name) \
+    fn__("Time to " #name ": %f seconds\n", name##_omp_elapsed);
 #else
 #define LOG_MASTER(...)
 #define LOG_WORKER(...)
+#define START_MPI_TIMER(name)
+#define STOP_MPI_TIMER(name)
+#define STOP_MPI_TIMER_PRINT(name, fn__)
+#define START_OMP_TIMER(name)
+#define STOP_OMP_TIMER(name)
+#define STOP_OMP_TIMER_PRINT(name, fn__)
 #endif
 
 /**
