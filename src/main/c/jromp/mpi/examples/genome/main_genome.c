@@ -60,7 +60,33 @@ int main(int argc, string argv[]) {
             end += num_dirs_per_worker;
         }
 
-        cvector_free(directories);
+        // Receive the results from the worker nodes
+        int total_files = 0;
+        struct dna_sequence dna_sequence = { 0 };
+
+        MPI_Status status;
+        for (int i = 1; i < size; i++) {
+            int files;
+            MPI_Recv(&files, 1, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
+            total_files += files;
+
+            struct dna_sequence worker_dna_sequence;
+            MPI_Recv(&worker_dna_sequence, sizeof(struct dna_sequence), MPI_BYTE, i, 0, MPI_COMM_WORLD, &status);
+
+            dna_sequence.A += worker_dna_sequence.A;
+            dna_sequence.C += worker_dna_sequence.C;
+            dna_sequence.G += worker_dna_sequence.G;
+            dna_sequence.T += worker_dna_sequence.T;
+            dna_sequence.U += worker_dna_sequence.U;
+            dna_sequence.N += worker_dna_sequence.N;
+        }
+
+        // Print the results
+        LOG_MASTER("################## Results ##################\n");
+        LOG_MASTER("Files processed: %d\n", total_files);
+        LOG_MASTER("Total DNA sequence:\n");
+        pretty_print_dna_sequence(&dna_sequence);
+        LOG_MASTER("################## End of Results ##################\n");
     } else {
         // Receive the number of directories to expect
         int num_dirs_to_receive;
@@ -116,8 +142,13 @@ int main(int argc, string argv[]) {
 
         LOG_WORKER("Files processed: %d\n", files);
         pretty_print_dna_sequence(&dna_sequence);
-        cvector_free(directories);
+
+        // Send the results back to the master node
+        MPI_Send(&files, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        MPI_Send(&dna_sequence, sizeof(struct dna_sequence), MPI_BYTE, 0, 0, MPI_COMM_WORLD);
     }
+
+    cvector_free(directories);
 
     #ifdef DEBUG_LOGGING
     omp_destroy_lock(&print_lock);
