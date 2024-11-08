@@ -1,10 +1,9 @@
 #include "genome.h"
 
 int get_dirs(const string directory_path, cvector(string) *directories) {
-    DIR *dir;
-
     // Open the directory (if possible). If not, return -1 (error)
-    if ((dir = opendir(directory_path)) == NULL) {
+    DIR *dir = opendir(directory_path);
+    if (dir == NULL) {
         fprintf(stderr, "Error: Could not open directory %s\n", directory_path);
         return -1;
     }
@@ -33,10 +32,9 @@ int get_dirs(const string directory_path, cvector(string) *directories) {
 }
 
 PARALLEL_FN int process_directory(PRIVATE const string directory, SHARED struct dna_sequence *dna_sequence) {
-    DIR *dir;
-
-    // Open the directory (if possible). If not, return
-    if ((dir = opendir(directory)) == NULL) {
+    // Open the directory (if possible). If not, return -1
+    DIR *dir = opendir(directory);
+    if (dir == NULL) {
         fprintf(stderr, "Error: Could not open directory %s\n", directory);
         return -1;
     }
@@ -76,9 +74,9 @@ PARALLEL_FN int process_directory(PRIVATE const string directory, SHARED struct 
 }
 
 PARALLEL_FN void process_file(const string file, SHARED struct dna_sequence *dna_sequence) {
-    // Open the file
-    FILE *fp;
-    if ((fp = fopen(file, "r")) == NULL) {
+    // Open the file (if possible). If not, return
+    FILE *fp = fopen(file, "r");
+    if (fp == NULL) {
         fprintf(stderr, "Error: Could not open file %s\n", file);
         return;
     }
