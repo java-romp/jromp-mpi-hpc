@@ -1,4 +1,5 @@
-MPI_PATH=../../../../../../../libs/ompi
+PROJECT_BASE_PATH=../../../../../../..
+MPI_PATH=$(PROJECT_BASE_PATH)/libs/ompi
 MPI_INCLUDE=$(MPI_PATH)/include
 MPI_LIB=$(MPI_PATH)/lib
 MPI_BIN=$(MPI_PATH)/bin
@@ -11,7 +12,7 @@ LDFLAGS=-L$(MPI_LIB) -lmpi -lm
 
 # Use env variable or default value
 TASKS=$(or $(MPI_TASKS), 6)
-DATA_DIR=/home/samuel/IdeaProjects/IntelliJ/jromp-mpi-hpc/data/dna
+DATA_DIR=$(PROJECT_BASE_PATH)/data/huge/dna
 
 all: genome.o main_genome.o
 	@$(CC) $(CFLAGS) -o genome.out genome.o main_genome.o $(LDFLAGS)
