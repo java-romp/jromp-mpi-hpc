@@ -1,11 +1,15 @@
 #include "genome.h"
 
+int rank;
+int size;
+omp_lock_t print_lock;
+
 int main(int argc, string argv[]) {
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    #ifdef DEBUG_LOGGING
+    #ifdef DEBUG
     // Initialize the print lock, to prevent interleaved output
     omp_init_lock(&print_lock);
     #endif
@@ -47,33 +51,47 @@ int main(int argc, string argv[]) {
             LOG_MASTER("Sending %d directories to worker %d\n", num_dirs_to_send, i);
 
             // Send the number of directories to expect
-            MPI_Send(&num_dirs_to_send, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+            MPI_Send(&num_dirs_to_send, 1, MPI_INT, i, TAG_DIRS_TO_PROCESS, MPI_COMM_WORLD);
 
             // Send the directories
             for (int j = start; j < end; j++) {
                 const string directory = directories[j];
                 const int directory_size = (int) strlen(directory) + 1;
 
-                MPI_Send(&directory_size, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
-                MPI_Send(directory, directory_size, MPI_CHAR, i, 0, MPI_COMM_WORLD);
+                MPI_Send(&directory_size, 1, MPI_INT, i, TAG_DIRECTORY_SIZE, MPI_COMM_WORLD);
+                MPI_Send(directory, directory_size, MPI_CHAR, i, TAG_DIRECTORY_NAME, MPI_COMM_WORLD);
             }
 
             start = end;
             end += num_dirs_per_worker;
         }
 
+        int processed_dirs = 0;
+        int has_received_message;
+        MPI_Status status;
+
+        while (processed_dirs != num_dirs) {
+            MPI_Iprobe(MPI_ANY_SOURCE, TAG_NEW_DIR_PROCESSED, MPI_COMM_WORLD, &has_received_message, &status);
+
+            if (has_received_message) {
+                MPI_Recv(NULL, 0, MPI_INT, status.MPI_SOURCE, TAG_NEW_DIR_PROCESSED, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                processed_dirs++;
+
+                LOG_MASTER("Directories processed: %d/%d\n", processed_dirs, num_dirs);
+            }
+        };
+
         // Receive the results from the worker nodes
         int total_files = 0;
         struct dna_sequence dna_sequence = { 0 };
 
-        MPI_Status status;
         for (int i = 1; i < size; i++) {
             int files;
-            MPI_Recv(&files, 1, MPI_INT, i, 0, MPI_COMM_WORLD, &status);
+            MPI_Recv(&files, 1, MPI_INT, i, TAG_TOTAL_FILES, MPI_COMM_WORLD, &status);
             total_files += files;
 
             struct dna_sequence worker_dna_sequence;
-            MPI_Recv(&worker_dna_sequence, sizeof(struct dna_sequence), MPI_BYTE, i, 0, MPI_COMM_WORLD, &status);
+            MPI_Recv(&worker_dna_sequence, sizeof(struct dna_sequence), MPI_BYTE, i, TAG_DNA_SEQ_RESULT, MPI_COMM_WORLD, &status);
 
             dna_sequence.A += worker_dna_sequence.A;
             dna_sequence.C += worker_dna_sequence.C;
@@ -95,16 +113,16 @@ int main(int argc, string argv[]) {
     } else {
         // Receive the number of directories to expect
         int num_dirs_to_receive;
-        MPI_Recv(&num_dirs_to_receive, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(&num_dirs_to_receive, 1, MPI_INT, 0, TAG_DIRS_TO_PROCESS, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         cvector_init(directories, num_dirs_to_receive, NULL);
 
         // Receive the directories
         for (int i = 0; i < num_dirs_to_receive; i++) {
             int directory_size;
-            MPI_Recv(&directory_size, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(&directory_size, 1, MPI_INT, 0, TAG_DIRECTORY_SIZE, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
             string directory = malloc(directory_size);
-            MPI_Recv(directory, directory_size, MPI_CHAR, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            MPI_Recv(directory, directory_size, MPI_CHAR, 0, TAG_DIRECTORY_NAME, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
             cvector_push_back(directories, directory);
         }
@@ -135,7 +153,10 @@ int main(int argc, string argv[]) {
                     continue; // Do not update the files counter and exit the loop immediately
                 }
 
-                // Process the directory
+                // Notify the master node that a new directory has been processed
+                MPI_Send(NULL, 0, MPI_INT, 0, TAG_NEW_DIR_PROCESSED, MPI_COMM_WORLD);
+
+                // Update the files counter
                 files += dir_files;
             }
         }
@@ -153,13 +174,13 @@ int main(int argc, string argv[]) {
         pretty_print_dna_sequence(&dna_sequence);
 
         // Send the results back to the master node
-        MPI_Send(&files, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-        MPI_Send(&dna_sequence, sizeof(struct dna_sequence), MPI_BYTE, 0, 0, MPI_COMM_WORLD);
+        MPI_Send(&files, 1, MPI_INT, 0, TAG_TOTAL_FILES, MPI_COMM_WORLD);
+        MPI_Send(&dna_sequence, sizeof(struct dna_sequence), MPI_BYTE, 0, TAG_DNA_SEQ_RESULT, MPI_COMM_WORLD);
     }
 
     cvector_free(directories);
 
-    #ifdef DEBUG_LOGGING
+    #ifdef DEBUG
     omp_destroy_lock(&print_lock);
     #endif
     MPI_Finalize();

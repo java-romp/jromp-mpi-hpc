@@ -8,11 +8,11 @@ OPTIMIZATION_LEVEL=3
 
 CC=$(MPI_BIN)/mpicc
 CFLAGS=-I$(MPI_INCLUDE) -Wall -fopenmp
-LDFLAGS=-L$(MPI_LIB) -lmpi -lm
+LDFLAGS=-L$(MPI_LIB) -lm
 
 # Use env variable or default value
 TASKS=$(or $(MPI_TASKS), 6)
-DATA_DIR=$(PROJECT_BASE_PATH)/data/huge/dna
+DATA_DIR=$(HOME)/data/dna/huge
 
 all: genome.o main_genome.o
 	@$(CC) $(CFLAGS) -o genome.out genome.o main_genome.o $(LDFLAGS)

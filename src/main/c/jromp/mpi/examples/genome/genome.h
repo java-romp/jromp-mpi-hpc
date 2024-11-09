@@ -15,15 +15,11 @@
 #define CVECTOR_LOGARITHMIC_GROWTH
 #include "cvector.h"
 
-int rank;
-int size;
-omp_lock_t print_lock;
-
 #define MAX_PATH_SIZE 1024
 #define MAX_FASTA_HEADER_LENGTH 1024
 #define MAX_FASTA_DNA_SEQUENCE_LENGTH 80
 #define string char *
-#define DEBUG_LOGGING 1
+#define DEBUG 1
 
 #define LIKELY(x) __builtin_expect(!!(x), 1)
 #define UNLIKELY(x) __builtin_expect(!!(x), 0)
@@ -32,7 +28,7 @@ omp_lock_t print_lock;
 #define SHARED
 #define PRIVATE
 
-#if DEBUG_LOGGING == 1
+#if DEBUG == 1
 /**
  * Prints the given message if the current rank is 0 (Master process).
  */
@@ -113,6 +109,16 @@ struct dna_sequence {
     /** Nucleic acid (N) nucleotide count. */
     ssize_t N;
 } __attribute__((aligned(64)));
+
+enum Tags {
+    TAG_BASE = 0,
+    TAG_NEW_DIR_PROCESSED,
+    TAG_DIRS_TO_PROCESS,
+    TAG_DIRECTORY_SIZE,
+    TAG_DIRECTORY_NAME,
+    TAG_TOTAL_FILES,
+    TAG_DNA_SEQ_RESULT
+};
 
 int get_dirs(const string directory_path, cvector(string) *directories);
 

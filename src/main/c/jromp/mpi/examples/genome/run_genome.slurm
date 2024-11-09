@@ -23,48 +23,44 @@
 # ---------------------------------------------------- #
 # --------------- Properties to adjust --------------- #
 # ---------------------------------------------------- #
-#SBATCH --job-name=jromp-mpi                          # Name of the job to be sent
-#SBATCH --output=outputs/out/jromp-mpi_%A.out # Output filename
-#SBATCH --error=outputs/err/jromp-mpi_%A.err  # Error filename
+#SBATCH --job-name=genome                              # Name of the job to be sent
+#SBATCH --output=outputs/out/genome_%A.out             # Output filename
+#SBATCH --error=outputs/err/genome_%A.err              # Error filename
 
 # ---------------------------------------------------- #
 # ------------------ Job execution ------------------- #
 # ---------------------------------------------------- #
 # Parameters:
-# 1: Main class to execute (e.g. "jromp.examples.pi.Pi")
+# None
 
 function print_slurm_info() {
-    echo ""
-    echo ""
-    echo "##################################################"
-    echo "Date: $(date +'%d/%m/%Y %H:%M:%S')"
-    echo "Job ID: $SLURM_JOB_ID"
-    echo "Job Nodes: $SLURM_NNODES ($SLURM_JOB_NODELIST)"
-    echo "Tasks: $SLURM_NTASKS ($SLURM_NTASKS_PER_NODE task(s)/node)"
-    echo "CPUs: $((SLURM_NTASKS * SLURM_CPUS_PER_TASK)) ($SLURM_CPUS_PER_TASK CPU(s)/task)"
-    echo "##################################################"
-    echo ""
-    echo ""
+  echo ""
+  echo ""
+  echo "##################################################"
+  echo "Date: $(date +'%d/%m/%Y %H:%M:%S')"
+  echo "Job ID: $SLURM_JOB_ID"
+  echo "Job Nodes: $SLURM_NNODES ($SLURM_JOB_NODELIST)"
+  echo "Tasks: $SLURM_NTASKS ($SLURM_NTASKS_PER_NODE task(s)/node)"
+  echo "CPUs: $((SLURM_NTASKS * SLURM_CPUS_PER_TASK)) ($SLURM_CPUS_PER_TASK CPU(s)/task)"
+  echo "##################################################"
+  echo ""
+  echo ""
 }
 
-# Configure the variables to execute the job and keep it clean
-PROJECT_PATH="$(pwd)"
-LIBS_CLASSPATH="$PROJECT_PATH"/libs/java/commons-lang3-3.16.0.jar:"$PROJECT_PATH"/libs/java/jromp-2.2.0.jar:"$PROJECT_PATH"/libs/ompi/lib/mpi.jar
-CLASSPATH="$PROJECT_PATH"/build/classes/java/main:"$PROJECT_PATH"/build/resources/main:"$LIBS_CLASSPATH"
-MPI_RUN_EXECUTABLE="$PROJECT_PATH"/libs/ompi/bin/mpirun
-JAVA_OPTS="-XX:+UseParallelGC -XX:-TieredCompilation -Xmx32g -Xms32g"
+DATA_DIR="$HOME/data/dna/huge"
+PROJECT_BASE_PATH=../../../../../../..
+MPI_PATH=$PROJECT_BASE_PATH/libs/ompi
+MPI_RUN_EXECUTABLE=$MPI_PATH/bin/mpirun
+
+# Compile the program
+make clean all
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
 export PRTE_MCA_plm_slurm_ignore_args=true
 
-# Compile the Java classes
-./gradlew compileJava
-
 # Print the SLURM info
 print_slurm_info
 
 # Execute the job
-$MPI_RUN_EXECUTABLE --mca pml ob1 --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
-
-# See why I execute mpirun directly: https://docs.open-mpi.org/en/main/launching-apps/slurm.html
+$MPI_RUN_EXECUTABLE --mca pml ob1 --bind-to none -np "$SLURM_NTASKS" ./genome.out "$DATA_DIR"
