@@ -65,6 +65,8 @@
     STOP_MPI_TIMER(name) \
     fn__("Time to " #name ": %f seconds\n", name##_mpi_elapsed);
 
+#define GET_MPI_TIMER(name) name##_mpi_elapsed
+
 #define START_OMP_TIMER(name) \
     double name##_omp_start = omp_get_wtime();
 
@@ -75,15 +77,19 @@
 #define STOP_OMP_TIMER_PRINT(name, fn__) \
     STOP_OMP_TIMER(name) \
     fn__("Time to " #name ": %f seconds\n", name##_omp_elapsed);
+
+#define GET_OMP_TIMER(name) name##_omp_elapsed
 #else
 #define LOG_MASTER(...)
 #define LOG_WORKER(...)
 #define START_MPI_TIMER(name)
 #define STOP_MPI_TIMER(name)
 #define STOP_MPI_TIMER_PRINT(name, fn__)
+#define GET_MPI_TIMER(name)
 #define START_OMP_TIMER(name)
 #define STOP_OMP_TIMER(name)
 #define STOP_OMP_TIMER_PRINT(name, fn__)
+#define GET_OMP_TIMER(name)
 #endif
 
 /**

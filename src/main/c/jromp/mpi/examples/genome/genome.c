@@ -75,7 +75,11 @@ PARALLEL_FN int process_directory(PRIVATE const string directory, SHARED struct 
 
 PARALLEL_FN void process_file(const string file, SHARED struct dna_sequence *dna_sequence) {
     // Open the file (if possible). If not, return
+    START_OMP_TIMER(fopen)
     FILE *fp = fopen(file, "r");
+    STOP_OMP_TIMER(fopen)
+    printf("Time to open file: %f\n", GET_OMP_TIMER(fopen));
+
     if (fp == NULL) {
         fprintf(stderr, "Error: Could not open file %s\n", file);
         return;
