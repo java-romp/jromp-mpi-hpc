@@ -29,3 +29,6 @@ add_executable(genome ${EXAMPLES_DIR}/genome/genome.c
         ${EXAMPLES_DIR}/genome/main_genome.c)
 
 target_link_libraries(genome PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
+target_link_libraries(mandelbrot_parallel PUBLIC MPI::MPI_C)
+target_link_libraries(mandelbrot_parallel_with_openmp PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
+target_link_libraries(full_parallel PUBLIC MPI::MPI_C OpenMP::OpenMP_C)

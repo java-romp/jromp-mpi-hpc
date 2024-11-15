@@ -14,18 +14,18 @@
 # ---------------------------------------------------- #
 # ------- Properties set on run_calendula.bash ------- #
 # ---------------------------------------------------- #
-# --ntasks           # Number of tasks (processes)
-# --ntasks-per-node  # Number of task per node
-# --cpus-per-task    # Number of cpus per task
-# --nodes            # Number of nodes
-# --nodelist         # Node where the job is sent
+# --ntasks=1                                     # Number of tasks (processes)
+# --ntasks-per-node=1                            # Number of task per node
+# --cpus-per-task=32                             # Number of cpus per task
+# --nodes=1                                      # Number of nodes
+# --nodelist=cn6009                              # Node where the job is sent
 
 # ---------------------------------------------------- #
 # --------------- Properties to adjust --------------- #
 # ---------------------------------------------------- #
-#SBATCH --job-name=jromp-mpi                          # Name of the job to be sent
-#SBATCH --output=outputs/out/jromp-mpi_%A.out # Output filename
-#SBATCH --error=outputs/err/jromp-mpi_%A.err  # Error filename
+#SBATCH --job-name=jromp-mpi                           # Name of the job to be sent
+#SBATCH --output=outputs/out/jromp-mpi_%A.out          # Output filename
+#SBATCH --error=outputs/err/jromp-mpi_%A.err           # Error filename
 
 # ---------------------------------------------------- #
 # ------------------ Job execution ------------------- #
@@ -52,11 +52,14 @@ PROJECT_PATH="$(pwd)"
 LIBS_CLASSPATH="$PROJECT_PATH"/libs/java/commons-lang3-3.16.0.jar:"$PROJECT_PATH"/libs/java/jromp-2.2.0.jar:"$PROJECT_PATH"/libs/ompi/lib/mpi.jar
 CLASSPATH="$PROJECT_PATH"/build/classes/java/main:"$PROJECT_PATH"/build/resources/main:"$LIBS_CLASSPATH"
 MPI_RUN_EXECUTABLE="$PROJECT_PATH"/libs/ompi/bin/mpirun
-JAVA_OPTS="-XX:+UseParallelGC -XX:-TieredCompilation -Xmx32g -Xms32g"
+JAVA_OPTS="-XX:+UseParallelGC -XX:-TieredCompilation -Xmx32G"
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
 export PRTE_MCA_plm_slurm_ignore_args=true
+
+# Use mlx5_0:1 interface for Infiniband
+export UCX_NET_DEVICES=mlx5_0:1
 
 # Compile the Java classes
 ./gradlew compileJava
@@ -65,6 +68,8 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 print_slurm_info
 
 # Execute the job
-$MPI_RUN_EXECUTABLE --mca pml ob1 --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
+$MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
 
 # See why I execute mpirun directly: https://docs.open-mpi.org/en/main/launching-apps/slurm.html
+# Linpack hpl  Jack Dongarra
+# https://github.com/maxhutch/homb
