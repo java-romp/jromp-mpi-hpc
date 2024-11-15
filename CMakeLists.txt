@@ -30,6 +30,9 @@ add_executable(genome ${EXAMPLES_DIR}/genome/genome.c
 add_executable(jacobi ${EXAMPLES_DIR}/jacobi/jacobi_openmp.c)
 add_executable(molecular_dynamics ${EXAMPLES_DIR}/molecular_dynamics/md_openmp.c)
 add_executable(fft ${EXAMPLES_DIR}/fft/fft_openmp.c)
+add_executable(sgefa ${EXAMPLES_DIR}/sgefa/sgefa_openmp.c)
+add_executable(ziggurat ${EXAMPLES_DIR}/ziggurat/ziggurat_openmp.c)
+add_executable(heated_plate ${EXAMPLES_DIR}/heated_plate/heated_plate_openmp.c)
 
 target_link_libraries(genome PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
 target_link_libraries(mandelbrot_parallel PUBLIC MPI::MPI_C)
@@ -37,3 +40,6 @@ target_link_libraries(mandelbrot_parallel_with_openmp PUBLIC MPI::MPI_C OpenMP::
 target_link_libraries(full_parallel PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
 target_link_libraries(jacobi PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(fft PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
+target_link_libraries(sgefa PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
+target_link_libraries(ziggurat PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
+target_link_libraries(heated_plate PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
