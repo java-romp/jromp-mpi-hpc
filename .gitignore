@@ -49,3 +49,4 @@ cmake-build-project
 data
 *.o
 *.out
+*.bmp

@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
 	printf("Rank %d: mean = %f\n", rank, mean);
 #endif
 
+    printf("Number of elements: %d\n", num_elements);
     // Update the matrix chunk by dividing each element by the mean
     for (i = 0; i < num_elements; i++) {
         matrix_chunk[i] /= mean;

@@ -1,10 +1,10 @@
-# include <stdlib.h>
-# include <stdio.h>
-# include <math.h>
-# include <time.h>
-# include <omp.h>
+#include <math.h>
+#include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int main();
+#define TIME_SIZE 40
 
 void ccopy(int n, double x[], double y[]);
 
@@ -19,11 +19,6 @@ void step(int n, int mj, double a[], double b[], double c[], double d[],
 
 void timestamp();
 
-/******************************************************************************/
-
-int main()
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -55,7 +50,7 @@ int main()
     ISBN: 0-19-851576-6,
     LC: QA76.58.P47.
 */
-{
+int main() {
     double error;
     int first;
     double flops;
@@ -64,7 +59,7 @@ int main()
     int icase;
     int it;
     int ln2;
-    int ln2_max = 25;
+    int ln2_max = 20;
     double mflops;
     int n;
     int nits = 1000;
@@ -132,19 +127,17 @@ int main()
                     z[i + 1] = z1;
                 }
             } else {
-                # pragma omp parallel \
-    shared ( n, x, z ) \
-    private ( i, z0, z1 )
-
-                # pragma omp for nowait
-
-                for (i = 0; i < 2 * n; i = i + 2) {
-                    z0 = 0.0; /* real part of array */
-                    z1 = 0.0; /* imaginary part of array */
-                    x[i] = z0;
-                    z[i] = z0; /* copy of initial real data */
-                    x[i + 1] = z1;
-                    z[i + 1] = z1; /* copy of initial imag. data */
+                #pragma omp parallel shared (n, x, z) private (i, z0, z1)
+                {
+                    #pragma omp for nowait
+                    for (i = 0; i < 2 * n; i = i + 2) {
+                        z0 = 0.0; /* real part of array */
+                        z1 = 0.0; /* imaginary part of array */
+                        x[i] = z0;
+                        z[i] = z0; /* copy of initial real data */
+                        x[i + 1] = z1;
+                        z[i + 1] = z1; /* copy of initial imag. data */
+                    }
                 }
             }
             /*
@@ -190,7 +183,7 @@ int main()
                 printf("  %12e  %12e  %12f\n", wtime, wtime / (double) (2 * nits), mflops);
             }
         }
-        if ((ln2 % 4) == 0) {
+        if (ln2 % 4 == 0) {
             nits = nits / 10;
         }
         if (nits < 1) {
@@ -213,11 +206,6 @@ int main()
     return 0;
 }
 
-/******************************************************************************/
-
-void ccopy(int n, double x[], double y[])
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -257,21 +245,15 @@ void ccopy(int n, double x[], double y[])
 
     Output, double Y[2*N], a copy of X.
 */
-{
+void ccopy(int n, double x[], double y[]) {
     int i;
 
     for (i = 0; i < n; i++) {
         y[i * 2 + 0] = x[i * 2 + 0];
         y[i * 2 + 1] = x[i * 2 + 1];
     }
-    return;
 }
 
-/******************************************************************************/
-
-void cfft2(int n, double x[], double y[], double w[], double sgn)
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -307,13 +289,13 @@ void cfft2(int n, double x[], double y[], double w[], double sgn)
 
     Input, double SGN, is +1 for a "forward" FFT and -1 for a "backward" FFT.
 */
-{
+void cfft2(int n, double x[], double y[], double w[], double sgn) {
     int j;
     int m;
     int mj;
     int tgle;
 
-    m = (int) (log((double) n) / log(1.99));
+    m = (int) (log(n) / log(1.99));
     mj = 1;
     /*
       Toggling switch for work array.
@@ -344,15 +326,8 @@ void cfft2(int n, double x[], double y[], double w[], double sgn)
 
     mj = n / 2;
     step(n, mj, &x[0 * 2 + 0], &x[(n / 2) * 2 + 0], &y[0 * 2 + 0], &y[mj * 2 + 0], w, sgn);
-
-    return;
 }
 
-/******************************************************************************/
-
-void cffti(int n, double w[])
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -381,7 +356,7 @@ void cffti(int n, double w[])
 
     Output, double W[N], a table of sines and cosines.
 */
-{
+void cffti(int n, double w[]) {
     double arg;
     double aw;
     int i;
@@ -391,25 +366,17 @@ void cffti(int n, double w[])
     n2 = n / 2;
     aw = 2.0 * pi / ((double) n);
 
-    # pragma omp parallel \
-    shared ( aw, n, w ) \
-    private ( arg, i )
-
-    # pragma omp for nowait
-
-    for (i = 0; i < n2; i++) {
-        arg = aw * ((double) i);
-        w[i * 2 + 0] = cos(arg);
-        w[i * 2 + 1] = sin(arg);
+    #pragma omp parallel shared (aw, n, w) private (arg, i)
+    {
+        #pragma omp for nowait
+        for (i = 0; i < n2; i++) {
+            arg = aw * ((double) i);
+            w[i * 2 + 0] = cos(arg);
+            w[i * 2 + 1] = sin(arg);
+        }
     }
-    return;
 }
 
-/******************************************************************************/
-
-double ggl(double *seed)
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -438,25 +405,19 @@ double ggl(double *seed)
 
     Output, double GGL, the next pseudorandom value.
 */
-{
+double ggl(double *seed) {
     double d2 = 0.2147483647e10;
     double t;
     double value;
 
-    t = (double) *seed;
+    t = *seed;
     t = fmod(16807.0 * t, d2);
-    *seed = (double) t;
-    value = (double) ((t - 1.0) / (d2 - 1.0));
+    *seed = t;
+    value = (t - 1.0) / (d2 - 1.0);
 
     return value;
 }
 
-/******************************************************************************/
-
-void step(int n, int mj, double a[], double b[], double c[],
-          double d[], double w[], double sgn)
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -482,7 +443,8 @@ void step(int n, int mj, double a[], double b[], double c[],
   Parameters:
 
 */
-{
+void step(int n, int mj, double a[], double b[], double c[],
+          double d[], double w[], double sgn) {
     double ambr;
     double ambu;
     int j;
@@ -499,45 +461,39 @@ void step(int n, int mj, double a[], double b[], double c[],
     mj2 = 2 * mj;
     lj = n / mj2;
 
-    # pragma omp parallel \
-    shared ( a, b, c, d, lj, mj, mj2, sgn, w ) \
-    private ( ambr, ambu, j, ja, jb, jc, jd, jw, k, wjw )
+    #pragma omp parallel \
+        shared ( a, b, c, d, lj, mj, mj2, sgn, w ) \
+        private ( ambr, ambu, j, ja, jb, jc, jd, jw, k, wjw )
+    {
+        #pragma omp for nowait
+        for (j = 0; j < lj; j++) {
+            jw = j * mj;
+            ja = jw;
+            jb = ja;
+            jc = j * mj2;
+            jd = jc;
 
-    # pragma omp for nowait
+            wjw[0] = w[jw * 2 + 0];
+            wjw[1] = w[jw * 2 + 1];
 
-    for (j = 0; j < lj; j++) {
-        jw = j * mj;
-        ja = jw;
-        jb = ja;
-        jc = j * mj2;
-        jd = jc;
+            if (sgn < 0.0) {
+                wjw[1] = -wjw[1];
+            }
 
-        wjw[0] = w[jw * 2 + 0];
-        wjw[1] = w[jw * 2 + 1];
+            for (k = 0; k < mj; k++) {
+                c[(jc + k) * 2 + 0] = a[(ja + k) * 2 + 0] + b[(jb + k) * 2 + 0];
+                c[(jc + k) * 2 + 1] = a[(ja + k) * 2 + 1] + b[(jb + k) * 2 + 1];
 
-        if (sgn < 0.0) {
-            wjw[1] = -wjw[1];
-        }
+                ambr = a[(ja + k) * 2 + 0] - b[(jb + k) * 2 + 0];
+                ambu = a[(ja + k) * 2 + 1] - b[(jb + k) * 2 + 1];
 
-        for (k = 0; k < mj; k++) {
-            c[(jc + k) * 2 + 0] = a[(ja + k) * 2 + 0] + b[(jb + k) * 2 + 0];
-            c[(jc + k) * 2 + 1] = a[(ja + k) * 2 + 1] + b[(jb + k) * 2 + 1];
-
-            ambr = a[(ja + k) * 2 + 0] - b[(jb + k) * 2 + 0];
-            ambu = a[(ja + k) * 2 + 1] - b[(jb + k) * 2 + 1];
-
-            d[(jd + k) * 2 + 0] = wjw[0] * ambr - wjw[1] * ambu;
-            d[(jd + k) * 2 + 1] = wjw[1] * ambr + wjw[0] * ambu;
+                d[(jd + k) * 2 + 0] = wjw[0] * ambr - wjw[1] * ambu;
+                d[(jd + k) * 2 + 1] = wjw[1] * ambr + wjw[0] * ambu;
+            }
         }
     }
-    return;
 }
 
-/******************************************************************************/
-
-void timestamp(void)
-
-/******************************************************************************/
 /*
   Purpose:
 
@@ -563,20 +519,12 @@ void timestamp(void)
 
     None
 */
-{
-    # define TIME_SIZE 40
-
+void timestamp(void) {
     static char time_buffer[TIME_SIZE];
-    const struct tm *tm;
-    time_t now;
-
-    now = time(NULL);
-    tm = localtime(&now);
+    const time_t now = time(NULL);
+    const struct tm *tm = localtime(&now);
 
     strftime(time_buffer, TIME_SIZE, "%d %B %Y %I:%M:%S %p", tm);
 
     printf("%s\n", time_buffer);
-
-    return;
-    # undef TIME_SIZE
 }
