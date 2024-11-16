@@ -1,24 +1,8 @@
-/*
- * Dynamic MPI Mandelbrot algorithm
- * Copyright (C) 2015  Martin Ohmann <martin@mohmann.de>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// ReSharper disable CppJoinDeclarationAndAssignment
 #include "mandelbrot.h"
 
 int main(int argc, char **argv) {
-    int proc_count, proc_id, retval;
+    int proc_count, proc_id, ret_val;
     mo_opts_t *opts;
 
     /* initialize MPI */
@@ -46,27 +30,27 @@ int main(int argc, char **argv) {
     }
 
     /* parse args and store them in opts */
-    retval = parse_args(argc, argv, opts, proc_id, proc_count);
+    ret_val = parse_args(argc, argv, opts, proc_id, proc_count);
 
-    if (retval == EXIT_SUCCESS) {
+    if (ret_val == EXIT_SUCCESS) {
         /* depending on process id run as master (0) or slave (n) */
         if (proc_id == 0) {
-            retval = master_proc(proc_count - 1, opts);
+            ret_val = master_proc(proc_count - 1, opts);
         } else {
-            retval = slave_proc(proc_id, opts);
+            ret_val = slave_proc(proc_id, opts);
         }
     }
 
     free(opts);
     MPI_Finalize();
 
-    return retval;
+    return ret_val;
 }
 
 /*
  * parse CLI args and store them into opts
  */
-static int parse_args(int argc, char **argv, mo_opts_t *opts, int proc_id, int proc_count) {
+static int parse_args(const int argc, char **argv, mo_opts_t *opts, const int proc_id, const int proc_count) {
     /* set default values first */
     opts->max_iterations = MO_MAXITER;
     opts->width = MO_SIZE;
@@ -114,9 +98,8 @@ static int parse_args(int argc, char **argv, mo_opts_t *opts, int proc_id, int p
                     opts->height = optval_int;
                 else if (c == 'n')
                     opts->max_iterations = optval_int;
-                else
-                    if (c == 'b')
-                        opts->blocksize = optval_int;
+                else if (c == 'b')
+                    opts->blocksize = optval_int;
                 break;
             case 'p': /* colormin */
             case 'q': /* colormax */
@@ -127,9 +110,8 @@ static int parse_args(int argc, char **argv, mo_opts_t *opts, int proc_id, int p
                     opts->min_color = optval_long;
                 else if (c == 'q')
                     opts->max_color = optval_long;
-                else
-                    if (c == 'm')
-                        opts->color_mask = optval_long;
+                else if (c == 'm')
+                    opts->color_mask = optval_long;
                 break;
             case 'x': /* xoffset */
             case 'y': /* yoffset */
@@ -218,7 +200,7 @@ static int parse_args(int argc, char **argv, mo_opts_t *opts, int proc_id, int p
 /*
  * display parameters used for computation
  */
-static void print_params(mo_opts_t *opts, double x_off, double y_off, double axis_length) {
+static void print_params(const mo_opts_t *opts, const double x_off, const double y_off, const double axis_length) {
     printf("Computation parameters:\n"
            "    output file              %s\n"
            "    maximum iterations       %d\n"
@@ -273,10 +255,10 @@ static void print_usage(char **argv) {
 /*
  * master process logic
  */
-static int master_proc(int slave_count, mo_opts_t *opts) {
-    int *rows = (int *) malloc(opts->blocksize * sizeof(*rows));
-    long *data = (long *) malloc((opts->width + 1) * opts->blocksize * sizeof(*data));
-    char *rgb = (char *) malloc(3 * opts->width * opts->height * sizeof(*rgb));
+static int master_proc(const int slave_count, const mo_opts_t *opts) {
+    int *rows = malloc(opts->blocksize * sizeof(*rows));
+    long *data = malloc((opts->width + 1) * opts->blocksize * sizeof(*data));
+    char *rgb = malloc(3 * opts->width * opts->height * sizeof(*rgb));
 
     if (rows == NULL || data == NULL || rgb == NULL) {
         eprintf("unable to allocate memory for buffers.\n");
@@ -291,7 +273,7 @@ static int master_proc(int slave_count, mo_opts_t *opts) {
     long pixel_color, pixel_pos;
     int current_row = 0;
     int running_tasks = 0;
-    int retval = EXIT_SUCCESS;
+    int ret_val = EXIT_SUCCESS;
 
     MPI_Status status;
 
@@ -361,9 +343,9 @@ static int master_proc(int slave_count, mo_opts_t *opts) {
 
     /* write rgb data to file */
     printf("Creating bitmap image.\n");
-    retval = write_bitmap(opts->filename, opts->width, opts->height, rgb);
+    ret_val = write_bitmap(opts->filename, opts->width, opts->height, rgb);
 
-    if (retval == EXIT_SUCCESS) {
+    if (ret_val == EXIT_SUCCESS) {
         printf("Finished. Image stored in '%s'.\n", opts->filename);
     } else {
         eprintf("failed to write bitmap to file.\n");
@@ -373,7 +355,7 @@ static int master_proc(int slave_count, mo_opts_t *opts) {
     free(data);
     free(rgb);
 
-    return retval;
+    return ret_val;
 }
 
 /*
@@ -432,7 +414,7 @@ static int slave_proc(int proc_id, mo_opts_t *opts) {
 /*
  * compute pixel color using the mandelbrot algorithm
  */
-static long mandelbrot(int col, int row, mo_scale_t *scale, mo_opts_t *opts) {
+static long mandelbrot(const int col, const int row, const mo_scale_t *scale, const mo_opts_t *opts) {
     mo_complex_t a, b;
     a.re = a.im = 0;
 
@@ -459,16 +441,16 @@ static long mandelbrot(int col, int row, mo_scale_t *scale, mo_opts_t *opts) {
 /*
  * print progress bar
  */
-static inline void print_progress(int rows_processed, int row_count) {
-    int r = row_count / MO_PUPDATE;
+static inline void print_progress(const int rows_processed, const int row_count) {
+    const int r = row_count / MO_PUPDATE;
 
     /* only update MO_PUPDATE times */
     if (r == 0 || rows_processed % r != 0)
         return;
 
     /* calulate ratio and current position */
-    float ratio = rows_processed / (float) row_count;
-    int pos = ratio * MO_PWIDTH;
+    const float ratio = rows_processed / (float) row_count;
+    const int pos = ratio * MO_PWIDTH;
 
     /* print percentage and progress bar */
     printf("%3d%% [", (int) (ratio * 100));
@@ -486,7 +468,7 @@ static inline void print_progress(int rows_processed, int row_count) {
  * write bitmap file
  * derived from http://cpansearch.perl.org/src/DHUNT/PDL-Planet-0.05/libimage/bmp.c
  */
-static int write_bitmap(const char *filename, int width, int height, char *rgb) {
+static int write_bitmap(const char *filename, const int width, const int height, const char *rgb) {
     int i, j, pixel_pos;
     int bytes_per_line;
     unsigned char *line;
