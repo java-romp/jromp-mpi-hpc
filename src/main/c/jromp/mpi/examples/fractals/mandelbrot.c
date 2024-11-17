@@ -148,7 +148,7 @@ static int parse_args(const int argc, char **argv, mo_opts_t *opts, const int pr
             case '?': /* unknown opt */
                 if (proc_id == 0) {
                     /* hacky fix: get correct index if length of invalid option is > 2 */
-                    index = (strncmp(argv[0], argv[optind - 1], sizeof(argv)) == 0)
+                    index = strncmp(argv[0], argv[optind - 1], sizeof(argv)) == 0
                                 ? optind
                                 : optind - 1;
 
@@ -269,7 +269,6 @@ static int master_proc(const int slave_count, const mo_opts_t *opts) {
     }
 
     int proc_id, offset;
-    double start_time, end_time;
     long pixel_color, pixel_pos;
     int current_row = 0;
     int running_tasks = 0;
@@ -279,8 +278,7 @@ static int master_proc(const int slave_count, const mo_opts_t *opts) {
 
     printf("Computation started.\n");
 
-    /* get start time */
-    start_time = MPI_Wtime();
+    START_MPI_TIMER(mandelbrot_calc)
 
     /* assign each slave initial row(s) */
     for (int p = 0; p < slave_count; ++p) {
@@ -332,14 +330,14 @@ static int master_proc(const int slave_count, const mo_opts_t *opts) {
         }
     }
 
-    /* get end time  */
-    end_time = MPI_Wtime();
+    STOP_MPI_TIMER(mandelbrot_calc)
 
     /* clear progress bar from stdout */
-    if (opts->show_progress)
+    if (opts->show_progress) {
         printf("\033[K");
+    }
 
-    printf("Finished. Computation finished in %g sec.\n\n", end_time - start_time);
+    printf("Finished. Computation finished in %g sec.\n\n", GET_MPI_TIMER(mandelbrot_calc));
 
     /* write rgb data to file */
     printf("Creating bitmap image.\n");
@@ -361,10 +359,10 @@ static int master_proc(const int slave_count, const mo_opts_t *opts) {
 /*
  * slave process logic
  */
-static int slave_proc(int proc_id, mo_opts_t *opts) {
-    int *rows = (int *) malloc(opts->blocksize * sizeof(*rows));
-    long *data = (long *) malloc((opts->width + 1) * opts->blocksize * sizeof(*data));
-    mo_scale_t *scale = (mo_scale_t *) malloc(sizeof(*scale));
+static int slave_proc(const int proc_id, const mo_opts_t *opts) {
+    int *rows = malloc(opts->blocksize * sizeof(*rows));
+    long *data = malloc((opts->width + 1) * opts->blocksize * sizeof(*data));
+    mo_scale_t *scale = malloc(sizeof(*scale));
 
     if (rows == NULL || data == NULL || scale == NULL) {
         free(rows);
@@ -373,9 +371,7 @@ static int slave_proc(int proc_id, mo_opts_t *opts) {
         return EXIT_FAILURE;
     }
 
-    long pixel_color;
     int offset;
-
     MPI_Status status;
 
     /* compute factor for color scaling */
@@ -383,22 +379,32 @@ static int slave_proc(int proc_id, mo_opts_t *opts) {
                    (double) (opts->max_iterations - 1);
 
     /* compute factors to scale computational region to imagesize */
-    scale->re = (double) (opts->max_re - opts->min_re) / (double) opts->width;
-    scale->im = (double) (opts->max_im - opts->min_im) / (double) opts->height;
+    scale->re = (opts->max_re - opts->min_re) / (double) opts->width;
+    scale->im = (opts->max_im - opts->min_im) / (double) opts->height;
 
     /* receive row(s) and start computation if status is MO_CALC */
-    while ((MPI_Recv(rows, opts->blocksize, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD,
-                     &status) == MPI_SUCCESS) && status.MPI_TAG == MO_CALC) {
+    while (MPI_Recv(rows, opts->blocksize, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status) == MPI_SUCCESS
+           && status.MPI_TAG == MO_CALC) {
+        START_OMP_TIMER(mandelbrot_calc)
+
+        #ifdef PARALLELIZE
+        #pragma omp parallel for \
+            shared(data, rows, scale, opts) \
+            private(offset)
+        #endif
         for (int i = 0; i < opts->blocksize; ++i) {
             offset = opts->width * i;
             data[offset] = rows[i];
 
             /* compute pixel colors using mandelbrot algorithm */
             for (int col = 0; col < opts->width; ++col) {
-                pixel_color = mandelbrot(col, rows[i], scale, opts);
-                data[offset + col + 1] = pixel_color;
+                data[offset + col + 1] = mandelbrot(col, rows[i], scale, opts);
             }
         }
+
+        STOP_OMP_TIMER(mandelbrot_calc)
+        printf("Slave %d: Computation of subregion (%d x %d) finished in %g sec.\n",
+               proc_id, opts->width, opts->blocksize, GET_OMP_TIMER(mandelbrot_calc));
 
         /* send row(s) to master */
         MPI_Send(data, (opts->width + 1) * opts->blocksize, MPI_LONG, 0, MO_DATA, MPI_COMM_WORLD);
@@ -419,8 +425,8 @@ static long mandelbrot(const int col, const int row, const mo_scale_t *scale, co
     a.re = a.im = 0;
 
     /* scale display coordinates to actual region */
-    b.re = opts->min_re + ((double) col * scale->re);
-    b.im = opts->min_im + ((double) (opts->height - 1 - row) * scale->im);
+    b.re = opts->min_re + (double) col * scale->re;
+    b.im = opts->min_im + (double) (opts->height - 1 - row) * scale->im;
 
     /* calculate z0, z1, until divergence or maximum iterations */
     int n = 0;
@@ -441,24 +447,27 @@ static long mandelbrot(const int col, const int row, const mo_scale_t *scale, co
 /*
  * print progress bar
  */
-static inline void print_progress(const int rows_processed, const int row_count) {
+static void print_progress(const int rows_processed, const int row_count) {
     const int r = row_count / MO_PUPDATE;
 
     /* only update MO_PUPDATE times */
     if (r == 0 || rows_processed % r != 0)
         return;
 
-    /* calulate ratio and current position */
-    const float ratio = rows_processed / (float) row_count;
-    const int pos = ratio * MO_PWIDTH;
+    /* calculate ratio and current position */
+    const float ratio = (float) rows_processed / (float) row_count;
+    const int pos = (int) ratio * MO_PWIDTH;
 
     /* print percentage and progress bar */
     printf("%3d%% [", (int) (ratio * 100));
 
-    for (int i = 0; i < pos; ++i)
+    for (int i = 0; i < pos; ++i) {
         printf("=");
-    for (int i = pos; i < MO_PWIDTH; ++i)
+    }
+
+    for (int i = pos; i < MO_PWIDTH; ++i) {
         printf(" ");
+    }
 
     /* carriage return to overwrite line on next progress update */
     printf("]\r");

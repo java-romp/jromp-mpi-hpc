@@ -1,11 +1,13 @@
+// ReSharper disable CppUnusedIncludeDirective
 #ifndef _MO_MANDELBROT_H
 #define _MO_MANDELBROT_H
 
+#include <getopt.h>
+#include <mpi.h>
+#include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <getopt.h>
-#include <mpi.h>
 
 /*
  * default values
@@ -43,6 +45,24 @@
     MPI_Finalize(); \
     exit((error_code)); \
 }
+
+#define START_MPI_TIMER(name) \
+    double name##_mpi_start = MPI_Wtime();
+
+#define STOP_MPI_TIMER(name) \
+    double name##_mpi_end = MPI_Wtime(); \
+    double name##_mpi_elapsed = name##_mpi_end - name##_mpi_start;
+
+#define GET_MPI_TIMER(name) name##_mpi_elapsed
+
+#define START_OMP_TIMER(name) \
+    double name##_omp_start = omp_get_wtime();
+
+#define STOP_OMP_TIMER(name) \
+    double name##_omp_end = omp_get_wtime(); \
+    double name##_omp_elapsed = name##_omp_end - name##_omp_start;
+
+#define GET_OMP_TIMER(name) name##_omp_elapsed
 
 /*
  * structdef for complex numbers
@@ -109,11 +129,11 @@ static void print_usage(char **);
 
 static int master_proc(int, const mo_opts_t *);
 
-static int slave_proc(int, mo_opts_t *);
+static int slave_proc(int, const mo_opts_t *);
 
 static long mandelbrot(int, int, const mo_scale_t *, const mo_opts_t *);
 
-static inline void print_progress(int, int);
+static void print_progress(int, int);
 
 static int write_bitmap(const char *, int, int, const char *);
 
