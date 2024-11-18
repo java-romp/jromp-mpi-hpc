@@ -1,0 +1,3 @@
+Parallel calculation video: https://en.wikipedia.org/wiki/File:Multi-threaded_mandelbrot_render_w_symmetry.webm
+https://en.wikipedia.org/wiki/Plotting_algorithms_for_the_Mandelbrot_set (see Multithreading section)
+https://en.wikipedia.org/wiki/Embarrassingly_parallel

@@ -36,6 +36,8 @@ add_executable(heated_plate ${EXAMPLES_DIR}/heated_plate/heated_plate_openmp.c
         ${EXAMPLES_DIR}/heated_plate/heated.c)
 add_executable(fractals ${EXAMPLES_DIR}/fractals/mandelbrot.h
         ${EXAMPLES_DIR}/fractals/mandelbrot.c)
+add_executable(big_multiplication ${EXAMPLES_DIR}/big_multiplication/big_multiplication.c
+        ${EXAMPLES_DIR}/big_multiplication/big_multiplication.h)
 
 target_link_libraries(genome PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
 target_link_libraries(mandelbrot_parallel PUBLIC MPI::MPI_C)
@@ -47,3 +49,4 @@ target_link_libraries(sgefa PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(ziggurat PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(heated_plate PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(fractals PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
+target_link_libraries(big_multiplication PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
