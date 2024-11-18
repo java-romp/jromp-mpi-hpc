@@ -22,14 +22,14 @@ function compile {
 
 function run {
   local processes=5
-  local width=10000
-  local height=10000
-  local iterations=6000
-  local block_size=$((height / processes))
+  local width=2000
+  local height=2000
+  local iterations=20000
+  local block_size=10
 
   echo "Running with $processes processes, $width x $height resolution, $iterations iterations and $block_size block size"
 
-  $MPIEXEC -np $processes ./mandelbrot.o -n $iterations -a 3.5 -c $width -r $height -b $block_size -o mandelbrot.bmp
+  $MPIEXEC -np $processes ./mandelbrot.o -n $iterations -c $width -r $height -b $block_size -o mandelbrot.bmp
 }
 
 function profile {

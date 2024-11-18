@@ -20,7 +20,7 @@ function ceil_div() {
 
 function main() {
   local nodes=16         # Number of nodes
-  local n_tasks=31       # Number of processes (MPI ranks)
+  local n_tasks=27       # Number of processes (MPI ranks)
   local cpus_per_task=30 # Threads that JROMP will use
 
   local n_tasks_per_node     # Number of processes per node
@@ -30,10 +30,10 @@ function main() {
   local node_list_str        # List of nodes as a string separated by commas
   local i
 
-  local iterations=6000
-  local real_part=3.5
-  local width=3000
-  local height=3000
+  local iterations=12000
+  local real_part=2
+  local width=26000
+  local height=26000
   local block_size=$((height / (n_tasks - 1)))
 
   n_tasks_per_node=$(ceil_div $n_tasks $nodes)
@@ -51,7 +51,7 @@ function main() {
 
   echo "Running with the following parameters:"
   echo "  Nodes: $nodes"
-  echo "  Processes: $n_tasks"
+  echo "  Processes: $n_tasks ($((n_tasks - 1)) workers + 1 master)"
   echo "  Threads per process: $cpus_per_task"
   echo "  Processes per node: $n_tasks_per_node"
   echo "  Node list: $node_list_str"

@@ -45,7 +45,7 @@ function print_slurm_info() {
     echo "Date: $(date +'%d/%m/%Y %H:%M:%S')"
     echo "Job ID: $SLURM_JOB_ID"
     echo "Job Nodes: $SLURM_NNODES ($SLURM_JOB_NODELIST)"
-    echo "Tasks: $SLURM_NTASKS ($SLURM_NTASKS_PER_NODE task(s)/node)"
+    echo "Tasks: $SLURM_NTASKS ($SLURM_NTASKS_PER_NODE task(s)/node) - $((SLURM_NTASKS - 1)) worker(s) + 1 master"
     echo "CPUs: $((SLURM_NTASKS * SLURM_CPUS_PER_TASK)) ($SLURM_CPUS_PER_TASK CPU(s)/task)"
     echo "##################################################"
     echo ""

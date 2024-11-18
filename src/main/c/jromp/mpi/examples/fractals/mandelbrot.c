@@ -404,7 +404,7 @@ static int slave_proc(const int proc_id, const mo_opts_t *opts) {
 
         STOP_OMP_TIMER(mandelbrot_calc)
         printf("Slave %d: Computation of subregion (%d x %d) finished in %g sec.\n",
-               proc_id, opts->width, opts->blocksize, GET_OMP_TIMER(mandelbrot_calc));
+               proc_id, opts->blocksize, opts->width, GET_OMP_TIMER(mandelbrot_calc));
 
         /* send row(s) to master */
         MPI_Send(data, (opts->width + 1) * opts->blocksize, MPI_LONG, 0, MO_DATA, MPI_COMM_WORLD);
