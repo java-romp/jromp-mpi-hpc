@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
     double *a = NULL, *b = NULL, *c = NULL;
 
     if (rank == 0) {
+        printf("Master process\n");
+
         // Only master process allocates memory for all complete matrices
         a = malloc(N * N * sizeof(double));
         b = malloc(N * N * sizeof(double));
@@ -96,6 +98,8 @@ int main(int argc, char *argv[]) {
         free(b);
         free(c);
     } else {
+        printf("Worker process %d (threads %d)\n", rank, omp_get_num_threads());
+
         // Workers allocate memory for their part of the matrices
         b = malloc(N * N * sizeof(double)); // All workers need the matrix B
         double *sub_A = malloc(rows_per_process * N * sizeof(double));
@@ -109,14 +113,14 @@ int main(int argc, char *argv[]) {
         }
 
         // Receive rows of A and matrix B
-        MPI_Recv(sub_A, rows_per_process * N, MPI_DOUBLE, 0, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        MPI_Recv(b, N * N, MPI_DOUBLE, 0, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(sub_A, rows_per_process * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(b, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         // Perform matrix multiplication
         matrix_multiplication(sub_A, b, sub_C, rows_per_process, &progress);
 
         // Send results back to master process
-        MPI_Send(sub_C, rows_per_process * N, MPI_DOUBLE, 0, FINISH_TAG, MPI_COMM_WORLD);
+        MPI_Send(sub_C, rows_per_process * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
 
         // Free memory
         free(b);
@@ -136,12 +140,6 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
     MPI_Request request;
 
     for (int i = 0; i < n; i++) {
-        progress->progress = (int) (i / (double) n * 100);
-        // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
-        // because it is not necessary to know if the master process has received the progress
-        // (it is only informative).
-        MPI_Isend(progress, 1, progress_type, 0, PROGRESS_TAG, MPI_COMM_WORLD, &request);
-
         for (int j = 0; j < N; j++) {
             c[i * N + j] = 0;
 
@@ -149,6 +147,12 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
                 c[i * N + j] += a[i * N + k] * b[k * N + j];
             }
         }
+
+        progress->progress = (int) ((i + 1) / (double) n * 100);
+        // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
+        // because it is not necessary to know if the master process has received the progress
+        // (it is only informative).
+        MPI_Isend(progress, 1, progress_type, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD, &request);
     }
 }
 

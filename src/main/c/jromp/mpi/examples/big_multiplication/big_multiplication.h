@@ -30,6 +30,7 @@
 
 #define MASTER
 #define WORKER
+#define MASTER_RANK 0
 #define DATA_TAG 0
 #define PROGRESS_TAG 1
 #define FINISH_TAG 2

@@ -26,8 +26,8 @@ function ceil_div() {
 
 function main() {
   local nodes=16             # Number of nodes
-  local n_tasks=17           # Number of processes (MPI ranks)
-  local cpus_per_task=30     # Threads that JROMP will use
+  local n_tasks=31           # Number of processes (MPI ranks) (-1 for master)
+  local cpus_per_task=32     # Threads that JROMP will use
   local n_tasks_per_node     # Number of processes per node
   local base_node_name="cn6" # Base name of the nodes
   local first_node=9         # First node number. IMPORTANT NOTE: IceLake Rocky 8 nodes start at 9
@@ -35,7 +35,7 @@ function main() {
   local node_list_str        # List of nodes as a string separated by commas
   local i
 
-  local matrix_size=16384
+  local matrix_size=13500
   local optimization_level=0
   n_tasks_per_node=$(ceil_div $n_tasks $nodes)
 
