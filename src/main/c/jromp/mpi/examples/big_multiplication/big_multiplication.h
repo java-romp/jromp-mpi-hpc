@@ -59,4 +59,23 @@ static void create_progress_type(MPI_Datatype *progress_type) {
     MPI_Type_create_struct(2, block_lengths, offsets, types, progress_type);
 }
 
+static void write_execution_configuration_to_file(const int n, const int ranks,
+                                                  const int threads, const int opt_level,
+                                                  const double time) {
+    FILE *file = fopen("execution_configs.csv", "a");
+
+    if (file == NULL) {
+        perror("Error: fopen failed\n");
+        MPI_Abort(MPI_COMM_WORLD, 1);
+    }
+
+    // Check if the header exists. If exists, do not write it again, otherwise write it first.
+    if (ftell(file) == 0) {
+        fprintf(file, "n,ranks,threads,total_cpus,opt_level,time\n");
+    }
+
+    fprintf(file, "%d,%d,%d,%d,%d,%f\n", n, ranks, threads, ranks * threads, opt_level, time);
+    fclose(file);
+}
+
 #endif // BIG_MULTIPLICATION_H

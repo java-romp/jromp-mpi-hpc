@@ -19,6 +19,13 @@ int main(int argc, char *argv[]) {
     optimization_level = (int) strtol(argv[3], NULL, 10);
 
     printf("Information: N = %d, threads = %d, optimization_level = %d\n", N, threads, optimization_level);
+    omp_set_num_threads(threads);
+
+    // This block is just for checking the number of threads
+    #pragma omp parallel
+    {
+        printf("I am the thread %d\n", omp_get_thread_num());
+    }
 
     int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -97,6 +104,9 @@ int main(int argc, char *argv[]) {
         free(a);
         free(b);
         free(c);
+
+        printf("Writing execution configuration to file\n");
+        write_execution_configuration_to_file(N, size, threads, optimization_level, GET_MPI_TIMER(calculations));
     } else {
         printf("Worker process %d (threads %d)\n", rank, omp_get_num_threads());
 
