@@ -72,7 +72,7 @@ typedef struct _progress {
 
 void matrix_multiplication(const double *a, const double *b, double *c, int n, progress *progress);
 
-void matrix_initialization(double *a, double *b, double *c, int n);
+void matrix_initialization(double *a, double *b, int n);
 
 static int random_in_range(const int min, const int max) {
     return min + random() % (max - min + 1);

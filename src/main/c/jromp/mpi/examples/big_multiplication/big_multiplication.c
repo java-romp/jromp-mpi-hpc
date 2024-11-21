@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
         // Only master process allocates memory for all complete matrices
         a = malloc(N * N * sizeof(double));
         b = malloc(N * N * sizeof(double));
-        c = malloc(N * N * sizeof(double));
+        c = calloc(N * N, sizeof(double)); // Initialize to zero
 
         // Check memory allocation
         if (a == NULL || b == NULL || c == NULL) {
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("*************************************\n");
 
         // Initialize matrices
-        matrix_initialization(a, b, c, N);
+        matrix_initialization(a, b, N);
 
         STOP_OMP_TIMER(initialization);
         LOG_MASTER("Time to initialize the matrices: %f\n", GET_OMP_TIMER(initialization));
@@ -203,16 +203,14 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
     }
 }
 
-MASTER void matrix_initialization(double *a, double *b, double *c, const int n) {
+MASTER void matrix_initialization(double *a, double *b, const int n) {
     assert_non_null(a);
     assert_non_null(b);
-    assert_non_null(c);
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             a[i * n + j] = random_in_range(1, 1000);
             b[i * n + j] = random_in_range(1, 1000);
-            c[i * n + j] = 0;
         }
     }
 }
