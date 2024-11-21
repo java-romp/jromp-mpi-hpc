@@ -72,11 +72,17 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("******* Matrix Multiplication *******\n");
         LOG_MASTER("*************************************\n");
 
+        MPI_Request *requests = malloc(2 * workers * sizeof(MPI_Request));
+
         // Send rows of A to workers and matrix B to all workers
         for (int i = 1; i < size; i++) {
-            MPI_Send(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD);
-            MPI_Send(b, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD);
+            MPI_Isend(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD,
+                      &requests[i - 1]);
+            MPI_Isend(b, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &requests[workers + i - 1]);
         }
+
+        MPI_Waitall(2 * workers, requests, MPI_STATUSES_IGNORE);
+        free(requests);
 
         int ended_workers = 0;
         MPI_Status status;
