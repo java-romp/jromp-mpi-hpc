@@ -35,7 +35,7 @@ function main() {
   local node_list_str        # List of nodes as a string separated by commas
   local i
 
-  local matrix_size=13500
+  local matrix_size=$((30 * 32 * 30)) # 30 tasks * 32 threads/task * number to obtain a bigger one
   local optimization_level=0
   n_tasks_per_node=$(ceil_div $n_tasks $nodes)
 

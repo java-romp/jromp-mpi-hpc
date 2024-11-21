@@ -5,8 +5,8 @@
 # ---------------------------------------------------- #
 #SBATCH --partition=formacion                          # Partition where the Jobs are sent
 #SBATCH --account=ule_formacion_9                      # Account to charge the job
-#SBATCH --qos=formacion                                # QOS to launch this partition
-#SBATCH --time=24:00:00                                # Estimated maximum time for the job
+#SBATCH --qos=normal                                   # QOS to launch this partition (5 days max)
+#SBATCH --time=5-00:00:00                              # Estimated maximum time for the job
 #SBATCH --mail-user=scastd00@estudiantes.unileon.es    # Mail to receive info (start/cancel/end)
 #SBATCH --mail-type=FAIL                               # We want to receive all the failures
 #SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
