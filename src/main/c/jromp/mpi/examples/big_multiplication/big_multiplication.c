@@ -1,12 +1,13 @@
 #include "big_multiplication.h"
 
 MPI_Datatype progress_type;
+omp_lock_t print_lock; // Lock to prevent interleaved output
+int workers;
 int N;
 int threads;
 int optimization_level;
 
 int main(int argc, char *argv[]) {
-    srand(time(NULL));
     MPI_Init(&argc, &argv);
 
     if (argc != 4) {
@@ -14,32 +15,34 @@ int main(int argc, char *argv[]) {
         MPI_Abort(MPI_COMM_WORLD, 1);
     }
 
+    int rank, size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    set_random_seed_secure(rank);
+
+    // Initialize globals
+    create_progress_type(&progress_type);
+    MPI_Type_commit(&progress_type);
+    omp_init_lock(&print_lock);
+    workers = size - 1;
     N = (int) strtol(argv[1], NULL, 10);
     threads = (int) strtol(argv[2], NULL, 10);
     optimization_level = (int) strtol(argv[3], NULL, 10);
 
-    printf("Information: N = %d, threads = %d, optimization_level = %d\n", N, threads, optimization_level);
+    LOG_MASTER("Information: N = %d, threads = %d, optimization_level = %d\n", N, threads, optimization_level);
     omp_set_num_threads(threads);
 
     // This block is just for checking the number of threads
     #pragma omp parallel
     {
-        printf("I am the thread %d\n", omp_get_thread_num());
+        LOG_WORKER("I am the thread %d\n", omp_get_thread_num());
     }
 
-    int rank, size;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    create_progress_type(&progress_type);
-    MPI_Type_commit(&progress_type);
-
-    const int rows_per_process = N / (size - 1); // Exclude the master process
+    const int rows_per_worker = N / workers; // Exclude the master process
     double *a = NULL, *b = NULL, *c = NULL;
 
     if (rank == 0) {
-        printf("Master process\n");
-
         // Only master process allocates memory for all complete matrices
         a = malloc(N * N * sizeof(double));
         b = malloc(N * N * sizeof(double));
@@ -53,38 +56,62 @@ int main(int argc, char *argv[]) {
 
         START_OMP_TIMER(initialization);
 
+        LOG_MASTER("*************************************\n");
+        LOG_MASTER("******* Matrix Initialization *******\n");
+        LOG_MASTER("*************************************\n");
+
         // Initialize matrices
         matrix_initialization(a, b, c, N);
 
         STOP_OMP_TIMER(initialization);
-        printf("Time to initialize the matrices: %f\n", GET_OMP_TIMER(initialization));
+        LOG_MASTER("Time to initialize the matrices: %f\n", GET_OMP_TIMER(initialization));
 
         START_MPI_TIMER(calculations);
 
+        LOG_MASTER("*************************************\n");
+        LOG_MASTER("******* Matrix Multiplication *******\n");
+        LOG_MASTER("*************************************\n");
+
         // Send rows of A to workers and matrix B to all workers
         for (int i = 1; i < size; i++) {
-            MPI_Send(&a[(i - 1) * rows_per_process * N], rows_per_process * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD);
+            MPI_Send(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD);
             MPI_Send(b, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD);
         }
 
         int ended_workers = 0;
         MPI_Status status;
         progress progress = { 0 };
+        double row_time_start = calculations_mpi_start;
+        double row_time_end = 0;
 
         do {
             MPI_Probe(MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 
-            if (status.MPI_TAG == FINISH_TAG) {
-                MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_process * N], rows_per_process * N, MPI_DOUBLE,
+            if (UNLIKELY(status.MPI_TAG == FINISH_TAG)) {
+                // ^^ Marked as unlikely because the available ranks are not a big number, so this condition is not expected
+                // to happen frequently.
+                MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
                          status.MPI_SOURCE, FINISH_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-                printf("Worker %d has finished\n", status.MPI_SOURCE);
+                LOG_MASTER("Worker %d has finished\n", status.MPI_SOURCE);
                 ended_workers++;
-            } else if (status.MPI_TAG == PROGRESS_TAG) {
+            } else if (LIKELY(status.MPI_TAG == PROGRESS_TAG)) {
+                // ^^ Marked as likely because the progress is sent very frequently during the calculations. This condition
+                // is expected to happen frequently.
                 MPI_Recv(&progress, 1, progress_type, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
                          MPI_STATUS_IGNORE);
+                row_time_end = MPI_Wtime();
 
-                printf("Worker %d has completed %d%%\n", progress.rank, progress.progress);
+                // Notation:
+                //  - T_r: Time to process a row.
+                //  - T_t: Time total (from the beginning of the calculations).
+                //  - ETF: Estimated time to finish the calculations.
+                LOG_MASTER("Progress of worker %d: %f%% (%d/%d)  ::  T_r: %.3fs   T_t: %.3fs   ETF: %.3fs\n",
+                           progress.rank, progress.progress, progress.rows_processed, rows_per_worker,
+                           row_time_end - row_time_start, row_time_end - calculations_mpi_start,
+                           etf(calculations_mpi_start, progress.progress));
+
+                row_time_start = row_time_end;
             } else {
                 // Unexpected message
                 MPI_Abort(MPI_COMM_WORLD, 1);
@@ -95,25 +122,25 @@ int main(int argc, char *argv[]) {
                 free(c);
                 return EXIT_FAILURE;
             }
-        } while (ended_workers < size - 1);
+        } while (ended_workers < workers);
 
         STOP_MPI_TIMER(calculations);
-        printf("Total time to do the calculations: %f\n", GET_MPI_TIMER(calculations));
+        LOG_MASTER("Total time to do the calculations: %f\n", GET_MPI_TIMER(calculations));
 
         // Free memory
         free(a);
         free(b);
         free(c);
 
-        printf("Writing execution configuration to file\n");
-        write_execution_configuration_to_file(N, size, threads, optimization_level, GET_MPI_TIMER(calculations));
+        LOG_MASTER("Writing execution configuration to file\n");
+        write_execution_configuration_to_file(N, workers, threads, optimization_level, GET_MPI_TIMER(calculations));
     } else {
-        printf("Worker process %d (threads %d)\n", rank, omp_get_num_threads());
+        LOG_WORKER("Number of threads: %d\n", omp_get_num_threads());
 
         // Workers allocate memory for their part of the matrices
         b = malloc(N * N * sizeof(double)); // All workers need the matrix B
-        double *sub_A = malloc(rows_per_process * N * sizeof(double));
-        double *sub_C = malloc(rows_per_process * N * sizeof(double));
+        double *sub_A = malloc(rows_per_worker * N * sizeof(double));
+        double *sub_C = malloc(rows_per_worker * N * sizeof(double));
         progress progress = { rank, 0 };
 
         // Check memory allocation
@@ -123,14 +150,14 @@ int main(int argc, char *argv[]) {
         }
 
         // Receive rows of A and matrix B
-        MPI_Recv(sub_A, rows_per_process * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(sub_A, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         MPI_Recv(b, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         // Perform matrix multiplication
-        matrix_multiplication(sub_A, b, sub_C, rows_per_process, &progress);
+        matrix_multiplication(sub_A, b, sub_C, rows_per_worker, &progress);
 
         // Send results back to master process
-        MPI_Send(sub_C, rows_per_process * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
+        MPI_Send(sub_C, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
 
         // Free memory
         free(b);
@@ -148,17 +175,21 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
     assert_non_null(c);
 
     MPI_Request request;
+    double local_sum = 0;
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < N; j++) {
-            c[i * N + j] = 0;
+            local_sum = 0;
 
             for (int k = 0; k < N; k++) {
-                c[i * N + j] += a[i * N + k] * b[k * N + j];
+                local_sum += a[i * N + k] * b[k * N + j];
             }
+
+            c[i * N + j] = local_sum;
         }
 
-        progress->progress = (int) ((i + 1) / (double) n * 100);
+        progress->progress = (i + 1.0) / n * 100.0;
+        progress->rows_processed = i + 1;
         // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
         // because it is not necessary to know if the master process has received the progress
         // (it is only informative).
