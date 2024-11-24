@@ -54,11 +54,11 @@ int main(int argc, char *argv[]) {
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
 
-        START_OMP_TIMER(initialization);
-
         LOG_MASTER("*************************************\n");
         LOG_MASTER("******* Matrix Initialization *******\n");
         LOG_MASTER("*************************************\n");
+
+        START_OMP_TIMER(initialization);
 
         // Initialize matrices
         matrix_initialization(a, b, N);
