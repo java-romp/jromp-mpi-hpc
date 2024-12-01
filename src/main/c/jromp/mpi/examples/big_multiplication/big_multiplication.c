@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
                 //  - T_r: Time to process a row.
                 //  - T_t: Time total (from the beginning of the calculations).
                 //  - ETF: Estimated time to finish the calculations.
-                LOG_MASTER("Progress of worker %d: %f%% (%d/%d)  ::  T_r: %.3fs   T_t: %.3fs   ETF: %.3fs\n",
+                LOG_MASTER("Progress of worker %d: %f%% (%d/%d)  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
                            progress.rank, progress.progress, progress.rows_processed, rows_per_worker,
                            row_time_end - row_time_start, row_time_end - calculations_mpi_start,
                            etf(calculations_mpi_start, progress.progress));
