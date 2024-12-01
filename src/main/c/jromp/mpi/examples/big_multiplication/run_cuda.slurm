@@ -33,20 +33,29 @@
 # ------------------ Job execution ------------------- #
 # ---------------------------------------------------- #
 # Parameters:
-# $1 = Optimization level
+# No parameters
+
+# Set the CUDA compiler and flags
+CC="nvcc"
+CUDA_LINKS="-lcublas"
+RUN_COMMAND=
+matrix_size=
+optimization_level=0
 
 # Load the CUDA module if the hostname starts with frontend
 if [[ $(hostname) == frontend* ]]; then
     module load CUDA/12.1.1
+    RUN_COMMAND="srun"
+    matrix_size=$((30 * 32 * 30))
+else
+    RUN_COMMAND=
+    matrix_size=8000
 fi
 
-# Set the CUDA compiler and flags
-CC="nvcc"
-CFLAGS="-Wall"
-CUDA_LINKS="-lcublas"
+echo "Compiling CUDA..."
 
 # Compile the code
-$CC $CFLAGS -o big_multiplication.cu.o big_multiplication.cu -O"$1" $CUDA_LINKS
+$CC -o big_multiplication.cu.o big_multiplication.cu -O$optimization_level $CUDA_LINKS
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
@@ -55,13 +64,7 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 # Use mlx5_0:1 interface for Infiniband
 export UCX_NET_DEVICES=mlx5_0:1
 
-matrix_size=
-
-if [[ $(hostname) == frontend* ]]; then
-    matrix_size=$((30 * 32 * 30))
-else
-    matrix_size=8192
-fi
+echo "Executing CUDA..."
 
 # Execute the code
-srun ./big_multiplication.cu.o $matrix_size
+$RUN_COMMAND ./big_multiplication.cu.o $matrix_size
