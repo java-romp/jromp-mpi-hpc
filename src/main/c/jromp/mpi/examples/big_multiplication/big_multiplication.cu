@@ -1,13 +1,5 @@
 #include "big_multiplication.cuh"
 
-void cublas_multiplication(const size_t N, const double *d_A, const double *d_B, double *d_C, const double alpha,
-                           const double beta, const cublasHandle_t *handle) {
-    START_CUDA_TIMER(cublasDgemm)
-    CUBLAS_CALL(cublasDgemm(*handle, CUBLAS_OP_N, CUBLAS_OP_N, N, N, N, &alpha, d_A, N, d_B, N, &beta, d_C, N));
-    STOP_CUDA_TIMER(cublasDgemm)
-    std::cout << "Elapsed time (cublasDgemm): " << GET_CUDA_TIMER(cublasDgemm) << " ms" << std::endl;
-}
-
 int main(const int argc, char *argv[]) {
     if (argc != 2) {
         std::cout << "Usage: " << argv[0] << " <N>" << std::endl;
@@ -19,7 +11,8 @@ int main(const int argc, char *argv[]) {
     double *d_A, *d_B, *d_C;
     constexpr double alpha = 1.0;
     constexpr double beta = 0.0;
-    cublasHandle_t cublasH;
+    cublasHandle_t cublasH = nullptr;
+    cudaStream_t stream = nullptr;
 
     auto *A = static_cast<double *>(malloc(N * N * sizeof(double)));
     auto *B = static_cast<double *>(malloc(N * N * sizeof(double)));
@@ -27,31 +20,38 @@ int main(const int argc, char *argv[]) {
 
     matrixInitialization(A, B, N);
 
+    // Initialize CUBLAS handle and bind the stream
+    CUBLAS_CALL(cublasCreate(&cublasH));
+    CUDA_CALL(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking));
+    CUBLAS_CALL(cublasSetStream(cublasH, stream));
+
     CUDA_CALL(cudaMalloc(&d_A, N * N * sizeof(double)));
     CUDA_CALL(cudaMalloc(&d_B, N * N * sizeof(double)));
     CUDA_CALL(cudaMalloc(&d_C, N * N * sizeof(double)));
 
-    CUBLAS_CALL(cublasCreate(&cublasH));
+    START_CUDA_TIMER(Gemm)
+        CUDA_CALL(cudaMemcpyAsync(d_A, A, N * N * sizeof(double), cudaMemcpyHostToDevice, stream));
+        CUDA_CALL(cudaMemcpyAsync(d_B, B, N * N * sizeof(double), cudaMemcpyHostToDevice, stream));
 
-    CUBLAS_CALL(cublasSetMatrix(N, N, sizeof(double), A, N, d_A, N));
-    CUBLAS_CALL(cublasSetMatrix(N, N, sizeof(double), B, N, d_B, N));
-    CUBLAS_CALL(cublasSetMatrix(N, N, sizeof(double), C, N, d_C, N));
+        CUBLAS_CALL(cublasDgemm(cublasH, CUBLAS_OP_N, CUBLAS_OP_N, N, N, N, &alpha, d_A, N, d_B, N, &beta, d_C, N));
 
-    std::cout << "Start matrix multiplication" << std::endl;
-
-    cublas_multiplication(N, d_A, d_B, d_C, alpha, beta, &cublasH);
-
-    CUBLAS_CALL(cublasGetMatrix(N, N, sizeof(double), d_C, N, C, N));
+        CUDA_CALL(cudaMemcpyAsync(C, d_C, N * N * sizeof(double), cudaMemcpyDeviceToHost, stream));
+        CUDA_CALL(cudaStreamSynchronize(stream));
+    STOP_CUDA_TIMER_PRINT_ELAPSED(Gemm)
 
     free(A);
     free(B);
     free(C);
-    cudaFree(d_A);
-    cudaFree(d_B);
-    cudaFree(d_C);
-    cublasDestroy(cublasH);
+    CUDA_CALL(cudaFree(d_A));
+    CUDA_CALL(cudaFree(d_B));
+    CUDA_CALL(cudaFree(d_C));
 
-    return 0;
+    CUBLAS_CALL(cublasDestroy(cublasH));
+    CUDA_CALL(cudaStreamDestroy(stream));
+
+    CUDA_CALL(cudaDeviceReset());
+
+    return EXIT_SUCCESS;
 }
 
 void matrixInitialization(double *a, double *b, const size_t n) {

@@ -12,19 +12,28 @@
 #define assert_non_null(ptr) assert(ptr != NULL)
 #define UNUSED __attribute__((unused))
 
+#define START_BLOCK {
+#define END_BLOCK }
+
+#define GET_CUDA_ELAPSED(name) name##_elapsed
+
 #define START_CUDA_TIMER(name) \
     cudaEvent_t name##_start, name##_end; \
     cudaEventCreate(&name##_start); \
     cudaEventCreate(&name##_end); \
-    cudaEventRecord(name##_start);
+    cudaEventRecord(name##_start); \
+    START_BLOCK
 
 #define STOP_CUDA_TIMER(name) \
+    END_BLOCK \
     cudaEventRecord(name##_end); \
     cudaEventSynchronize(name##_end); \
     float name##_elapsed; \
     cudaEventElapsedTime(&name##_elapsed, name##_start, name##_end);
 
-#define GET_CUDA_TIMER(name) name##_elapsed
+#define STOP_CUDA_TIMER_PRINT_ELAPSED(name) \
+    STOP_CUDA_TIMER(name) \
+    std::cout << "Elapsed time (" << #name << "): " << GET_CUDA_ELAPSED(name) << " ms" << std::endl;
 
 #define CUDA_CALL(x)                                                                                                   \
     {                                                                                                                  \
