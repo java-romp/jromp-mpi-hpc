@@ -8,40 +8,46 @@ int main(const int argc, char *argv[]) {
     const auto N = static_cast<size_t>(strtol(argv[1], nullptr, 10));
     std::cout << "Matrix size: " << N << std::endl;
 
-    double *d_A, *d_B, *d_C;
+    const int m = N;
+    const int n = N;
+    const int k = N;
+    const int lda = N;
+    const int ldb = N;
+    const int ldc = N;
+    constexpr cublasOperation_t transA = CUBLAS_OP_N;
+    constexpr cublasOperation_t transB = CUBLAS_OP_N;
     constexpr double alpha = 1.0;
     constexpr double beta = 0.0;
     cublasHandle_t cublasH = nullptr;
     cudaStream_t stream = nullptr;
+    std::vector<data_type> A(N * N);
+    std::vector<data_type> B(N * N);
+    std::vector<data_type> C(N * N);
+    data_type *d_A = nullptr;
+    data_type *d_B = nullptr;
+    data_type *d_C = nullptr;
 
-    auto *A = static_cast<double *>(malloc(N * N * sizeof(double)));
-    auto *B = static_cast<double *>(malloc(N * N * sizeof(double)));
-    auto *C = static_cast<double *>(malloc(N * N * sizeof(double)));
-
-    matrixInitialization(A, B, N);
+    matrixInitialization(A.data(), B.data(), N);
 
     // Initialize CUBLAS handle and bind the stream
     CUBLAS_CALL(cublasCreate(&cublasH));
     CUDA_CALL(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking));
     CUBLAS_CALL(cublasSetStream(cublasH, stream));
 
-    CUDA_CALL(cudaMalloc(&d_A, N * N * sizeof(double)));
-    CUDA_CALL(cudaMalloc(&d_B, N * N * sizeof(double)));
-    CUDA_CALL(cudaMalloc(&d_C, N * N * sizeof(double)));
+    CUDA_CALL(cudaMalloc(&d_A, A.size() * sizeof(data_type)));
+    CUDA_CALL(cudaMalloc(&d_B, B.size() * sizeof(data_type)));
+    CUDA_CALL(cudaMalloc(&d_C, C.size() * sizeof(data_type)));
 
     START_CUDA_TIMER(Gemm)
-        CUDA_CALL(cudaMemcpyAsync(d_A, A, N * N * sizeof(double), cudaMemcpyHostToDevice, stream));
-        CUDA_CALL(cudaMemcpyAsync(d_B, B, N * N * sizeof(double), cudaMemcpyHostToDevice, stream));
+        CUDA_CALL(cudaMemcpyAsync(d_A, A.data(), A.size() * sizeof(data_type), cudaMemcpyHostToDevice, stream));
+        CUDA_CALL(cudaMemcpyAsync(d_B, B.data(), B.size() * sizeof(data_type), cudaMemcpyHostToDevice, stream));
 
-        CUBLAS_CALL(cublasDgemm(cublasH, CUBLAS_OP_N, CUBLAS_OP_N, N, N, N, &alpha, d_A, N, d_B, N, &beta, d_C, N));
+        CUBLAS_CALL(cublasDgemm(cublasH, transA, transB, m, n, k, &alpha, d_A, lda, d_B, ldb, &beta, d_C, ldc));
 
-        CUDA_CALL(cudaMemcpyAsync(C, d_C, N * N * sizeof(double), cudaMemcpyDeviceToHost, stream));
+        CUDA_CALL(cudaMemcpyAsync(C.data(), d_C, C.size() * sizeof(data_type), cudaMemcpyDeviceToHost, stream));
         CUDA_CALL(cudaStreamSynchronize(stream));
     STOP_CUDA_TIMER_PRINT_ELAPSED(Gemm)
 
-    free(A);
-    free(B);
-    free(C);
     CUDA_CALL(cudaFree(d_A));
     CUDA_CALL(cudaFree(d_B));
     CUDA_CALL(cudaFree(d_C));

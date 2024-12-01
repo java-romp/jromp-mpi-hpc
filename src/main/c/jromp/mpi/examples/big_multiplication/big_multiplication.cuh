@@ -8,6 +8,7 @@
 #include <cuda_runtime.h>
 #include <iostream>
 #include <time.h>
+#include <vector>
 
 #define assert_non_null(ptr) assert(ptr != NULL)
 #define UNUSED __attribute__((unused))
@@ -52,6 +53,8 @@
             exit(1);                                                                                                   \
         }                                                                                                              \
     }
+
+using data_type = double;
 
 void matrixInitialization(double *a, double *b, size_t n);
 
