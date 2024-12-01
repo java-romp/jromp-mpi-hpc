@@ -13,7 +13,7 @@ int main(const int argc, char *argv[]) {
         std::cout << "Usage: " << argv[0] << " <N>" << std::endl;
     }
 
-    const auto N = static_cast<size_t>(strtoll(argv[1], nullptr, 10));
+    const auto N = static_cast<size_t>(strtol(argv[1], nullptr, 10));
     std::cout << "Matrix size: " << N << std::endl;
 
     double *d_A, *d_B, *d_C;
