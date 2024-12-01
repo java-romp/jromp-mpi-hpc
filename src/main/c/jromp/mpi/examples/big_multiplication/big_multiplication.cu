@@ -5,7 +5,7 @@ int main(const int argc, char *argv[]) {
         std::cout << "Usage: " << argv[0] << " <N>" << std::endl;
     }
 
-    const auto N = static_cast<size_t>(strtol(argv[1], nullptr, 10));
+    const auto N = static_cast<int>(strtol(argv[1], nullptr, 10));
     std::cout << "Matrix size: " << N << std::endl;
 
     const int m = N;
@@ -60,12 +60,12 @@ int main(const int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-void matrixInitialization(double *a, double *b, const size_t n) {
+void matrixInitialization(double *a, double *b, const int n) {
     assert_non_null(a);
     assert_non_null(b);
 
-    for (size_t i = 0; i < n; i++) {
-        for (size_t j = 0; j < n; j++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
             a[i * n + j] = randomInRange(1, 1000);
             b[i * n + j] = randomInRange(1, 1000);
         }
