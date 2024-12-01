@@ -4,7 +4,7 @@
 # the project. For building the project, use other build scripts (if any).
 #
 cmake_minimum_required(VERSION 3.24)
-project(jromp_mpi_hpc C)
+project(jromp_mpi_hpc C CUDA)
 
 set(CMAKE_C_STANDARD 17)
 
@@ -38,6 +38,8 @@ add_executable(fractals ${EXAMPLES_DIR}/fractals/mandelbrot.h
         ${EXAMPLES_DIR}/fractals/mandelbrot.c)
 add_executable(big_multiplication ${EXAMPLES_DIR}/big_multiplication/big_multiplication.c
         ${EXAMPLES_DIR}/big_multiplication/big_multiplication.h)
+add_executable(big_multiplication_cuda ${EXAMPLES_DIR}/big_multiplication/big_multiplication.cu
+        ${EXAMPLES_DIR}/big_multiplication/big_multiplication.cuh)
 
 target_link_libraries(genome PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
 target_link_libraries(mandelbrot_parallel PUBLIC MPI::MPI_C)
@@ -50,3 +52,4 @@ target_link_libraries(ziggurat PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(heated_plate PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(fractals PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(big_multiplication PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
+target_link_libraries(big_multiplication_cuda PUBLIC MPI::MPI_C OpenMP::OpenMP_C m cublas)

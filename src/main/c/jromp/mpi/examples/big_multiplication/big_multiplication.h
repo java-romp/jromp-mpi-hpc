@@ -29,6 +29,40 @@
 
 #define GET_OMP_TIMER(name) name##_omp_elapsed
 
+#ifdef __CUDA_RUNTIME_API_H__
+#define START_CUDA_TIMER(name) \
+    cudaEvent_t name##_start, name##_end; \
+    cudaEventCreate(&name##_start); \
+    cudaEventCreate(&name##_end); \
+    cudaEventRecord(name##_start);
+
+#define STOP_CUDA_TIMER(name) \
+    cudaEventRecord(name##_end); \
+    cudaEventSynchronize(name##_end); \
+    float name##_elapsed; \
+    cudaEventElapsedTime(&name##_elapsed, name##_start, name##_end);
+
+#define GET_CUDA_TIMER(name) name##_elapsed
+
+#define CUDA_CALL(x)                                                                                                   \
+    {                                                                                                                  \
+        const cudaError_t a = (x);                                                                                     \
+        if (a != cudaSuccess) {                                                                                        \
+            printf("\nError: %s (error code: %d) at %s:%d\n", cudaGetErrorString(a), a, __FILE__, __LINE__);           \
+            exit(1);                                                                                                   \
+        }                                                                                                              \
+    }
+
+#define CUBLAS_CALL(x)                                                                                                 \
+    {                                                                                                                  \
+        cublasStatus_t stat = (x);                                                                                     \
+        if (stat != CUBLAS_STATUS_SUCCESS) {                                                                           \
+            printf("\nError: %d at %s:%d\n", stat, __FILE__, __LINE__);                                                \
+            exit(1);                                                                                                   \
+        }                                                                                                              \
+    }
+#endif
+
 #define MASTER
 #define WORKER
 #define MASTER_RANK 0
