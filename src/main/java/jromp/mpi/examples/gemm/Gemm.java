@@ -31,7 +31,7 @@ public class Gemm {
                 System.out.println("Usage: mpirun ... java ... jromp.mpi.examples.gemm.Gemm <N> <threads>");
             }
 
-            MPI.Finalize(); // Abort does not exist in Java bindings, so we use Finalize
+            MPI.COMM_WORLD.abort(1);
             return;
         }
 
