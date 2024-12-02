@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
         matrix_initialization(a, b, N);
 
         STOP_OMP_TIMER(initialization);
-        LOG_MASTER("Time to initialize the matrices: %f\n", GET_OMP_TIMER(initialization));
+        LOG_MASTER("Time to initialize the matrices: %fs\n", GET_OMP_TIMER(initialization));
 
         START_MPI_TIMER(calculations);
 
