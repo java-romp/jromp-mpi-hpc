@@ -1,3 +1,7 @@
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URI
+
 plugins {
     id("java")
 }
@@ -21,21 +25,56 @@ repositories {
     mavenCentral()
 }
 
+fun checkInternetConnection(): Boolean {
+    try {
+        val url = URI.create("https://www.google.com").toURL()
+        val connection = url.openConnection() as HttpURLConnection
+
+        connection.connectTimeout = 3000
+        connection.connect()
+
+        val okResponse = connection.responseCode == 200
+
+        if (okResponse) {
+            println("Internet connection is available")
+        } else {
+            println("Internet connection is not available")
+        }
+
+        return okResponse
+    } catch (e: IOException) {
+        println("Internet connection is not available")
+        return false
+    }
+}
+
 dependencies {
-    implementation(
-        files(
-            "$dependencyJarsPath/commons-lang3-3.16.0.jar",
-            "$dependencyJarsPath/jromp-2.2.0.jar",
-            "$mpiLibPath/mpi.jar"
+    if (checkInternetConnection()) {
+        implementation("org.apache.commons:commons-lang3:3.16.0")
+        implementation("io.github.java-romp:jromp:3.0.0")
+        implementation(files("$mpiLibPath/mpi.jar"))
+    } else {
+        implementation(
+            files(
+                "$dependencyJarsPath/commons-lang3-3.16.0.jar",
+                "$dependencyJarsPath/jromp-3.0.0.jar",
+                "$mpiLibPath/mpi.jar"
+            )
         )
-    )
+    }
 }
 
 tasks.compileJava {
     options.forkOptions.executable = mpiJavac
 }
 
-fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
+fun createTaskWithNumProcesses(
+    name: String,
+    processes: Int,
+    debug: Boolean,
+    subpackage: String = "",
+    params: List<String> = emptyList()
+) {
     tasks.register<Exec>("run$name") {
         dependsOn("classes")
 
@@ -43,7 +82,7 @@ fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
         description = "Run $name with mpirun"
 
         val classpath = sourceSets.main.get().runtimeClasspath.asPath
-        val mpiRunParameters = mutableListOf("--mca", "pml", "ob1", "--bind-to", "none")
+        val mpiRunParameters = mutableListOf("--bind-to", "none")
         val jvmParameters = listOf("-XX:+UseParallelGC", "-XX:-TieredCompilation")
 
         if (debug) {
@@ -53,13 +92,20 @@ fun createTaskWithNumProcesses(name: String, processes: Int, debug: Boolean) {
         // Disable SLURM warnings (not really needed in local environment)
         environment("PRTE_MCA_plm_slurm_disable_warning", true)
         environment("PRTE_MCA_plm_slurm_ignore_args", true)
+        environment("UCX_NET_DEVICES", "mlx5_0:1")
+
+        val pkg = StringBuilder("jromp.mpi.examples")
+            .append(if (subpackage.isNotEmpty()) ".$subpackage" else "")
+            .append(".")
+            .append(name)
 
         commandLine =
             listOf(
                 mpiRun,
                 *mpiRunParameters.toTypedArray(),
                 "-np", "$processes",
-                "java", *jvmParameters.toTypedArray(), "-cp", classpath, "jromp.mpi.examples.$name"
+                "java", *jvmParameters.toTypedArray(), "-cp", classpath, pkg.toString(),
+                *params.toTypedArray()
             )
 
         standardOutput = System.out
@@ -85,3 +131,4 @@ createTaskWithNumProcesses("Cross", 4, true)
 createTaskWithNumProcesses("FullParallel", 3, true)
 createTaskWithNumProcesses("SimpleJROMP", 1, true)
 createTaskWithNumProcesses("JrompMPI", 2, true)
+createTaskWithNumProcesses("Gemm", 2, true, "gemm", listOf("1000", "4"))

@@ -5,7 +5,6 @@ import jromp.var.PrivateVariable;
 import jromp.var.ReductionVariable;
 import jromp.var.SharedVariable;
 import jromp.var.Variable;
-import jromp.var.Variables;
 import jromp.var.reduction.ReductionOperations;
 
 import java.io.File;
@@ -14,12 +13,7 @@ import java.io.PrintStream;
 import java.util.Date;
 
 import static java.lang.Math.sqrt;
-import static jromp.mpi.examples.mandelbrot.Mandelbrot.COUNT_MAX;
-import static jromp.mpi.examples.mandelbrot.Mandelbrot.IMAGE_SIZE;
-import static jromp.mpi.examples.mandelbrot.Mandelbrot.X_MAX;
-import static jromp.mpi.examples.mandelbrot.Mandelbrot.X_MIN;
-import static jromp.mpi.examples.mandelbrot.Mandelbrot.Y_MAX;
-import static jromp.mpi.examples.mandelbrot.Mandelbrot.Y_MIN;
+import static jromp.mpi.examples.mandelbrot.Mandelbrot.*;
 
 @SuppressWarnings("all")
 public class MandelbrotParallel {
@@ -68,57 +62,47 @@ public class MandelbrotParallel {
         /* Carry out the iteration for each pixel, determining COUNT. */
         count = new int[m * n];
 
-        Variables variables = Variables.create();
+        Variable<Integer> $i = new PrivateVariable<>(0);
+        Variable<Integer> $j = new PrivateVariable<>(0);
+        Variable<Double> $x = new PrivateVariable<>(0.0d);
+        Variable<Double> $y = new PrivateVariable<>(0.0d);
+        Variable<int[]> $count = new SharedVariable<>(new int[m * n]);
+        Variable<Integer> $m = new SharedVariable<>(m);
+        Variable<Integer> $n = new SharedVariable<>(n);
+        Variable<Double> $xMax = new SharedVariable<>(X_MAX);
+        Variable<Double> $xMin = new SharedVariable<>(X_MIN);
+        Variable<Double> $yMax = new SharedVariable<>(Y_MAX);
+        Variable<Double> $yMin = new SharedVariable<>(Y_MIN);
+        Variable<Integer> $countMax = new SharedVariable<>(countMax);
+        Variable<Integer> $cMax = new ReductionVariable<>(ReductionOperations.max(), 0);
 
-        try {
-            variables.add("i", new PrivateVariable<>(0))
-                     .add("j", new PrivateVariable<>(0))
-                     .add("x", new PrivateVariable<>(0.0d))
-                     .add("y", new PrivateVariable<>(0.0d))
-                     .add("count", new SharedVariable<>(new int[m * n]))
-                     .add("m", new SharedVariable<>(m))
-                     .add("n", new SharedVariable<>(n))
-                     .add("xMax", new SharedVariable<>(X_MAX))
-                     .add("xMin", new SharedVariable<>(X_MIN))
-                     .add("yMax", new SharedVariable<>(Y_MAX))
-                     .add("yMin", new SharedVariable<>(Y_MIN))
-                     .add("countMax", new SharedVariable<>(countMax))
-                     .add("cMax", new ReductionVariable<>(ReductionOperations.max(), 0));
+        JROMP.allThreads()
+             .registerVariables($i, $j, $x, $y, $count, $m, $n, $xMax, $xMin, $yMax, $yMin, $countMax, $cMax)
+             .single(false, () -> tv1[0] = System.nanoTime())
+             .parallelFor(0, m, false, (start, end) -> {
+                 for (int i_i = start; i_i < end; i_i++) {
+                     $x.set((i_i * X_MAX + (m - i_i - 1) * X_MIN) / (m - 1));
 
-            JROMP.allThreads()
-                 .withVariables(variables)
-                 .single(false, (vars) -> tv1[0] = System.nanoTime())
-                 .parallelFor(0, m, false, (start, end, vars) -> {
-                     for (int i_i = start; i_i < end; i_i++) {
-                         Variable<Double> x1 = vars.get("x");
-                         x1.set((i_i * X_MAX + (m - i_i - 1) * X_MIN) / (m - 1));
+                     for (int j_j = 0; j_j < $n.value(); j_j++) {
+                         $y.set((j_j * Y_MAX + (n - j_j - 1) * Y_MIN) / (n - 1));
 
-                         for (int j_j = 0; j_j < vars.<Integer>get("n").value(); j_j++) {
-                             Variable<Double> y1 = vars.get("y");
-                             y1.set((j_j * Y_MAX + (n - j_j - 1) * Y_MIN) / (n - 1));
-
-                             int explode = explode(x1.value(), y1.value(), countMax);
-                             vars.<int[]>get("count").value()[i_i + j_j * m] = explode;
+                         int explode = explode($x.value(), $y.value(), countMax);
+                         $count.value()[i_i + j_j * m] = explode;
+                     }
+                 }
+             })
+             .parallelFor(0, m, false, (start, end) -> {
+                 for (int i_i = start; i_i < end; i_i++) {
+                     for (int j_j = 0; j_j < $n.value(); j_j++) {
+                         int count1 = $count.value()[i_i + j_j * m];
+                         if ($cMax.value() < count1) {
+                             $cMax.set(count1);
                          }
                      }
-                 })
-                 .parallelFor(0, m, false, (start, end, vars) -> {
-                     for (int i_i = start; i_i < end; i_i++) {
-                         for (int j_j = 0; j_j < vars.<Integer>get("n").value(); j_j++) {
-                             Variable<Integer> cMax_ = vars.get("cMax");
-
-                             int count1 = vars.<int[]>get("count").value()[i_i + j_j * m];
-                             if (cMax_.value() < count1) {
-                                 cMax_.set(count1);
-                             }
-                         }
-                     }
-                 })
-                 .single(false, (vars) -> tv2[0] = System.nanoTime())
-                 .join();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
+                 }
+             })
+             .single(false, () -> tv2[0] = System.nanoTime())
+             .join();
 
         final double executionSeconds = (tv2[0] - tv1[0]) / 1.0e9;
         System.out.printf("Wall clock time = %12.4g sec\n", executionSeconds);
@@ -128,8 +112,8 @@ public class MandelbrotParallel {
         g = new int[m * n];
         b = new int[m * n];
 
-        count = variables.<int[]>get("count").value();
-        cMax = variables.<Integer>get("cMax").value();
+        count = $count.value();
+        cMax = $cMax.value();
 
         for (i = 0; i < m; i++) {
             for (j = 0; j < n; j++) {
