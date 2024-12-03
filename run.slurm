@@ -67,8 +67,12 @@ export UCX_NET_DEVICES=mlx5_0:1
 # Print the SLURM info
 print_slurm_info
 
+# Get the fully qualified class name
+fq_class_name="$1"
+other_args="${*:2}"
+
 # Execute the job
-$MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$1"
+$MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$fq_class_name" "$other_args"
 
 # See why I execute mpirun directly: https://docs.open-mpi.org/en/main/launching-apps/slurm.html
 # Linpack hpl  Jack Dongarra
