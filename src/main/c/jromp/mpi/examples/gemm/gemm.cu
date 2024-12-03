@@ -59,15 +59,3 @@ int main(const int argc, char *argv[]) {
 
     return EXIT_SUCCESS;
 }
-
-void matrixInitialization(double *a, double *b, const int n) {
-    assert_non_null(a);
-    assert_non_null(b);
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            a[i * n + j] = randomInRange(1, 1000);
-            b[i * n + j] = randomInRange(1, 1000);
-        }
-    }
-}

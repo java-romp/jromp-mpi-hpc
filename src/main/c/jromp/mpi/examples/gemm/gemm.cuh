@@ -56,10 +56,20 @@
 
 using data_type = double;
 
-void matrixInitialization(double *a, double *b, size_t n);
-
-static int randomInRange(const int min, const int max) {
+inline int randomInRange(const int min, const int max) {
     return min + random() % (max - min + 1);
+}
+
+inline void matrixInitialization(double *a, double *b, const size_t n) {
+    assert_non_null(a);
+    assert_non_null(b);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            a[i * n + j] = randomInRange(1, 1000);
+            b[i * n + j] = randomInRange(1, 1000);
+        }
+    }
 }
 
 /**
@@ -67,7 +77,7 @@ static int randomInRange(const int min, const int max) {
  *
  * @see https://wiki.sei.cmu.edu/confluence/display/c/MSC32-C.+Properly+seed+pseudorandom+number+generators
  */
-static void setRandomSeedSecure(const int rank) {
+inline void setRandomSeedSecure(const int rank) {
     timespec ts;
 
     if (timespec_get(&ts, TIME_UTC) == 0) {
