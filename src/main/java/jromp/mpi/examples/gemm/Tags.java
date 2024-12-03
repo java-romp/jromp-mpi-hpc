@@ -1,6 +1,6 @@
 package jromp.mpi.examples.gemm;
 
-public final class Tags {
+final class Tags {
     private Tags() {
         // Prevent instantiation
     }

@@ -2,12 +2,16 @@ package jromp.mpi.examples.gemm;
 
 import jromp.JROMP;
 
-public class Utils {
+class Utils {
     private static final Object printLock = new Object();
+
+    private Utils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static void LOG_MASTER(int rank, String format, Object... args) {
         if (rank == 0) {
-            System.out.printf("      Master: " + String.format(format, args));
+            System.out.printf("      Master: %s", String.format(format, args));
         }
     }
 
