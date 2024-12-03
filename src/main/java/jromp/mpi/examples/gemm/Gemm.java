@@ -27,7 +27,6 @@ import static jromp.mpi.examples.gemm.Utils.LOG_WORKER;
 @SuppressWarnings("all")
 public class Gemm {
     private static final SecureRandom random = new SecureRandom();
-    private static Datatype progressType;
     private static int workers;
     private static int N;
     private static int threads;
@@ -48,8 +47,6 @@ public class Gemm {
         int rank = MPI.COMM_WORLD.getRank();
         int size = MPI.COMM_WORLD.getSize();
 
-        progressType = createProgressType();
-        progressType.commit();
         workers = size - 1;
         N = Integer.parseInt(args[0]);
         threads = Integer.parseInt(args[1]);
@@ -124,11 +121,11 @@ public class Gemm {
                     LOG_MASTER(rank, "Worker %d has finished\n", status.getSource());
                     endedWorkers++;
                 } else if (status.getTag() == PROGRESS_TAG) {
-                    progressBuffer.clear();
                     MPI.COMM_WORLD.recv(progressBuffer, Progress.size(), MPI.BYTE, status.getSource(), PROGRESS_TAG);
                     rowTimeEnd = MPI.wtime();
 
                     progress.readBuffer(progressBuffer);
+                    progressBuffer.clear();
 
                     LOG_MASTER(rank, "Progress of worker %d: %f%% (%d/%d)  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
                                progress.rank(), progress.progress(), progress.rowsProcessed(), rowsPerWorker,
@@ -185,7 +182,7 @@ public class Gemm {
         Objects.requireNonNull(b);
         Objects.requireNonNull(c);
 
-        ByteBuffer progressBuffer = MPI.newByteBuffer(progressType.getSize());
+        ByteBuffer progressBuffer = MPI.newByteBuffer(Progress.size());
         double localSum = 0;
 
         for (int i = 0; i < n; i++) {
@@ -205,7 +202,7 @@ public class Gemm {
             // because it is not necessary to know if the master process has received the progress
             // (it is only informative).
             progress.fillBuffer(progressBuffer);
-            MPI.COMM_WORLD.iSend(progressBuffer, progressType.getSize(), MPI.BYTE, MASTER_RANK, PROGRESS_TAG);
+            MPI.COMM_WORLD.iSend(progressBuffer, Progress.size(), MPI.BYTE, MASTER_RANK, PROGRESS_TAG);
         }
     }
 
@@ -228,14 +225,6 @@ public class Gemm {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static Datatype createProgressType() throws MPIException {
-        Datatype[] types = { MPI.INT, MPI.INT, MPI.DOUBLE };
-        int[] blockLengths = { 1, 1, 1 };
-        int[] offsets = { 0, MPI.INT.getSize(), 2 * MPI.INT.getSize() };
-
-        return Datatype.createStruct(blockLengths, offsets, types);
     }
 
     private static void matrixInitialization(double[] a, double[] b, int n) {

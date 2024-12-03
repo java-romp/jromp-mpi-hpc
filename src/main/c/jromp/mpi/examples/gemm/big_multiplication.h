@@ -68,26 +68,14 @@ typedef struct _progress {
     int rank;
     int rows_processed;
     double progress;
-} progress;
+} Progress;
 
-void matrix_multiplication(const double *a, const double *b, double *c, int n, progress *progress);
+void matrix_multiplication(const double *a, const double *b, double *c, int n, Progress *progress);
 
 void matrix_initialization(double *a, double *b, int n);
 
 static int random_in_range(const int min, const int max) {
     return min + random() % (max - min + 1);
-}
-
-static void create_progress_type(MPI_Datatype *progress_type) {
-    const MPI_Datatype types[3] = { MPI_INT, MPI_INT, MPI_DOUBLE };
-    const int block_lengths[3] = { 1, 1, 1 };
-    MPI_Aint offsets[3];
-
-    offsets[0] = offsetof(progress, rank);
-    offsets[1] = offsetof(progress, rows_processed);
-    offsets[2] = offsetof(progress, progress);
-
-    MPI_Type_create_struct(3, block_lengths, offsets, types, progress_type);
 }
 
 static void write_execution_configuration_to_file(const int n, const int workers,

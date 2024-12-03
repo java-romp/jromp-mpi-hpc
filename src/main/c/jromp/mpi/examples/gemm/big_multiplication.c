@@ -1,6 +1,5 @@
 #include "big_multiplication.h"
 
-MPI_Datatype progress_type;
 omp_lock_t print_lock; // Lock to prevent interleaved output
 int workers;
 int N;
@@ -22,8 +21,6 @@ int main(int argc, char *argv[]) {
     set_random_seed_secure(rank);
 
     // Initialize globals
-    create_progress_type(&progress_type);
-    MPI_Type_commit(&progress_type);
     omp_init_lock(&print_lock);
     workers = size - 1;
     N = (int) strtol(argv[1], NULL, 10);
@@ -86,7 +83,7 @@ int main(int argc, char *argv[]) {
 
         int ended_workers = 0;
         MPI_Status status;
-        progress progress = { 0 };
+        Progress progress = { 0 };
         double row_time_start = calculations_mpi_start;
         double row_time_end = 0;
 
@@ -104,7 +101,7 @@ int main(int argc, char *argv[]) {
             } else if (LIKELY(status.MPI_TAG == PROGRESS_TAG)) {
                 // ^^ Marked as likely because the progress is sent very frequently during the calculations. This condition
                 // is expected to happen frequently.
-                MPI_Recv(&progress, 1, progress_type, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
+                MPI_Recv(&progress, sizeof(Progress), MPI_BYTE, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
                          MPI_STATUS_IGNORE);
                 row_time_end = MPI_Wtime();
 
@@ -144,38 +141,38 @@ int main(int argc, char *argv[]) {
         LOG_WORKER("Number of threads: %d\n", omp_get_num_threads());
 
         // Workers allocate memory for their part of the matrices
+        a = malloc(rows_per_worker * N * sizeof(double));
         b = malloc(N * N * sizeof(double)); // All workers need the matrix B
-        double *sub_A = malloc(rows_per_worker * N * sizeof(double));
-        double *sub_C = malloc(rows_per_worker * N * sizeof(double));
-        progress progress = { rank, 0 };
+        c = malloc(rows_per_worker * N * sizeof(double));
+        Progress progress = { rank, 0, 0.0 };
 
         // Check memory allocation
-        if (b == NULL || sub_A == NULL || sub_C == NULL) {
+        if (a == NULL || b == NULL || c == NULL) {
             perror("Error: malloc failed\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
 
         // Receive rows of A and matrix B
-        MPI_Recv(sub_A, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(a, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         MPI_Recv(b, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         // Perform matrix multiplication
-        matrix_multiplication(sub_A, b, sub_C, rows_per_worker, &progress);
+        matrix_multiplication(a, b, c, rows_per_worker, &progress);
 
         // Send results back to master process
-        MPI_Send(sub_C, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
+        MPI_Send(c, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
 
         // Free memory
         free(b);
-        free(sub_A);
-        free(sub_C);
+        free(a);
+        free(c);
     }
 
     MPI_Finalize();
     return 0;
 }
 
-WORKER void matrix_multiplication(const double *a, const double *b, double *c, const int n, progress *progress) {
+WORKER void matrix_multiplication(const double *a, const double *b, double *c, const int n, Progress *progress) {
     assert_non_null(a);
     assert_non_null(b);
     assert_non_null(c);
@@ -199,7 +196,7 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
         // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
         // because it is not necessary to know if the master process has received the progress
         // (it is only informative).
-        MPI_Isend(progress, 1, progress_type, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD, &request);
+        MPI_Isend(progress, sizeof(Progress), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD, &request);
     }
 }
 
