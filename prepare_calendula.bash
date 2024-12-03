@@ -4,7 +4,7 @@
 # The script must be run from the root of the project.
 
 module purge
-# los centos van del 1-8, 9-26 son rocky
+# los centos van del 1-8, 9-26 son rocky (25 y 26 están inactivos)
 module use /soft/calendula/cascadelake/centos7/EB/modules/all/
 module use /soft/calendula/cascadelake/centos7/modules/
 module use /soft/calendula/icelake/rocky8/EB/modules/all/
