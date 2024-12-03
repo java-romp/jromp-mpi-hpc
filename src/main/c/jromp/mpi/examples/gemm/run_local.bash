@@ -14,14 +14,14 @@ LDFLAGS="-L$MPI_LIB"
 # Parameters:
 #   1: Optimization level
 function compile {
-  $CC $CFLAGS -o big_multiplication.o big_multiplication.c -O"$1" $LDFLAGS
+  $CC $CFLAGS -o gemm.o gemm.c -O"$1" $LDFLAGS
 }
 
 # Clean the code
 # Parameters:
 #   None
 function clean {
-  rm -f big_multiplication.o
+  rm -f gemm.o
 }
 
 # Run the code
@@ -31,7 +31,7 @@ function clean {
 #   3: Number of threads
 #   4: Optimization level
 function run {
-  $MPI_BIN/mpirun --bind-to none -np "$1" ./big_multiplication.o "$2" "$3" "$4"
+  $MPI_BIN/mpirun --bind-to none -np "$1" ./gemm.o "$2" "$3" "$4"
 }
 
 function main {

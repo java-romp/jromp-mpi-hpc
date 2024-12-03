@@ -1,4 +1,4 @@
-#include "big_multiplication.h"
+#include "gemm.h"
 
 omp_lock_t print_lock; // Lock to prevent interleaved output
 int workers;

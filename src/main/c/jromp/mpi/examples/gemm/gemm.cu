@@ -1,4 +1,4 @@
-#include "big_multiplication.cuh"
+#include "gemm.cuh"
 
 int main(const int argc, char *argv[]) {
     if (argc != 2) {

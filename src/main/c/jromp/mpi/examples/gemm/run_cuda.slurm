@@ -25,9 +25,9 @@
 # ---------------------------------------------------- #
 # --------------- Properties to adjust --------------- #
 # ---------------------------------------------------- #
-#SBATCH --job-name=jromp-mpi-cuda-multiplication                           # Name of the job to be sent
-#SBATCH --output=outputs/out/jromp-mpi-cuda-multiplication_%A.out          # Output filename
-#SBATCH --error=outputs/err/jromp-mpi-cuda-multiplication_%A.err           # Error filename
+#SBATCH --job-name=jromp-mpi-cuda-gemm                           # Name of the job to be sent
+#SBATCH --output=outputs/out/jromp-mpi-cuda-gemm_%A.out          # Output filename
+#SBATCH --error=outputs/err/jromp-mpi-cuda-gemm_%A.err           # Error filename
 
 # ---------------------------------------------------- #
 # ------------------ Job execution ------------------- #
@@ -55,7 +55,7 @@ fi
 echo "Compiling CUDA..."
 
 # Compile the code
-$CC -o big_multiplication.cu.o big_multiplication.cu -O$optimization_level $CUDA_LINKS
+$CC -o gemm.cu.o gemm.cu -O$optimization_level $CUDA_LINKS
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
@@ -67,4 +67,4 @@ export UCX_NET_DEVICES=mlx5_0:1
 echo "Executing CUDA..."
 
 # Execute the code
-$RUN_COMMAND ./big_multiplication.cu.o $matrix_size
+$RUN_COMMAND ./gemm.cu.o $matrix_size

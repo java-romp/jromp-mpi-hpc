@@ -23,9 +23,9 @@
 # ---------------------------------------------------- #
 # --------------- Properties to adjust --------------- #
 # ---------------------------------------------------- #
-#SBATCH --job-name=jromp-mpi-c-multiplication                           # Name of the job to be sent
-#SBATCH --output=outputs/out/jromp-mpi-c-multiplication_%A.out          # Output filename
-#SBATCH --error=outputs/err/jromp-mpi-c-multiplication_%A.err           # Error filename
+#SBATCH --job-name=jromp-mpi-c-gemm                           # Name of the job to be sent
+#SBATCH --output=outputs/out/jromp-mpi-c-gemm_%A.out          # Output filename
+#SBATCH --error=outputs/err/jromp-mpi-c-gemm_%A.err           # Error filename
 
 # ---------------------------------------------------- #
 # ------------------ Job execution ------------------- #
@@ -48,7 +48,7 @@ LDFLAGS="-L$MPI_LIB"
 MPIEXEC="$MPI_BIN/mpirun"
 
 # Compile the code
-$CC $CFLAGS -o big_multiplication.o big_multiplication.c -O"$4" $LDFLAGS
+$CC $CFLAGS -o gemm.o gemm.c -O"$4" $LDFLAGS
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
@@ -70,4 +70,4 @@ echo "##################################################"
 echo ""
 echo ""
 
-$MPIEXEC --bind-to none -np "$1" ./big_multiplication.o "$2" "$3" "$4"
+$MPIEXEC --bind-to none -np "$1" ./gemm.o "$2" "$3" "$4"

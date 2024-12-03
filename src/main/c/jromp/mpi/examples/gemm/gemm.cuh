@@ -1,5 +1,5 @@
-#ifndef BIG_MULTIPLICATION_CUH
-#define BIG_MULTIPLICATION_CUH
+#ifndef GEMM_CUH
+#define GEMM_CUH
 
 #include <assert.h>
 #include <cstdio>
@@ -78,4 +78,4 @@ static void setRandomSeedSecure(const int rank) {
     srandom(ts.tv_nsec ^ ts.tv_sec ^ rank);
 }
 
-#endif // BIG_MULTIPLICATION_CUH
+#endif // GEMM_CUH
