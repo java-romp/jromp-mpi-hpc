@@ -64,13 +64,14 @@
         }                                                             \
     }
 
-typedef struct _progress {
+typedef struct progress {
     int rank;
     int rows_processed;
-    double progress;
-} Progress;
+    int thread;
+    float progress;
+} progress_t;
 
-void matrix_multiplication(const double *a, const double *b, double *c, int n, Progress *progress);
+void matrix_multiplication(const double *a, const double *b, double *c, int rows_per_worker, int rank);
 
 void matrix_initialization(double *a, double *b, int n);
 
