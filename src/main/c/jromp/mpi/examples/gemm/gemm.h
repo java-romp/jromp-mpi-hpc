@@ -110,19 +110,6 @@ static double etf(const double start_time, const double progress) {
 }
 
 /**
- * Estimated duration to finish the calculations based on the progress of the process.
- *
- * @param start_time Initial time of the calculations.
- * @param rows_processed Number of rows processed.
- * @param total_rows Total number of rows to be processed.
- *
- * @return Estimated duration to finish the calculations.
- */
-UNUSED static double ed(const double start_time, const int rows_processed, const int total_rows) {
-    return total_rows * (MPI_Wtime() - start_time) / rows_processed;
-}
-
-/**
  * Sets a secure random seed based on the current time.
  *
  * @see https://wiki.sei.cmu.edu/confluence/display/c/MSC32-C.+Properly+seed+pseudorandom+number+generators
