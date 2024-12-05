@@ -48,13 +48,14 @@ int main(const int argc, char *argv[]) {
         CUDA_CALL(cudaStreamSynchronize(stream));
     STOP_CUDA_TIMER_PRINT_ELAPSED(Gemm)
 
+    writeExecutionConfigurationToFile(n, GET_CUDA_ELAPSED(Gemm));
+
     CUDA_CALL(cudaFree(d_A));
     CUDA_CALL(cudaFree(d_B));
     CUDA_CALL(cudaFree(d_C));
 
     CUBLAS_CALL(cublasDestroy(cublasH));
     CUDA_CALL(cudaStreamDestroy(stream));
-
     CUDA_CALL(cudaDeviceReset());
 
     return EXIT_SUCCESS;

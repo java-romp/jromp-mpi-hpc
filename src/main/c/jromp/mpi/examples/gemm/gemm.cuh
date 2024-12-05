@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
+#include <fstream>
 #include <iostream>
 #include <time.h>
 #include <vector>
@@ -56,10 +57,25 @@
 
 using data_type = double;
 
+/**
+ * Generates a random number in the range [min, max].
+ *
+ * @param min minimum value.
+ * @param max maximum value.
+ *
+ * @return a random number in the range [min, max].
+ */
 inline int randomInRange(const int min, const int max) {
     return min + random() % (max - min + 1);
 }
 
+/**
+ * Initializes the matrices with random values.
+ *
+ * @param a first matrix.
+ * @param b second matrix.
+ * @param n matrix size.
+ */
 inline void matrixInitialization(double *a, double *b, const size_t n) {
     assert_non_null(a);
     assert_non_null(b);
@@ -75,6 +91,8 @@ inline void matrixInitialization(double *a, double *b, const size_t n) {
 /**
  * Sets a secure random seed based on the current time.
  *
+ * @param rank the MPI rank.
+ *
  * @see https://wiki.sei.cmu.edu/confluence/display/c/MSC32-C.+Properly+seed+pseudorandom+number+generators
  */
 inline void setRandomSeedSecure(const int rank) {
@@ -87,5 +105,30 @@ inline void setRandomSeedSecure(const int rank) {
 
     srandom(ts.tv_nsec ^ ts.tv_sec ^ rank);
 }
+
+/**
+ * Writes the execution configuration to a CSV file.
+ *
+ * @param n the matrix size.
+ * @param elapsed_time the elapsed time in milliseconds.
+ */
+inline void writeExecutionConfigurationToFile(const int n, const double elapsed_time) {
+    std::ofstream file;
+    file.open("execution_configuration_cuda.csv", std::ios_base::app);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    if (file.tellp() == 0) {
+        file << "n,elapsed_time" << std::endl;
+    }
+
+    file << n << "," << elapsed_time << std::endl;
+    file.close();
+}
+
+
 
 #endif // GEMM_CUH
