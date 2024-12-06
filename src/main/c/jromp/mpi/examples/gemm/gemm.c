@@ -185,20 +185,19 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
     assert_non_null(c);
 
     const int rows_per_thread = rows_per_worker / threads;
-    progress_t *progresses = malloc(threads * sizeof(progress_t));
-    MPI_Request *requests = malloc(threads * sizeof(MPI_Request));
+    // progress_t *progresses = malloc(threads * rows_per_worker * sizeof(progress_t));
+    // MPI_Request *requests = malloc(threads * rows_per_worker * sizeof(MPI_Request));
+    // i el hilo y j la i del bucle
 
-    #pragma omp parallel shared(a, b, c, rows_per_worker, rows_per_thread, progresses)
+    #pragma omp parallel shared(a, b, c, rows_per_worker, rows_per_thread, rank)
     {
         double local_sum;
-        int rows, i, j, k;
-        progress_t *progress = &progresses[omp_get_thread_num()];
-        progress->rank = rank;
-        progress->rows_processed = 0;
-        progress->thread = omp_get_thread_num();
-        progress->progress = 0.0f;
+        int row, i, j, k;
+        const int thread_num = omp_get_thread_num(); // To prevent multiple calls to the function inside the for loop
+        // MPI_Request *requests = malloc(rows_per_thread * sizeof(MPI_Request));
+        // progress_t *progresses = malloc(rows_per_thread * sizeof(progress_t));
 
-        #pragma omp for private(local_sum, rows, i, j, k)
+        #pragma omp for private(local_sum, row, i, j, k)
         for (i = 0; i < rows_per_worker; i++) {
             for (j = 0; j < N; j++) {
                 local_sum = 0;
@@ -210,25 +209,24 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
                 c[i * N + j] = local_sum;
             }
 
-            rows = (i + 1) % rows_per_thread;
-            progress->progress = (float) rows / (float) rows_per_thread * 100;
-            progress->rows_processed = rows;
+            row = i % rows_per_thread;
+            progress_t *progress = malloc(sizeof(progress_t));
+            MPI_Request request;
+            progress->rank = rank;
+            progress->rows_processed = row + 1;
+            progress->thread = thread_num;
+            progress->progress = (float) progress->rows_processed / (float) rows_per_thread * 100;
 
-            //! This critical section is necessary to avoid problems with multiple threads writing to the same
-            //! communication buffer at the same time.
-            #pragma omp critical
-            {
-                // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
-                // because it is not necessary to know if the master process has received the progress
-                // (it is only informative).
-                MPI_Isend(progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD,
-                          &requests[omp_get_thread_num()]);
-            }
+            // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
+            // because it is not necessary to know if the master process has received the progress
+            // (it is only informative).
+            MPI_Bsend(progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD);
         }
-    }
 
-    free(progresses);
-    free(requests);
+        // MPI_Waitall(rows_per_thread, requests, MPI_STATUSES_IGNORE);
+        // free(progresses);
+        // free(requests);
+    }
 }
 
 MASTER void matrix_initialization(double *a, double *b, const int n) {
