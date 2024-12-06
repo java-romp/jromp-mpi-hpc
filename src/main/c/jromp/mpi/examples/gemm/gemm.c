@@ -7,6 +7,11 @@ int threads;
 int optimization_level;
 
 int main(int argc, char *argv[]) {
+    if (argc != 4) {
+        printf("Usage: %s <N> <threads> <optimization_level>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
     int provided;
     const int required = MPI_THREAD_MULTIPLE;
 
@@ -16,11 +21,6 @@ int main(int argc, char *argv[]) {
         printf("Error: MPI does not provide the required thread support\n");
         MPI_Abort(MPI_COMM_WORLD, 1);
         exit(1);
-    }
-
-    if (argc != 4) {
-        printf("Usage: %s <N> <threads> <optimization_level>\n", argv[0]);
-        return EXIT_FAILURE;
     }
 
     int rank, size;
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
             } else {
                 // Unexpected message
                 MPI_Abort(MPI_COMM_WORLD, 1);
-                printf("Unexpected message\n");
+                LOG_MASTER("Unexpected message\n");
 
                 free(a);
                 free(b);
