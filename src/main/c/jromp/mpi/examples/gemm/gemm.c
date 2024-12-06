@@ -7,7 +7,16 @@ int threads;
 int optimization_level;
 
 int main(int argc, char *argv[]) {
-    MPI_Init(&argc, &argv);
+    int provided;
+    const int required = MPI_THREAD_MULTIPLE;
+
+    MPI_Init_thread(&argc, &argv, required, &provided);
+
+    if (provided < required) {
+        printf("Error: MPI does not provide the required thread support\n");
+        MPI_Abort(MPI_COMM_WORLD, 1);
+        exit(1);
+    }
 
     if (argc != 4) {
         printf("Usage: %s <N> <threads> <optimization_level>\n", argv[0]);
@@ -185,19 +194,17 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
     assert_non_null(c);
 
     const int rows_per_thread = rows_per_worker / threads;
-    // progress_t *progresses = malloc(threads * rows_per_worker * sizeof(progress_t));
-    // MPI_Request *requests = malloc(threads * rows_per_worker * sizeof(MPI_Request));
-    // i el hilo y j la i del bucle
+    progress_t *progresses = calloc(threads, sizeof(progress_t));
+    MPI_Request ignored_request;
 
-    #pragma omp parallel shared(a, b, c, rows_per_worker, rows_per_thread, rank)
+    #pragma omp parallel shared(a, b, c, rows_per_worker, rank, rows_per_thread, progresses, ignored_request)
     {
         double local_sum;
-        int row, i, j, k;
-        const int thread_num = omp_get_thread_num(); // To prevent multiple calls to the function inside the for loop
-        // MPI_Request *requests = malloc(rows_per_thread * sizeof(MPI_Request));
-        // progress_t *progresses = malloc(rows_per_thread * sizeof(progress_t));
+        int current_row, i, j, k;
+        progress_t *thread_progress;
+        const int thread_num = omp_get_thread_num(); // Prevent multiple calls to the function inside the for loop
 
-        #pragma omp for private(local_sum, row, i, j, k)
+        #pragma omp for private(local_sum, current_row, i, j, k)
         for (i = 0; i < rows_per_worker; i++) {
             for (j = 0; j < N; j++) {
                 local_sum = 0;
@@ -209,23 +216,23 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
                 c[i * N + j] = local_sum;
             }
 
-            row = i % rows_per_thread;
-            progress_t *progress = malloc(sizeof(progress_t));
-            MPI_Request request;
-            progress->rank = rank;
-            progress->rows_processed = row + 1;
-            progress->thread = thread_num;
-            progress->progress = (float) progress->rows_processed / (float) rows_per_thread * 100;
+            current_row = i % rows_per_thread;
+            thread_progress = &progresses[thread_num];
+            thread_progress->rank = rank;
+            thread_progress->rows_processed = current_row + 1;
+            thread_progress->thread = thread_num;
+            thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100;
 
-            // Send asynchronous progress to master process to avoid blocking. No wait for the request to complete
-            // because it is not necessary to know if the master process has received the progress
-            // (it is only informative).
-            MPI_Bsend(progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD);
+            /*
+             * Send asynchronous progress to master process to avoid blocking.
+             * No wait for the request to complete because it is not necessary to know if the
+             * master process has received the progress (it is only informative).
+             */
+            MPI_Isend(thread_progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD,
+                      &ignored_request);
         }
 
-        // MPI_Waitall(rows_per_thread, requests, MPI_STATUSES_IGNORE);
-        // free(progresses);
-        // free(requests);
+        free(progresses);
     }
 }
 
