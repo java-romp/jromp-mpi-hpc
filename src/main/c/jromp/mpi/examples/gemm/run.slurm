@@ -46,9 +46,15 @@ CC="$MPI_BIN/mpicc"
 CFLAGS="-I$MPI_INCLUDE -Wall -fopenmp"
 LDFLAGS="-L$MPI_LIB"
 MPIEXEC="$MPI_BIN/mpirun"
+COMPILED_CODE="gemm.o"
+
+# If argument 5 is present, use it as the filename of the compiled code
+if [ -n "$5" ]; then
+    COMPILED_CODE="$5"
+fi
 
 # Compile the code
-$CC $CFLAGS -o gemm.o gemm.c -O"$4" $LDFLAGS
+$CC $CFLAGS -o $COMPILED_CODE gemm.c -O"$4" $LDFLAGS
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
@@ -70,4 +76,4 @@ echo "##################################################"
 echo ""
 echo ""
 
-$MPIEXEC --bind-to none -np "$1" ./gemm.o "$2" "$3" "$4"
+$MPIEXEC --bind-to none -np "$1" ./"$COMPILED_CODE" "$2" "$3" "$4"

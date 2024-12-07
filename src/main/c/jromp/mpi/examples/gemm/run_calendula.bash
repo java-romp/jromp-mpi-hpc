@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function check_modules() {
+function check_modules {
   local modules=("Java/21.0.2" "gradle_8.10.2" "GCC/11.2.0" "GCCcore/11.2.0")
   local module
 
@@ -12,7 +12,7 @@ function check_modules() {
   done
 }
 
-function ceil_div() {
+function ceil_div {
   local dividend=$1
   local divisor=$2
   local result=$((dividend / divisor))
@@ -24,7 +24,7 @@ function ceil_div() {
   echo $result
 }
 
-function main() {
+function main {
   local nodes=16             # Number of nodes
   local n_tasks=31           # Number of processes (MPI ranks) (-1 for master)
   local cpus_per_task=32     # Threads that JROMP will use
@@ -51,11 +51,10 @@ function main() {
   )
 
   echo "Running with the following parameters:"
-  echo "  Nodes: $nodes"
-  echo "  Processes: $n_tasks ($((n_tasks - 1)) workers + 1 master)"
+  echo "  Nodes: $nodes ($node_list_str)"
+  echo "  Total processes: $n_tasks ($((n_tasks - 1)) workers + 1 master)"
   echo "  Threads per process: $cpus_per_task"
   echo "  Processes per node: $n_tasks_per_node"
-  echo "  Node list: $node_list_str"
   echo " ****** Program parameters ******"
   echo "  Matrix size: $matrix_size"
   echo "  Optimization level: $optimization_level"
