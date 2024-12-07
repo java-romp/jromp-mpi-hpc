@@ -194,8 +194,8 @@ int main(int argc, char *argv[]) {
         MPI_Send(c, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
 
         // Free memory
-        free(b);
         free(a);
+        free(b);
         free(c);
     }
 
@@ -240,9 +240,10 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
             thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100;
 
             /*
-             * Send asynchronous progress to master process to avoid blocking.
-             * No wait for the request to complete because it is not necessary to know if the
-             * master process has received the progress (it is only informative).
+             * Send asynchronous progress to master rank to avoid blocking.
+             * Waiting for the request to complete is not necessary because we don't want to know if the
+             * master process has received the progress (it is only informative). If it is lost, the master
+             * process will not have the progress of the worker, but the calculations will continue.
              */
             MPI_Isend(thread_progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD,
                       &ignored_request);
