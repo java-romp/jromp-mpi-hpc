@@ -1,10 +1,12 @@
 #include "gemm.h"
 
-omp_lock_t print_lock; // Lock to prevent interleaved output
-int workers;
-int N;
-int threads;
-int optimization_level;
+omp_lock_t print_lock;  // Lock to prevent interleaved output
+int workers;            // Number of worker processes
+int N;                  // Matrix size
+int threads;            // Number of threads per process
+int optimization_level; // Optimization level
+int rank;               // Rank of the current process
+int size;               // Number of processes
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
@@ -23,7 +25,6 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
@@ -35,16 +36,24 @@ int main(int argc, char *argv[]) {
     N = (int) strtol(argv[1], NULL, 10);
     threads = (int) strtol(argv[2], NULL, 10);
     optimization_level = (int) strtol(argv[3], NULL, 10);
+    omp_set_num_threads(threads);
 
     LOG_MASTER("Information: N = %d, threads per rank = %d, optimization_level = %d\n",
                N, threads, optimization_level);
-    omp_set_num_threads(threads);
+    LOG_MASTER("Checking the number of threads in all ranks...\n");
 
-    // This block is just for checking the number of threads
+    MPI_Barrier(MPI_COMM_WORLD);
+
+    // Check that all ranks have the same number of threads
     #pragma omp parallel
     {
-        LOG_WORKER("I am the thread %d\n", omp_get_thread_num());
+        #pragma omp master
+        {
+            printf("Number of threads of rank %d: %d\n", rank, omp_get_num_threads());
+        }
     }
+
+    MPI_Barrier(MPI_COMM_WORLD);
 
     const int rows_per_worker = N / workers; // Exclude the master process
     double *a = NULL, *b = NULL, *c = NULL;
@@ -73,11 +82,11 @@ int main(int argc, char *argv[]) {
         STOP_OMP_TIMER(initialization);
         LOG_MASTER("Time to initialize the matrices: %fs\n", GET_OMP_TIMER(initialization));
 
-        START_MPI_TIMER(calculations);
+        LOG_MASTER("*************************************\n");
+        LOG_MASTER("****** Sending data to workers ******\n");
+        LOG_MASTER("*************************************\n");
 
-        LOG_MASTER("*************************************\n");
-        LOG_MASTER("******* Matrix Multiplication *******\n");
-        LOG_MASTER("*************************************\n");
+        START_MPI_TIMER(send_data);
 
         MPI_Request *requests = malloc(2 * workers * sizeof(MPI_Request));
 
@@ -90,6 +99,15 @@ int main(int argc, char *argv[]) {
 
         MPI_Waitall(2 * workers, requests, MPI_STATUSES_IGNORE);
         free(requests);
+
+        STOP_MPI_TIMER(send_data);
+        LOG_MASTER("Time to send data to workers: %fs\n", GET_MPI_TIMER(send_data));
+
+        LOG_MASTER("*************************************\n");
+        LOG_MASTER("******* Matrix Multiplication *******\n");
+        LOG_MASTER("*************************************\n");
+
+        START_MPI_TIMER(calculations);
 
         int ended_workers = 0;
         double row_time_start = calculations_mpi_start;
@@ -144,7 +162,7 @@ int main(int argc, char *argv[]) {
         } while (ended_workers < workers);
 
         STOP_MPI_TIMER(calculations);
-        LOG_MASTER("Total time to do the calculations: %f\n", GET_MPI_TIMER(calculations));
+        LOG_MASTER("Time to do the calculations: %f\n", GET_MPI_TIMER(calculations));
 
         // Free memory
         free(a);
@@ -154,8 +172,6 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("Writing execution configuration to file\n");
         write_execution_configuration_to_file(N, workers, threads, optimization_level, GET_MPI_TIMER(calculations));
     } else {
-        LOG_WORKER("Number of threads: %d\n", omp_get_num_threads());
-
         // Workers allocate memory for their part of the matrices
         a = malloc(rows_per_worker * N * sizeof(double));
         b = malloc(N * N * sizeof(double)); // All workers need the matrix B
