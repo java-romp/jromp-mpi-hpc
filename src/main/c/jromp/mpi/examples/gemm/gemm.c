@@ -243,9 +243,9 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
             MPI_Isend(thread_progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD,
                       &ignored_request);
         }
-
-        free(progresses);
     }
+
+    free(progresses);
 }
 
 MASTER void matrix_initialization(double *a, double *b, const int n) {
