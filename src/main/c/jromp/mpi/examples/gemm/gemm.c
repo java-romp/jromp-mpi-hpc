@@ -164,11 +164,6 @@ int main(int argc, char *argv[]) {
         STOP_MPI_TIMER(calculations);
         LOG_MASTER("Time to do the calculations: %f\n", GET_MPI_TIMER(calculations));
 
-        // Free memory
-        free(a);
-        free(b);
-        free(c);
-
         LOG_MASTER("Writing execution configuration to file\n");
         write_execution_configuration_to_file(N, workers, threads, optimization_level, GET_MPI_TIMER(calculations));
     } else {
@@ -192,12 +187,12 @@ int main(int argc, char *argv[]) {
 
         // Send results back to master process
         MPI_Send(c, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
-
-        // Free memory
-        free(a);
-        free(b);
-        free(c);
     }
+
+    // Free memory
+    free(a);
+    free(b);
+    free(c);
 
     MPI_Finalize();
     return 0;
