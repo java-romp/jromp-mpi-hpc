@@ -6,9 +6,14 @@ import java.util.Objects;
 final class Progress {
     private int rank;
     private int rowsProcessed;
-    private double progress;
+    private int thread;
+    private float progress;
 
-    Progress(int rank, int rowsProcessed, double progress) {
+    Progress() {
+        this(0, 0, (int) Thread.currentThread().threadId(), 0.0f);
+    }
+
+    Progress(int rank, int rowsProcessed, int thread, float progress) {
         if (rank < 0) {
             throw new IllegalArgumentException("Rank must be non-negative");
         }
@@ -23,6 +28,7 @@ final class Progress {
 
         this.rank = rank;
         this.rowsProcessed = rowsProcessed;
+        this.thread = thread;
         this.progress = progress;
     }
 
@@ -42,19 +48,32 @@ final class Progress {
         this.rowsProcessed = rowsProcessed;
     }
 
+    public int thread() {
+        return thread;
+    }
+
+    public void thread(int thread) {
+        this.thread = thread;
+    }
+
     public double progress() {
         return progress;
     }
 
-    public void progress(double progress) {
+    public void progress(float progress) {
         this.progress = progress;
+    }
+
+    public void incrementRowsProcessed() {
+        rowsProcessed++;
     }
 
     public void fillBuffer(ByteBuffer buffer) {
         buffer.clear()
               .putInt(rank)
               .putInt(rowsProcessed)
-              .putDouble(progress)
+              .putInt(thread)
+              .putFloat(progress)
               .rewind();
     }
 
@@ -62,33 +81,35 @@ final class Progress {
         buffer.rewind();
         rank = buffer.getInt();
         rowsProcessed = buffer.getInt();
-        progress = buffer.getDouble();
+        thread = buffer.getInt();
+        progress = buffer.getFloat();
     }
 
     public static int size() {
-        return Integer.BYTES + Integer.BYTES + Double.BYTES;
+        return 3 * Integer.BYTES + Float.BYTES;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (Progress) obj;
-        return this.rank == that.rank &&
-                this.rowsProcessed == that.rowsProcessed &&
-                Double.doubleToLongBits(this.progress) == Double.doubleToLongBits(that.progress);
+    public boolean equals(Object o) {
+        if (!(o instanceof Progress progress1)) return false;
+        return rank == progress1.rank
+                && rowsProcessed == progress1.rowsProcessed
+                && thread == progress1.thread
+                && Float.compare(progress, progress1.progress) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rank, rowsProcessed, progress);
+        return Objects.hash(rank, rowsProcessed, thread, progress);
     }
 
     @Override
     public String toString() {
-        return "Progress[" +
-                "rank=" + rank + ", " +
-                "rowsProcessed=" + rowsProcessed + ", " +
-                "progress=" + progress + ']';
+        return "Progress{" +
+                "rank=" + rank +
+                ", rowsProcessed=" + rowsProcessed +
+                ", thread=" + thread +
+                ", progress=" + progress +
+                '}';
     }
 }
