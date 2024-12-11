@@ -11,7 +11,7 @@ int size;               // Number of processes
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         printf("Usage: %s <N> <threads> <optimization_level>\n", argv[0]);
-        return EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     int provided;
@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
 
     if (provided < required) {
         printf("Error: MPI does not provide the required thread support\n");
-        MPI_Abort(MPI_COMM_WORLD, 1);
-        exit(1);
+        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -38,8 +38,7 @@ int main(int argc, char *argv[]) {
     optimization_level = (int) strtol(argv[3], NULL, 10);
     omp_set_num_threads(threads);
 
-    LOG_MASTER("Information: N = %d, threads per rank = %d, optimization_level = %d\n",
-               N, threads, optimization_level);
+    LOG_MASTER("Information: N = %d, threads per rank = %d, optimization_level = %d\n", N, threads, optimization_level);
     LOG_MASTER("Checking the number of threads in all ranks...\n");
 
     MPI_Barrier(MPI_COMM_WORLD);
@@ -56,9 +55,11 @@ int main(int argc, char *argv[]) {
     MPI_Barrier(MPI_COMM_WORLD);
 
     const int rows_per_worker = N / workers; // Exclude the master process
-    double *a = NULL, *b = NULL, *c = NULL;
+    double *a;
+    double *b;
+    double *c;
 
-    if (rank == 0) {
+    if (rank == MASTER_RANK) {
         // Only master process allocates memory for all complete matrices
         a = malloc(N * N * sizeof(double));
         b = malloc(N * N * sizeof(double));
@@ -90,7 +91,7 @@ int main(int argc, char *argv[]) {
 
         MPI_Request *requests = malloc(2 * workers * sizeof(MPI_Request));
 
-        // Send rows of A to workers and matrix B to all workers
+        // Distribute rows of A to workers and send matrix B to all workers
         for (int i = 1; i < size; i++) {
             MPI_Isend(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD,
                       &requests[i - 1]);
@@ -135,7 +136,7 @@ int main(int argc, char *argv[]) {
                 row_time_end = MPI_Wtime();
 
                 global_progress.rows_processed++;
-                global_progress.progress = (float) global_progress.rows_processed / (float) N * 100;
+                global_progress.progress = (float) global_progress.rows_processed / (float) N * 100.0f;
 
                 // Notation:
                 //  - T_r: Time to process a row.
@@ -151,9 +152,10 @@ int main(int argc, char *argv[]) {
                 row_time_start = row_time_end;
             } else {
                 // Unexpected message
-                MPI_Abort(MPI_COMM_WORLD, 1);
+                MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
                 LOG_MASTER("Unexpected message\n");
 
+                // Free memory and exit
                 free(a);
                 free(b);
                 free(c);
@@ -211,11 +213,13 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
     #pragma omp parallel shared(a, b, c, rows_per_worker, rank, rows_per_thread, progresses, ignored_request)
     {
         double local_sum;
-        int current_row, i, j, k;
-        progress_t *thread_progress;
+        int i, j, k;
         const int thread_num = omp_get_thread_num(); // Prevent multiple calls to the function inside the for loop
+        progress_t *thread_progress = &progresses[thread_num];
+        thread_progress->rank = rank;
+        thread_progress->thread = thread_num;
 
-        #pragma omp for private(local_sum, current_row, i, j, k)
+        #pragma omp for
         for (i = 0; i < rows_per_worker; i++) {
             for (j = 0; j < N; j++) {
                 local_sum = 0;
@@ -227,11 +231,7 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
                 c[i * N + j] = local_sum;
             }
 
-            current_row = i % rows_per_thread;
-            thread_progress = &progresses[thread_num];
-            thread_progress->rank = rank;
-            thread_progress->rows_processed = current_row + 1;
-            thread_progress->thread = thread_num;
+            thread_progress->rows_processed++;
             thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100;
 
             /*
