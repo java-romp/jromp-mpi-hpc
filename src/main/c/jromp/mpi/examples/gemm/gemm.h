@@ -36,9 +36,6 @@
 #define PROGRESS_TAG 1
 #define FINISH_TAG 2
 
-#define LIKELY(x) __builtin_expect(!!(x), 1)
-#define UNLIKELY(x) __builtin_expect(!!(x), 0)
-
 /**
  * Prints the given message if the current rank is 0 (Master process).
  */
@@ -83,7 +80,7 @@ static int random_in_range(const int min, const int max) {
 static void write_execution_configuration_to_file(const int n, const int workers,
                                                   const int threads, const int opt_level,
                                                   const double time) {
-    FILE *file = fopen("execution_configs.csv", "a");
+    FILE *file = fopen("execution_configs_c.csv", "a");
 
     if (file == NULL) {
         perror("Error: fopen failed\n");

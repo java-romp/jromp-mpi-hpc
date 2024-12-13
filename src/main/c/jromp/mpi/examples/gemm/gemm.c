@@ -119,45 +119,46 @@ int main(int argc, char *argv[]) {
         do {
             MPI_Probe(MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 
-            if (UNLIKELY(status.MPI_TAG == FINISH_TAG)) {
-                // ^^ Marked as unlikely because the available ranks are not a big number, so this condition is not expected
-                // to happen frequently.
-                MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
-                         status.MPI_SOURCE, FINISH_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            switch (status.MPI_TAG) {
+                case FINISH_TAG:
+                    MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
+                             status.MPI_SOURCE, FINISH_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-                LOG_MASTER("Worker %d has finished\n", status.MPI_SOURCE);
-                ended_workers++;
-            } else if (LIKELY(status.MPI_TAG == PROGRESS_TAG)) {
-                // ^^ Marked as likely because the progress is sent very frequently during the calculations. This condition
-                // is expected to happen frequently.
-                MPI_Recv(&progress, sizeof(progress_t), MPI_BYTE, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
-                         MPI_STATUS_IGNORE);
-                time_end = MPI_Wtime();
+                    LOG_MASTER("Worker %d has finished\n", status.MPI_SOURCE);
+                    ended_workers++;
+                    break;
 
-                global_progress.rows_processed++;
-                global_progress.progress = (float) global_progress.rows_processed / (float) N * 100.0f;
+                case PROGRESS_TAG:
+                    MPI_Recv(&progress, sizeof(progress_t), MPI_BYTE, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
+                             MPI_STATUS_IGNORE);
+                    time_end = MPI_Wtime();
 
-                // Notation:
-                //  - T_r: Time to process a row.
-                //  - T_t: Time total (from the beginning of the calculations).
-                //  - ETF: Estimated time to finish the calculations.
-                LOG_MASTER(
-                        "Progress of worker %d (Thread %d): %f%% (%d/%d) (overall: %f%% (%d/%d))  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
-                        progress.rank, progress.thread, progress.progress, progress.rows_processed,
-                        rows_per_worker / threads, global_progress.progress, global_progress.rows_processed, N,
-                        progress.row_time, time_end - calculations_mpi_start,
-                        etf(calculations_mpi_start, global_progress.progress));
-            } else {
-                // Unexpected message
-                MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-                LOG_MASTER("Unexpected message\n");
+                    global_progress.rows_processed++;
+                    global_progress.progress = (float) global_progress.rows_processed / (float) N * 100.0f;
 
-                // Free memory and exit
-                free(a);
-                free(b);
-                free(c);
+                    // Notation:
+                    //  - T_r: Time to process a row.
+                    //  - T_t: Time total (from the beginning of the calculations).
+                    //  - ETF: Estimated time to finish the calculations.
+                    LOG_MASTER(
+                            "Progress of worker %d (Thread %d): %f%% (%d/%d) (overall: %f%% (%d/%d))  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
+                            progress.rank, progress.thread, progress.progress, progress.rows_processed,
+                            rows_per_worker / threads, global_progress.progress, global_progress.rows_processed, N,
+                            progress.row_time, time_end - calculations_mpi_start,
+                            etf(calculations_mpi_start, global_progress.progress));
+                    break;
 
-                return EXIT_FAILURE;
+                default:
+                    // Unexpected message
+                    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+                    LOG_MASTER("Unexpected message\n");
+
+                    // Free memory and exit
+                    free(a);
+                    free(b);
+                    free(c);
+
+                    exit(EXIT_FAILURE);
             }
         } while (ended_workers < workers);
 
@@ -233,7 +234,7 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
 
             thread_progress->row_time = omp_get_wtime() - thread_progress->row_time;
             thread_progress->rows_processed++;
-            thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100;
+            thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100.0f;
 
             /*
              * Send asynchronous progress to master rank to avoid blocking.
