@@ -69,6 +69,7 @@ typedef struct progress {
     int rows_processed;
     int thread;
     float progress;
+    double row_time;
 } progress_t;
 
 void matrix_multiplication(const double *a, const double *b, double *c, int rows_per_worker, int rank);

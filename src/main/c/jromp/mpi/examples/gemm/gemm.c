@@ -111,8 +111,7 @@ int main(int argc, char *argv[]) {
         START_MPI_TIMER(calculations);
 
         int ended_workers = 0;
-        double row_time_start = calculations_mpi_start;
-        double row_time_end = 0;
+        double time_end = 0;
         MPI_Status status;
         progress_t progress = { 0 };
         progress_t global_progress = { 0 };
@@ -133,7 +132,7 @@ int main(int argc, char *argv[]) {
                 // is expected to happen frequently.
                 MPI_Recv(&progress, sizeof(progress_t), MPI_BYTE, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
                          MPI_STATUS_IGNORE);
-                row_time_end = MPI_Wtime();
+                time_end = MPI_Wtime();
 
                 global_progress.rows_processed++;
                 global_progress.progress = (float) global_progress.rows_processed / (float) N * 100.0f;
@@ -146,10 +145,8 @@ int main(int argc, char *argv[]) {
                         "Progress of worker %d (Thread %d): %f%% (%d/%d) (overall: %f%% (%d/%d))  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
                         progress.rank, progress.thread, progress.progress, progress.rows_processed,
                         rows_per_worker / threads, global_progress.progress, global_progress.rows_processed, N,
-                        row_time_end - row_time_start, row_time_end - calculations_mpi_start,
+                        progress.row_time, time_end - calculations_mpi_start,
                         etf(calculations_mpi_start, global_progress.progress));
-
-                row_time_start = row_time_end;
             } else {
                 // Unexpected message
                 MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
@@ -159,6 +156,7 @@ int main(int argc, char *argv[]) {
                 free(a);
                 free(b);
                 free(c);
+
                 return EXIT_FAILURE;
             }
         } while (ended_workers < workers);
@@ -221,6 +219,8 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
 
         #pragma omp for
         for (i = 0; i < rows_per_worker; i++) {
+            thread_progress->row_time = omp_get_wtime();
+
             for (j = 0; j < N; j++) {
                 local_sum = 0;
 
@@ -231,6 +231,7 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
                 c[i * N + j] = local_sum;
             }
 
+            thread_progress->row_time = omp_get_wtime() - thread_progress->row_time;
             thread_progress->rows_processed++;
             thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100;
 
