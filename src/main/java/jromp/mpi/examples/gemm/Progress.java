@@ -8,12 +8,13 @@ final class Progress {
     private int rowsProcessed;
     private int thread;
     private float progress;
+    private double rowTime;
 
     Progress() {
-        this(0, 0, (int) Thread.currentThread().threadId(), 0.0f);
+        this(0, 0, (int) Thread.currentThread().threadId(), 0.0f, 0.0);
     }
 
-    Progress(int rank, int rowsProcessed, int thread, float progress) {
+    Progress(int rank, int rowsProcessed, int thread, float progress, double rowTime) {
         if (rank < 0) {
             throw new IllegalArgumentException("Rank must be non-negative");
         }
@@ -30,6 +31,7 @@ final class Progress {
         this.rowsProcessed = rowsProcessed;
         this.thread = thread;
         this.progress = progress;
+        this.rowTime = rowTime;
     }
 
     public int rank() {
@@ -64,6 +66,14 @@ final class Progress {
         this.progress = progress;
     }
 
+    public double rowTime() {
+        return rowTime;
+    }
+
+    public void rowTime(double rowTime) {
+        this.rowTime = rowTime;
+    }
+
     public void incrementRowsProcessed() {
         rowsProcessed++;
     }
@@ -74,6 +84,7 @@ final class Progress {
               .putInt(rowsProcessed)
               .putInt(thread)
               .putFloat(progress)
+              .putDouble(rowTime)
               .rewind();
     }
 
@@ -83,10 +94,11 @@ final class Progress {
         rowsProcessed = buffer.getInt();
         thread = buffer.getInt();
         progress = buffer.getFloat();
+        rowTime = buffer.getDouble();
     }
 
     public static int size() {
-        return 3 * Integer.BYTES + Float.BYTES;
+        return 3 * Integer.BYTES + Float.BYTES + Double.BYTES;
     }
 
     @Override
@@ -95,12 +107,13 @@ final class Progress {
         return rank == progress1.rank
                 && rowsProcessed == progress1.rowsProcessed
                 && thread == progress1.thread
-                && Float.compare(progress, progress1.progress) == 0;
+                && Float.compare(progress, progress1.progress) == 0
+                && Double.compare(progress1.rowTime, rowTime) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rank, rowsProcessed, thread, progress);
+        return Objects.hash(rank, rowsProcessed, thread, progress, rowTime);
     }
 
     @Override
@@ -110,6 +123,7 @@ final class Progress {
                 ", rowsProcessed=" + rowsProcessed +
                 ", thread=" + thread +
                 ", progress=" + progress +
+                ", rowTime=" + rowTime +
                 '}';
     }
 }

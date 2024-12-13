@@ -113,7 +113,7 @@ public class Gemm {
             LOG_MASTER("****** Sending data to workers ******\n");
             LOG_MASTER("*************************************\n");
 
-            double sendStart = getWTime();
+            double sendDataStart = getWTime();
 
             Request[] requests = new Request[2 * workers];
 
@@ -130,8 +130,8 @@ public class Gemm {
 
             Request.waitAll(requests);
 
-            double sendEnd = getWTime();
-            LOG_MASTER("Time to send data to workers: %fs\n", sendEnd - sendStart);
+            double sendDataEnd = getWTime();
+            LOG_MASTER("Time to send data to workers: %fs\n", sendDataEnd - sendDataStart);
 
             LOG_MASTER("*************************************\n");
             LOG_MASTER("******* Matrix Multiplication *******\n");
@@ -140,8 +140,7 @@ public class Gemm {
             double calculationsStart = MPI.wtime();
 
             int endedWorkers = 0;
-            double rowTimeStart = calculationsStart;
-            double rowTimeEnd = 0;
+            double timeEnd;
             Status status;
             Progress progress = new Progress();
             Progress globalProgress = new Progress();
@@ -150,43 +149,46 @@ public class Gemm {
             do {
                 status = MPI.COMM_WORLD.probe(MPI.ANY_SOURCE, MPI.ANY_TAG);
 
-                if (status.getTag() == FINISH_TAG) {
-                    DoubleBuffer recvBuffer = MPI.newDoubleBuffer(rowsPerWorker * N);
-                    MPI.COMM_WORLD.recv(recvBuffer, rowsPerWorker * N, MPI.DOUBLE, status.getSource(), FINISH_TAG);
+                switch (status.getTag()) {
+                    case FINISH_TAG -> {
+                        DoubleBuffer recvBuffer = MPI.newDoubleBuffer(rowsPerWorker * N);
+                        MPI.COMM_WORLD.recv(recvBuffer, rowsPerWorker * N, MPI.DOUBLE, status.getSource(), FINISH_TAG);
 
-                    recvBuffer.get(C, (status.getSource() - 1) * rowsPerWorker * N, rowsPerWorker * N);
-                    recvBuffer.clear();
+                        recvBuffer.get(C, (status.getSource() - 1) * rowsPerWorker * N, rowsPerWorker * N);
+                        recvBuffer.clear();
 
-                    LOG_MASTER("Worker %d has finished\n", status.getSource());
-                    endedWorkers++;
-                } else if (status.getTag() == PROGRESS_TAG) {
-                    MPI.COMM_WORLD.recv(progressBuffer, Progress.size(), MPI.BYTE, status.getSource(), PROGRESS_TAG);
-                    rowTimeEnd = MPI.wtime();
+                        LOG_MASTER("Worker %d has finished\n", status.getSource());
+                        endedWorkers++;
+                    }
+                    case PROGRESS_TAG -> {
+                        MPI.COMM_WORLD.recv(progressBuffer, Progress.size(), MPI.BYTE, status.getSource(),
+                                            PROGRESS_TAG);
+                        timeEnd = MPI.wtime();
 
-                    progress.readBuffer(progressBuffer);
-                    progressBuffer.clear();
+                        progress.readBuffer(progressBuffer);
+                        progressBuffer.clear();
 
-                    globalProgress.incrementRowsProcessed();
-                    globalProgress.progress((float) globalProgress.rowsProcessed() / N * 100.0f);
+                        globalProgress.incrementRowsProcessed();
+                        globalProgress.progress((float) globalProgress.rowsProcessed() / N * 100.0f);
 
-                    // Notation:
-                    //  - T_r: Time to process a row.
-                    //  - T_t: Time total (from the beginning of the calculations).
-                    //  - ETF: Estimated time to finish the calculations.
-                    LOG_MASTER(
-                            "Progress of worker %d (Thread %d): %f%% (%d/%d) (overall: %f%% (%d/%d))  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
-                            progress.rank(), progress.thread(), progress.progress(), progress.rowsProcessed(),
-                            rowsPerWorker / threads, globalProgress.progress(), globalProgress.rowsProcessed(), N,
-                            rowTimeEnd - rowTimeStart, rowTimeEnd - calculationsStart,
-                            etf(calculationsStart, globalProgress.progress()));
+                        // Notation:
+                        //  - T_r: Time to process a row.
+                        //  - T_t: Time total (from the beginning of the calculations).
+                        //  - ETF: Estimated time to finish the calculations.
+                        LOG_MASTER(
+                                "Progress of worker %d (Thread %d): %f%% (%d/%d) (overall: %f%% (%d/%d))  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
+                                progress.rank(), progress.thread(), progress.progress(), progress.rowsProcessed(),
+                                rowsPerWorker / threads, globalProgress.progress(), globalProgress.rowsProcessed(), N,
+                                progress.rowTime(), timeEnd - calculationsStart,
+                                etf(calculationsStart, globalProgress.progress()));
+                    }
+                    default -> {
+                        // Unexpected message
+                        MPI.COMM_WORLD.abort(EXIT_FAILURE);
+                        LOG_MASTER("Unexpected message\n");
 
-                    rowTimeStart = rowTimeEnd;
-                } else {
-                    // Unexpected message
-                    MPI.COMM_WORLD.abort(EXIT_FAILURE);
-                    LOG_MASTER("Unexpected message\n");
-
-                    System.exit(EXIT_FAILURE);
+                        System.exit(EXIT_FAILURE);
+                    }
                 }
             } while (endedWorkers < workers);
 
@@ -214,6 +216,7 @@ public class Gemm {
 
             // Perform matrix multiplication
             matrixMultiplication(A, B, C, rowsPerWorker, rank);
+            // bufferC is filled when the matrix multiplication is done
 
             // Send results back to master process
             MPI.COMM_WORLD.send(bufferC, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, FINISH_TAG);
@@ -225,7 +228,6 @@ public class Gemm {
         }
 
         MPI.Finalize();
-        System.exit(EXIT_SUCCESS);
     }
 
     private static void matrixMultiplication(double[] a, double[] b, double[] c, int rowsPerWorker, int rank) {
@@ -248,13 +250,15 @@ public class Gemm {
                  int i, j, k;
                  final int threadNum = getThreadNum(); // Prevent multiple calls to the function inside the for loop
                  ByteBuffer progressBuffer = MPI.newByteBuffer(Progress.size());
-                 Progress threadProgress = new Progress(rank, 0, threadNum, 0.0f);
+                 Progress threadProgress = new Progress(rank, 0, threadNum, 0.0f, 0.0);
                  progresses.value()[threadNum] = threadProgress;
                  double[] A = vA.value();
                  double[] B = vB.value();
                  double[] C = vC.value();
 
                  for (i = start; i < end; i++) {
+                     threadProgress.rowTime(getWTime());
+
                      for (j = 0; j < N; j++) {
                          localSum = 0;
 
@@ -265,6 +269,7 @@ public class Gemm {
                          C[i * N + j] = localSum;
                      }
 
+                     threadProgress.rowTime(getWTime() - threadProgress.rowTime());
                      threadProgress.incrementRowsProcessed();
                      threadProgress.progress((float) threadProgress.rowsProcessed() / rowsPerThread.value() * 100.0f);
                      threadProgress.fillBuffer(progressBuffer);
@@ -286,17 +291,17 @@ public class Gemm {
     }
 
     private static void writeExecutionConfigurationToFile(int n, int workers, int threads, double time) {
-        File file = new File("execution_configuration.csv");
+        File file = new File("execution_configs_java.csv");
 
         try {
-            // If the file does not exist, creates it and writes the header
+            // If the file does not exist, create it and write the header
             if (file.createNewFile()) {
                 try (FileWriter writer = new FileWriter(file, false)) { // Disable append mode
                     writer.write("n,workers,threads,total_cpus,time" + System.lineSeparator());
                 }
             }
 
-            // Adds the content to the end of the file
+            // Add the content to the end of the file
             try (FileWriter writer = new FileWriter(file, true)) { // Append mode
                 writer.write(String.format("%d,%d,%d,%d,%f%n", n, workers, threads, workers * threads, time));
             }
@@ -322,7 +327,7 @@ public class Gemm {
     }
 
     private static void setRandomSeedSecure(int rank) {
-        random.setSeed(System.nanoTime() ^ System.currentTimeMillis() ^ rank);
+        random.setSeed(System.nanoTime() ^ System.currentTimeMillis() / 1000 ^ rank);
     }
 
     public static void printf(String format, Object... args) {
@@ -331,17 +336,17 @@ public class Gemm {
 
     public static void LOG_MASTER(String format, Object... args) {
         if (rank == 0) {
-            System.out.printf("      Master: %s", String.format(format, args));
+            printf("      Master: %s", String.format(format, args));
         }
     }
 
     public static void LOG_WORKER(String format, Object... args) {
         if (rank != 0) {
-            if (JROMP.getNumThreads() == 1) {
-                System.out.printf("   Worker %02d: %s", rank, String.format(format, args));
+            if (getNumThreads() == 1) {
+                printf("   Worker %02d: %s", rank, String.format(format, args));
             } else {
                 synchronized (printLock) {
-                    System.out.printf("Worker %02d-%02d: %s", rank, JROMP.getThreadNum(), String.format(format, args));
+                    printf("Worker %02d-%02d: %s", rank, getThreadNum(), String.format(format, args));
                 }
             }
         }
