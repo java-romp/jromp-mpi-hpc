@@ -57,8 +57,8 @@ function sequential {
 }
 
 function parallel_1 {
-  local nodes_9_to_16="cn6009,cn6010,cn6011,cn6012,cn6013,cn6014,cn6015,cn6016"
-  local nodes_17_to_24="cn6017,cn6018,cn6019,cn6020,cn6021,cn6022,cn6023,cn6024"
+  local nodes_9_to_16="cn[6009-6016]"
+  local nodes_17_to_24="cn[6017-6024]"
 
   run_config 8 16 1 0 $nodes_9_to_16
   run_config 8 16 1 1 $nodes_17_to_24
@@ -75,7 +75,7 @@ function parallel_1 {
 }
 
 function parallel_2 {
-  local all_nodes="cn6009,cn6010,cn6011,cn6012,cn6013,cn6014,cn6015,cn6016,cn6017,cn6018,cn6019,cn6020,cn6021,cn6022,cn6023,cn6024"
+  local all_nodes="cn[6009-6024]"
 
   run_config 16 31 1 0 $all_nodes
   run_config 16 31 1 1 $all_nodes
