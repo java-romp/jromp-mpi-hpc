@@ -60,41 +60,43 @@ function parallel_1 {
   local nodes_9_to_16="cn[6009-6016]"
   local nodes_17_to_24="cn[6017-6024]"
 
-  run_config 8 16 1 0 $nodes_9_to_16
-  run_config 8 16 1 1 $nodes_17_to_24
-  run_config 8 16 1 2 $nodes_9_to_16
-  run_config 8 16 1 3 $nodes_17_to_24
-  run_config 8 16 12 0 $nodes_9_to_16
-  run_config 8 16 12 1 $nodes_17_to_24
-  run_config 8 16 12 2 $nodes_9_to_16
-  run_config 8 16 12 3 $nodes_17_to_24
-  run_config 8 16 32 0 $nodes_9_to_16
-  run_config 8 16 32 1 $nodes_17_to_24
-  run_config 8 16 32 2 $nodes_9_to_16
-  run_config 8 16 32 3 $nodes_17_to_24
+  run_config 8 16 1 0 "$nodes_9_to_16"
+  run_config 8 16 1 1 "$nodes_17_to_24"
+  run_config 8 16 1 2 "$nodes_9_to_16"
+  run_config 8 16 1 3 "$nodes_17_to_24"
+  run_config 8 16 12 0 "$nodes_9_to_16"
+  run_config 8 16 12 1 "$nodes_17_to_24"
+  run_config 8 16 12 2 "$nodes_9_to_16"
+  run_config 8 16 12 3 "$nodes_17_to_24"
+  run_config 8 16 32 0 "$nodes_9_to_16"
+  run_config 8 16 32 1 "$nodes_17_to_24"
+  run_config 8 16 32 2 "$nodes_9_to_16"
+  run_config 8 16 32 3 "$nodes_17_to_24"
 }
 
 function parallel_2 {
   local all_nodes="cn[6009-6024]"
 
-  run_config 16 31 1 0 $all_nodes
-  run_config 16 31 1 1 $all_nodes
-  run_config 16 31 1 2 $all_nodes
-  run_config 16 31 1 3 $all_nodes
-  run_config 16 31 12 0 $all_nodes
-  run_config 16 31 12 1 $all_nodes
-  run_config 16 31 12 2 $all_nodes
-  run_config 16 31 12 3 $all_nodes
-  run_config 16 31 32 0 $all_nodes
-  run_config 16 31 32 1 $all_nodes
-  run_config 16 31 32 2 $all_nodes
-  run_config 16 31 32 3 $all_nodes
+  run_config 16 31 1 0 "$all_nodes"
+  run_config 16 31 1 1 "$all_nodes"
+  run_config 16 31 1 2 "$all_nodes"
+  run_config 16 31 1 3 "$all_nodes"
+  run_config 16 31 12 0 "$all_nodes"
+  run_config 16 31 12 1 "$all_nodes"
+  run_config 16 31 12 2 "$all_nodes"
+  run_config 16 31 12 3 "$all_nodes"
+  run_config 16 31 32 0 "$all_nodes"
+  run_config 16 31 32 1 "$all_nodes"
+  run_config 16 31 32 2 "$all_nodes"
+  run_config 16 31 32 3 "$all_nodes"
 }
 
 function main {
-  #sequential
+  sequential
+  sleep 3 # Warranty that the previous jobs are already running
   parallel_1
-  #parallel_2
+  sleep 3
+  parallel_2
 }
 
 main "$@"

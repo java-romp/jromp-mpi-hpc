@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <mpi.h>
 #include <omp.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -40,8 +41,7 @@
 #define WORKER
 #define MASTER_RANK 0
 #define DATA_TAG 0
-#define PROGRESS_TAG 1
-#define FINISH_TAG 2
+#define FINISH_TAG 1
 
 /**
  * Prints the given message if the current rank is 0 (Master process).
@@ -68,7 +68,7 @@
         }                                                             \
     }
 
-void matrix_multiplication(const double *a, const double *b, double *c, int rows_per_worker);
+void gemm(const double *a, const double *b, double *c, int rows_per_worker);
 
 void matrix_initialization(double *a, double *b, int n);
 
@@ -93,18 +93,6 @@ static void write_execution_configuration_to_file(const int n, const int workers
 
     fprintf(file, "%d,%d,%d,%d,%d,%f\n", n, workers, threads, workers * threads, opt_level, time);
     fclose(file);
-}
-
-/**
- * Estimated time to finish (etf) the calculations based on the progress of the process.
- *
- * @param start_time Initial time of the calculations.
- * @param progress Progress of the process.
- *
- * @return Estimated time to finish the calculations.
- */
-static double etf(const double start_time, const double progress) {
-    return (100.0 - progress) * (MPI_Wtime() - start_time) / progress;
 }
 
 /**
