@@ -11,19 +11,26 @@
 #define assert_non_null(ptr) assert(ptr != NULL)
 #define UNUSED __attribute__((unused))
 
+#define START_BLOCK {
+#define END_BLOCK }
+
 #define START_MPI_TIMER(name) \
-    double name##_mpi_start = MPI_Wtime();
+    double name##_mpi_start = MPI_Wtime(); \
+    START_BLOCK
 
 #define STOP_MPI_TIMER(name) \
+    END_BLOCK \
     double name##_mpi_end = MPI_Wtime(); \
     double name##_mpi_elapsed = name##_mpi_end - name##_mpi_start;
 
 #define GET_MPI_TIMER(name) name##_mpi_elapsed
 
 #define START_OMP_TIMER(name) \
-    double name##_omp_start = omp_get_wtime();
+    double name##_omp_start = omp_get_wtime(); \
+    START_BLOCK
 
 #define STOP_OMP_TIMER(name) \
+    END_BLOCK \
     double name##_omp_end = omp_get_wtime(); \
     double name##_omp_elapsed = name##_omp_end - name##_omp_start;
 
@@ -41,7 +48,7 @@
  */
 #define LOG_MASTER(...)                        \
     if (rank == 0) {                           \
-        printf("      Master: " __VA_ARGS__); \
+        printf("      Master: " __VA_ARGS__);  \
     }
 
 /**
@@ -61,15 +68,7 @@
         }                                                             \
     }
 
-typedef struct progress {
-    int rank;
-    int rows_processed;
-    int thread;
-    float progress;
-    double row_time;
-} progress_t;
-
-void matrix_multiplication(const double *a, const double *b, double *c, int rows_per_worker, int rank);
+void matrix_multiplication(const double *a, const double *b, double *c, int rows_per_worker);
 
 void matrix_initialization(double *a, double *b, int n);
 

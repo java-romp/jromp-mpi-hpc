@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
         // Only master process allocates memory for all complete matrices
         a = malloc(N * N * sizeof(double));
         b = malloc(N * N * sizeof(double));
-        c = calloc(N * N, sizeof(double)); // Initialize to zero
+        c = malloc(N * N * sizeof(double));
 
         // Check memory allocation
         if (a == NULL || b == NULL || c == NULL) {
@@ -75,94 +75,86 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("******* Matrix Initialization *******\n");
         LOG_MASTER("*************************************\n");
 
-        START_OMP_TIMER(initialization);
-
-        // Initialize matrices
-        matrix_initialization(a, b, N);
-
-        STOP_OMP_TIMER(initialization);
+        START_OMP_TIMER(initialization)
+            matrix_initialization(a, b, N);
+        STOP_OMP_TIMER(initialization)
         LOG_MASTER("Time to initialize the matrices: %fs\n", GET_OMP_TIMER(initialization));
 
         LOG_MASTER("*************************************\n");
         LOG_MASTER("****** Sending data to workers ******\n");
         LOG_MASTER("*************************************\n");
 
-        START_MPI_TIMER(send_data);
+        START_MPI_TIMER(send_data)
+            MPI_Request *requests = malloc(2 * workers * sizeof(MPI_Request));
 
-        MPI_Request *requests = malloc(2 * workers * sizeof(MPI_Request));
+            // Distribute rows of A to workers and send matrix B to all workers
+            for (int i = 1; i < size; i++) {
+                MPI_Isend(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG,
+                          MPI_COMM_WORLD,
+                          &requests[i - 1]);
+                MPI_Isend(b, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &requests[workers + i - 1]);
+            }
 
-        // Distribute rows of A to workers and send matrix B to all workers
-        for (int i = 1; i < size; i++) {
-            MPI_Isend(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD,
-                      &requests[i - 1]);
-            MPI_Isend(b, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &requests[workers + i - 1]);
-        }
-
-        MPI_Waitall(2 * workers, requests, MPI_STATUSES_IGNORE);
-        free(requests);
-
-        STOP_MPI_TIMER(send_data);
+            MPI_Waitall(2 * workers, requests, MPI_STATUSES_IGNORE);
+            free(requests);
+        STOP_MPI_TIMER(send_data)
         LOG_MASTER("Time to send data to workers: %fs\n", GET_MPI_TIMER(send_data));
 
         LOG_MASTER("*************************************\n");
         LOG_MASTER("******* Matrix Multiplication *******\n");
         LOG_MASTER("*************************************\n");
 
-        START_MPI_TIMER(calculations);
+        START_MPI_TIMER(calculations)
+            int ended_workers = 0;
+            double time_end = 0;
+            MPI_Status status;
+            double row_time, progress = 0;
+            int rows_processed = 0;
 
-        int ended_workers = 0;
-        double time_end = 0;
-        MPI_Status status;
-        progress_t progress = { 0 };
-        progress_t global_progress = { 0 };
+            do {
+                MPI_Probe(MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 
-        do {
-            MPI_Probe(MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+                switch (status.MPI_TAG) {
+                    case FINISH_TAG:
+                        MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
+                                 status.MPI_SOURCE, FINISH_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-            switch (status.MPI_TAG) {
-                case FINISH_TAG:
-                    MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
-                             status.MPI_SOURCE, FINISH_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                        LOG_MASTER("Worker %d has finished\n", status.MPI_SOURCE);
+                        ended_workers++;
+                        break;
 
-                    LOG_MASTER("Worker %d has finished\n", status.MPI_SOURCE);
-                    ended_workers++;
-                    break;
+                    case PROGRESS_TAG:
+                        MPI_Recv(&row_time, 1, MPI_DOUBLE, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
+                                 MPI_STATUS_IGNORE);
+                        time_end = MPI_Wtime();
 
-                case PROGRESS_TAG:
-                    MPI_Recv(&progress, sizeof(progress_t), MPI_BYTE, status.MPI_SOURCE, PROGRESS_TAG, MPI_COMM_WORLD,
-                             MPI_STATUS_IGNORE);
-                    time_end = MPI_Wtime();
-
-                    global_progress.rows_processed++;
-                    global_progress.progress = (float) global_progress.rows_processed / (float) N * 100.0f;
+                        rows_processed++;
+                        progress = (float) rows_processed / (float) N * 100.0f;
 
                     // Notation:
                     //  - T_r: Time to process a row.
                     //  - T_t: Time total (from the beginning of the calculations).
                     //  - ETF: Estimated time to finish the calculations.
-                    LOG_MASTER(
-                            "Progress of worker %d (Thread %d): %f%% (%d/%d) (overall: %f%% (%d/%d))  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
-                            progress.rank, progress.thread, progress.progress, progress.rows_processed,
-                            rows_per_worker / threads, global_progress.progress, global_progress.rows_processed, N,
-                            progress.row_time, time_end - calculations_mpi_start,
-                            etf(calculations_mpi_start, global_progress.progress));
-                    break;
+                        LOG_MASTER(
+                                "Progress of worker: %f%% (%d/%d)  ::  T_r: %.5fs   T_t: %.5fs   ETF: %.5fs\n",
+                                progress, rows_processed, N, row_time, time_end - calculations_mpi_start,
+                                etf(calculations_mpi_start, progress));
+                        break;
 
-                default:
-                    // Unexpected message
-                    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-                    LOG_MASTER("Unexpected message\n");
+                    default:
+                        // Unexpected message
+                        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+                        LOG_MASTER("Unexpected message\n");
 
                     // Free memory and exit
-                    free(a);
-                    free(b);
-                    free(c);
+                        free(a);
+                        free(b);
+                        free(c);
 
-                    exit(EXIT_FAILURE);
-            }
-        } while (ended_workers < workers);
-
-        STOP_MPI_TIMER(calculations);
+                        exit(EXIT_FAILURE);
+                }
+            } while (ended_workers < workers);
+        STOP_MPI_TIMER(calculations)
         LOG_MASTER("Time to do the calculations: %f\n", GET_MPI_TIMER(calculations));
 
         LOG_MASTER("Writing execution configuration to file\n");
@@ -184,7 +176,7 @@ int main(int argc, char *argv[]) {
         MPI_Recv(b, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         // Perform matrix multiplication
-        matrix_multiplication(a, b, c, rows_per_worker, rank);
+        matrix_multiplication(a, b, c, rows_per_worker);
 
         // Send results back to master process
         MPI_Send(c, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
@@ -199,29 +191,18 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-WORKER void matrix_multiplication(const double *a, const double *b, double *c, const int rows_per_worker,
-                                  const int rank) {
+WORKER void matrix_multiplication(const double *a, const double *b, double *c, const int rows_per_worker) {
     assert_non_null(a);
     assert_non_null(b);
     assert_non_null(c);
 
-    const int rows_per_thread = rows_per_worker / threads;
-    progress_t *progresses = calloc(threads, sizeof(progress_t));
-    MPI_Request ignored_request;
-
-    #pragma omp parallel shared(a, b, c, rows_per_worker, rank, rows_per_thread, progresses, ignored_request)
+    #pragma omp parallel shared(a, b, c, rows_per_worker) num_threads(threads)
     {
         double local_sum;
         int i, j, k;
-        const int thread_num = omp_get_thread_num(); // Prevent multiple calls to the function inside the for loop
-        progress_t *thread_progress = &progresses[thread_num];
-        thread_progress->rank = rank;
-        thread_progress->thread = thread_num;
 
         #pragma omp for
         for (i = 0; i < rows_per_worker; i++) {
-            thread_progress->row_time = omp_get_wtime();
-
             for (j = 0; j < N; j++) {
                 local_sum = 0;
 
@@ -231,23 +212,8 @@ WORKER void matrix_multiplication(const double *a, const double *b, double *c, c
 
                 c[i * N + j] = local_sum;
             }
-
-            thread_progress->row_time = omp_get_wtime() - thread_progress->row_time;
-            thread_progress->rows_processed++;
-            thread_progress->progress = (float) thread_progress->rows_processed / (float) rows_per_thread * 100.0f;
-
-            /*
-             * Send asynchronous progress to master rank to avoid blocking.
-             * Waiting for the request to complete is not necessary because we don't want to know if the
-             * master process has received the progress (it is only informative). If it is lost, the master
-             * process will not have the progress of the worker, but the calculations will continue.
-             */
-            MPI_Isend(thread_progress, sizeof(progress_t), MPI_BYTE, MASTER_RANK, PROGRESS_TAG, MPI_COMM_WORLD,
-                      &ignored_request);
         }
     }
-
-    free(progresses);
 }
 
 MASTER void matrix_initialization(double *a, double *b, const int n) {
