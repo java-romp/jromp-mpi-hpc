@@ -6,6 +6,5 @@ final class Tags {
     }
 
     public static final int DATA_TAG = 0;
-    public static final int PROGRESS_TAG = 1;
-    public static final int FINISH_TAG = 2;
+    public static final int FINISH_TAG = 1;
 }
