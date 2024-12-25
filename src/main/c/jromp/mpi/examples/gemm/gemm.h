@@ -68,14 +68,46 @@
         }                                                             \
     }
 
+/**
+ * Performs the matrix multiplication C = A * B (GEMM).
+ *
+ * @param a Matrix A.
+ * @param b Matrix B.
+ * @param c Matrix C.
+ * @param rows_per_worker The number of rows to be processed by each worker.
+ */
 void gemm(const double *a, const double *b, double *c, int rows_per_worker);
 
+/**
+ * Initializes the given matrix with random values.
+ *
+ * @param a The first matrix.
+ * @param b The second matrix.
+ * @param n The size of the matrices.
+ */
 void matrix_initialization(double *a, double *b, int n);
 
+/**
+ * Generates a random integer in the range [min, max].
+ *
+ * @param min The minimum value.
+ * @param max The maximum value.
+ *
+ * @return The random integer.
+ */
 static int random_in_range(const int min, const int max) {
     return min + random() % (max - min + 1);
 }
 
+/**
+ * Writes the execution configuration to the file.
+ *
+ * @param n The size of the matrices.
+ * @param workers The number of workers.
+ * @param threads The number of threads.
+ * @param opt_level The optimization level.
+ * @param time The total execution time.
+ */
 static void write_execution_configuration_to_file(const int n, const int workers,
                                                   const int threads, const int opt_level,
                                                   const double time) {
