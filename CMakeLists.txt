@@ -20,20 +20,11 @@ add_executable(blocking ${EXAMPLES_DIR}/blocking.c)
 add_executable(burro ${EXAMPLES_DIR}/burro.c)
 add_executable(cross ${EXAMPLES_DIR}/cross.c)
 add_executable(full_parallel ${EXAMPLES_DIR}/full_parallel.c)
-add_executable(mandelbrot_parallel ${EXAMPLES_DIR}/mandelbrot/mandelbrot_parallel.c)
-add_executable(mandelbrot_parallel_with_openmp ${EXAMPLES_DIR}/mandelbrot/mandelbrot_parallel_with_openmp.c)
 add_executable(genome ${EXAMPLES_DIR}/genome/genome.c
         ${EXAMPLES_DIR}/genome/genome.h
         ${EXAMPLES_DIR}/genome/cvector.h
         ${EXAMPLES_DIR}/genome/cvector_utils.h
         ${EXAMPLES_DIR}/genome/main_genome.c)
-add_executable(jacobi ${EXAMPLES_DIR}/jacobi/jacobi_openmp.c)
-add_executable(molecular_dynamics ${EXAMPLES_DIR}/molecular_dynamics/md_openmp.c)
-add_executable(fft ${EXAMPLES_DIR}/fft/fft_openmp.c)
-add_executable(sgefa ${EXAMPLES_DIR}/sgefa/sgefa_openmp.c)
-add_executable(ziggurat ${EXAMPLES_DIR}/ziggurat/ziggurat_openmp.c)
-add_executable(heated_plate ${EXAMPLES_DIR}/heated_plate/heated_plate_openmp.c
-        ${EXAMPLES_DIR}/heated_plate/heated.c)
 add_executable(fractals ${EXAMPLES_DIR}/fractals/mandelbrot.h
         ${EXAMPLES_DIR}/fractals/mandelbrot.c)
 add_executable(gemm ${EXAMPLES_DIR}/gemm/gemm.c
@@ -42,14 +33,7 @@ add_executable(gemm_cuda ${EXAMPLES_DIR}/gemm/gemm.cu
         ${EXAMPLES_DIR}/gemm/gemm.cuh)
 
 target_link_libraries(genome PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
-target_link_libraries(mandelbrot_parallel PUBLIC MPI::MPI_C)
-target_link_libraries(mandelbrot_parallel_with_openmp PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
 target_link_libraries(full_parallel PUBLIC MPI::MPI_C OpenMP::OpenMP_C)
-target_link_libraries(jacobi PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
-target_link_libraries(fft PUBLIC MPI::MPI_C OpenMP::OpenMP_C m fftw3)
-target_link_libraries(sgefa PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
-target_link_libraries(ziggurat PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
-target_link_libraries(heated_plate PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(fractals PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(gemm PUBLIC MPI::MPI_C OpenMP::OpenMP_C m)
 target_link_libraries(gemm_cuda PUBLIC MPI::MPI_C OpenMP::OpenMP_C m cublas)
