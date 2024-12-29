@@ -54,9 +54,7 @@ function sequential {
   run_config 1 2 32 1 "cn6018"
   run_config 1 2 32 2 "cn6019"
   run_config 1 2 32 3 "cn6020"
-}
 
-function sequential_1 {
   run_config 1 2 4 0 "cn6009"
   run_config 1 2 4 1 "cn6010"
   run_config 1 2 4 2 "cn6011"
@@ -87,11 +85,6 @@ function parallel_1 {
   run_config 8 16 32 1 "$nodes_17_to_24"
   run_config 8 16 32 2 "$nodes_9_to_16"
   run_config 8 16 32 3 "$nodes_17_to_24"
-}
-
-function parallel_1_1 {
-  local nodes_9_to_16="cn[6009-6016]"
-  local nodes_17_to_24="cn[6017-6024]"
 
   run_config 8 16 4 0 "$nodes_9_to_16"
   run_config 8 16 4 1 "$nodes_17_to_24"
@@ -122,10 +115,6 @@ function parallel_2 {
   run_config 16 31 32 1 "$all_nodes"
   run_config 16 31 32 2 "$all_nodes"
   run_config 16 31 32 3 "$all_nodes"
-}
-
-function parallel_2_1 {
-  local all_nodes="cn[6009-6024]"
 
   run_config 16 31 4 0 "$all_nodes"
   run_config 16 31 4 1 "$all_nodes"
