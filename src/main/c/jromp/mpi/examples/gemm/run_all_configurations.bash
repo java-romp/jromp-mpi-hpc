@@ -47,6 +47,11 @@ function sequential {
   run_config 1 2 1 2 "cn6011"
   run_config 1 2 1 3 "cn6012"
 
+  run_config 1 2 2 0 "cn6009"
+  run_config 1 2 2 1 "cn6010"
+  run_config 1 2 2 2 "cn6011"
+  run_config 1 2 2 3 "cn6012"
+
   run_config 1 2 4 0 "cn6009"
   run_config 1 2 4 1 "cn6010"
   run_config 1 2 4 2 "cn6011"
@@ -67,6 +72,16 @@ function sequential {
   run_config 1 2 16 2 "cn6019"
   run_config 1 2 16 3 "cn6020"
 
+  run_config 1 2 20 0 "cn6017"
+  run_config 1 2 20 1 "cn6018"
+  run_config 1 2 20 2 "cn6019"
+  run_config 1 2 20 3 "cn6020"
+
+  run_config 1 2 24 0 "cn6017"
+  run_config 1 2 24 1 "cn6018"
+  run_config 1 2 24 2 "cn6019"
+  run_config 1 2 24 3 "cn6020"
+
   run_config 1 2 32 0 "cn6017"
   run_config 1 2 32 1 "cn6018"
   run_config 1 2 32 2 "cn6019"
@@ -81,6 +96,11 @@ function parallel_1 {
   run_config 8 16 1 1 "$nodes_17_to_24"
   run_config 8 16 1 2 "$nodes_9_to_16"
   run_config 8 16 1 3 "$nodes_17_to_24"
+
+  run_config 8 16 2 0 "$nodes_9_to_16"
+  run_config 8 16 2 1 "$nodes_17_to_24"
+  run_config 8 16 2 2 "$nodes_9_to_16"
+  run_config 8 16 2 3 "$nodes_17_to_24"
 
   run_config 8 16 4 0 "$nodes_9_to_16"
   run_config 8 16 4 1 "$nodes_17_to_24"
@@ -102,10 +122,70 @@ function parallel_1 {
   run_config 8 16 16 2 "$nodes_9_to_16"
   run_config 8 16 16 3 "$nodes_17_to_24"
 
+  run_config 8 16 20 0 "$nodes_9_to_16"
+  run_config 8 16 20 1 "$nodes_17_to_24"
+  run_config 8 16 20 2 "$nodes_9_to_16"
+  run_config 8 16 20 3 "$nodes_17_to_24"
+
+  run_config 8 16 24 0 "$nodes_9_to_16"
+  run_config 8 16 24 1 "$nodes_17_to_24"
+  run_config 8 16 24 2 "$nodes_9_to_16"
+  run_config 8 16 24 3 "$nodes_17_to_24"
+
   run_config 8 16 32 0 "$nodes_9_to_16"
   run_config 8 16 32 1 "$nodes_17_to_24"
   run_config 8 16 32 2 "$nodes_9_to_16"
   run_config 8 16 32 3 "$nodes_17_to_24"
+}
+
+function parallel_3 {
+  local nodes_9_to_14="cn[6009-6014]"
+  local nodes_15_to_20="cn[6015-6020]"
+
+  run_config 6 11 1 0 "$nodes_9_to_14"
+  run_config 6 11 1 1 "$nodes_15_to_20"
+  run_config 6 11 1 2 "$nodes_9_to_14"
+  run_config 6 11 1 3 "$nodes_15_to_20"
+
+  run_config 6 11 2 0 "$nodes_9_to_14"
+  run_config 6 11 2 1 "$nodes_15_to_20"
+  run_config 6 11 2 2 "$nodes_9_to_14"
+  run_config 6 11 2 3 "$nodes_15_to_20"
+
+  run_config 6 11 4 0 "$nodes_9_to_14"
+  run_config 6 11 4 1 "$nodes_15_to_20"
+  run_config 6 11 4 2 "$nodes_9_to_14"
+  run_config 6 11 4 3 "$nodes_15_to_20"
+
+  run_config 6 11 8 0 "$nodes_9_to_14"
+  run_config 6 11 8 1 "$nodes_15_to_20"
+  run_config 6 11 8 2 "$nodes_9_to_14"
+  run_config 6 11 8 3 "$nodes_15_to_20"
+
+  run_config 6 11 12 0 "$nodes_9_to_14"
+  run_config 6 11 12 1 "$nodes_15_to_20"
+  run_config 6 11 12 2 "$nodes_9_to_14"
+  run_config 6 11 12 3 "$nodes_15_to_20"
+
+  run_config 6 11 16 0 "$nodes_9_to_14"
+  run_config 6 11 16 1 "$nodes_15_to_20"
+  run_config 6 11 16 2 "$nodes_9_to_14"
+  run_config 6 11 16 3 "$nodes_15_to_20"
+
+  run_config 6 11 20 0 "$nodes_9_to_14"
+  run_config 6 11 20 1 "$nodes_15_to_20"
+  run_config 6 11 20 2 "$nodes_9_to_14"
+  run_config 6 11 20 3 "$nodes_15_to_20"
+
+  run_config 6 11 24 0 "$nodes_9_to_14"
+  run_config 6 11 24 1 "$nodes_15_to_20"
+  run_config 6 11 24 2 "$nodes_9_to_14"
+  run_config 6 11 24 3 "$nodes_15_to_20"
+
+  run_config 6 11 32 0 "$nodes_9_to_14"
+  run_config 6 11 32 1 "$nodes_15_to_20"
+  run_config 6 11 32 2 "$nodes_9_to_14"
+  run_config 6 11 32 3 "$nodes_15_to_20"
 }
 
 function parallel_2 {
@@ -115,6 +195,11 @@ function parallel_2 {
   run_config 16 31 1 1 "$all_nodes"
   run_config 16 31 1 2 "$all_nodes"
   run_config 16 31 1 3 "$all_nodes"
+
+  run_config 16 31 2 0 "$all_nodes"
+  run_config 16 31 2 1 "$all_nodes"
+  run_config 16 31 2 2 "$all_nodes"
+  run_config 16 31 2 3 "$all_nodes"
 
   run_config 16 31 4 0 "$all_nodes"
   run_config 16 31 4 1 "$all_nodes"
@@ -136,6 +221,16 @@ function parallel_2 {
   run_config 16 31 16 2 "$all_nodes"
   run_config 16 31 16 3 "$all_nodes"
 
+  run_config 16 31 20 0 "$all_nodes"
+  run_config 16 31 20 1 "$all_nodes"
+  run_config 16 31 20 2 "$all_nodes"
+  run_config 16 31 20 3 "$all_nodes"
+
+  run_config 16 31 24 0 "$all_nodes"
+  run_config 16 31 24 1 "$all_nodes"
+  run_config 16 31 24 2 "$all_nodes"
+  run_config 16 31 24 3 "$all_nodes"
+
   run_config 16 31 32 0 "$all_nodes"
   run_config 16 31 32 1 "$all_nodes"
   run_config 16 31 32 2 "$all_nodes"
@@ -143,11 +238,11 @@ function parallel_2 {
 }
 
 function main {
-  sequential_1
+  sequential
   sleep 3 # Warranty that the previous jobs are already running
-  parallel_1_1
+  parallel_1
   sleep 3
-  parallel_2_1
+  parallel_2
 }
 
 main "$@"
