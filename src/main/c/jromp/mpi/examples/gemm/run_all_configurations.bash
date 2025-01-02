@@ -41,7 +41,7 @@ function run_config {
     run.slurm $n_tasks $MATRIX_SIZE $cpus_per_task $optimization_level $compiled_file
 }
 
-function sequential {
+function parallel_1 {
   run_config 1 2 1 0 "cn6009"
   run_config 1 2 1 1 "cn6010"
   run_config 1 2 1 2 "cn6011"
@@ -88,57 +88,60 @@ function sequential {
   run_config 1 2 32 3 "cn6020"
 }
 
-function parallel_1 {
-  local nodes_9_to_16="cn[6009-6016]"
-  local nodes_17_to_24="cn[6017-6024]"
+function parallel_5 {
+  local nodes_9_to_11="cn[6009-6011]"
+  local nodes_12_to_14="cn[6012-6014]"
+  local nodes_15_to_17="cn[6015-6017]"
+  local nodes_18_to_20="cn[6018-6020]"
+  local nodes_21_to_23="cn[6021-6023]"
 
-  run_config 8 16 1 0 "$nodes_9_to_16"
-  run_config 8 16 1 1 "$nodes_17_to_24"
-  run_config 8 16 1 2 "$nodes_9_to_16"
-  run_config 8 16 1 3 "$nodes_17_to_24"
+  run_config 3 6 1 0 "$nodes_9_to_11"
+  run_config 3 6 1 1 "$nodes_12_to_14"
+  run_config 3 6 1 2 "$nodes_15_to_17"
+  run_config 3 6 1 3 "$nodes_18_to_20"
 
-  run_config 8 16 2 0 "$nodes_9_to_16"
-  run_config 8 16 2 1 "$nodes_17_to_24"
-  run_config 8 16 2 2 "$nodes_9_to_16"
-  run_config 8 16 2 3 "$nodes_17_to_24"
+  run_config 3 6 2 0 "$nodes_21_to_23"
+  run_config 3 6 2 1 "$nodes_9_to_11"
+  run_config 3 6 2 2 "$nodes_12_to_14"
+  run_config 3 6 2 3 "$nodes_15_to_17"
 
-  run_config 8 16 4 0 "$nodes_9_to_16"
-  run_config 8 16 4 1 "$nodes_17_to_24"
-  run_config 8 16 4 2 "$nodes_9_to_16"
-  run_config 8 16 4 3 "$nodes_17_to_24"
+  run_config 3 6 4 0 "$nodes_18_to_20"
+  run_config 3 6 4 1 "$nodes_21_to_23"
+  run_config 3 6 4 2 "$nodes_9_to_11"
+  run_config 3 6 4 3 "$nodes_12_to_14"
 
-  run_config 8 16 8 0 "$nodes_9_to_16"
-  run_config 8 16 8 1 "$nodes_17_to_24"
-  run_config 8 16 8 2 "$nodes_9_to_16"
-  run_config 8 16 8 3 "$nodes_17_to_24"
+  run_config 3 6 8 0 "$nodes_15_to_17"
+  run_config 3 6 8 1 "$nodes_18_to_20"
+  run_config 3 6 8 2 "$nodes_21_to_23"
+  run_config 3 6 8 3 "$nodes_9_to_11"
 
-  run_config 8 16 12 0 "$nodes_9_to_16"
-  run_config 8 16 12 1 "$nodes_17_to_24"
-  run_config 8 16 12 2 "$nodes_9_to_16"
-  run_config 8 16 12 3 "$nodes_17_to_24"
+  run_config 3 6 12 0 "$nodes_12_to_14"
+  run_config 3 6 12 1 "$nodes_15_to_17"
+  run_config 3 6 12 2 "$nodes_18_to_20"
+  run_config 3 6 12 3 "$nodes_21_to_23"
 
-  run_config 8 16 16 0 "$nodes_9_to_16"
-  run_config 8 16 16 1 "$nodes_17_to_24"
-  run_config 8 16 16 2 "$nodes_9_to_16"
-  run_config 8 16 16 3 "$nodes_17_to_24"
+  run_config 3 6 16 0 "$nodes_9_to_11"
+  run_config 3 6 16 1 "$nodes_12_to_14"
+  run_config 3 6 16 2 "$nodes_15_to_17"
+  run_config 3 6 16 3 "$nodes_18_to_20"
 
-  run_config 8 16 20 0 "$nodes_9_to_16"
-  run_config 8 16 20 1 "$nodes_17_to_24"
-  run_config 8 16 20 2 "$nodes_9_to_16"
-  run_config 8 16 20 3 "$nodes_17_to_24"
+  run_config 3 6 20 0 "$nodes_21_to_23"
+  run_config 3 6 20 1 "$nodes_9_to_11"
+  run_config 3 6 20 2 "$nodes_12_to_14"
+  run_config 3 6 20 3 "$nodes_15_to_17"
 
-  run_config 8 16 24 0 "$nodes_9_to_16"
-  run_config 8 16 24 1 "$nodes_17_to_24"
-  run_config 8 16 24 2 "$nodes_9_to_16"
-  run_config 8 16 24 3 "$nodes_17_to_24"
+  run_config 3 6 24 0 "$nodes_18_to_20"
+  run_config 3 6 24 1 "$nodes_21_to_23"
+  run_config 3 6 24 2 "$nodes_15_to_17"
+  run_config 3 6 24 3 "$nodes_9_to_11"
 
-  run_config 8 16 32 0 "$nodes_9_to_16"
-  run_config 8 16 32 1 "$nodes_17_to_24"
-  run_config 8 16 32 2 "$nodes_9_to_16"
-  run_config 8 16 32 3 "$nodes_17_to_24"
+  run_config 3 6 32 0 "$nodes_12_to_14"
+  run_config 3 6 32 1 "$nodes_15_to_17"
+  run_config 3 6 32 2 "$nodes_18_to_20"
+  run_config 3 6 32 3 "$nodes_9_to_11"
 }
 
-function parallel_3 {
+function parallel_10 {
   local nodes_9_to_14="cn[6009-6014]"
   local nodes_15_to_20="cn[6015-6020]"
 
@@ -188,7 +191,152 @@ function parallel_3 {
   run_config 6 11 32 3 "$nodes_15_to_20"
 }
 
-function parallel_2 {
+function parallel_15 {
+  local nodes_9_to_16="cn[6009-6016]"
+  local nodes_17_to_24="cn[6017-6024]"
+
+  run_config 8 16 1 0 "$nodes_9_to_16"
+  run_config 8 16 1 1 "$nodes_17_to_24"
+  run_config 8 16 1 2 "$nodes_9_to_16"
+  run_config 8 16 1 3 "$nodes_17_to_24"
+
+  run_config 8 16 2 0 "$nodes_9_to_16"
+  run_config 8 16 2 1 "$nodes_17_to_24"
+  run_config 8 16 2 2 "$nodes_9_to_16"
+  run_config 8 16 2 3 "$nodes_17_to_24"
+
+  run_config 8 16 4 0 "$nodes_9_to_16"
+  run_config 8 16 4 1 "$nodes_17_to_24"
+  run_config 8 16 4 2 "$nodes_9_to_16"
+  run_config 8 16 4 3 "$nodes_17_to_24"
+
+  run_config 8 16 8 0 "$nodes_9_to_16"
+  run_config 8 16 8 1 "$nodes_17_to_24"
+  run_config 8 16 8 2 "$nodes_9_to_16"
+  run_config 8 16 8 3 "$nodes_17_to_24"
+
+  run_config 8 16 12 0 "$nodes_9_to_16"
+  run_config 8 16 12 1 "$nodes_17_to_24"
+  run_config 8 16 12 2 "$nodes_9_to_16"
+  run_config 8 16 12 3 "$nodes_17_to_24"
+
+  run_config 8 16 16 0 "$nodes_9_to_16"
+  run_config 8 16 16 1 "$nodes_17_to_24"
+  run_config 8 16 16 2 "$nodes_9_to_16"
+  run_config 8 16 16 3 "$nodes_17_to_24"
+
+  run_config 8 16 20 0 "$nodes_9_to_16"
+  run_config 8 16 20 1 "$nodes_17_to_24"
+  run_config 8 16 20 2 "$nodes_9_to_16"
+  run_config 8 16 20 3 "$nodes_17_to_24"
+
+  run_config 8 16 24 0 "$nodes_9_to_16"
+  run_config 8 16 24 1 "$nodes_17_to_24"
+  run_config 8 16 24 2 "$nodes_9_to_16"
+  run_config 8 16 24 3 "$nodes_17_to_24"
+
+  run_config 8 16 32 0 "$nodes_9_to_16"
+  run_config 8 16 32 1 "$nodes_17_to_24"
+  run_config 8 16 32 2 "$nodes_9_to_16"
+  run_config 8 16 32 3 "$nodes_17_to_24"
+}
+
+function parallel_20 {
+  local nodes_9_to_20="cn[6009-6020]"
+
+  run_config 11 21 1 0 "$nodes_9_to_20"
+  run_config 11 21 1 1 "$nodes_9_to_20"
+  run_config 11 21 1 2 "$nodes_9_to_20"
+  run_config 11 21 1 3 "$nodes_9_to_20"
+
+  run_config 11 21 2 0 "$nodes_9_to_20"
+  run_config 11 21 2 1 "$nodes_9_to_20"
+  run_config 11 21 2 2 "$nodes_9_to_20"
+  run_config 11 21 2 3 "$nodes_9_to_20"
+
+  run_config 11 21 4 0 "$nodes_9_to_20"
+  run_config 11 21 4 1 "$nodes_9_to_20"
+  run_config 11 21 4 2 "$nodes_9_to_20"
+  run_config 11 21 4 3 "$nodes_9_to_20"
+
+  run_config 11 21 8 0 "$nodes_9_to_20"
+  run_config 11 21 8 1 "$nodes_9_to_20"
+  run_config 11 21 8 2 "$nodes_9_to_20"
+  run_config 11 21 8 3 "$nodes_9_to_20"
+
+  run_config 11 21 12 0 "$nodes_9_to_20"
+  run_config 11 21 12 1 "$nodes_9_to_20"
+  run_config 11 21 12 2 "$nodes_9_to_20"
+  run_config 11 21 12 3 "$nodes_9_to_20"
+
+  run_config 11 21 16 0 "$nodes_9_to_20"
+  run_config 11 21 16 1 "$nodes_9_to_20"
+  run_config 11 21 16 2 "$nodes_9_to_20"
+  run_config 11 21 16 3 "$nodes_9_to_20"
+
+  run_config 11 21 20 0 "$nodes_9_to_20"
+  run_config 11 21 20 1 "$nodes_9_to_20"
+  run_config 11 21 20 2 "$nodes_9_to_20"
+  run_config 11 21 20 3 "$nodes_9_to_20"
+
+  run_config 11 21 24 0 "$nodes_9_to_20"
+  run_config 11 21 24 1 "$nodes_9_to_20"
+  run_config 11 21 24 2 "$nodes_9_to_20"
+  run_config 11 21 24 3 "$nodes_9_to_20"
+
+  run_config 11 21 32 0 "$nodes_9_to_20"
+  run_config 11 21 32 1 "$nodes_9_to_20"
+  run_config 11 21 32 2 "$nodes_9_to_20"
+  run_config 11 21 32 3 "$nodes_9_to_20"
+}
+
+function parallel_25 {
+  local nodes_9_to_21="cn[6009-6021]"
+
+  run_config 13 26 1 0 "$nodes_9_to_21"
+  run_config 13 26 1 1 "$nodes_9_to_21"
+  run_config 13 26 1 2 "$nodes_9_to_21"
+  run_config 13 26 1 3 "$nodes_9_to_21"
+
+  run_config 13 26 2 0 "$nodes_9_to_21"
+  run_config 13 26 2 1 "$nodes_9_to_21"
+  run_config 13 26 2 2 "$nodes_9_to_21"
+  run_config 13 26 2 3 "$nodes_9_to_21"
+
+  run_config 13 26 4 0 "$nodes_9_to_21"
+  run_config 13 26 4 1 "$nodes_9_to_21"
+  run_config 13 26 4 2 "$nodes_9_to_21"
+  run_config 13 26 4 3 "$nodes_9_to_21"
+
+  run_config 13 26 8 0 "$nodes_9_to_21"
+  run_config 13 26 8 1 "$nodes_9_to_21"
+  run_config 13 26 8 2 "$nodes_9_to_21"
+  run_config 13 26 8 3 "$nodes_9_to_21"
+
+  run_config 13 26 12 0 "$nodes_9_to_21"
+  run_config 13 26 12 1 "$nodes_9_to_21"
+  run_config 13 26 12 2 "$nodes_9_to_21"
+  run_config 13 26 12 3 "$nodes_9_to_21"
+
+  run_config 13 26 16 0 "$nodes_9_to_21"
+  run_config 13 26 16 1 "$nodes_9_to_21"
+  run_config 13 26 16 2 "$nodes_9_to_21"
+  run_config 13 26 16 3 "$nodes_9_to_21"
+
+  # 20 threads cannot divide
+
+  run_config 13 26 24 0 "$nodes_9_to_21"
+  run_config 13 26 24 1 "$nodes_9_to_21"
+  run_config 13 26 24 2 "$nodes_9_to_21"
+  run_config 13 26 24 3 "$nodes_9_to_21"
+
+  run_config 13 26 32 0 "$nodes_9_to_21"
+  run_config 13 26 32 1 "$nodes_9_to_21"
+  run_config 13 26 32 2 "$nodes_9_to_21"
+  run_config 13 26 32 3 "$nodes_9_to_21"
+}
+
+function parallel_30 {
   local all_nodes="cn[6009-6024]"
 
   run_config 16 31 1 0 "$all_nodes"
@@ -238,11 +386,19 @@ function parallel_2 {
 }
 
 function main {
-  sequential
-  sleep 3 # Warranty that the previous jobs are already running
-  parallel_1
-  sleep 3
-  parallel_2
+  #  parallel_1
+  #  sleep 2
+  parallel_5
+  sleep 2
+  parallel_10
+  sleep 2
+  #  parallel_15
+  #  sleep 2
+  parallel_20
+  sleep 2
+  parallel_25
+  sleep 2
+  #  parallel_30
 }
 
 main "$@"
