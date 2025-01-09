@@ -17,7 +17,6 @@ import java.util.Objects;
 
 import static jromp.JROMP.getNumThreads;
 import static jromp.JROMP.getThreadNum;
-import static jromp.JROMP.getWTime;
 import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
 import static jromp.mpi.examples.gemm.Tags.FINISH_TAG;
 
@@ -98,18 +97,18 @@ public class Gemm {
             LOG_MASTER("******* Matrix Initialization *******\n");
             LOG_MASTER("*************************************\n");
 
-            double initializationStart = getWTime();
+            double initializationStart = JROMP.getWTime();
 
             // Initialize matrices
             matrixInitialization(A, B, N);
 
-            double initializationEnd = getWTime();
+            double initializationEnd = JROMP.getWTime();
             LOG_MASTER("Time to initialize the matrices: %fs\n", initializationEnd - initializationStart);
 
             LOG_MASTER("*************************************\n");
             LOG_MASTER("****** Sending data to workers ******\n");
             LOG_MASTER("*************************************\n");
-            double sendDataStart = getWTime();
+            double sendDataStart = MPI.wtime();
 
             Request[] requests = new Request[2 * workers];
 
@@ -125,7 +124,7 @@ public class Gemm {
             }
 
             Request.waitAll(requests);
-            double sendDataEnd = getWTime();
+            double sendDataEnd = MPI.wtime();
             LOG_MASTER("Time to send data to workers: %fs\n", sendDataEnd - sendDataStart);
 
             LOG_MASTER("*************************************\n");
@@ -147,7 +146,8 @@ public class Gemm {
 
                     LOG_MASTER("Worker %d has finished\n", status.getSource());
                     endedWorkers++;
-                } else { // Unexpected message
+                } else {
+                    // Unexpected message
                     MPI.COMM_WORLD.abort(EXIT_FAILURE);
                     LOG_MASTER("Unexpected message\n");
 
@@ -251,12 +251,25 @@ public class Gemm {
         Objects.requireNonNull(a);
         Objects.requireNonNull(b);
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                a[i * n + j] = randomInRange(1, 1000);
-                b[i * n + j] = randomInRange(1, 1000);
-            }
-        }
+        SharedVariable<double[]> vA = new SharedVariable<>(a);
+        SharedVariable<double[]> vB = new SharedVariable<>(b);
+        SharedVariable<Integer> vN = new SharedVariable<>(n);
+
+        JROMP.withThreads(threads)
+             .registerVariables(vA, vB, vN)
+             .parallelFor(0, n, false, n > 10_000, (start, end) -> {
+                 double[] A = vA.value();
+                 double[] B = vB.value();
+                 int N = vN.value();
+
+                 for (int i = start; i < end; i++) {
+                     for (int j = 0; j < N; j++) {
+                         A[i * N + j] = randomInRange(1, 1000);
+                         B[i * N + j] = randomInRange(1, 1000);
+                     }
+                 }
+             })
+             .join();
     }
 
     private static int randomInRange(int min, int max) {
@@ -264,7 +277,7 @@ public class Gemm {
     }
 
     private static void setRandomSeedSecure(int rank) {
-        random.setSeed(System.nanoTime() ^ System.currentTimeMillis() / 1000 ^ rank);
+        random.setSeed(System.nanoTime() ^ (System.currentTimeMillis() / 1000) ^ rank);
     }
 
     public static void printf(String format, Object... args) {
