@@ -386,19 +386,19 @@ function parallel_30 {
 }
 
 function main {
-  #  parallel_1
-  #  sleep 2
+  parallel_1
+  sleep 2
   parallel_5
   sleep 2
   parallel_10
   sleep 2
-  #  parallel_15
-  #  sleep 2
+  parallel_15
+  sleep 2
   parallel_20
   sleep 2
   parallel_25
   sleep 2
-  #  parallel_30
+  parallel_30
 }
 
 main "$@"
