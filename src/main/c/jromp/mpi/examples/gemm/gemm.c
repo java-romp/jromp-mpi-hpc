@@ -73,10 +73,10 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("*************************************\n");
         LOG_MASTER("******* Matrix Initialization *******\n");
         LOG_MASTER("*************************************\n");
-        START_MPI_TIMER(initialization)
+        START_OMP_TIMER(initialization)
             matrix_initialization(a, b, N);
-        STOP_MPI_TIMER(initialization)
-        LOG_MASTER("Time to initialize the matrices: %fs\n", GET_MPI_TIMER(initialization));
+        STOP_OMP_TIMER(initialization)
+        LOG_MASTER("Time to initialize the matrices: %fs\n", GET_OMP_TIMER(initialization));
 
         LOG_MASTER("*************************************\n");
         LOG_MASTER("****** Sending data to workers ******\n");
