@@ -1,0 +1,442 @@
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6013:3395749] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6013:3395749] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6013:3395749:0:3395754] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6011:1739056] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6011:1739056] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6011:1739056:0:1739064] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+fatal flex scanner internal error--end of buffer missed
+fatal flex scanner internal error--end of buffer missed
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733647] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733647] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6012:3733648] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6012:3733648] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6012:3733647:0:3733653] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+[cn6012:3733648:0:3733656] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+fatal flex scanner internal error--end of buffer missed
+==== backtrace (tid:3733656) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+ 1 0x00000000000638f1 _getnb_cbfunc()  pmix_client_get.c:0
+ 2 0x00000000001a8490 pmix_ptl_base_process_msg()  ???:0
+ 3 0x000000000001c6f0 event_process_active_single_queue()  event.c:0
+ 4 0x000000000001ce6f event_base_loop()  ???:0
+ 5 0x00000000000baf49 progress_engine()  pmix_progress_threads.c:0
+ 6 0x00000000000081cf start_thread()  ???:0
+ 7 0x0000000000039dd3 __GI___clone()  :0
+=================================
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6010:1968391] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6010:1968391] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6010:1968391:0:1968396] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+fatal flex scanner internal error--end of buffer missed
+fatal flex scanner internal error--end of buffer missed
+double free or corruption (top)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085015] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6016:3085014] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6016:3085014] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6016:3085015:0:3085021] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+[cn6016:3085014:0:3085024] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+double free or corruption (out)
+input in flex scanner failed
+[cn6016:3085015] *** Process received signal ***
+[cn6016:3085015] Signal: Aborted (6)
+[cn6016:3085015] Signal code:  (-6)
+==== backtrace (tid:3085024) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+ 1 0x00000000000638f1 _getnb_cbfunc()  pmix_client_get.c:0
+ 2 0x00000000001a8490 pmix_ptl_base_process_msg()  ???:0
+ 3 0x000000000001c6f0 event_process_active_single_queue()  event.c:0
+ 4 0x000000000001ce6f event_base_loop()  ???:0
+ 5 0x00000000000baf49 progress_engine()  pmix_progress_threads.c:0
+ 6 0x00000000000081cf start_thread()  ???:0
+ 7 0x0000000000039dd3 __GI___clone()  :0
+=================================
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398568] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398568:0:3398577] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6015:3398569] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6015:3398569] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6015:3398569:0:3398574] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+double free or corruption (out)
+[cn6015:3398569] *** Process received signal ***
+[cn6015:3398569] Signal: Aborted (6)
+[cn6015:3398569] Signal code:  (-6)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414616] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414616:0:3414625] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file base/bfrop_base_copy.c at line 43
+[cn6014:3414617] PMIX ERROR: PMIX_ERR_BAD_PARAM in file client/pmix_client_get.c at line 477
+[cn6014:3414617] pml_ucx.c:188  Error: Failed to receive UCX worker address: Take next option (-46)
+[cn6014:3414617:0:3414622] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x275)
+[cn6015:3398569] [ 0] /lib64/libpthread.so.0(+0x12ce0)[0x1466d1852ce0]
+[cn6015:3398569] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x1466d14c9a9f]
+[cn6015:3398569] [ 2] /lib64/libc.so.6(abort+0x127)[0x1466d149ce05]
+[cn6015:3398569] [ 3] /lib64/libc.so.6(+0x91037)[0x1466d150c037]
+[cn6015:3398569] [ 4] /lib64/libc.so.6(+0x9819c)[0x1466d151319c]
+[cn6015:3398569] [ 5] /lib64/libc.so.6(+0x99f40)[0x1466d1514f40]
+[cn6015:3398569] [ 6] /lib64/libc.so.6(fclose+0xa5)[0x1466d15022d5]
+[cn6015:3398569] [ 7] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80(opal_show_help_vstring+0x33a)[0x1466d1efc44a]
+[cn6015:3398569] [ 8] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80(+0x5a5f2)[0x1466d1efc5f2]
+[cn6015:3398569] [ 9] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80(+0x59dd6)[0x1466d1efbdd6]
+[cn6015:3398569] [10] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40(+0x8b50b)[0x1466d1aeb50b]
+[cn6015:3398569] [11] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40(ompi_mpi_errors_are_fatal_comm_handler+0xc7)[0x1466d1aebd37]
+[cn6015:3398569] [12] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40(ompi_errhandler_invoke+0x165)[0x1466d1aeb0d5]
+[cn6015:3398569] [13] /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40(MPI_Isend+0x275)[0x1466d1b2e925]
+[cn6015:3398569] [14] ./gemm_8_16_28800_12_0[0x402213]
+[cn6015:3398569] [15] /soft/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libgomp.so.1(+0x1c1d6)[0x1466d20081d6]
+[cn6015:3398569] [16] /lib64/libpthread.so.0(+0x81cf)[0x1466d18481cf]
+[cn6015:3398569] [17] /lib64/libc.so.6(clone+0x43)[0x1466d14b4dd3]
+[cn6015:3398569] *** End of error message ***
+==== backtrace (tid:3414622) ====
+ 0 0x0000000000012ce0 __funlockfile()  :0
+ 1 0x00000000000638f1 _getnb_cbfunc()  pmix_client_get.c:0
+ 2 0x00000000001a8490 pmix_ptl_base_process_msg()  ???:0
+ 3 0x000000000001c6f0 event_process_active_single_queue()  event.c:0
+ 4 0x000000000001ce6f event_base_loop()  ???:0
+ 5 0x00000000000baf49 progress_engine()  pmix_progress_threads.c:0
+ 6 0x00000000000081cf start_thread()  ???:0
+ 7 0x0000000000039dd3 __GI___clone()  :0
+=================================
+--------------------------------------------------------------------------
+prterun noticed that process rank 9 with PID 3395749 on node cn6013 exited on
+signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
