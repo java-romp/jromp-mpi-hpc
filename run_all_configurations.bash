@@ -135,18 +135,15 @@ function parallel_30 {
 
 function main {
   parallel_1
-  sleep 2
+  sleep 2 # Ensure that the previous jobs are submitted before the next ones
   parallel_5
-  sleep 2
   parallel_10
-  sleep 2
   parallel_15
-  sleep 2
   parallel_20
-  sleep 2
   parallel_25
-  sleep 2
   parallel_30
 }
 
 main "$@"
+
+# Last revision (scastd): 16/01/2025 03:47:00
