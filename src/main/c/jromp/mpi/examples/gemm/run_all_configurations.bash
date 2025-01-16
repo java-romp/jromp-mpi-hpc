@@ -72,11 +72,6 @@ function parallel_1 {
   run_config 1 2 16 2 "cn6015"
   run_config 1 2 16 3 "cn6016"
 
-  run_config 1 2 20 0 "cn6017"
-  run_config 1 2 20 1 "cn6018"
-  run_config 1 2 20 2 "cn6019"
-  run_config 1 2 20 3 "cn6020"
-
   run_config 1 2 24 0 "cn6021"
   run_config 1 2 24 1 "cn6022"
   run_config 1 2 24 2 "cn6023"
@@ -125,11 +120,6 @@ function parallel_5 {
   run_config 3 6 16 2 "$nodes_15_to_17"
   run_config 3 6 16 3 "$nodes_18_to_20"
 
-  run_config 3 6 20 0 "$nodes_21_to_23"
-  run_config 3 6 20 1 "$nodes_9_to_11"
-  run_config 3 6 20 2 "$nodes_12_to_14"
-  run_config 3 6 20 3 "$nodes_15_to_17"
-
   run_config 3 6 24 0 "$nodes_18_to_20"
   run_config 3 6 24 1 "$nodes_21_to_23"
   run_config 3 6 24 2 "$nodes_15_to_17"
@@ -174,11 +164,6 @@ function parallel_10 {
   run_config 6 11 16 1 "$nodes_15_to_20"
   run_config 6 11 16 2 "$nodes_9_to_14"
   run_config 6 11 16 3 "$nodes_15_to_20"
-
-  run_config 6 11 20 0 "$nodes_9_to_14"
-  run_config 6 11 20 1 "$nodes_15_to_20"
-  run_config 6 11 20 2 "$nodes_9_to_14"
-  run_config 6 11 20 3 "$nodes_15_to_20"
 
   run_config 6 11 24 0 "$nodes_9_to_14"
   run_config 6 11 24 1 "$nodes_15_to_20"
@@ -225,11 +210,6 @@ function parallel_15 {
   run_config 8 16 16 2 "$nodes_9_to_16"
   run_config 8 16 16 3 "$nodes_17_to_24"
 
-  run_config 8 16 20 0 "$nodes_9_to_16"
-  run_config 8 16 20 1 "$nodes_17_to_24"
-  run_config 8 16 20 2 "$nodes_9_to_16"
-  run_config 8 16 20 3 "$nodes_17_to_24"
-
   run_config 8 16 24 0 "$nodes_9_to_16"
   run_config 8 16 24 1 "$nodes_17_to_24"
   run_config 8 16 24 2 "$nodes_9_to_16"
@@ -273,11 +253,6 @@ function parallel_20 {
   run_config 11 21 16 1 "$nodes_9_to_20"
   run_config 11 21 16 2 "$nodes_9_to_20"
   run_config 11 21 16 3 "$nodes_9_to_20"
-
-  run_config 11 21 20 0 "$nodes_9_to_20"
-  run_config 11 21 20 1 "$nodes_9_to_20"
-  run_config 11 21 20 2 "$nodes_9_to_20"
-  run_config 11 21 20 3 "$nodes_9_to_20"
 
   run_config 11 21 24 0 "$nodes_9_to_20"
   run_config 11 21 24 1 "$nodes_9_to_20"
@@ -323,8 +298,6 @@ function parallel_25 {
   run_config 13 26 16 2 "$nodes_9_to_21"
   run_config 13 26 16 3 "$nodes_9_to_21"
 
-  # 20 threads cannot divide
-
   run_config 13 26 24 0 "$nodes_9_to_21"
   run_config 13 26 24 1 "$nodes_9_to_21"
   run_config 13 26 24 2 "$nodes_9_to_21"
@@ -369,11 +342,6 @@ function parallel_30 {
   run_config 16 31 16 2 "$all_nodes"
   run_config 16 31 16 3 "$all_nodes"
 
-  run_config 16 31 20 0 "$all_nodes"
-  run_config 16 31 20 1 "$all_nodes"
-  run_config 16 31 20 2 "$all_nodes"
-  run_config 16 31 20 3 "$all_nodes"
-
   run_config 16 31 24 0 "$all_nodes"
   run_config 16 31 24 1 "$all_nodes"
   run_config 16 31 24 2 "$all_nodes"
@@ -387,18 +355,15 @@ function parallel_30 {
 
 function main {
   parallel_1
-  sleep 2
+  sleep 2 # Ensure that the previous jobs are submitted before the next ones
   parallel_5
-  sleep 2
   parallel_10
-  sleep 2
   parallel_15
-  sleep 2
   parallel_20
-  sleep 2
   parallel_25
-  sleep 2
   parallel_30
 }
 
 main "$@"
+
+# Last revision (scastd): 16/01/2025 03:47:00
