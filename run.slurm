@@ -8,7 +8,7 @@
 #SBATCH --qos=normal                                   # QOS to launch this partition (5 days max)
 #SBATCH --time=5-00:00:00                              # Estimated maximum time for the job
 #SBATCH --mail-user=scastd00@estudiantes.unileon.es    # Mail to receive info (start/cancel/end)
-#SBATCH --mail-type=FAIL                               # We want to receive all the failures
+#SBATCH --mail-type=FAIL,END                           # We want to receive all the failures and end information
 #SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
 
 # ---------------------------------------------------- #
@@ -75,5 +75,3 @@ other_args="${*:2}"
 $MPI_RUN_EXECUTABLE --bind-to none -np "$SLURM_NTASKS" java $JAVA_OPTS -cp "$CLASSPATH" "$fq_class_name" "$other_args"
 
 # See why I execute mpirun directly: https://docs.open-mpi.org/en/main/launching-apps/slurm.html
-# Linpack hpl  Jack Dongarra
-# https://github.com/maxhutch/homb

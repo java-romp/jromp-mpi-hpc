@@ -8,7 +8,7 @@
 #SBATCH --qos=normal                                   # QOS to launch this partition (5 days max)
 #SBATCH --time=5-00:00:00                              # Estimated maximum time for the job
 #SBATCH --mail-user=scastd00@estudiantes.unileon.es    # Mail to receive info (start/cancel/end)
-#SBATCH --mail-type=FAIL                               # We want to receive all the failures
+#SBATCH --mail-type=FAIL,END                           # We want to receive all the failures and end information
 #SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
 
 # ---------------------------------------------------- #
@@ -77,3 +77,5 @@ echo ""
 echo ""
 
 $MPIEXEC --bind-to none -np "$1" ./"$COMPILED_CODE" "$2" "$3" "$4"
+
+# See why I execute mpirun directly: https://docs.open-mpi.org/en/main/launching-apps/slurm.html
