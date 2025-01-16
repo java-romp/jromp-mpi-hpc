@@ -54,18 +54,18 @@ int main(int argc, char *argv[]) {
     MPI_Barrier(MPI_COMM_WORLD);
 
     const int rows_per_worker = N / workers; // Exclude the master process
-    double *a;
-    double *b;
-    double *c;
+    double *A;
+    double *B;
+    double *C;
 
     if (rank == MASTER_RANK) {
         // Only master process allocates memory for all complete matrices
-        a = malloc(N * N * sizeof(double));
-        b = malloc(N * N * sizeof(double));
-        c = malloc(N * N * sizeof(double));
+        A = malloc(N * N * sizeof(double));
+        B = malloc(N * N * sizeof(double));
+        C = malloc(N * N * sizeof(double));
 
         // Check memory allocation
-        if (a == NULL || b == NULL || c == NULL) {
+        if (A == NULL || B == NULL || C == NULL) {
             perror("Error: malloc failed\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("******* Matrix Initialization *******\n");
         LOG_MASTER("*************************************\n");
         START_OMP_TIMER(initialization)
-            matrix_initialization(a, b, N);
+            matrix_initialization(A, B, N);
         STOP_OMP_TIMER(initialization)
         LOG_MASTER("Time to initialize the matrices: %fs\n", GET_OMP_TIMER(initialization));
 
@@ -86,9 +86,9 @@ int main(int argc, char *argv[]) {
 
             // Distribute rows of A to workers and send matrix B to all workers
             for (int i = 1; i < size; i++) {
-                MPI_Isend(&a[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG,
+                MPI_Isend(&A[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG,
                           MPI_COMM_WORLD, &requests[i - 1]);
-                MPI_Isend(b, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &requests[workers + i - 1]);
+                MPI_Isend(B, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &requests[workers + i - 1]);
             }
 
             MPI_Waitall(2 * workers, requests, MPI_STATUSES_IGNORE);
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
                 MPI_Probe(MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 
                 if (status.MPI_TAG == FINISH_TAG) {
-                    MPI_Recv(&c[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
+                    MPI_Recv(&C[(status.MPI_SOURCE - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE,
                              status.MPI_SOURCE, FINISH_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
                     LOG_MASTER("Worker %d has finished\n", status.MPI_SOURCE);
@@ -118,9 +118,9 @@ int main(int argc, char *argv[]) {
                     LOG_MASTER("Unexpected message\n");
 
                     // Free memory and exit
-                    free(a);
-                    free(b);
-                    free(c);
+                    free(A);
+                    free(B);
+                    free(C);
 
                     exit(EXIT_FAILURE);
                 }
@@ -132,34 +132,35 @@ int main(int argc, char *argv[]) {
         write_execution_configuration_to_file(N, workers, threads, optimization_level, GET_MPI_TIMER(calculations));
     } else {
         // Workers allocate memory for their part of the matrices
-        a = malloc(rows_per_worker * N * sizeof(double));
-        b = malloc(N * N * sizeof(double)); // All workers need the matrix B
-        c = malloc(rows_per_worker * N * sizeof(double));
+        A = malloc(rows_per_worker * N * sizeof(double));
+        B = malloc(N * N * sizeof(double)); // All workers need the matrix B
+        C = malloc(rows_per_worker * N * sizeof(double));
 
         // Check memory allocation
-        if (a == NULL || b == NULL || c == NULL) {
+        if (A == NULL || B == NULL || C == NULL) {
             perror("Error: malloc failed\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
 
         // Receive rows of A and matrix B
-        MPI_Recv(a, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        MPI_Recv(b, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(A, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(B, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
         // Perform matrix multiplication
-        gemm(a, b, c, rows_per_worker);
+        gemm(A, B, C, rows_per_worker);
+        // C is filled during multiplication
 
         // Send results back to master process
-        MPI_Send(c, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
+        MPI_Send(C, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, FINISH_TAG, MPI_COMM_WORLD);
     }
 
     // Free memory
-    free(a);
-    free(b);
-    free(c);
+    free(A);
+    free(B);
+    free(C);
 
     MPI_Finalize();
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 WORKER void gemm(const double *a, const double *b, double *c, const int rows_per_worker) {
@@ -199,3 +200,5 @@ MASTER void matrix_initialization(double *a, double *b, const int n) {
         }
     }
 }
+
+// Last revision (scastd): 16/01/2025 03:38:00

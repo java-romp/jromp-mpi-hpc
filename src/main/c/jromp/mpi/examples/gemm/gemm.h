@@ -128,9 +128,12 @@ static void write_execution_configuration_to_file(const int n, const int workers
 }
 
 /**
- * Sets a secure random seed based on the current time.
+ * Sets the random seed securely.
+ * The seed is generated using the current time and the rank of the process.
  *
- * @see https://wiki.sei.cmu.edu/confluence/display/c/MSC32-C.+Properly+seed+pseudorandom+number+generators
+ * NOTE: <a href="https://wiki.sei.cmu.edu/confluence/display/c/MSC32-C.+Properly+seed+pseudorandom+number+generators">MSC32-C</a>
+ *
+ * @param rank The rank of the process.
  */
 static void set_random_seed_secure(const int rank) {
     struct timespec ts;
@@ -144,3 +147,5 @@ static void set_random_seed_secure(const int rank) {
 }
 
 #endif // GEMM_H
+
+// Last revision (scastd): 16/01/2025 03:38:00
