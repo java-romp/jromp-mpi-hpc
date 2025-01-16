@@ -15,8 +15,6 @@ import java.nio.DoubleBuffer;
 import java.security.SecureRandom;
 import java.util.Objects;
 
-import static jromp.JROMP.getNumThreads;
-import static jromp.JROMP.getThreadNum;
 import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
 import static jromp.mpi.examples.gemm.Tags.FINISH_TAG;
 
@@ -75,7 +73,7 @@ public class Gemm {
 
         // Check that all ranks have the same number of threads
         JROMP.withThreads(threads)
-             .masked(() -> printf("Number of threads of rank %d: %d\n", rank, getNumThreads()))
+             .masked(() -> printf("Number of threads of rank %d: %d\n", rank, JROMP.getNumThreads()))
              .join();
 
         MPI.COMM_WORLD.barrier();
@@ -98,10 +96,7 @@ public class Gemm {
             LOG_MASTER("*************************************\n");
 
             double initializationStart = JROMP.getWTime();
-
-            // Initialize matrices
             matrixInitialization(A, B, N);
-
             double initializationEnd = JROMP.getWTime();
             LOG_MASTER("Time to initialize the matrices: %fs\n", initializationEnd - initializationStart);
 
@@ -109,7 +104,6 @@ public class Gemm {
             LOG_MASTER("****** Sending data to workers ******\n");
             LOG_MASTER("*************************************\n");
             double sendDataStart = MPI.wtime();
-
             Request[] requests = new Request[2 * workers];
 
             DoubleBuffer bufferA = MPI.newDoubleBuffer(N * N).put(A);
@@ -154,7 +148,6 @@ public class Gemm {
                     System.exit(EXIT_FAILURE);
                 }
             } while (endedWorkers < workers);
-
             double calculationsEnd = MPI.wtime();
             double calculationsTimer = calculationsEnd - calculationsStart;
             LOG_MASTER("Time to do the calculations: %f\n", calculationsTimer);
@@ -179,7 +172,7 @@ public class Gemm {
 
             // Perform matrix multiplication
             gemm(A, B, C, rowsPerWorker);
-            // bufferC is filled when the matrix multiplication is done
+            // bufferC is filled during multiplication
 
             // Send results back to master process
             MPI.COMM_WORLD.send(bufferC, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, FINISH_TAG);
@@ -193,7 +186,7 @@ public class Gemm {
         MPI.Finalize();
     }
 
-    private static void gemm(double[] a, double[] b, double[] c, int rowsPerWorker) {
+    private static void gemm(final double[] a, final double[] b, double[] c, final int rowsPerWorker) {
         Objects.requireNonNull(a);
         Objects.requireNonNull(b);
         Objects.requireNonNull(c);
@@ -227,7 +220,8 @@ public class Gemm {
              .join();
     }
 
-    private static void writeExecutionConfigurationToFile(int n, int workers, int threads, double time) {
+    private static void writeExecutionConfigurationToFile(final int n, final int workers,
+                                                          final int threads, final double time) {
         File file = new File("execution_configs_java.csv");
 
         try {
@@ -239,7 +233,7 @@ public class Gemm {
             }
 
             // Add the content to the end of the file
-            try (FileWriter writer = new FileWriter(file, true)) { // Append mode
+            try (FileWriter writer = new FileWriter(file, true)) { // Enable append mode
                 writer.write(String.format("%d,%d,%d,%d,%f%n", n, workers, threads, workers * threads, time));
             }
         } catch (IOException e) {
@@ -247,7 +241,7 @@ public class Gemm {
         }
     }
 
-    private static void matrixInitialization(double[] a, double[] b, int n) {
+    private static void matrixInitialization(double[] a, double[] b, final int n) {
         Objects.requireNonNull(a);
         Objects.requireNonNull(b);
 
@@ -272,11 +266,27 @@ public class Gemm {
              .join();
     }
 
-    private static int randomInRange(int min, int max) {
+    /**
+     * Generates a random integer in the range [min, max].
+     *
+     * @param min The minimum value.
+     * @param max The maximum value.
+     *
+     * @return The random integer.
+     */
+    private static int randomInRange(final int min, final int max) {
         return random.nextInt(min, max + 1);
     }
 
-    private static void setRandomSeedSecure(int rank) {
+    /**
+     * Sets the random seed securely.
+     * The seed is generated using the current time and the rank of the process.
+     * <p>
+     * NOTE: <a href="https://wiki.sei.cmu.edu/confluence/display/c/MSC32-C.+Properly+seed+pseudorandom+number+generators">MSC32-C</a>
+     *
+     * @param rank The rank of the process.
+     */
+    private static void setRandomSeedSecure(final int rank) {
         random.setSeed(System.nanoTime() ^ (System.currentTimeMillis() / 1000) ^ rank);
     }
 
@@ -292,13 +302,15 @@ public class Gemm {
 
     public static void LOG_WORKER(String format, Object... args) {
         if (rank != 0) {
-            if (getNumThreads() == 1) {
+            if (JROMP.getNumThreads() == 1) {
                 printf("   Worker %02d: %s", rank, String.format(format, args));
             } else {
                 synchronized (printLock) {
-                    printf("Worker %02d-%02d: %s", rank, getThreadNum(), String.format(format, args));
+                    printf("Worker %02d-%02d: %s", rank, JROMP.getThreadNum(), String.format(format, args));
                 }
             }
         }
     }
 }
+
+// Last revision (scastd): 16/01/2025 03:38:00
