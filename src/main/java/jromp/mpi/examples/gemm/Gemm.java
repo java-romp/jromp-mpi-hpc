@@ -50,7 +50,7 @@ public class Gemm {
         provided = MPI.InitThread(args, required);
 
         if (provided < required) {
-            printf("Error: MPI does not provide the required thread support\n");
+            System.err.print("Error: MPI does not provide the required thread support\n");
             MPI.COMM_WORLD.abort(EXIT_FAILURE);
             System.exit(EXIT_FAILURE);
         }
@@ -77,7 +77,7 @@ public class Gemm {
 
         MPI.COMM_WORLD.barrier();
 
-        int rowsPerWorker = N / workers; // Exclude the master process
+        final int rowsPerWorker = N / workers; // Exclude the master process
         double[] A;
         double[] B;
         double[] C;
@@ -300,4 +300,4 @@ public class Gemm {
     }
 }
 
-// Last revision (scastd): 16/01/2025 03:38:00
+// Last revision (scastd): 17/01/2025 13:53

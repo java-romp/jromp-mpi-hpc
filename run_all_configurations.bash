@@ -25,7 +25,7 @@ function run_config {
   local n_tasks=$2
   local cpus_per_task=$3
   local node_list_str=$4
-  local main_class="jromp.mpi.examples.FullParallel"
+  local main_class="jromp.mpi.examples.gemm.Gemm"
 
   echo "Running configuration: nodes=$nodes, n_tasks=$n_tasks, cpus_per_task=$cpus_per_task, node_list=$node_list_str"
 

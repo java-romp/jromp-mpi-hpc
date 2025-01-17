@@ -1,0 +1,2179 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x000014a98097a6fb (sent by kill), pid=1756418, tid=1756421
+#
+# JRE version: OpenJDK Runtime Environment Temurin-21.0.2+13 (21.0.2+13) (build 21.0.2+13-LTS)
+# Java VM: OpenJDK 64-Bit Server VM Temurin-21.0.2+13 (21.0.2+13-LTS, mixed mode, sharing, compressed class ptrs, parallel gc, linux-amd64)
+# Problematic frame:
+# J 146% c2 jromp.JROMP.join()V (80 bytes) @ 0x000014a98097a6fb [0x000014a98097a660+0x000000000000009b]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e" (or dumping to /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/core.1756418)
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/adoptium/adoptium-support/issues
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Djava.library.path=/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib -XX:+UseParallelGC -XX:-TieredCompilation -Xmx32G jromp.mpi.examples.gemm.Gemm 28800 32
+
+Host: Intel(R) Xeon(R) Platinum 8358P CPU @ 2.60GHz, 64 cores, 251G, Rocky Linux release 8.6 (Green Obsidian)
+Time: Thu Jan 16 15:28:37 2025 CET elapsed time: 297.695016 seconds (0d 0h 4m 57s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000014a98c0299f0):  JavaThread "main"             [_thread_in_Java, id=1756421, stack(0x000014a995569000,0x000014a99566a000) (1028K)]
+
+Stack: [0x000014a995569000,0x000014a99566a000],  sp=0x000014a995668820,  free space=1022k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+J 146% c2 jromp.JROMP.join()V (80 bytes) @ 0x000014a98097a6fb [0x000014a98097a660+0x000000000000009b]
+j  jromp.mpi.examples.gemm.Gemm.matrixInitialization([D[DI)V+97
+j  jromp.mpi.examples.gemm.Gemm.main([Ljava/lang/String;)V+255
+v  ~StubRoutines::call_stub 0x000014a9808bdcbf
+V  [libjvm.so+0x902735]  JavaCalls::call_helper(JavaValue*, methodHandle const&, JavaCallArguments*, JavaThread*)+0x2e5
+V  [libjvm.so+0x9ab5c0]  jni_invoke_static(JNIEnv_*, JavaValue*, _jobject*, JNICallType, _jmethodID*, JNI_ArgumentPusher*, JavaThread*) [clone .constprop.1]+0x390
+V  [libjvm.so+0x9ae4a7]  jni_CallStaticVoidMethod+0x167
+C  [libjli.so+0xb644]  JavaMain+0x1054
+C  [libjli.so+0xe1f9]  ThreadJavaMain+0x9
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: -6 (SI_TKILL), si_pid: 1756418 (current process), si_uid: 3033
+
+Registers:
+RAX=0x000014a9808c9471, RBX=0x000014a0f0433cc8, RCX=0x000014a994cbc08b, RDX=0x000014a98c029168
+RSP=0x000014a995668820, RBP=0x000014a6230623f0, RSI=0x0000000000000058, RDI=0x000014a98097a6ec
+R8 =0x000014a623103210, R9 =0x000014a62311a868, R10=0x000014a995678000, R11=0x000014a995668820
+R12=0x000014a623068108, R13=0x000014a0f0bce5e0, R14=0x000014a995668818, R15=0x000014a98c0299f0
+RIP=0x000014a98097a6fb, EFLAGS=0x0000000000010206, CSGSFS=0x002b000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+
+Register to memory mapping:
+
+RAX=0x000014a9808c9471 is at code_begin+1009 in an Interpreter codelet
+native method entry point (kind = native)  [0x000014a9808c9080, 0x000014a9808c9928]  2216 bytes
+RBX={method} {0x000014a0f0433cc8} 'sleep0' '(J)V' in 'java/lang/Thread'
+RCX=0x000014a994cbc08b: __sched_yield+0x000000000000000b in /lib64/libc.so.6 at 0x000014a994c83000
+RDX=0x000014a98c029168 points into unknown readable memory: 0x0000000000000115 | 15 01 00 00 00 00 00 00
+RSP=0x000014a995668820 is pointing into the stack for thread: 0x000014a98c0299f0
+RBP=0x000014a6230623f0 is an oop: java.util.concurrent.TimeUnit 
+{0x000014a6230623f0} - klass: 'java/util/concurrent/TimeUnit'
+ - ---- fields (total size 11 words):
+ - private final 'ordinal' 'I' @12  2 (0x00000002)
+ - private 'hash' 'I' @16  0 (0x00000000)
+ - private final 'name' 'Ljava/lang/String;' @24  "MILLISECONDS"{0x000014a623202b30} (0x000014a623202b30)
+ - private final 'milliRatio' 'I' @20  1 (0x00000001)
+ - private final 'scale' 'J' @32  1000000 (0x00000000000f4240)
+ - private final 'maxNanos' 'J' @40  9223372036854 (0x000008637bd05af6)
+ - private final 'maxMicros' 'J' @48  9223372036854775 (0x0020c49ba5e353f7)
+ - private final 'maxMillis' 'J' @56  9223372036854775807 (0x7fffffffffffffff)
+ - private final 'maxSecs' 'J' @64  9223372036854775 (0x0020c49ba5e353f7)
+ - private final 'microRatio' 'J' @72  1000 (0x00000000000003e8)
+ - private final 'secRatio' 'I' @80  1000 (0x000003e8)
+RSI=0x0000000000000058 is an unknown value
+RDI=0x000014a98097a6ec is at entry_point+140 in (nmethod*)0x000014a98097a490
+Compiled method (c2)  297889  146 %           jromp.JROMP::join @ 7 (80 bytes)
+ total in heap  [0x000014a98097a490,0x000014a98097ad58] = 2248
+ relocation     [0x000014a98097a5e8,0x000014a98097a660] = 120
+ main code      [0x000014a98097a660,0x000014a98097a9b0] = 848
+ stub code      [0x000014a98097a9b0,0x000014a98097a9e8] = 56
+ oops           [0x000014a98097a9e8,0x000014a98097a9f0] = 8
+ metadata       [0x000014a98097a9f0,0x000014a98097aa60] = 112
+ scopes data    [0x000014a98097aa60,0x000014a98097abb0] = 336
+ scopes pcs     [0x000014a98097abb0,0x000014a98097ace0] = 304
+ dependencies   [0x000014a98097ace0,0x000014a98097acf0] = 16
+ handler table  [0x000014a98097acf0,0x000014a98097ad20] = 48
+ nul chk table  [0x000014a98097ad20,0x000014a98097ad58] = 56
+R8 =0x000014a623103210 is an oop: java.lang.Thread$FieldHolder 
+{0x000014a623103210} - klass: 'java/lang/Thread$FieldHolder'
+ - ---- fields (total size 6 words):
+ - volatile 'priority' 'I' @12  5 (0x00000005)
+ - final 'stackSize' 'J' @16  0 (0x0000000000000000)
+ - volatile 'threadStatus' 'I' @24  5 (0x00000005)
+ - volatile 'daemon' 'Z' @28  false (0x00)
+ - final 'group' 'Ljava/lang/ThreadGroup;' @32  a 'java/lang/ThreadGroup'{0x000014a623104848} (0x000014a623104848)
+ - final 'task' 'Ljava/lang/Runnable;' @40  null (0x0000000000000000)
+R9 =0x000014a62311a868 is an oop: [Ljava.util.concurrent.ExecutorService; 
+{0x000014a62311a868} - klass: 'java/util/concurrent/ExecutorService'[]
+ - length: 32
+R10=0x000014a995678000 is an unknown value
+R11=0x000014a995668820 is pointing into the stack for thread: 0x000014a98c0299f0
+R12=0x000014a623068108 is an oop: jromp.JROMP 
+{0x000014a623068108} - klass: 'jromp/JROMP'
+ - ---- fields (total size 3 words):
+ - private final 'executor' 'Ljromp/concurrent/SimpleRoundRobinExecutor;' @16  a 'jromp/concurrent/SimpleRoundRobinExecutor'{0x000014a62311a850} (0x000014a62311a850)
+R13=0x000014a0f0bce5e0 is pointing into metadata
+R14=0x000014a995668818 is pointing into the stack for thread: 0x000014a98c0299f0
+R15=0x000014a98c0299f0 is a thread
+
+Top of Stack: (sp=0x000014a995668820)
+0x000014a995668820:   000014a623068108 000014a0e243b048
+0x000014a995668830:   0000000000000000 000014a995668868
+0x000014a995668840:   000014a9956688b8 000014a9808c4e66
+0x000014a995668850:   000014a9956688b8 000014a9808c4e66
+0x000014a995668860:   0000000000000000 000014a6f5e08d10
+0x000014a995668870:   000014a995668870 000014a0e2401e01
+0x000014a995668880:   0000000000000007 000014a0e2402f78
+0x000014a995668890:   0000000000000000 000014a623068120
+0x000014a9956688a0:   000014a0e2401e60 000014a995668868
+0x000014a9956688b0:   000014a9956688e0 000014a995668940
+0x000014a9956688c0:   000014a9808c4e66 000014a623068240
+0x000014a9956688d0:   000014a623068220 000014a623068200
+0x000014a9956688e0:   0000000000007080 000014a30c020010
+0x000014a9956688f0:   000014a180800000 000014a9956688f8
+0x000014a995668900:   000014a0e24014c7 000000000000001b
+0x000014a995668910:   000014a0e2402f78 0000000000000000
+0x000014a995668920:   000014a623068120 000014a0e24018d8
+0x000014a995668930:   000014a9956688e0 000014a995668a18
+0x000014a995668940:   000014a995668a80 000014a9808bdcbf
+0x000014a995668950:   0000000000000000 0000000000000000
+0x000014a995668960:   0000000000000000 0000000000000000
+0x000014a995668970:   0000000000000000 0000000000000000
+0x000014a995668980:   0000000000000000 0000000000000000
+0x000014a995668990:   0000000000000000 0000000000000000
+0x000014a9956689a0:   0000000000000000 0000000000000000
+0x000014a9956689b0:   0000000000000000 0000000000000000
+0x000014a9956689c0:   0000000000000000 0000000000000000
+0x000014a9956689d0:   0000000000000000 416d2fb9dd24e6a3
+0x000014a9956689e0:   0000000000000000 000014a497840020
+0x000014a9956689f0:   000014a30c020010 000014a180800000
+0x000014a995668a00:   00000000000003c0 0000000000000003
+0x000014a995668a10:   0000000000000003 000014a623068260 
+
+Instructions: (pc=0x000014a98097a6fb)
+0x000014a98097a5fb:   50 06 78 25 63 07 78 10 63 67 31 05 80 1f 31 05
+0x000014a98097a60b:   80 23 31 05 80 17 31 05 80 23 31 05 80 2b 31 05
+0x000014a98097a61b:   80 27 31 05 80 13 31 05 80 13 31 05 80 0f 31 05
+0x000014a98097a62b:   80 0f 31 05 80 0f 31 05 80 1f 31 05 80 1f 31 05
+0x000014a98097a63b:   80 27 21 05 80 21 60 18 31 05 31 0a 00 01 7c fd
+0x000014a98097a64b:   fc 00 28 00 60 0a 31 01 7c 79 ff 05 28 00 60 0a
+0x000014a98097a65b:   31 05 31 0f 31 e8 7b da ab 13 66 66 66 0f 1f 84
+0x000014a98097a66b:   00 00 00 00 00 89 84 24 00 c0 fe ff 55 48 83 ec
+0x000014a98097a67b:   30 41 81 7f 20 01 00 00 00 0f 85 1c 03 00 00 4c
+0x000014a98097a68b:   8b 66 18 4d 8b 97 80 03 00 00 49 8b 1a 48 8b fe
+0x000014a98097a69b:   49 ba 40 7f 4f 94 a9 14 00 00 41 ff d2 0f 1f 84
+0x000014a98097a6ab:   00 00 00 00 00 45 8b 54 24 08 41 81 fa e8 56 00
+0x000014a98097a6bb:   01 0f 85 e6 01 00 00 44 8b 53 08 41 81 fa e8 a0
+0x000014a98097a6cb:   02 00 0f 84 c0 01 00 00 48 bd f0 23 06 23 a6 14
+0x000014a98097a6db:   00 00 eb 23 90 4c 89 24 24 33 f6 90 e8 d3 02 00
+0x000014a98097a6eb:   00 0f 1f 84 00 5c 02 00 00 4d 8b 97 58 04 00 00
+0x000014a98097a6fb:   41 85 02 4c 8b 24 24 4d 8b 54 24 10 4d 8b 4a 10
+0x000014a98097a70b:   45 8b 51 0c 45 85 d2 0f 86 d8 00 00 00 4d 8b 41
+0x000014a98097a71b:   10 41 8b 48 08 81 f9 08 39 05 01 75 7c 4d 8b 58
+0x000014a98097a72b:   10 41 8b 5b 08 81 fb 30 3c 05 01 0f 85 8c 00 00
+0x000014a98097a73b:   00 4d 8b 5b 30 45 8b 5b 0c 41 81 fb 00 00 00 60
+0x000014a98097a74b:   0f 8d bb 00 00 00 4c 8b 55 20 49 83 fa 01 0f 84
+0x000014a98097a75b:   d5 00 00 00 4c 8b 55 28 4d 85 d2 0f 8c f8 00 00
+0x000014a98097a76b:   00 49 f7 da 4d 85 d2 0f 8e 68 ff ff ff 45 33 db
+0x000014a98097a77b:   4d 3b da bd ff ff ff ff 7c 08 40 0f 95 c5 40 0f
+0x000014a98097a78b:   b6 ed be 45 ff ff ff 4c 89 24 24 90 e8 e4 8d f9
+0x000014a98097a79b:   ff 0f 1f 84 00 0c 03 00 02 be de ff ff ff 49 8b
+0x000014a98097a7ab:   ec 4c 89 0c 24 44 89 54 24 08 4c 89 44 24 10 90
+0x000014a98097a7bb:   e8 c0 8d f9 ff 0f 1f 84 00 30 03 00 03 be de ff
+0x000014a98097a7cb:   ff ff 49 8b ec 4c 89 0c 24 44 89 54 24 08 4c 89
+0x000014a98097a7db:   44 24 10 4c 89 5c 24 18 e8 98 8d f9 ff 0f 1f 84
+0x000014a98097a7eb:   00 58 03 00 04 be 45 ff ff ff 49 8b ec 44 89 14 
+
+
+Stack slot to memory mapping:
+
+stack at sp + 0 slots: 0x000014a623068108 is an oop: jromp.JROMP 
+{0x000014a623068108} - klass: 'jromp/JROMP'
+ - ---- fields (total size 3 words):
+ - private final 'executor' 'Ljromp/concurrent/SimpleRoundRobinExecutor;' @16  a 'jromp/concurrent/SimpleRoundRobinExecutor'{0x000014a62311a850} (0x000014a62311a850)
+stack at sp + 1 slots: {method} {0x000014a0e243b048} 'join' '()V' in 'jromp/JROMP'
+stack at sp + 2 slots: 0x0 is null
+stack at sp + 3 slots: 0x000014a995668868 is pointing into the stack for thread: 0x000014a98c0299f0
+stack at sp + 4 slots: 0x000014a9956688b8 is pointing into the stack for thread: 0x000014a98c0299f0
+stack at sp + 5 slots: 0x000014a9808c4e66 is at code_begin+1158 in an Interpreter codelet
+return entry points  [0x000014a9808c49e0, 0x000014a9808c5538]  2904 bytes
+stack at sp + 6 slots: 0x000014a9956688b8 is pointing into the stack for thread: 0x000014a98c0299f0
+stack at sp + 7 slots: 0x000014a9808c4e66 is at code_begin+1158 in an Interpreter codelet
+return entry points  [0x000014a9808c49e0, 0x000014a9808c5538]  2904 bytes
+
+
+Compiled method (c2)  297935  146 %           jromp.JROMP::join @ 7 (80 bytes)
+ total in heap  [0x000014a98097a490,0x000014a98097ad58] = 2248
+ relocation     [0x000014a98097a5e8,0x000014a98097a660] = 120
+ main code      [0x000014a98097a660,0x000014a98097a9b0] = 848
+ stub code      [0x000014a98097a9b0,0x000014a98097a9e8] = 56
+ oops           [0x000014a98097a9e8,0x000014a98097a9f0] = 8
+ metadata       [0x000014a98097a9f0,0x000014a98097aa60] = 112
+ scopes data    [0x000014a98097aa60,0x000014a98097abb0] = 336
+ scopes pcs     [0x000014a98097abb0,0x000014a98097ace0] = 304
+ dependencies   [0x000014a98097ace0,0x000014a98097acf0] = 16
+ handler table  [0x000014a98097acf0,0x000014a98097ad20] = 48
+ nul chk table  [0x000014a98097ad20,0x000014a98097ad58] = 56
+
+[Constant Pool (empty)]
+
+[MachCode]
+[Verified Entry Point]
+  # {method} {0x000014a0e243b048} 'join' '()V' in 'jromp/JROMP'
+  0x000014a98097a660: ;   {runtime_call os::breakpoint()}
+  0x000014a98097a660: e87b daab | 1366 6666 | 0f1f 8400 | 0000 0000 | 8984 2400 | c0fe ff55 | 4883 ec30 | 4181 7f20 
+  0x000014a98097a680: 0100 0000 | 0f85 1c03 | 0000 4c8b | 6618 4d8b | 9780 0300 | 0049 8b1a | 488b fe49 | ba40 7f4f 
+  0x000014a98097a6a0: 94a9 1400 | 0041 ffd2 
+
+  0x000014a98097a6a8: ;   {other}
+  0x000014a98097a6a8: 0f1f 8400 | 0000 0000 
+
+  0x000014a98097a6b0: ; implicit exception: dispatches to 0x000014a98097a890
+  0x000014a98097a6b0: 458b 5424 
+
+  0x000014a98097a6b4: ;   {metadata('jromp/JROMP')}
+  0x000014a98097a6b4: 0841 81fa | e856 0001 | 0f85 e601 | 0000 448b 
+
+  0x000014a98097a6c4: ;   {metadata('java/lang/VirtualThread')}
+  0x000014a98097a6c4: 5308 4181 | fae8 a002 | 000f 84c0 
+
+  0x000014a98097a6d0: ;   {oop(a 'java/util/concurrent/TimeUnit'{0x000014a6230623f0})}
+  0x000014a98097a6d0: 0100 0048 | bdf0 2306 | 23a6 1400 | 00eb 2390 | 4c89 2424 
+
+  0x000014a98097a6e4: ;   {static_call}
+  0x000014a98097a6e4: 33f6 90e8 
+
+  0x000014a98097a6e8: ; ImmutableOopMap {rbp=Oop [0]=Oop }
+                      ;*invokestatic sleep0 {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.lang.Thread::sleep@60 (line 509)
+                      ; - jromp.JROMP::waitForFinish@1 (line 85)
+                      ; - jromp.JROMP::join@17 (line 113)
+  0x000014a98097a6e8: d302 0000 
+
+  0x000014a98097a6ec: ;   {other}
+  0x000014a98097a6ec: 0f1f 8400 | 5c02 0000 | 4d8b 9758 
+
+  0x000014a98097a6f8: ; ImmutableOopMap {rbp=Oop [0]=Oop }
+                      ;*goto {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) jromp.JROMP::join@20 (line 113)
+                      ;   {poll}
+  0x000014a98097a6f8: 0400 0041 | 8502 4c8b | 2424 4d8b | 5424 104d | 8b4a 1045 | 8b51 0c45 | 85d2 0f86 | d800 0000 
+  0x000014a98097a718: 4d8b 4110 
+
+  0x000014a98097a71c: ; implicit exception: dispatches to 0x000014a98097a8e8
+  0x000014a98097a71c: 418b 4808 
+
+  0x000014a98097a720: ;   {metadata('java/util/concurrent/Executors$AutoShutdownDelegatedExecutorService')}
+  0x000014a98097a720: 81f9 0839 | 0501 757c | 4d8b 5810 
+
+  0x000014a98097a72c: ; implicit exception: dispatches to 0x000014a98097a8fc
+  0x000014a98097a72c: 418b 5b08 
+
+  0x000014a98097a730: ;   {metadata('java/util/concurrent/ThreadPoolExecutor')}
+  0x000014a98097a730: 81fb 303c | 0501 0f85 | 8c00 0000 | 4d8b 5b30 
+
+  0x000014a98097a740: ; implicit exception: dispatches to 0x000014a98097a920
+  0x000014a98097a740: 458b 5b0c | 4181 fb00 | 0000 600f | 8dbb 0000 | 004c 8b55 | 2049 83fa | 010f 84d5 | 0000 004c 
+  0x000014a98097a760: 8b55 284d | 85d2 0f8c | f800 0000 | 49f7 da4d | 85d2 0f8e | 68ff ffff | 4533 db4d | 3bda bdff 
+  0x000014a98097a780: ffff ff7c | 0840 0f95 | c540 0fb6 | edbe 45ff | ffff 4c89 
+
+  0x000014a98097a794: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a794: 2424 90e8 
+
+  0x000014a98097a798: ; ImmutableOopMap {[0]=Oop }
+                      ;*ifge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.util.concurrent.TimeUnit::toNanos@34 (line 257)
+                      ; - java.lang.Thread::sleep@20 (line 503)
+                      ; - jromp.JROMP::waitForFinish@1 (line 85)
+                      ; - jromp.JROMP::join@17 (line 113)
+  0x000014a98097a798: e48d f9ff 
+
+  0x000014a98097a79c: ;   {other}
+  0x000014a98097a79c: 0f1f 8400 | 0c03 0002 | bede ffff | ff49 8bec | 4c89 0c24 | 4489 5424 | 084c 8944 
+
+  0x000014a98097a7b8: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a7b8: 2410 90e8 
+
+  0x000014a98097a7bc: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=Oop }
+                      ;*invokeinterface isTerminated {reexecute=0 rethrow=0 return_oop=0}
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@22 (line 53)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a7bc: c08d f9ff 
+
+  0x000014a98097a7c0: ;   {other}
+  0x000014a98097a7c0: 0f1f 8400 | 3003 0003 | bede ffff | ff49 8bec | 4c89 0c24 | 4489 5424 | 084c 8944 | 2410 4c89 
+  0x000014a98097a7e0: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a7e0: 5c24 18e8 
+
+  0x000014a98097a7e4: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=Oop [24]=Oop }
+                      ;*invokeinterface isTerminated {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.util.concurrent.Executors$DelegatedExecutorService::isTerminated@4 (line 774)
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@22 (line 53)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a7e4: 988d f9ff 
+
+  0x000014a98097a7e8: ;   {other}
+  0x000014a98097a7e8: 0f1f 8400 | 5803 0004 | be45 ffff | ff49 8bec | 4489 1424 
+
+  0x000014a98097a7fc: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a7fc: 6666 90e8 
+
+  0x000014a98097a800: ; ImmutableOopMap {rbp=Oop }
+                      ;*if_icmpge {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@12 (line 52)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a800: 7c8d f9ff 
+
+  0x000014a98097a804: ;   {other}
+  0x000014a98097a804: 0f1f 8400 | 7403 0005 | be45 ffff | ff49 8bec | 4c89 0c24 | 4489 5424 | 084c 8944 | 2410 4489 
+  0x000014a98097a824: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a824: 5c24 0ce8 
+
+  0x000014a98097a828: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=Oop }
+                      ;*if_icmplt {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.util.concurrent.ThreadPoolExecutor::runStateAtLeast@2 (line 413)
+                      ; - java.util.concurrent.ThreadPoolExecutor::isTerminated@9 (line 1463)
+                      ; - java.util.concurrent.Executors$DelegatedExecutorService::isTerminated@4 (line 774)
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@22 (line 53)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a828: 548d f9ff 
+
+  0x000014a98097a82c: ;   {other}
+  0x000014a98097a82c: 0f1f 8400 | 9c03 0006 | be45 ffff | ff41 bb01 | 0000 004d | 3bd3 bdff | ffff ff7c | 0840 0f95 
+  0x000014a98097a84c: c540 0fb6 | ed4c 8924 
+
+  0x000014a98097a854: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a854: 2466 90e8 
+
+  0x000014a98097a858: ; ImmutableOopMap {[0]=Oop }
+                      ;*ifne {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.util.concurrent.TimeUnit::toNanos@8 (line 253)
+                      ; - java.lang.Thread::sleep@20 (line 503)
+                      ; - jromp.JROMP::waitForFinish@1 (line 85)
+                      ; - jromp.JROMP::join@17 (line 113)
+  0x000014a98097a858: 248d f9ff 
+
+  0x000014a98097a85c: ;   {other}
+  0x000014a98097a85c: 0f1f 8400 | cc03 0007 | 4533 db4d | 3bda bdff | ffff ff7c | 0840 0f95 | c540 0fb6 | edbe 45ff 
+  0x000014a98097a87c: ffff 4c89 
+
+  0x000014a98097a880: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a880: 2424 90e8 
+
+  0x000014a98097a884: ; ImmutableOopMap {[0]=Oop }
+                      ;*ifle {reexecute=1 rethrow=0 return_oop=0}
+                      ; - (reexecute) java.util.concurrent.TimeUnit::toNanos@22 (line 255)
+                      ; - java.lang.Thread::sleep@20 (line 503)
+                      ; - jromp.JROMP::waitForFinish@1 (line 85)
+                      ; - jromp.JROMP::join@17 (line 113)
+  0x000014a98097a884: f88c f9ff 
+
+  0x000014a98097a888: ;   {other}
+  0x000014a98097a888: 0f1f 8400 | f803 0008 | 4533 e4be | 76ff ffff 
+
+  0x000014a98097a898: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a898: 498b ece8 
+
+  0x000014a98097a89c: ; ImmutableOopMap {rbp=Oop }
+                      ;*aload_0 {reexecute=0 rethrow=0 return_oop=0}
+                      ; - jromp.JROMP::join@7 (line 112)
+  0x000014a98097a89c: e08c f9ff 
+
+  0x000014a98097a8a0: ;   {other}
+  0x000014a98097a8a0: 0f1f 8400 | 1004 0009 | be8d ffff | ff49 8bec 
+
+  0x000014a98097a8b0: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a8b0: 6666 90e8 
+
+  0x000014a98097a8b4: ; ImmutableOopMap {rbp=Oop }
+                      ;*aload_0 {reexecute=0 rethrow=0 return_oop=0}
+                      ; - jromp.JROMP::join@7 (line 112)
+  0x000014a98097a8b4: c88c f9ff 
+
+  0x000014a98097a8b8: ;   {other}
+  0x000014a98097a8b8: 0f1f 8400 | 2804 000a | bef6 ffff 
+
+  0x000014a98097a8c4: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a8c4: ff66 90e8 
+
+  0x000014a98097a8c8: ; ImmutableOopMap {}
+                      ;*invokevirtual isTerminated {reexecute=0 rethrow=0 return_oop=0}
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a8c8: b48c f9ff 
+
+  0x000014a98097a8cc: ;   {other}
+  0x000014a98097a8cc: 0f1f 8400 | 3c04 000b | bef6 ffff 
+
+  0x000014a98097a8d8: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a8d8: ff66 90e8 
+
+  0x000014a98097a8dc: ; ImmutableOopMap {}
+                      ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@6 (line 52)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a8dc: a08c f9ff 
+
+  0x000014a98097a8e0: ;   {other}
+  0x000014a98097a8e0: 0f1f 8400 | 5004 000c | bef6 ffff 
+
+  0x000014a98097a8ec: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a8ec: ff66 90e8 
+
+  0x000014a98097a8f0: ; ImmutableOopMap {}
+                      ;*invokeinterface isTerminated {reexecute=0 rethrow=0 return_oop=0}
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@22 (line 53)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a8f0: 8c8c f9ff 
+
+  0x000014a98097a8f4: ;   {other}
+  0x000014a98097a8f4: 0f1f 8400 | 6404 000d | bef6 ffff | ff49 8bec | 4c89 0c24 | 4489 5424 | 084c 8944 
+
+  0x000014a98097a910: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a910: 2410 90e8 
+
+  0x000014a98097a914: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=Oop }
+                      ;*invokeinterface isTerminated {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.util.concurrent.Executors$DelegatedExecutorService::isTerminated@4 (line 774)
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@22 (line 53)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a914: 688c f9ff 
+
+  0x000014a98097a918: ;   {other}
+  0x000014a98097a918: 0f1f 8400 | 8804 000e | bef6 ffff | ff49 8bec | 4c89 0c24 | 4489 5424 | 084c 8944 
+
+  0x000014a98097a934: ;   {runtime_call UncommonTrapBlob}
+  0x000014a98097a934: 2410 90e8 
+
+  0x000014a98097a938: ; ImmutableOopMap {rbp=Oop [0]=Oop [16]=Oop }
+                      ;*invokevirtual get {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.util.concurrent.ThreadPoolExecutor::isTerminated@4 (line 1463)
+                      ; - java.util.concurrent.Executors$DelegatedExecutorService::isTerminated@4 (line 774)
+                      ; - jromp.concurrent.SimpleRoundRobinExecutor::isTerminated@22 (line 53)
+                      ; - jromp.JROMP::join@11 (line 112)
+  0x000014a98097a938: 448c f9ff 
+
+  0x000014a98097a93c: ;   {other}
+  0x000014a98097a93c: 0f1f 8400 | ac04 000f | 448b 4008 | 49ba 0000 | 00f0 a014 | 0000 4d03 | d048 8bf0 | eb2f 4889 
+  0x000014a98097a95c: 4424 0833 
+
+  0x000014a98097a960: ;   {static_call}
+  0x000014a98097a960: f666 90e8 
+
+  0x000014a98097a964: ; ImmutableOopMap {rbp=Oop [0]=Oop [8]=Oop }
+                      ;*invokestatic afterSleep {reexecute=0 rethrow=0 return_oop=0}
+                      ; - java.lang.Thread::sleep@75 (line 512)
+                      ; - jromp.JROMP::waitForFinish@1 (line 85)
+                      ; - jromp.JROMP::join@17 (line 113)
+  0x000014a98097a964: 1815 f9ff 
+
+  0x000014a98097a968: ;   {other}
+  0x000014a98097a968: 0f1f 8400 | d804 0010 | 4c8b 4424 | 0845 8b58 | 0849 ba00 | 0000 f0a0 | 1400 004d | 03d3 498b 
+  0x000014a98097a988: ;   {metadata('java/lang/InterruptedException')}
+  0x000014a98097a988: f049 bb88 | 1105 f1a0 | 1400 004d | 3bd3 0f84 | 58fd ffff | 4883 c430 
+
+  0x000014a98097a9a0: ;   {runtime_call _rethrow_Java}
+  0x000014a98097a9a0: 5de9 da1d 
+
+  0x000014a98097a9a4: ;   {runtime_call StubRoutines (final stubs)}
+  0x000014a98097a9a4: fcff e8d5 | faf7 ffe9 | dafc ffff 
+[Stub Code]
+  0x000014a98097a9b0: ;   {no_reloc}
+  0x000014a98097a9b0: 48bb 0000 | 0000 0000 
+
+  0x000014a98097a9b8: ;   {runtime_call}
+  0x000014a98097a9b8: 0000 e9fb 
+
+  0x000014a98097a9bc: ;   {static_stub}
+  0x000014a98097a9bc: ffff ff48 | bbc8 3c43 | f0a0 1400 
+
+  0x000014a98097a9c8: ;   {runtime_call I2C/C2I adapters}
+  0x000014a98097a9c8: 00e9 9553 
+
+  0x000014a98097a9cc: ;   {runtime_call ExceptionBlob}
+  0x000014a98097a9cc: f7ff e9ad | 60fb ffe8 | 0000 0000 | 4883 2c24 
+
+  0x000014a98097a9dc: ;   {runtime_call DeoptimizationBlob}
+  0x000014a98097a9dc: 05e9 be8e | f9ff f4f4 | f4f4 f4f4 
+[/MachCode]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x000014a0b40e0190, length=41, elements={
+0x000014a98c0299f0, 0x000014a98c0a5f60, 0x000014a98c0a7580, 0x000014a98c0a9050,
+0x000014a98c0aa660, 0x000014a98c0abbd0, 0x000014a98c0ad650, 0x000014a98c1015f0,
+0x000014a98c10d600, 0x000014a98c690020, 0x000014a98c6967f0, 0x000014a98c7fcad0,
+0x000014a98c849ab0, 0x000014a98c7fdd80, 0x000014a98c843020, 0x000014a98c8176b0,
+0x000014a98c7fa480, 0x000014a98c692000, 0x000014a98c690ed0, 0x000014a98c7f9310,
+0x000014a98c800440, 0x000014a98c813ca0, 0x000014a98c801390, 0x000014a98c7ff0e0,
+0x000014a98c695710, 0x000014a98c6942c0, 0x000014a98c7fb530, 0x000014a98c818660,
+0x000014a98c693110, 0x000014a98c84ac30, 0x000014a98c84bde0, 0x000014a98c815290,
+0x000014a98c814730, 0x000014a98c815e00, 0x000014a98c846550, 0x000014a98c0c5330,
+0x000014a98c0c5a40, 0x000014a98c0c6530, 0x000014a98c0c7220, 0x000014a98c0c7ed0,
+0x000014a98c0c8f50
+}
+
+Java Threads: ( => current thread )
+=>0x000014a98c0299f0 JavaThread "main"                              [_thread_in_Java, id=1756421, stack(0x000014a995569000,0x000014a99566a000) (1028K)]
+  0x000014a98c0a5f60 JavaThread "Reference Handler"          daemon [_thread_blocked, id=1756429, stack(0x000014a0e65e7000,0x000014a0e66e7000) (1024K)]
+  0x000014a98c0a7580 JavaThread "Finalizer"                  daemon [_thread_blocked, id=1756431, stack(0x000014a0e64e6000,0x000014a0e65e6000) (1024K)]
+  0x000014a98c0a9050 JavaThread "Signal Dispatcher"          daemon [_thread_blocked, id=1756433, stack(0x000014a0e63e5000,0x000014a0e64e5000) (1024K)]
+  0x000014a98c0aa660 JavaThread "Service Thread"             daemon [_thread_blocked, id=1756435, stack(0x000014a0e62e4000,0x000014a0e63e4000) (1024K)]
+  0x000014a98c0abbd0 JavaThread "Monitor Deflation Thread"   daemon [_thread_blocked, id=1756437, stack(0x000014a0e61e3000,0x000014a0e62e3000) (1024K)]
+  0x000014a98c0ad650 JavaThread "C2 CompilerThread0"         daemon [_thread_blocked, id=1756439, stack(0x000014a0e60e2000,0x000014a0e61e2000) (1024K)]
+  0x000014a98c1015f0 JavaThread "Notification Thread"        daemon [_thread_blocked, id=1756441, stack(0x000014a0e1f00000,0x000014a0e2000000) (1024K)]
+  0x000014a98c10d600 JavaThread "Common-Cleaner"             daemon [_thread_blocked, id=1756443, stack(0x000014a0e1dff000,0x000014a0e1eff000) (1024K)]
+  0x000014a98c690020 JavaThread "JrompThread-0-0"                   [_thread_blocked, id=1756584, stack(0x000014a0e1afc000,0x000014a0e1bfc000) (1024K)]
+  0x000014a98c6967f0 JavaThread "JrompThread-0-1"                   [_thread_blocked, id=1756585, stack(0x000014a0e19fb000,0x000014a0e1afb000) (1024K)]
+  0x000014a98c7fcad0 JavaThread "JrompThread-0-2"                   [_thread_blocked, id=1756586, stack(0x000014a0e18fa000,0x000014a0e19fa000) (1024K)]
+  0x000014a98c849ab0 JavaThread "JrompThread-0-3"                   [_thread_blocked, id=1756587, stack(0x000014a0830fa000,0x000014a0831fa000) (1024K)]
+  0x000014a98c7fdd80 JavaThread "JrompThread-0-4"                   [_thread_blocked, id=1756588, stack(0x000014a0824ee000,0x000014a0825ee000) (1024K)]
+  0x000014a98c843020 JavaThread "JrompThread-0-5"                   [_thread_blocked, id=1756589, stack(0x000014a09844a000,0x000014a09854a000) (1024K)]
+  0x000014a98c8176b0 JavaThread "JrompThread-0-6"                   [_thread_blocked, id=1756590, stack(0x000014a082ff9000,0x000014a0830f9000) (1024K)]
+  0x000014a98c7fa480 JavaThread "JrompThread-0-7"                   [_thread_blocked, id=1756591, stack(0x000014a09395a000,0x000014a093a5a000) (1024K)]
+  0x000014a98c692000 JavaThread "JrompThread-0-8"                   [_thread_blocked, id=1756592, stack(0x000014a093b5c000,0x000014a093c5c000) (1024K)]
+  0x000014a98c690ed0 JavaThread "JrompThread-0-9"                   [_thread_blocked, id=1756593, stack(0x000014a093859000,0x000014a093959000) (1024K)]
+  0x000014a98c7f9310 JavaThread "JrompThread-0-10"                  [_thread_blocked, id=1756594, stack(0x000014a082cf6000,0x000014a082df6000) (1024K)]
+  0x000014a98c800440 JavaThread "JrompThread-0-11"                  [_thread_blocked, id=1756595, stack(0x000014a093f00000,0x000014a094000000) (1024K)]
+  0x000014a98c813ca0 JavaThread "JrompThread-0-12"                  [_thread_blocked, id=1756596, stack(0x000014a082ef8000,0x000014a082ff8000) (1024K)]
+  0x000014a98c801390 JavaThread "JrompThread-0-13"                  [_thread_blocked, id=1756597, stack(0x000014a0900a7000,0x000014a0901a7000) (1024K)]
+  0x000014a98c7ff0e0 JavaThread "JrompThread-0-14"                  [_thread_blocked, id=1756598, stack(0x000014a098248000,0x000014a098348000) (1024K)]
+  0x000014a98c695710 JavaThread "JrompThread-0-15"                  [_thread_blocked, id=1756599, stack(0x000014a0825ef000,0x000014a0826ef000) (1024K)]
+  0x000014a98c6942c0 JavaThread "JrompThread-0-16"                  [_thread_blocked, id=1756600, stack(0x000014a0e15f7000,0x000014a0e16f7000) (1024K)]
+  0x000014a98c7fb530 JavaThread "JrompThread-0-17"                  [_thread_blocked, id=1756601, stack(0x000014a0829f3000,0x000014a082af3000) (1024K)]
+  0x000014a98c818660 JavaThread "JrompThread-0-18"                  [_thread_blocked, id=1756602, stack(0x000014a093a5b000,0x000014a093b5b000) (1024K)]
+  0x000014a98c693110 JavaThread "JrompThread-0-19"                  [_thread_blocked, id=1756603, stack(0x000014a0826f0000,0x000014a0827f0000) (1024K)]
+  0x000014a98c84ac30 JavaThread "JrompThread-0-20"                  [_thread_blocked, id=1756604, stack(0x000014a0828f2000,0x000014a0829f2000) (1024K)]
+  0x000014a98c84bde0 JavaThread "JrompThread-0-21"                  [_thread_blocked, id=1756605, stack(0x000014a098147000,0x000014a098247000) (1024K)]
+  0x000014a98c815290 JavaThread "JrompThread-0-22"                  [_thread_blocked, id=1756606, stack(0x000014a082df7000,0x000014a082ef7000) (1024K)]
+  0x000014a98c814730 JavaThread "JrompThread-0-23"                  [_thread_blocked, id=1756607, stack(0x000014a09854b000,0x000014a09864b000) (1024K)]
+  0x000014a98c815e00 JavaThread "JrompThread-0-24"                  [_thread_blocked, id=1756608, stack(0x000014a0831fb000,0x000014a0832fb000) (1024K)]
+  0x000014a98c846550 JavaThread "JrompThread-0-25"                  [_thread_blocked, id=1756609, stack(0x000014a0e17f9000,0x000014a0e18f9000) (1024K)]
+  0x000014a98c0c5330 JavaThread "JrompThread-0-26"                  [_thread_blocked, id=1756610, stack(0x000014a098349000,0x000014a098449000) (1024K)]
+  0x000014a98c0c5a40 JavaThread "JrompThread-0-27"                  [_thread_blocked, id=1756611, stack(0x000014a082bf5000,0x000014a082cf5000) (1024K)]
+  0x000014a98c0c6530 JavaThread "JrompThread-0-28"                  [_thread_blocked, id=1756612, stack(0x000014a098046000,0x000014a098146000) (1024K)]
+  0x000014a98c0c7220 JavaThread "JrompThread-0-29"                  [_thread_blocked, id=1756613, stack(0x000014a082af4000,0x000014a082bf4000) (1024K)]
+  0x000014a98c0c7ed0 JavaThread "JrompThread-0-30"                  [_thread_blocked, id=1756614, stack(0x000014a0827f1000,0x000014a0828f1000) (1024K)]
+  0x000014a98c0c8f50 JavaThread "JrompThread-0-31"                  [_thread_blocked, id=1756615, stack(0x000014a0832fc000,0x000014a0833fc000) (1024K)]
+Total: 41
+
+Other Threads:
+  0x000014a98c08f3f0 VMThread "VM Thread"                           [id=1756427, stack(0x000014a0e66e8000,0x000014a0e67e8000) (1024K)] _threads_hazard_ptr=0x000014a0b40e0190
+  0x000014a98c04f430 WatcherThread "VM Periodic Task Thread"        [id=1756425, stack(0x000014a992148000,0x000014a992248000) (1024K)]
+  0x000014a98c040a40 WorkerThread "GC Thread#0"                     [id=1756422, stack(0x000014a9925e6000,0x000014a9926e6000) (1024K)]
+  0x000014a0dc000c50 WorkerThread "GC Thread#1"                     [id=1756616, stack(0x000014a0901a8000,0x000014a0902a8000) (1024K)]
+  0x000014a0dc001470 WorkerThread "GC Thread#2"                     [id=1756617, stack(0x000014a0e16f8000,0x000014a0e17f8000) (1024K)]
+  0x000014a0dc001c90 WorkerThread "GC Thread#3"                     [id=1756618, stack(0x000014a093c5d000,0x000014a093e5d000) (2048K)]
+  0x000014a0dc0024b0 WorkerThread "GC Thread#4"                     [id=1756619, stack(0x000014a0823ed000,0x000014a0824ed000) (1024K)]
+  0x000014a0dc002e70 WorkerThread "GC Thread#5"                     [id=1756620, stack(0x000014a0822ec000,0x000014a0823ec000) (1024K)]
+  0x000014a0dc003830 WorkerThread "GC Thread#6"                     [id=1756621, stack(0x000014a0821eb000,0x000014a0822eb000) (1024K)]
+  0x000014a0dc0041f0 WorkerThread "GC Thread#7"                     [id=1756622, stack(0x000014a0820ea000,0x000014a0821ea000) (1024K)]
+  0x000014a0dc004d70 WorkerThread "GC Thread#8"                     [id=1756623, stack(0x000014a081fe9000,0x000014a0820e9000) (1024K)]
+  0x000014a0dc005ce0 WorkerThread "GC Thread#9"                     [id=1756624, stack(0x000014a081ee8000,0x000014a081fe8000) (1024K)]
+  0x000014a0dc006c50 WorkerThread "GC Thread#10"                    [id=1756625, stack(0x000014a081de7000,0x000014a081ee7000) (1024K)]
+  0x000014a0dc007bc0 WorkerThread "GC Thread#11"                    [id=1756626, stack(0x000014a081ce6000,0x000014a081de6000) (1024K)]
+  0x000014a0dc008b30 WorkerThread "GC Thread#12"                    [id=1756627, stack(0x000014a081be5000,0x000014a081ce5000) (1024K)]
+  0x000014a0dc009aa0 WorkerThread "GC Thread#13"                    [id=1756628, stack(0x000014a081ae4000,0x000014a081be4000) (1024K)]
+  0x000014a0dc00aa10 WorkerThread "GC Thread#14"                    [id=1756629, stack(0x000014a0819e3000,0x000014a081ae3000) (1024K)]
+  0x000014a0dc00b980 WorkerThread "GC Thread#15"                    [id=1756630, stack(0x000014a0818e2000,0x000014a0819e2000) (1024K)]
+  0x000014a0dc00c8f0 WorkerThread "GC Thread#16"                    [id=1756631, stack(0x000014a0817e1000,0x000014a0818e1000) (1024K)]
+  0x000014a0dc00d860 WorkerThread "GC Thread#17"                    [id=1756632, stack(0x000014a0816e0000,0x000014a0817e0000) (1024K)]
+  0x000014a0dc00e7d0 WorkerThread "GC Thread#18"                    [id=1756633, stack(0x000014a0815df000,0x000014a0816df000) (1024K)]
+  0x000014a0dc00f740 WorkerThread "GC Thread#19"                    [id=1756634, stack(0x000014a0814de000,0x000014a0815de000) (1024K)]
+  0x000014a0dc0106b0 WorkerThread "GC Thread#20"                    [id=1756635, stack(0x000014a0813dd000,0x000014a0814dd000) (1024K)]
+  0x000014a0dc011620 WorkerThread "GC Thread#21"                    [id=1756636, stack(0x000014a0812dc000,0x000014a0813dc000) (1024K)]
+  0x000014a0dc012590 WorkerThread "GC Thread#22"                    [id=1756637, stack(0x000014a0811db000,0x000014a0812db000) (1024K)]
+  0x000014a0dc013500 WorkerThread "GC Thread#23"                    [id=1756638, stack(0x000014a0810da000,0x000014a0811da000) (1024K)]
+  0x000014a0dc014470 WorkerThread "GC Thread#24"                    [id=1756639, stack(0x000014a080fd9000,0x000014a0810d9000) (1024K)]
+  0x000014a0dc0153e0 WorkerThread "GC Thread#25"                    [id=1756640, stack(0x000014a080ed8000,0x000014a080fd8000) (1024K)]
+  0x000014a0dc016350 WorkerThread "GC Thread#26"                    [id=1756641, stack(0x000014a080dd7000,0x000014a080ed7000) (1024K)]
+  0x000014a0dc0172c0 WorkerThread "GC Thread#27"                    [id=1756642, stack(0x000014a080cd6000,0x000014a080dd6000) (1024K)]
+  0x000014a0dc018230 WorkerThread "GC Thread#28"                    [id=1756643, stack(0x000014a080bd5000,0x000014a080cd5000) (1024K)]
+  0x000014a0dc0191a0 WorkerThread "GC Thread#29"                    [id=1756644, stack(0x000014a080ad4000,0x000014a080bd4000) (1024K)]
+  0x000014a0dc01a110 WorkerThread "GC Thread#30"                    [id=1756645, stack(0x000014a0809d3000,0x000014a080ad3000) (1024K)]
+  0x000014a0dc01b080 WorkerThread "GC Thread#31"                    [id=1756646, stack(0x000014a0808d2000,0x000014a0809d2000) (1024K)]
+  0x000014a0dc01bff0 WorkerThread "GC Thread#32"                    [id=1756647, stack(0x000014a0807d1000,0x000014a0808d1000) (1024K)]
+  0x000014a0dc01cf60 WorkerThread "GC Thread#33"                    [id=1756648, stack(0x000014a0806d0000,0x000014a0807d0000) (1024K)]
+  0x000014a0dc01ded0 WorkerThread "GC Thread#34"                    [id=1756649, stack(0x000014a0805cf000,0x000014a0806cf000) (1024K)]
+  0x000014a0dc01ee40 WorkerThread "GC Thread#35"                    [id=1756650, stack(0x000014a0804ce000,0x000014a0805ce000) (1024K)]
+  0x000014a0dc01fdb0 WorkerThread "GC Thread#36"                    [id=1756651, stack(0x000014a0803cd000,0x000014a0804cd000) (1024K)]
+  0x000014a0dc020d20 WorkerThread "GC Thread#37"                    [id=1756652, stack(0x000014a0802cc000,0x000014a0803cc000) (1024K)]
+  0x000014a0dc021c90 WorkerThread "GC Thread#38"                    [id=1756653, stack(0x000014a0801cb000,0x000014a0802cb000) (1024K)]
+  0x000014a0dc022c00 WorkerThread "GC Thread#39"                    [id=1756654, stack(0x000014a0800ca000,0x000014a0801ca000) (1024K)]
+  0x000014a0dc023b70 WorkerThread "GC Thread#40"                    [id=1756655, stack(0x0000149f7bf00000,0x0000149f7c000000) (1024K)]
+  0x000014a0dc024ae0 WorkerThread "GC Thread#41"                    [id=1756656, stack(0x0000149f7bdff000,0x0000149f7beff000) (1024K)]
+  0x000014a0dc025a50 WorkerThread "GC Thread#42"                    [id=1756657, stack(0x0000149f7bcfe000,0x0000149f7bdfe000) (1024K)]
+Total: 45
+
+Threads with active compile tasks:
+Total: 0
+
+VM state: synchronizing (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000014a994c4eda0] Threads_lock - owner thread: 0x000014a98c08f3f0
+[0x000014a994c4eca0] Heap_lock - owner thread: 0x000014a98c800440
+
+CDS archive(s) mapped at: [0x000014a0f0000000-0x000014a0f0ca7000-0x000014a0f0ca7000), size 13266944, SharedBaseAddress: 0x000014a0f0000000, ArchiveRelocationMode: 1.
+Compressed class space mapped at: 0x000014a0f1000000-0x000014a131000000, reserved size: 1073741824
+Narrow klass base: 0x000014a0f0000000, Narrow klass shift: 0, Narrow klass range: 0x100000000
+
+GC Precious Log:
+ CardTable entry size: 512
+ CPUs: 64 total, 64 available
+ Memory: 251G
+ Large Page Support: Disabled
+ NUMA Support: Disabled
+ Compressed Oops: Disabled
+ Alignments: Space 512K, Generation 512K, Heap 2M
+ Heap Min Capacity: 8M
+ Heap Initial Capacity: 2G
+ Heap Max Capacity: 32G
+ Pre-touch: Disabled
+ Parallel Workers: 43
+
+Heap:
+ PSYoungGen      total 349184K, used 348736K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 348672K, 100% used [0x000014a6d5d80000,0x000014a6eb200000,0x000014a6eb200000)
+  from space 512K, 12% used [0x000014a6f8380000,0x000014a6f8390000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+
+Card table byte_map: [0x000014a17c7ff000,0x000014a180800000] _byte_map_base: 0x000014972bbfb000
+
+Marking Bits: (ParMarkBitMap*) 0x000014a994c54f00
+ Begin Bits: [0x000014a135555000, 0x000014a155555000)
+ End Bits:   [0x000014a155555000, 0x000014a175555000)
+
+Polling page: 0x000014a995678000
+
+Metaspace:
+
+Usage:
+  Non-class:      1.12 MB used.
+      Class:    124.91 KB used.
+       Both:      1.24 MB used.
+
+Virtual space:
+  Non-class space:       64.00 MB reserved,       1.19 MB (  2%) committed,  1 nodes.
+      Class space:        1.00 GB reserved,     192.00 KB ( <1%) committed,  1 nodes.
+             Both:        1.06 GB reserved,       1.38 MB ( <1%) committed. 
+
+Chunk freelists:
+   Non-Class:  11.69 MB
+       Class:  15.69 MB
+        Both:  27.39 MB
+
+MaxMetaspaceSize: unlimited
+CompressedClassSpaceSize: 1.00 GB
+Initial GC threshold: 21.00 MB
+Current GC threshold: 21.00 MB
+CDS: on
+ - commit_granule_bytes: 65536.
+ - commit_granule_words: 8192.
+ - virtual_space_node_default_size: 8388608.
+ - enlarge_chunks_in_place: 1.
+ - use_allocation_guard: 0.
+
+
+Internal statistics:
+
+num_allocs_failed_limit: 0.
+num_arena_births: 28.
+num_arena_deaths: 0.
+num_vsnodes_births: 2.
+num_vsnodes_deaths: 0.
+num_space_committed: 22.
+num_space_uncommitted: 0.
+num_chunks_returned_to_freelist: 0.
+num_chunks_taken_from_freelist: 48.
+num_chunk_merges: 0.
+num_chunk_splits: 31.
+num_chunks_enlarged: 20.
+num_inconsistent_stats: 0.
+
+CodeCache: size=49152Kb used=897Kb max_used=912Kb free=48254Kb
+ bounds [0x000014a9808bd000, 0x000014a980b2d000, 0x000014a9838bd000]
+ total_blobs=647 nmethods=203 adapters=387
+ compilation: enabled
+              stopped_count=0, restarted_count=0
+ full_count=0
+
+Compilation events (20 events):
+Event: 7.879 Thread 0x000014a0c8023f50  205 %           jromp.mpi.examples.gemm.Gemm::lambda$matrixInitialization$2 @ 43 (101 bytes)
+Event: 7.884 Thread 0x000014a0c8023f50 nmethod 205% 0x000014a980997290 code [0x000014a980997480, 0x000014a980997a80]
+Event: 8.048 Thread 0x000014a0c8087530  206   !         java.security.SecureRandom::nextBytes (46 bytes)
+Event: 8.049 Thread 0x000014a0c8087530 nmethod 206 0x000014a980991f90 code [0x000014a980992120, 0x000014a980992260]
+Event: 8.993 Thread 0x000014a0c8088790  207             sun.security.provider.NativePRNG::engineNextBytes (8 bytes)
+Event: 8.993 Thread 0x000014a0c8088790 nmethod 207 0x000014a980990810 code [0x000014a9809909a0, 0x000014a980990a60]
+Event: 9.534 Thread 0x000014a98c0ad650  208             jdk.internal.misc.VM::isBooted (13 bytes)
+Event: 9.534 Thread 0x000014a98c0ad650 nmethod 208 0x000014a980987010 code [0x000014a980987180, 0x000014a980987218]
+Event: 9.734 Thread 0x000014a98c0ad650  209   !         jdk.internal.misc.Blocker::begin (97 bytes)
+Event: 9.734 Thread 0x000014a98c0ad650 nmethod 209 0x000014a980996f10 code [0x000014a9809970a0, 0x000014a980997168]
+Event: 9.736 Thread 0x000014a98c0ad650  210             jdk.internal.misc.Blocker::end (71 bytes)
+Event: 9.736 Thread 0x000014a98c0ad650 nmethod 210 0x000014a980986d10 code [0x000014a980986e80, 0x000014a980986f18]
+Event: 10.688 Thread 0x000014a98c0ad650  211   !         java.io.FileInputStream::read (32 bytes)
+Event: 10.689 Thread 0x000014a98c0ad650 nmethod 211 0x000014a980996a10 code [0x000014a980996bc0, 0x000014a980996d20]
+Event: 10.695 Thread 0x000014a98c0ad650  212             sun.security.provider.NativePRNG$RandomIO::readFully (61 bytes)
+Event: 10.697 Thread 0x000014a98c0ad650 nmethod 212 0x000014a98099e310 code [0x000014a98099e4e0, 0x000014a98099e720]
+Event: 10.697 Thread 0x000014a98c0ad650  213             java.io.FilterInputStream::read (11 bytes)
+Event: 10.698 Thread 0x000014a98c0ad650 nmethod 213 0x000014a98099dd90 code [0x000014a98099df40, 0x000014a98099e0f0]
+Event: 11.183 Thread 0x000014a98c0ad650  214   !         sun.security.provider.NativePRNG$RandomIO::implNextBytes (162 bytes)
+Event: 11.189 Thread 0x000014a98c0ad650 nmethod 214 0x000014a98098c990 code [0x000014a98098cb80, 0x000014a98098d3d0]
+
+GC Heap History (20 events):
+Event: 261.012 GC heap before
+{Heap before GC invocations=61 (full 0):
+ PSYoungGen      total 344064K, used 343936K [0x000014a6d5d80000, 0x000014a6f8500000, 0x000014a980800000)
+  eden space 343552K, 100% used [0x000014a6d5d80000,0x000014a6ead00000,0x000014a6ead00000)
+  from space 512K, 75% used [0x000014a6f8480000,0x000014a6f84e0000,0x000014a6f8500000)
+  to   space 1024K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 261.047 GC heap after
+{Heap after GC invocations=61 (full 0):
+ PSYoungGen      total 337920K, used 224K [0x000014a6d5d80000, 0x000014a6f8500000, 0x000014a980800000)
+  eden space 336896K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6ea680000)
+  from space 1024K, 21% used [0x000014a6f8300000,0x000014a6f8338000,0x000014a6f8400000)
+  to   space 1024K, 0% used [0x000014a6f8400000,0x000014a6f8400000,0x000014a6f8500000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 264.787 GC heap before
+{Heap before GC invocations=62 (full 0):
+ PSYoungGen      total 337920K, used 337120K [0x000014a6d5d80000, 0x000014a6f8500000, 0x000014a980800000)
+  eden space 336896K, 100% used [0x000014a6d5d80000,0x000014a6ea680000,0x000014a6ea680000)
+  from space 1024K, 21% used [0x000014a6f8300000,0x000014a6f8338000,0x000014a6f8400000)
+  to   space 1024K, 0% used [0x000014a6f8400000,0x000014a6f8400000,0x000014a6f8500000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 264.822 GC heap after
+{Heap after GC invocations=62 (full 0):
+ PSYoungGen      total 331264K, used 96K [0x000014a6d5d80000, 0x000014a6f8480000, 0x000014a980800000)
+  eden space 330752K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6ea080000)
+  from space 512K, 18% used [0x000014a6f8400000,0x000014a6f8418000,0x000014a6f8480000)
+  to   space 1024K, 0% used [0x000014a6f8280000,0x000014a6f8280000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 268.597 GC heap before
+{Heap before GC invocations=63 (full 0):
+ PSYoungGen      total 331264K, used 330848K [0x000014a6d5d80000, 0x000014a6f8480000, 0x000014a980800000)
+  eden space 330752K, 100% used [0x000014a6d5d80000,0x000014a6ea080000,0x000014a6ea080000)
+  from space 512K, 18% used [0x000014a6f8400000,0x000014a6f8418000,0x000014a6f8480000)
+  to   space 1024K, 0% used [0x000014a6f8280000,0x000014a6f8280000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 268.631 GC heap after
+{Heap after GC invocations=63 (full 0):
+ PSYoungGen      total 325632K, used 96K [0x000014a6d5d80000, 0x000014a6f8480000, 0x000014a980800000)
+  eden space 324608K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6e9a80000)
+  from space 1024K, 9% used [0x000014a6f8280000,0x000014a6f8298000,0x000014a6f8380000)
+  to   space 1024K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8480000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 272.247 GC heap before
+{Heap before GC invocations=64 (full 0):
+ PSYoungGen      total 325632K, used 324704K [0x000014a6d5d80000, 0x000014a6f8480000, 0x000014a980800000)
+  eden space 324608K, 100% used [0x000014a6d5d80000,0x000014a6e9a80000,0x000014a6e9a80000)
+  from space 1024K, 9% used [0x000014a6f8280000,0x000014a6f8298000,0x000014a6f8380000)
+  to   space 1024K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8480000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 272.282 GC heap after
+{Heap after GC invocations=64 (full 0):
+ PSYoungGen      total 318976K, used 160K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 318464K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6e9480000)
+  from space 512K, 31% used [0x000014a6f8380000,0x000014a6f83a8000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 275.811 GC heap before
+{Heap before GC invocations=65 (full 0):
+ PSYoungGen      total 318976K, used 318624K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 318464K, 100% used [0x000014a6d5d80000,0x000014a6e9480000,0x000014a6e9480000)
+  from space 512K, 31% used [0x000014a6f8380000,0x000014a6f83a8000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 275.845 GC heap after
+{Heap after GC invocations=65 (full 0):
+ PSYoungGen      total 313344K, used 160K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 312832K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6e8f00000)
+  from space 512K, 31% used [0x000014a6f8300000,0x000014a6f8328000,0x000014a6f8380000)
+  to   space 512K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 279.313 GC heap before
+{Heap before GC invocations=66 (full 0):
+ PSYoungGen      total 313344K, used 312992K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 312832K, 100% used [0x000014a6d5d80000,0x000014a6e8f00000,0x000014a6e8f00000)
+  from space 512K, 31% used [0x000014a6f8300000,0x000014a6f8328000,0x000014a6f8380000)
+  to   space 512K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 279.348 GC heap after
+{Heap after GC invocations=66 (full 0):
+ PSYoungGen      total 307712K, used 128K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 307200K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6e8980000)
+  from space 512K, 25% used [0x000014a6f8380000,0x000014a6f83a0000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 282.732 GC heap before
+{Heap before GC invocations=67 (full 0):
+ PSYoungGen      total 307712K, used 307328K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 307200K, 100% used [0x000014a6d5d80000,0x000014a6e8980000,0x000014a6e8980000)
+  from space 512K, 25% used [0x000014a6f8380000,0x000014a6f83a0000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 282.766 GC heap after
+{Heap after GC invocations=67 (full 0):
+ PSYoungGen      total 302080K, used 96K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 301568K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6e8400000)
+  from space 512K, 18% used [0x000014a6f8300000,0x000014a6f8318000,0x000014a6f8380000)
+  to   space 512K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 286.081 GC heap before
+{Heap before GC invocations=68 (full 0):
+ PSYoungGen      total 302080K, used 301664K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 301568K, 100% used [0x000014a6d5d80000,0x000014a6e8400000,0x000014a6e8400000)
+  from space 512K, 18% used [0x000014a6f8300000,0x000014a6f8318000,0x000014a6f8380000)
+  to   space 512K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 286.116 GC heap after
+{Heap after GC invocations=68 (full 0):
+ PSYoungGen      total 296960K, used 224K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 296448K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6e7f00000)
+  from space 512K, 43% used [0x000014a6f8380000,0x000014a6f83b8000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 289.372 GC heap before
+{Heap before GC invocations=69 (full 0):
+ PSYoungGen      total 296960K, used 296672K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 296448K, 100% used [0x000014a6d5d80000,0x000014a6e7f00000,0x000014a6e7f00000)
+  from space 512K, 43% used [0x000014a6f8380000,0x000014a6f83b8000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 289.407 GC heap after
+{Heap after GC invocations=69 (full 0):
+ PSYoungGen      total 356352K, used 96K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 355840K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6eb900000)
+  from space 512K, 18% used [0x000014a6f8300000,0x000014a6f8318000,0x000014a6f8380000)
+  to   space 512K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 293.394 GC heap before
+{Heap before GC invocations=70 (full 0):
+ PSYoungGen      total 356352K, used 355936K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 355840K, 100% used [0x000014a6d5d80000,0x000014a6eb900000,0x000014a6eb900000)
+  from space 512K, 18% used [0x000014a6f8300000,0x000014a6f8318000,0x000014a6f8380000)
+  to   space 512K, 0% used [0x000014a6f8380000,0x000014a6f8380000,0x000014a6f8400000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+Event: 293.429 GC heap after
+{Heap after GC invocations=70 (full 0):
+ PSYoungGen      total 349184K, used 64K [0x000014a6d5d80000, 0x000014a6f8400000, 0x000014a980800000)
+  eden space 348672K, 0% used [0x000014a6d5d80000,0x000014a6d5d80000,0x000014a6eb200000)
+  from space 512K, 12% used [0x000014a6f8380000,0x000014a6f8390000,0x000014a6f8400000)
+  to   space 512K, 0% used [0x000014a6f8300000,0x000014a6f8300000,0x000014a6f8380000)
+ ParOldGen       total 20839424K, used 19442242K [0x000014a180800000, 0x000014a678700000, 0x000014a6d5d80000)
+  object space 20839424K, 93% used [0x000014a180800000,0x000014a623290948,0x000014a678700000)
+ Metaspace       used 1271K, committed 1408K, reserved 1114112K
+  class space    used 124K, committed 192K, reserved 1048576K
+}
+
+Dll operation events (6 events):
+Event: 0.074 Loaded shared library /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+Event: 0.335 Loaded shared library /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjsvml.so
+Event: 0.384 Loaded shared library /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+Event: 0.393 Loaded shared library /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libzip.so
+Event: 2.238 Loaded shared library /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi_java.so.40.40.0
+Event: 3.349 Loaded shared library /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjimage.so
+
+Deoptimization events (20 events):
+Event: 8.145 Thread 0x000014a98c6942c0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000014a980983938 relative=0x0000000000000278
+Event: 8.145 Thread 0x000014a98c6942c0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000014a980983938 method=jromp.mpi.examples.gemm.Gemm.lambda$matrixInitialization$2(Ljromp/var/SharedVariable;Ljromp/var/SharedVariable;Ljromp/var/SharedVariable;II)V @ 47 c2
+Event: 8.145 Thread 0x000014a98c6942c0 DEOPT PACKING pc=0x000014a980983938 sp=0x000014a0e16f56e0
+Event: 8.145 Thread 0x000014a98c6942c0 DEOPT UNPACKING pc=0x000014a980913619 sp=0x000014a0e16f5690 mode 2
+Event: 8.164 Thread 0x000014a98c7ff0e0 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000014a980983938 relative=0x0000000000000278
+Event: 8.164 Thread 0x000014a98c7ff0e0 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000014a980983938 method=jromp.mpi.examples.gemm.Gemm.lambda$matrixInitialization$2(Ljromp/var/SharedVariable;Ljromp/var/SharedVariable;Ljromp/var/SharedVariable;II)V @ 47 c2
+Event: 8.164 Thread 0x000014a98c7ff0e0 DEOPT PACKING pc=0x000014a980983938 sp=0x000014a0983466e0
+Event: 8.164 Thread 0x000014a98c7ff0e0 DEOPT UNPACKING pc=0x000014a980913619 sp=0x000014a098346690 mode 2
+Event: 8.280 Thread 0x000014a98c695710 Uncommon trap: trap_request=0xffffff45 fr.pc=0x000014a980983938 relative=0x0000000000000278
+Event: 8.280 Thread 0x000014a98c695710 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000014a980983938 method=jromp.mpi.examples.gemm.Gemm.lambda$matrixInitialization$2(Ljromp/var/SharedVariable;Ljromp/var/SharedVariable;Ljromp/var/SharedVariable;II)V @ 47 c2
+Event: 8.280 Thread 0x000014a98c695710 DEOPT PACKING pc=0x000014a980983938 sp=0x000014a0826ed6e0
+Event: 8.280 Thread 0x000014a98c695710 DEOPT UNPACKING pc=0x000014a980913619 sp=0x000014a0826ed690 mode 2
+Event: 8.990 Thread 0x000014a98c813ca0 Uncommon trap: trap_request=0xffffff3d fr.pc=0x000014a980999bbc relative=0x00000000000019bc
+Event: 8.990 Thread 0x000014a98c813ca0 Uncommon trap: reason=unstable_fused_if action=reinterpret pc=0x000014a980999bbc method=sun.security.provider.NativePRNG$RandomIO.ensureBufferValid()V @ 57 c2
+Event: 8.990 Thread 0x000014a98c813ca0 DEOPT PACKING pc=0x000014a980999bbc sp=0x000014a082ff6610
+Event: 8.990 Thread 0x000014a98c813ca0 DEOPT UNPACKING pc=0x000014a980913619 sp=0x000014a082ff64e8 mode 2
+Event: 11.181 Thread 0x000014a98c0c7ed0 Uncommon trap: trap_request=0xffffff3d fr.pc=0x000014a980995698 relative=0x00000000000013f8
+Event: 11.182 Thread 0x000014a98c0c7ed0 Uncommon trap: reason=unstable_fused_if action=reinterpret pc=0x000014a980995698 method=sun.security.provider.NativePRNG$RandomIO.ensureBufferValid()V @ 57 c2
+Event: 11.182 Thread 0x000014a98c0c7ed0 DEOPT PACKING pc=0x000014a980995698 sp=0x000014a0828ef610
+Event: 11.182 Thread 0x000014a98c0c7ed0 DEOPT UNPACKING pc=0x000014a980913619 sp=0x000014a0828ef530 mode 2
+
+Classes loaded (20 events):
+Event: 3.650 Loading class java/util/concurrent/ThreadPoolExecutor
+Event: 3.651 Loading class java/util/concurrent/ThreadPoolExecutor done
+Event: 3.651 Loading class java/util/concurrent/ThreadPoolExecutor$AbortPolicy
+Event: 3.651 Loading class java/util/concurrent/RejectedExecutionHandler
+Event: 3.651 Loading class java/util/concurrent/RejectedExecutionHandler done
+Event: 3.651 Loading class java/util/concurrent/ThreadPoolExecutor$AbortPolicy done
+Event: 3.651 Loading class java/util/concurrent/LinkedBlockingQueue
+Event: 3.651 Loading class java/util/concurrent/BlockingQueue
+Event: 3.661 Loading class java/util/concurrent/BlockingQueue done
+Event: 3.661 Loading class java/util/AbstractQueue
+Event: 3.681 Loading class java/util/AbstractQueue done
+Event: 3.681 Loading class java/util/concurrent/LinkedBlockingQueue done
+Event: 3.681 Loading class java/util/concurrent/LinkedBlockingQueue$Node
+Event: 3.681 Loading class java/util/concurrent/LinkedBlockingQueue$Node done
+Event: 3.685 Loading class java/util/concurrent/ThreadPoolExecutor$Worker
+Event: 3.685 Loading class java/util/concurrent/ThreadPoolExecutor$Worker done
+Event: 3.685 Loading class java/lang/Thread$ThreadNumbering
+Event: 3.686 Loading class java/lang/Thread$ThreadNumbering done
+Event: 3.696 Loading class jdk/internal/event/ThreadSleepEvent
+Event: 3.696 Loading class jdk/internal/event/ThreadSleepEvent done
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (5 events):
+Event: 3.682 Thread 0x000014a98c0299f0 Exception <a 'java/lang/NoSuchMethodError'{0x000014a6d6070a00}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, java.lang.Object)'> (0x000014a6d6070a00) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 772]
+Event: 3.684 Thread 0x000014a98c0299f0 Exception <a 'java/lang/NoSuchMethodError'{0x000014a6d6086538}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(java.lang.Object, int, java.lang.Object)'> (0x000014a6d6086538) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 772]
+Event: 3.685 Thread 0x000014a98c0299f0 Exception <a 'java/lang/NoSuchMethodError'{0x000014a6d608d418}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, int, java.lang.Object)'> (0x000014a6d608d418) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 772]
+Event: 6.965 Thread 0x000014a98c0299f0 Exception <a 'java/lang/NoSuchMethodError'{0x000014a6d60c14c8}: 'java.lang.Object java.lang.invoke.DirectMethodHandle$Holder.newInvokeSpecial(java.lang.Object, java.lang.Object, int, int)'> (0x000014a6d60c14c8) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 772]
+Event: 6.969 Thread 0x000014a98c0299f0 Exception <a 'java/lang/NoSuchMethodError'{0x000014a6d60da9f0}: 'void java.lang.invoke.DirectMethodHandle$Holder.invokeVirtual(java.lang.Object, java.lang.Object)'> (0x000014a6d60da9f0) 
+thrown [src/hotspot/share/interpreter/linkResolver.cpp, line 772]
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (20 events):
+Event: 261.047 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 264.787 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 264.822 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 268.597 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 268.631 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 272.247 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 272.282 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 275.811 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 275.845 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 279.313 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 279.348 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 282.731 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 282.766 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 286.081 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 286.116 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 289.372 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 289.407 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 293.394 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+Event: 293.429 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure) done
+Event: 297.395 Executing VM operation: ParallelGCFailedAllocation (Allocation Failure)
+
+Events (20 events):
+Event: 7.044 Thread 0x000014a0c8091f20 Thread added: 0x000014a0c8091f20
+Event: 7.044 Protecting memory [0x0000149f7bbfd000,0x0000149f7bc01000] with protection modes 0
+Event: 7.045 Thread 0x000014a0c8023f50 Thread added: 0x000014a0c8023f50
+Event: 7.045 Protecting memory [0x0000149f7bafc000,0x0000149f7bb00000] with protection modes 0
+Event: 7.081 Thread 0x0000149f640aa9e0 Thread added: 0x0000149f640aa9e0
+Event: 7.081 Protecting memory [0x0000149f7b9fb000,0x0000149f7b9ff000] with protection modes 0
+Event: 7.081 Thread 0x0000149f640abd50 Thread added: 0x0000149f640abd50
+Event: 7.081 Protecting memory [0x0000149f7b8fa000,0x0000149f7b8fe000] with protection modes 0
+Event: 7.081 Thread 0x0000149f640ad180 Thread added: 0x0000149f640ad180
+Event: 7.081 Protecting memory [0x0000149f7b7f9000,0x0000149f7b7fd000] with protection modes 0
+Event: 7.178 Thread 0x0000149f5c0022c0 Thread added: 0x0000149f5c0022c0
+Event: 7.178 Protecting memory [0x0000149f7b6f8000,0x0000149f7b6fc000] with protection modes 0
+Event: 7.353 Thread 0x0000149f5c0022c0 Thread exited: 0x0000149f5c0022c0
+Event: 7.353 Thread 0x0000149f640ad180 Thread exited: 0x0000149f640ad180
+Event: 7.353 Thread 0x0000149f640abd50 Thread exited: 0x0000149f640abd50
+Event: 7.657 Thread 0x0000149f640aa9e0 Thread exited: 0x0000149f640aa9e0
+Event: 8.048 Thread 0x000014a0c8023f50 Thread exited: 0x000014a0c8023f50
+Event: 8.048 Thread 0x000014a0c8091f20 Thread exited: 0x000014a0c8091f20
+Event: 9.534 Thread 0x000014a0c8088790 Thread exited: 0x000014a0c8088790
+Event: 9.534 Thread 0x000014a0c8087530 Thread exited: 0x000014a0c8087530
+
+
+Dynamic libraries:
+149f54000000-149f5408e000 rw-p 00000000 00:00 0 
+149f5408e000-149f58000000 ---p 00000000 00:00 0 
+149f58000000-149f580a0000 rw-p 00000000 00:00 0 
+149f580a0000-149f5c000000 ---p 00000000 00:00 0 
+149f5c000000-149f5c077000 rw-p 00000000 00:00 0 
+149f5c077000-149f60000000 ---p 00000000 00:00 0 
+149f60000000-149f601bb000 rw-p 00000000 00:00 0 
+149f601bb000-149f64000000 ---p 00000000 00:00 0 
+149f64000000-149f642ef000 rw-p 00000000 00:00 0 
+149f642ef000-149f68000000 ---p 00000000 00:00 0 
+149f68000000-149f682a0000 rw-p 00000000 00:00 0 
+149f682a0000-149f6c000000 ---p 00000000 00:00 0 
+149f6c000000-149f6c021000 rw-p 00000000 00:00 0 
+149f6c021000-149f70000000 ---p 00000000 00:00 0 
+149f70000000-149f70021000 rw-p 00000000 00:00 0 
+149f70021000-149f74000000 ---p 00000000 00:00 0 
+149f74000000-149f74021000 rw-p 00000000 00:00 0 
+149f74021000-149f78000000 ---p 00000000 00:00 0 
+149f7b6f7000-149f7b6f8000 ---p 00000000 00:00 0 
+149f7b6f8000-149f7b6fc000 ---p 00000000 00:00 0 
+149f7b6fc000-149f7b7f8000 rw-p 00000000 00:00 0 
+149f7b7f8000-149f7b7f9000 ---p 00000000 00:00 0 
+149f7b7f9000-149f7b7fd000 ---p 00000000 00:00 0 
+149f7b7fd000-149f7b8f9000 rw-p 00000000 00:00 0 
+149f7b8f9000-149f7b8fa000 ---p 00000000 00:00 0 
+149f7b8fa000-149f7b8fe000 ---p 00000000 00:00 0 
+149f7b8fe000-149f7b9fa000 rw-p 00000000 00:00 0 
+149f7b9fa000-149f7b9fb000 ---p 00000000 00:00 0 
+149f7b9fb000-149f7b9ff000 ---p 00000000 00:00 0 
+149f7b9ff000-149f7bafb000 rw-p 00000000 00:00 0 
+149f7bafb000-149f7bafc000 ---p 00000000 00:00 0 
+149f7bafc000-149f7bb00000 ---p 00000000 00:00 0 
+149f7bb00000-149f7bbfc000 rw-p 00000000 00:00 0 
+149f7bbfc000-149f7bbfd000 ---p 00000000 00:00 0 
+149f7bbfd000-149f7bc01000 ---p 00000000 00:00 0 
+149f7bc01000-149f7bcfd000 rw-p 00000000 00:00 0 
+149f7bcfd000-149f7bcfe000 ---p 00000000 00:00 0 
+149f7bcfe000-149f7bdfe000 rw-p 00000000 00:00 0 
+149f7bdfe000-149f7bdff000 ---p 00000000 00:00 0 
+149f7bdff000-149f7beff000 rw-p 00000000 00:00 0 
+149f7beff000-149f7bf00000 ---p 00000000 00:00 0 
+149f7bf00000-149f7c000000 rw-p 00000000 00:00 0 
+149f7c000000-149f7c021000 rw-p 00000000 00:00 0 
+149f7c021000-149f80000000 ---p 00000000 00:00 0 
+149f80000000-149f80021000 rw-p 00000000 00:00 0 
+149f80021000-149f84000000 ---p 00000000 00:00 0 
+149f84000000-149f84021000 rw-p 00000000 00:00 0 
+149f84021000-149f88000000 ---p 00000000 00:00 0 
+149f88000000-149f88021000 rw-p 00000000 00:00 0 
+149f88021000-149f8c000000 ---p 00000000 00:00 0 
+149f8c000000-149f8c021000 rw-p 00000000 00:00 0 
+149f8c021000-149f90000000 ---p 00000000 00:00 0 
+149f90000000-149f90021000 rw-p 00000000 00:00 0 
+149f90021000-149f94000000 ---p 00000000 00:00 0 
+149f94000000-149f94021000 rw-p 00000000 00:00 0 
+149f94021000-149f98000000 ---p 00000000 00:00 0 
+149f98000000-149f98021000 rw-p 00000000 00:00 0 
+149f98021000-149f9c000000 ---p 00000000 00:00 0 
+149f9c000000-149f9c021000 rw-p 00000000 00:00 0 
+149f9c021000-149fa0000000 ---p 00000000 00:00 0 
+149fa0000000-149fa0021000 rw-p 00000000 00:00 0 
+149fa0021000-149fa4000000 ---p 00000000 00:00 0 
+149fa4000000-149fa4021000 rw-p 00000000 00:00 0 
+149fa4021000-149fa8000000 ---p 00000000 00:00 0 
+149fa8000000-149fa8021000 rw-p 00000000 00:00 0 
+149fa8021000-149fac000000 ---p 00000000 00:00 0 
+149fac000000-149fac021000 rw-p 00000000 00:00 0 
+149fac021000-149fb0000000 ---p 00000000 00:00 0 
+149fb0000000-149fb0021000 rw-p 00000000 00:00 0 
+149fb0021000-149fb4000000 ---p 00000000 00:00 0 
+149fb4000000-149fb4021000 rw-p 00000000 00:00 0 
+149fb4021000-149fb8000000 ---p 00000000 00:00 0 
+149fb8000000-149fb8021000 rw-p 00000000 00:00 0 
+149fb8021000-149fbc000000 ---p 00000000 00:00 0 
+149fbc000000-149fbc021000 rw-p 00000000 00:00 0 
+149fbc021000-149fc0000000 ---p 00000000 00:00 0 
+149fc0000000-149fc0021000 rw-p 00000000 00:00 0 
+149fc0021000-149fc4000000 ---p 00000000 00:00 0 
+149fc4000000-149fc4021000 rw-p 00000000 00:00 0 
+149fc4021000-149fc8000000 ---p 00000000 00:00 0 
+149fc8000000-149fc8021000 rw-p 00000000 00:00 0 
+149fc8021000-149fcc000000 ---p 00000000 00:00 0 
+149fcc000000-149fcc021000 rw-p 00000000 00:00 0 
+149fcc021000-149fd0000000 ---p 00000000 00:00 0 
+149fd0000000-149fd0021000 rw-p 00000000 00:00 0 
+149fd0021000-149fd4000000 ---p 00000000 00:00 0 
+149fd4000000-149fd4021000 rw-p 00000000 00:00 0 
+149fd4021000-149fd8000000 ---p 00000000 00:00 0 
+149fd8000000-149fd8021000 rw-p 00000000 00:00 0 
+149fd8021000-149fdc000000 ---p 00000000 00:00 0 
+149fdc000000-149fdc021000 rw-p 00000000 00:00 0 
+149fdc021000-149fe0000000 ---p 00000000 00:00 0 
+149fe0000000-149fe0021000 rw-p 00000000 00:00 0 
+149fe0021000-149fe4000000 ---p 00000000 00:00 0 
+149fe4000000-149fe4021000 rw-p 00000000 00:00 0 
+149fe4021000-149fe8000000 ---p 00000000 00:00 0 
+149fe8000000-149fe8021000 rw-p 00000000 00:00 0 
+149fe8021000-149fec000000 ---p 00000000 00:00 0 
+149fec000000-149fec021000 rw-p 00000000 00:00 0 
+149fec021000-149ff0000000 ---p 00000000 00:00 0 
+149ff0000000-149ff0021000 rw-p 00000000 00:00 0 
+149ff0021000-149ff4000000 ---p 00000000 00:00 0 
+149ff4000000-149ff4021000 rw-p 00000000 00:00 0 
+149ff4021000-149ff8000000 ---p 00000000 00:00 0 
+149ff8000000-149ff8021000 rw-p 00000000 00:00 0 
+149ff8021000-149ffc000000 ---p 00000000 00:00 0 
+149ffc000000-149ffc021000 rw-p 00000000 00:00 0 
+149ffc021000-14a000000000 ---p 00000000 00:00 0 
+14a000000000-14a000021000 rw-p 00000000 00:00 0 
+14a000021000-14a004000000 ---p 00000000 00:00 0 
+14a004000000-14a004021000 rw-p 00000000 00:00 0 
+14a004021000-14a008000000 ---p 00000000 00:00 0 
+14a008000000-14a008021000 rw-p 00000000 00:00 0 
+14a008021000-14a00c000000 ---p 00000000 00:00 0 
+14a00c000000-14a00c021000 rw-p 00000000 00:00 0 
+14a00c021000-14a010000000 ---p 00000000 00:00 0 
+14a010000000-14a010021000 rw-p 00000000 00:00 0 
+14a010021000-14a014000000 ---p 00000000 00:00 0 
+14a014000000-14a014021000 rw-p 00000000 00:00 0 
+14a014021000-14a018000000 ---p 00000000 00:00 0 
+14a018000000-14a018021000 rw-p 00000000 00:00 0 
+14a018021000-14a01c000000 ---p 00000000 00:00 0 
+14a01c000000-14a01c021000 rw-p 00000000 00:00 0 
+14a01c021000-14a020000000 ---p 00000000 00:00 0 
+14a020000000-14a020021000 rw-p 00000000 00:00 0 
+14a020021000-14a024000000 ---p 00000000 00:00 0 
+14a024000000-14a024021000 rw-p 00000000 00:00 0 
+14a024021000-14a028000000 ---p 00000000 00:00 0 
+14a028000000-14a028021000 rw-p 00000000 00:00 0 
+14a028021000-14a02c000000 ---p 00000000 00:00 0 
+14a02c000000-14a02c021000 rw-p 00000000 00:00 0 
+14a02c021000-14a030000000 ---p 00000000 00:00 0 
+14a030000000-14a030021000 rw-p 00000000 00:00 0 
+14a030021000-14a034000000 ---p 00000000 00:00 0 
+14a034000000-14a034021000 rw-p 00000000 00:00 0 
+14a034021000-14a038000000 ---p 00000000 00:00 0 
+14a038000000-14a038021000 rw-p 00000000 00:00 0 
+14a038021000-14a03c000000 ---p 00000000 00:00 0 
+14a03c000000-14a03c021000 rw-p 00000000 00:00 0 
+14a03c021000-14a040000000 ---p 00000000 00:00 0 
+14a040000000-14a040021000 rw-p 00000000 00:00 0 
+14a040021000-14a044000000 ---p 00000000 00:00 0 
+14a044000000-14a044021000 rw-p 00000000 00:00 0 
+14a044021000-14a048000000 ---p 00000000 00:00 0 
+14a048000000-14a048021000 rw-p 00000000 00:00 0 
+14a048021000-14a04c000000 ---p 00000000 00:00 0 
+14a04c000000-14a04c021000 rw-p 00000000 00:00 0 
+14a04c021000-14a050000000 ---p 00000000 00:00 0 
+14a050000000-14a050021000 rw-p 00000000 00:00 0 
+14a050021000-14a054000000 ---p 00000000 00:00 0 
+14a054000000-14a054021000 rw-p 00000000 00:00 0 
+14a054021000-14a058000000 ---p 00000000 00:00 0 
+14a058000000-14a058021000 rw-p 00000000 00:00 0 
+14a058021000-14a05c000000 ---p 00000000 00:00 0 
+14a05c000000-14a05c021000 rw-p 00000000 00:00 0 
+14a05c021000-14a060000000 ---p 00000000 00:00 0 
+14a060000000-14a060021000 rw-p 00000000 00:00 0 
+14a060021000-14a064000000 ---p 00000000 00:00 0 
+14a064000000-14a064021000 rw-p 00000000 00:00 0 
+14a064021000-14a068000000 ---p 00000000 00:00 0 
+14a068000000-14a068021000 rw-p 00000000 00:00 0 
+14a068021000-14a06c000000 ---p 00000000 00:00 0 
+14a06c000000-14a06c021000 rw-p 00000000 00:00 0 
+14a06c021000-14a070000000 ---p 00000000 00:00 0 
+14a070000000-14a070021000 rw-p 00000000 00:00 0 
+14a070021000-14a074000000 ---p 00000000 00:00 0 
+14a074000000-14a074021000 rw-p 00000000 00:00 0 
+14a074021000-14a078000000 ---p 00000000 00:00 0 
+14a078000000-14a078021000 rw-p 00000000 00:00 0 
+14a078021000-14a07c000000 ---p 00000000 00:00 0 
+14a07c000000-14a07c021000 rw-p 00000000 00:00 0 
+14a07c021000-14a080000000 ---p 00000000 00:00 0 
+14a0800c9000-14a0800ca000 ---p 00000000 00:00 0 
+14a0800ca000-14a0801ca000 rw-p 00000000 00:00 0 
+14a0801ca000-14a0801cb000 ---p 00000000 00:00 0 
+14a0801cb000-14a0802cb000 rw-p 00000000 00:00 0 
+14a0802cb000-14a0802cc000 ---p 00000000 00:00 0 
+14a0802cc000-14a0803cc000 rw-p 00000000 00:00 0 
+14a0803cc000-14a0803cd000 ---p 00000000 00:00 0 
+14a0803cd000-14a0804cd000 rw-p 00000000 00:00 0 
+14a0804cd000-14a0804ce000 ---p 00000000 00:00 0 
+14a0804ce000-14a0805ce000 rw-p 00000000 00:00 0 
+14a0805ce000-14a0805cf000 ---p 00000000 00:00 0 
+14a0805cf000-14a0806cf000 rw-p 00000000 00:00 0 
+14a0806cf000-14a0806d0000 ---p 00000000 00:00 0 
+14a0806d0000-14a0807d0000 rw-p 00000000 00:00 0 
+14a0807d0000-14a0807d1000 ---p 00000000 00:00 0 
+14a0807d1000-14a0808d1000 rw-p 00000000 00:00 0 
+14a0808d1000-14a0808d2000 ---p 00000000 00:00 0 
+14a0808d2000-14a0809d2000 rw-p 00000000 00:00 0 
+14a0809d2000-14a0809d3000 ---p 00000000 00:00 0 
+14a0809d3000-14a080ad3000 rw-p 00000000 00:00 0 
+14a080ad3000-14a080ad4000 ---p 00000000 00:00 0 
+14a080ad4000-14a080bd4000 rw-p 00000000 00:00 0 
+14a080bd4000-14a080bd5000 ---p 00000000 00:00 0 
+14a080bd5000-14a080cd5000 rw-p 00000000 00:00 0 
+14a080cd5000-14a080cd6000 ---p 00000000 00:00 0 
+14a080cd6000-14a080dd6000 rw-p 00000000 00:00 0 
+14a080dd6000-14a080dd7000 ---p 00000000 00:00 0 
+14a080dd7000-14a080ed7000 rw-p 00000000 00:00 0 
+14a080ed7000-14a080ed8000 ---p 00000000 00:00 0 
+14a080ed8000-14a080fd8000 rw-p 00000000 00:00 0 
+14a080fd8000-14a080fd9000 ---p 00000000 00:00 0 
+14a080fd9000-14a0810d9000 rw-p 00000000 00:00 0 
+14a0810d9000-14a0810da000 ---p 00000000 00:00 0 
+14a0810da000-14a0811da000 rw-p 00000000 00:00 0 
+14a0811da000-14a0811db000 ---p 00000000 00:00 0 
+14a0811db000-14a0812db000 rw-p 00000000 00:00 0 
+14a0812db000-14a0812dc000 ---p 00000000 00:00 0 
+14a0812dc000-14a0813dc000 rw-p 00000000 00:00 0 
+14a0813dc000-14a0813dd000 ---p 00000000 00:00 0 
+14a0813dd000-14a0814dd000 rw-p 00000000 00:00 0 
+14a0814dd000-14a0814de000 ---p 00000000 00:00 0 
+14a0814de000-14a0815de000 rw-p 00000000 00:00 0 
+14a0815de000-14a0815df000 ---p 00000000 00:00 0 
+14a0815df000-14a0816df000 rw-p 00000000 00:00 0 
+14a0816df000-14a0816e0000 ---p 00000000 00:00 0 
+14a0816e0000-14a0817e0000 rw-p 00000000 00:00 0 
+14a0817e0000-14a0817e1000 ---p 00000000 00:00 0 
+14a0817e1000-14a0818e1000 rw-p 00000000 00:00 0 
+14a0818e1000-14a0818e2000 ---p 00000000 00:00 0 
+14a0818e2000-14a0819e2000 rw-p 00000000 00:00 0 
+14a0819e2000-14a0819e3000 ---p 00000000 00:00 0 
+14a0819e3000-14a081ae3000 rw-p 00000000 00:00 0 
+14a081ae3000-14a081ae4000 ---p 00000000 00:00 0 
+14a081ae4000-14a081be4000 rw-p 00000000 00:00 0 
+14a081be4000-14a081be5000 ---p 00000000 00:00 0 
+14a081be5000-14a081ce5000 rw-p 00000000 00:00 0 
+14a081ce5000-14a081ce6000 ---p 00000000 00:00 0 
+14a081ce6000-14a081de6000 rw-p 00000000 00:00 0 
+14a081de6000-14a081de7000 ---p 00000000 00:00 0 
+14a081de7000-14a081ee7000 rw-p 00000000 00:00 0 
+14a081ee7000-14a081ee8000 ---p 00000000 00:00 0 
+14a081ee8000-14a081fe8000 rw-p 00000000 00:00 0 
+14a081fe8000-14a081fe9000 ---p 00000000 00:00 0 
+14a081fe9000-14a0820e9000 rw-p 00000000 00:00 0 
+14a0820e9000-14a0820ea000 ---p 00000000 00:00 0 
+14a0820ea000-14a0821ea000 rw-p 00000000 00:00 0 
+14a0821ea000-14a0821eb000 ---p 00000000 00:00 0 
+14a0821eb000-14a0822eb000 rw-p 00000000 00:00 0 
+14a0822eb000-14a0822ec000 ---p 00000000 00:00 0 
+14a0822ec000-14a0823ec000 rw-p 00000000 00:00 0 
+14a0823ec000-14a0823ed000 ---p 00000000 00:00 0 
+14a0823ed000-14a0824ed000 rw-p 00000000 00:00 0 
+14a0824ed000-14a0824ee000 ---p 00000000 00:00 0 
+14a0824ee000-14a0824f2000 ---p 00000000 00:00 0 
+14a0824f2000-14a0825ee000 rw-p 00000000 00:00 0 
+14a0825ee000-14a0825ef000 ---p 00000000 00:00 0 
+14a0825ef000-14a0825f3000 ---p 00000000 00:00 0 
+14a0825f3000-14a0826ef000 rw-p 00000000 00:00 0 
+14a0826ef000-14a0826f0000 ---p 00000000 00:00 0 
+14a0826f0000-14a0826f4000 ---p 00000000 00:00 0 
+14a0826f4000-14a0827f0000 rw-p 00000000 00:00 0 
+14a0827f0000-14a0827f1000 ---p 00000000 00:00 0 
+14a0827f1000-14a0827f5000 ---p 00000000 00:00 0 
+14a0827f5000-14a0828f1000 rw-p 00000000 00:00 0 
+14a0828f1000-14a0828f2000 ---p 00000000 00:00 0 
+14a0828f2000-14a0828f6000 ---p 00000000 00:00 0 
+14a0828f6000-14a0829f2000 rw-p 00000000 00:00 0 
+14a0829f2000-14a0829f3000 ---p 00000000 00:00 0 
+14a0829f3000-14a0829f7000 ---p 00000000 00:00 0 
+14a0829f7000-14a082af3000 rw-p 00000000 00:00 0 
+14a082af3000-14a082af4000 ---p 00000000 00:00 0 
+14a082af4000-14a082af8000 ---p 00000000 00:00 0 
+14a082af8000-14a082bf4000 rw-p 00000000 00:00 0 
+14a082bf4000-14a082bf5000 ---p 00000000 00:00 0 
+14a082bf5000-14a082bf9000 ---p 00000000 00:00 0 
+14a082bf9000-14a082cf5000 rw-p 00000000 00:00 0 
+14a082cf5000-14a082cf6000 ---p 00000000 00:00 0 
+14a082cf6000-14a082cfa000 ---p 00000000 00:00 0 
+14a082cfa000-14a082df6000 rw-p 00000000 00:00 0 
+14a082df6000-14a082df7000 ---p 00000000 00:00 0 
+14a082df7000-14a082dfb000 ---p 00000000 00:00 0 
+14a082dfb000-14a082ef7000 rw-p 00000000 00:00 0 
+14a082ef7000-14a082ef8000 ---p 00000000 00:00 0 
+14a082ef8000-14a082efc000 ---p 00000000 00:00 0 
+14a082efc000-14a082ff8000 rw-p 00000000 00:00 0 
+14a082ff8000-14a082ff9000 ---p 00000000 00:00 0 
+14a082ff9000-14a082ffd000 ---p 00000000 00:00 0 
+14a082ffd000-14a0830f9000 rw-p 00000000 00:00 0 
+14a0830f9000-14a0830fa000 ---p 00000000 00:00 0 
+14a0830fa000-14a0830fe000 ---p 00000000 00:00 0 
+14a0830fe000-14a0831fa000 rw-p 00000000 00:00 0 
+14a0831fa000-14a0831fb000 ---p 00000000 00:00 0 
+14a0831fb000-14a0831ff000 ---p 00000000 00:00 0 
+14a0831ff000-14a0832fb000 rw-p 00000000 00:00 0 
+14a0832fb000-14a0832fc000 ---p 00000000 00:00 0 
+14a0832fc000-14a083300000 ---p 00000000 00:00 0 
+14a083300000-14a083400000 rw-p 00000000 00:00 0 
+14a083400000-14a084800000 rw-p 00000000 00:00 0 
+14a084800000-14a084a00000 rw-p 00000000 00:00 0 
+14a084a00000-14a087000000 rw-p 00000000 00:00 0 
+14a087000000-14a087200000 rw-p 00000000 00:00 0 
+14a087200000-14a089800000 rw-p 00000000 00:00 0 
+14a089800000-14a089a00000 rw-p 00000000 00:00 0 
+14a089a00000-14a08be00000 rw-p 00000000 00:00 0 
+14a08be00000-14a08c000000 rw-p 00000000 00:00 0 
+14a08c000000-14a08c009000 rw-p 00000000 00:00 0 
+14a08c009000-14a08c029000 rw-p 00000000 00:00 0 
+14a08c029000-14a08c02a000 rw-p 00000000 00:00 0 
+14a08c02a000-14a090000000 ---p 00000000 00:00 0 
+14a0900a6000-14a0900a7000 ---p 00000000 00:00 0 
+14a0900a7000-14a0900ab000 ---p 00000000 00:00 0 
+14a0900ab000-14a0901a7000 rw-p 00000000 00:00 0 
+14a0901a7000-14a0901a8000 ---p 00000000 00:00 0 
+14a0901a8000-14a0901ac000 ---p 00000000 00:00 0 
+14a0901ac000-14a0902a8000 rw-p 00000000 00:00 0 
+14a0902a8000-14a0903b2000 rw-p 00000000 00:00 0 
+14a0903b2000-14a0903d8000 rw-p 00000000 00:00 0 
+14a0903d8000-14a0904d8000 rw-p 00000000 00:00 0 
+14a0904d8000-14a0904d9000 rw-p 00000000 00:00 0 
+14a0904d9000-14a0908f2000 rw-s 00000000 00:01 3309591                    /SYSV00000000 (deleted)
+14a0908f2000-14a090d0b000 rw-s 00000000 00:16 30671678                   /dev/shm/ucx_shm_posix_382fc0c6 (deleted)
+14a090d0b000-14a090d0c000 rw-p 00000000 00:00 0 
+14a090d0c000-14a090e0c000 rw-p 00000000 00:00 0 
+14a090e0c000-14a090e0e000 rw-p 00000000 00:00 0 
+14a090e0e000-14a090f0e000 rw-p 00000000 00:00 0 
+14a090f0e000-14a091010000 rw-p 00000000 00:00 0 
+14a091010000-14a092010000 rw-s 00000000 00:16 30671594                   /dev/shm/sm_segment.cn6009.3033.631d0001.0
+14a092010000-14a092433000 rw-s 00000000 00:16 30671593                   /dev/shm/psm3_shm.30330a0401310073a9bc0
+14a092433000-14a092ed9000 rw-p 00000000 00:00 0 
+14a092ed9000-14a093319000 rw-p 00000000 00:00 0 
+14a093319000-14a09331a000 rw-p 00000000 00:00 0 
+14a09331a000-14a093716000 rw-p 00000000 00:00 0 
+14a093716000-14a093718000 rw-p 00000000 00:00 0 
+14a093718000-14a093839000 rw-p 00000000 00:00 0 
+14a093858000-14a093859000 ---p 00000000 00:00 0 
+14a093859000-14a09385d000 ---p 00000000 00:00 0 
+14a09385d000-14a093959000 rw-p 00000000 00:00 0 
+14a093959000-14a09395a000 ---p 00000000 00:00 0 
+14a09395a000-14a09395e000 ---p 00000000 00:00 0 
+14a09395e000-14a093a5a000 rw-p 00000000 00:00 0 
+14a093a5a000-14a093a5b000 ---p 00000000 00:00 0 
+14a093a5b000-14a093a5f000 ---p 00000000 00:00 0 
+14a093a5f000-14a093b5b000 rw-p 00000000 00:00 0 
+14a093b5b000-14a093b5c000 ---p 00000000 00:00 0 
+14a093b5c000-14a093b60000 ---p 00000000 00:00 0 
+14a093b60000-14a093c5c000 rw-p 00000000 00:00 0 
+14a093c5c000-14a093c5d000 ---p 00000000 00:00 0 
+14a093c5d000-14a093c61000 ---p 00000000 00:00 0 
+14a093c61000-14a093e5d000 rw-p 00000000 00:00 0 
+14a093ee5000-14a093efd000 r-xp 00000000 357:2eb56 144117291972360226     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libgcc_s.so.1
+14a093efd000-14a093efe000 r--p 00017000 357:2eb56 144117291972360226     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libgcc_s.so.1
+14a093efe000-14a093eff000 rw-p 00018000 357:2eb56 144117291972360226     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libgcc_s.so.1
+14a093eff000-14a093f00000 ---p 00000000 00:00 0 
+14a093f00000-14a093f04000 ---p 00000000 00:00 0 
+14a093f04000-14a094000000 rw-p 00000000 00:00 0 
+14a094000000-14a094080000 rw-p 00000000 00:00 0 
+14a094080000-14a098000000 ---p 00000000 00:00 0 
+14a098004000-14a098005000 -w-s 00902000 00:06 29838                      /dev/infiniband/uverbs0
+14a098005000-14a098008000 rw-s 00000000 00:01 3309590                    /SYSV00000000 (deleted)
+14a098008000-14a09802d000 rw-p 00000000 00:00 0 
+14a098045000-14a098046000 ---p 00000000 00:00 0 
+14a098046000-14a09804a000 ---p 00000000 00:00 0 
+14a09804a000-14a098146000 rw-p 00000000 00:00 0 
+14a098146000-14a098147000 ---p 00000000 00:00 0 
+14a098147000-14a09814b000 ---p 00000000 00:00 0 
+14a09814b000-14a098247000 rw-p 00000000 00:00 0 
+14a098247000-14a098248000 ---p 00000000 00:00 0 
+14a098248000-14a09824c000 ---p 00000000 00:00 0 
+14a09824c000-14a098348000 rw-p 00000000 00:00 0 
+14a098348000-14a098349000 ---p 00000000 00:00 0 
+14a098349000-14a09834d000 ---p 00000000 00:00 0 
+14a09834d000-14a098449000 rw-p 00000000 00:00 0 
+14a098449000-14a09844a000 ---p 00000000 00:00 0 
+14a09844a000-14a09844e000 ---p 00000000 00:00 0 
+14a09844e000-14a09854a000 rw-p 00000000 00:00 0 
+14a09854a000-14a09854b000 ---p 00000000 00:00 0 
+14a09854b000-14a09854f000 ---p 00000000 00:00 0 
+14a09854f000-14a098800000 rw-p 00000000 00:00 0 
+14a098800000-14a099200000 rw-p 00000000 00:00 0 
+14a099200000-14a09924c000 rw-p 00000000 00:00 0 
+14a09924c000-14a09924f000 rw-s 00000000 00:16 30680456                   /dev/shm/ucx_shm_posix_56be2114 (deleted)
+14a09924f000-14a099290000 rw-p 00000000 00:00 0 
+14a099290000-14a09929b000 r-xp 00000000 fd:00 2392                       /usr/lib64/libnss_files-2.28.so
+14a09929b000-14a09949b000 ---p 0000b000 fd:00 2392                       /usr/lib64/libnss_files-2.28.so
+14a09949b000-14a09949c000 r--p 0000b000 fd:00 2392                       /usr/lib64/libnss_files-2.28.so
+14a09949c000-14a09949d000 rw-p 0000c000 fd:00 2392                       /usr/lib64/libnss_files-2.28.so
+14a09949d000-14a0994a3000 rw-p 00000000 00:00 0 
+14a0994a3000-14a0994a4000 rw-s 00800000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994a4000-14a0994a7000 rw-s 00000000 00:16 30671676                   /dev/shm/ucx_shm_posix_4cc3610 (deleted)
+14a0994a7000-14a0994a9000 rw-p 00000000 00:00 0 
+14a0994a9000-14a0994aa000 -w-s 00902000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994aa000-14a0994ab000 rw-s 00801000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994ab000-14a0994ac000 -w-s 00901000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994ac000-14a0994ad000 -w-s 00901000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994ad000-14a0994ae000 -w-s 00900000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994ae000-14a0994af000 r--s 00700000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994af000-14a0994b0000 r--s 00500000 00:06 29838                      /dev/infiniband/uverbs0
+14a0994b0000-14a0994b1000 rw-s 00000000 00:06 29840                      /dev/infiniband/uverbs1
+14a0994b1000-14a099536000 rw-p 00000000 00:00 0 
+14a099536000-14a099537000 ---p 00000000 00:00 0 
+14a099537000-14a099737000 rw-p 00000000 00:00 0 
+14a099737000-14a09973d000 r-xp 00000000 fd:00 67119470                   /usr/lib64/libibverbs/libbnxt_re-rdmav34.so
+14a09973d000-14a09993d000 ---p 00006000 fd:00 67119470                   /usr/lib64/libibverbs/libbnxt_re-rdmav34.so
+14a09993d000-14a09993e000 r--p 00006000 fd:00 67119470                   /usr/lib64/libibverbs/libbnxt_re-rdmav34.so
+14a09993e000-14a09993f000 rw-p 00000000 00:00 0 
+14a09993f000-14a099948000 r-xp 00000000 fd:00 67119471                   /usr/lib64/libibverbs/libcxgb4-rdmav34.so
+14a099948000-14a099b48000 ---p 00009000 fd:00 67119471                   /usr/lib64/libibverbs/libcxgb4-rdmav34.so
+14a099b48000-14a099b49000 r--p 00009000 fd:00 67119471                   /usr/lib64/libibverbs/libcxgb4-rdmav34.so
+14a099b49000-14a099b4a000 rw-p 0000a000 fd:00 67119471                   /usr/lib64/libibverbs/libcxgb4-rdmav34.so
+14a099b4a000-14a099b4e000 r-xp 00000000 fd:00 67119473                   /usr/lib64/libibverbs/libhfi1verbs-rdmav34.so
+14a099b4e000-14a099d4d000 ---p 00004000 fd:00 67119473                   /usr/lib64/libibverbs/libhfi1verbs-rdmav34.so
+14a099d4d000-14a099d4e000 r--p 00003000 fd:00 67119473                   /usr/lib64/libibverbs/libhfi1verbs-rdmav34.so
+14a099d4e000-14a099d4f000 rw-p 00000000 00:00 0 
+14a099d4f000-14a099d59000 r-xp 00000000 fd:00 67119474                   /usr/lib64/libibverbs/libhns-rdmav34.so
+14a099d59000-14a099f59000 ---p 0000a000 fd:00 67119474                   /usr/lib64/libibverbs/libhns-rdmav34.so
+14a099f59000-14a099f5a000 r--p 0000a000 fd:00 67119474                   /usr/lib64/libibverbs/libhns-rdmav34.so
+14a099f5a000-14a099f5b000 rw-p 00000000 00:00 0 
+14a099f5b000-14a099f64000 r-xp 00000000 fd:00 67119475                   /usr/lib64/libibverbs/libirdma-rdmav34.so
+14a099f64000-14a09a163000 ---p 00009000 fd:00 67119475                   /usr/lib64/libibverbs/libirdma-rdmav34.so
+14a09a163000-14a09a164000 r--p 00008000 fd:00 67119475                   /usr/lib64/libibverbs/libirdma-rdmav34.so
+14a09a164000-14a09a165000 rw-p 00000000 00:00 0 
+14a09a165000-14a09a170000 r-xp 00000000 fd:00 2678                       /usr/lib64/libmlx4.so.1.0.37.2
+14a09a170000-14a09a370000 ---p 0000b000 fd:00 2678                       /usr/lib64/libmlx4.so.1.0.37.2
+14a09a370000-14a09a371000 r--p 0000b000 fd:00 2678                       /usr/lib64/libmlx4.so.1.0.37.2
+14a09a371000-14a09a372000 rw-p 00000000 00:00 0 
+14a09a372000-14a09a37c000 r-xp 00000000 fd:00 67119478                   /usr/lib64/libibverbs/libqedr-rdmav34.so
+14a09a37c000-14a09a57c000 ---p 0000a000 fd:00 67119478                   /usr/lib64/libibverbs/libqedr-rdmav34.so
+14a09a57c000-14a09a57d000 r--p 0000a000 fd:00 67119478                   /usr/lib64/libibverbs/libqedr-rdmav34.so
+14a09a57d000-14a09a57e000 rw-p 00000000 00:00 0 
+14a09a57e000-14a09a584000 r-xp 00000000 fd:00 67119479                   /usr/lib64/libibverbs/librxe-rdmav34.so
+14a09a584000-14a09a783000 ---p 00006000 fd:00 67119479                   /usr/lib64/libibverbs/librxe-rdmav34.so
+14a09a783000-14a09a784000 r--p 00005000 fd:00 67119479                   /usr/lib64/libibverbs/librxe-rdmav34.so
+14a09a784000-14a09a785000 rw-p 00000000 00:00 0 
+14a09a785000-14a09a78a000 r-xp 00000000 fd:00 67119480                   /usr/lib64/libibverbs/libsiw-rdmav34.so
+14a09a78a000-14a09a989000 ---p 00005000 fd:00 67119480                   /usr/lib64/libibverbs/libsiw-rdmav34.so
+14a09a989000-14a09a98a000 r--p 00004000 fd:00 67119480                   /usr/lib64/libibverbs/libsiw-rdmav34.so
+14a09a98a000-14a09a98b000 rw-p 00000000 00:00 0 
+14a09a98b000-14a09a990000 r-xp 00000000 fd:00 67119481                   /usr/lib64/libibverbs/libvmw_pvrdma-rdmav34.so
+14a09a990000-14a09ab8f000 ---p 00005000 fd:00 67119481                   /usr/lib64/libibverbs/libvmw_pvrdma-rdmav34.so
+14a09ab8f000-14a09ab90000 r--p 00004000 fd:00 67119481                   /usr/lib64/libibverbs/libvmw_pvrdma-rdmav34.so
+14a09ab90000-14a09ab91000 rw-p 00000000 00:00 0 
+14a09ab91000-14a09abf8000 r-xp 00000000 fd:00 2680                       /usr/lib64/libmlx5.so.1.21.37.2
+14a09abf8000-14a09adf7000 ---p 00067000 fd:00 2680                       /usr/lib64/libmlx5.so.1.21.37.2
+14a09adf7000-14a09adf9000 r--p 00066000 fd:00 2680                       /usr/lib64/libmlx5.so.1.21.37.2
+14a09adf9000-14a09adfa000 rw-p 00068000 fd:00 2680                       /usr/lib64/libmlx5.so.1.21.37.2
+14a09adfa000-14a09adfc000 rw-p 00000000 00:00 0 
+14a09adfc000-14a09ae71000 r-xp 00000000 357:2eb56 144117291972390539     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_ib.so.0.0.0
+14a09ae71000-14a09ae72000 ---p 00075000 357:2eb56 144117291972390539     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_ib.so.0.0.0
+14a09ae72000-14a09ae73000 r--p 00075000 357:2eb56 144117291972390539     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_ib.so.0.0.0
+14a09ae73000-14a09ae79000 rw-p 00076000 357:2eb56 144117291972390539     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_ib.so.0.0.0
+14a09ae79000-14a09ae7a000 ---p 00000000 00:00 0 
+14a09ae7a000-14a09b09d000 rw-p 00000000 00:00 0 
+14a09b09d000-14a09b0c6000 r-xp 00000000 fd:00 1842                       /usr/lib64/libtinfo.so.6.1
+14a09b0c6000-14a09b2c5000 ---p 00029000 fd:00 1842                       /usr/lib64/libtinfo.so.6.1
+14a09b2c5000-14a09b2c9000 r--p 00028000 fd:00 1842                       /usr/lib64/libtinfo.so.6.1
+14a09b2c9000-14a09b2ca000 rw-p 0002c000 fd:00 1842                       /usr/lib64/libtinfo.so.6.1
+14a09b2ca000-14a09b310000 r-xp 00000000 fd:00 2573                       /usr/lib64/libreadline.so.7.0
+14a09b310000-14a09b50f000 ---p 00046000 fd:00 2573                       /usr/lib64/libreadline.so.7.0
+14a09b50f000-14a09b512000 r--p 00045000 fd:00 2573                       /usr/lib64/libreadline.so.7.0
+14a09b512000-14a09b518000 rw-p 00048000 fd:00 2573                       /usr/lib64/libreadline.so.7.0
+14a09b518000-14a09b519000 rw-p 00000000 00:00 0 
+14a09b519000-14a09b594000 r-xp 00000000 fd:00 2661                       /usr/lib64/libnl-route-3.so.200.26.0
+14a09b594000-14a09b794000 ---p 0007b000 fd:00 2661                       /usr/lib64/libnl-route-3.so.200.26.0
+14a09b794000-14a09b798000 r--p 0007b000 fd:00 2661                       /usr/lib64/libnl-route-3.so.200.26.0
+14a09b798000-14a09b79d000 rw-p 0007f000 fd:00 2661                       /usr/lib64/libnl-route-3.so.200.26.0
+14a09b79d000-14a09b79f000 rw-p 00000000 00:00 0 
+14a09b79f000-14a09b7c0000 r-xp 00000000 fd:00 2653                       /usr/lib64/libnl-3.so.200.26.0
+14a09b7c0000-14a09b9bf000 ---p 00021000 fd:00 2653                       /usr/lib64/libnl-3.so.200.26.0
+14a09b9bf000-14a09b9c1000 r--p 00020000 fd:00 2653                       /usr/lib64/libnl-3.so.200.26.0
+14a09b9c1000-14a09b9c2000 rw-p 00022000 fd:00 2653                       /usr/lib64/libnl-3.so.200.26.0
+14a09b9c2000-14a09b9e8000 r-xp 00000000 357:2eb56 144117291972376836     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/XZ/5.2.5-GCCcore-11.2.0/lib/liblzma.so.5.2.5
+14a09b9e8000-14a09b9e9000 r--p 00025000 357:2eb56 144117291972376836     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/XZ/5.2.5-GCCcore-11.2.0/lib/liblzma.so.5.2.5
+14a09b9e9000-14a09b9ea000 rw-p 00026000 357:2eb56 144117291972376836     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/XZ/5.2.5-GCCcore-11.2.0/lib/liblzma.so.5.2.5
+14a09b9ea000-14a09ba01000 r-xp 00000000 357:2eb56 144117291972362135     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/zlib/1.2.11-GCCcore-11.2.0/lib/libz.so.1.2.11
+14a09ba01000-14a09ba02000 r--p 00016000 357:2eb56 144117291972362135     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/zlib/1.2.11-GCCcore-11.2.0/lib/libz.so.1.2.11
+14a09ba02000-14a09ba03000 rw-p 00017000 357:2eb56 144117291972362135     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/zlib/1.2.11-GCCcore-11.2.0/lib/libz.so.1.2.11
+14a09ba03000-14a09bb65000 r-xp 00000000 357:2eb56 144117291972390097     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libxml2/2.9.10-GCCcore-11.2.0/lib/libxml2.so.2.9.10
+14a09bb65000-14a09bb66000 ---p 00162000 357:2eb56 144117291972390097     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libxml2/2.9.10-GCCcore-11.2.0/lib/libxml2.so.2.9.10
+14a09bb66000-14a09bb6e000 r--p 00162000 357:2eb56 144117291972390097     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libxml2/2.9.10-GCCcore-11.2.0/lib/libxml2.so.2.9.10
+14a09bb6e000-14a09bb70000 rw-p 0016a000 357:2eb56 144117291972390097     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libxml2/2.9.10-GCCcore-11.2.0/lib/libxml2.so.2.9.10
+14a09bb70000-14a09bb71000 rw-p 00000000 00:00 0 
+14a09bb71000-14a09bbca000 r-xp 00000000 357:2eb56 144117291972390912     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/hwloc/2.5.0-GCCcore-11.2.0/lib/libhwloc.so.15.5.0
+14a09bbca000-14a09bbcb000 r--p 00058000 357:2eb56 144117291972390912     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/hwloc/2.5.0-GCCcore-11.2.0/lib/libhwloc.so.15.5.0
+14a09bbcb000-14a09bbcc000 rw-p 00059000 357:2eb56 144117291972390912     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/hwloc/2.5.0-GCCcore-11.2.0/lib/libhwloc.so.15.5.0
+14a09bbcc000-14a09bbce000 r-xp 00000000 fd:00 2402                       /usr/lib64/libutil-2.28.so
+14a09bbce000-14a09bdce000 ---p 00002000 fd:00 2402                       /usr/lib64/libutil-2.28.so
+14a09bdce000-14a09bdcf000 r--p 00002000 fd:00 2402                       /usr/lib64/libutil-2.28.so
+14a09bdcf000-14a09bdd0000 rw-p 00003000 fd:00 2402                       /usr/lib64/libutil-2.28.so
+14a09bdd0000-14a09bdf6000 r-xp 00000000 fd:00 1101288                    /usr/lib64/liblustreapi.so.1.0.0
+14a09bdf6000-14a09bff5000 ---p 00026000 fd:00 1101288                    /usr/lib64/liblustreapi.so.1.0.0
+14a09bff5000-14a09bff6000 r--p 00025000 fd:00 1101288                    /usr/lib64/liblustreapi.so.1.0.0
+14a09bff6000-14a09bff7000 rw-p 00026000 fd:00 1101288                    /usr/lib64/liblustreapi.so.1.0.0
+14a09bff7000-14a09c000000 rw-p 00000000 00:00 0 
+14a09c000000-14a09c034000 rw-p 00000000 00:00 0 
+14a09c034000-14a0a0000000 ---p 00000000 00:00 0 
+14a0a0000000-14a0a0028000 rw-p 00000000 00:00 0 
+14a0a0028000-14a0a4000000 ---p 00000000 00:00 0 
+14a0a4000000-14a0a4055000 rw-p 00000000 00:00 0 
+14a0a4055000-14a0a8000000 ---p 00000000 00:00 0 
+14a0a8000000-14a0a8037000 rw-p 00000000 00:00 0 
+14a0a8037000-14a0ac000000 ---p 00000000 00:00 0 
+14a0ac000000-14a0ac024000 rw-p 00000000 00:00 0 
+14a0ac024000-14a0b0000000 ---p 00000000 00:00 0 
+14a0b0000000-14a0b0053000 rw-p 00000000 00:00 0 
+14a0b0053000-14a0b4000000 ---p 00000000 00:00 0 
+14a0b4000000-14a0b45ab000 rw-p 00000000 00:00 0 
+14a0b45ab000-14a0b8000000 ---p 00000000 00:00 0 
+14a0b8000000-14a0b8285000 rw-p 00000000 00:00 0 
+14a0b8285000-14a0bc000000 ---p 00000000 00:00 0 
+14a0bc000000-14a0bc021000 rw-p 00000000 00:00 0 
+14a0bc021000-14a0c0000000 ---p 00000000 00:00 0 
+14a0c0000000-14a0c0021000 rw-p 00000000 00:00 0 
+14a0c0021000-14a0c4000000 ---p 00000000 00:00 0 
+14a0c4000000-14a0c4021000 rw-p 00000000 00:00 0 
+14a0c4021000-14a0c8000000 ---p 00000000 00:00 0 
+14a0c8000000-14a0c8402000 rw-p 00000000 00:00 0 
+14a0c8402000-14a0cc000000 ---p 00000000 00:00 0 
+14a0cc000000-14a0cc021000 rw-p 00000000 00:00 0 
+14a0cc021000-14a0d0000000 ---p 00000000 00:00 0 
+14a0d0000000-14a0d0021000 rw-p 00000000 00:00 0 
+14a0d0021000-14a0d4000000 ---p 00000000 00:00 0 
+14a0d4000000-14a0d4021000 rw-p 00000000 00:00 0 
+14a0d4021000-14a0d8000000 ---p 00000000 00:00 0 
+14a0d8000000-14a0d8021000 rw-p 00000000 00:00 0 
+14a0d8021000-14a0dc000000 ---p 00000000 00:00 0 
+14a0dc000000-14a0dc02a000 rw-p 00000000 00:00 0 
+14a0dc02a000-14a0e0000000 ---p 00000000 00:00 0 
+14a0e0000000-14a0e0001000 -w-s 00900000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e0001000-14a0e0002000 r--s 00700000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e0002000-14a0e0003000 r--s 00500000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e0003000-14a0e0004000 rw-s 00000000 00:06 21784                      /dev/infiniband/uverbs2
+14a0e0004000-14a0e0005000 rw-s 00000000 00:06 29840                      /dev/infiniband/uverbs1
+14a0e0005000-14a0e0006000 -w-s 00901000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e0006000-14a0e0007000 rw-s 00000000 00:06 21784                      /dev/infiniband/uverbs2
+14a0e0007000-14a0e003b000 r-xp 00000000 357:2eb56 144117291972363988     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libevent/2.1.12-GCCcore-11.2.0/lib/libevent_core-2.1.so.7.0.1
+14a0e003b000-14a0e003c000 r--p 00033000 357:2eb56 144117291972363988     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libevent/2.1.12-GCCcore-11.2.0/lib/libevent_core-2.1.so.7.0.1
+14a0e003c000-14a0e003d000 rw-p 00034000 357:2eb56 144117291972363988     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libevent/2.1.12-GCCcore-11.2.0/lib/libevent_core-2.1.so.7.0.1
+14a0e003d000-14a0e003e000 rw-p 00000000 00:00 0 
+14a0e003e000-14a0e0047000 r-xp 00000000 fd:00 3570                       /usr/lib64/libmunge.so.2.0.0
+14a0e0047000-14a0e0246000 ---p 00009000 fd:00 3570                       /usr/lib64/libmunge.so.2.0.0
+14a0e0246000-14a0e0247000 r--p 00008000 fd:00 3570                       /usr/lib64/libmunge.so.2.0.0
+14a0e0247000-14a0e0248000 rw-p 00009000 fd:00 3570                       /usr/lib64/libmunge.so.2.0.0
+14a0e0248000-14a0e0459000 r-xp 00000000 357:2eb56 144117744386757802     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libpmix.so.2.13.3
+14a0e0459000-14a0e0462000 r--p 00210000 357:2eb56 144117744386757802     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libpmix.so.2.13.3
+14a0e0462000-14a0e0477000 rw-p 00219000 357:2eb56 144117744386757802     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libpmix.so.2.13.3
+14a0e0477000-14a0e047c000 rw-p 00000000 00:00 0 
+14a0e047c000-14a0e05a3000 r-xp 00000000 357:2eb56 144117291972362869     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/binutils/2.37-GCCcore-11.2.0/lib/libbfd-2.37.so
+14a0e05a3000-14a0e05a4000 ---p 00127000 357:2eb56 144117291972362869     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/binutils/2.37-GCCcore-11.2.0/lib/libbfd-2.37.so
+14a0e05a4000-14a0e05b8000 r--p 00127000 357:2eb56 144117291972362869     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/binutils/2.37-GCCcore-11.2.0/lib/libbfd-2.37.so
+14a0e05b8000-14a0e05bb000 rw-p 0013b000 357:2eb56 144117291972362869     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/binutils/2.37-GCCcore-11.2.0/lib/libbfd-2.37.so
+14a0e05bb000-14a0e05d1000 r-xp 00000000 357:2eb56 144117291972390425     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucm.so.0.0.0
+14a0e05d1000-14a0e05d2000 ---p 00016000 357:2eb56 144117291972390425     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucm.so.0.0.0
+14a0e05d2000-14a0e05d3000 r--p 00016000 357:2eb56 144117291972390425     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucm.so.0.0.0
+14a0e05d3000-14a0e05d4000 rw-p 00017000 357:2eb56 144117291972390425     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucm.so.0.0.0
+14a0e05d4000-14a0e05d5000 rw-p 00000000 00:00 0 
+14a0e05d5000-14a0e061c000 r-xp 00000000 357:2eb56 144117291972390437     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucs.so.0.0.0
+14a0e061c000-14a0e061d000 r--p 00046000 357:2eb56 144117291972390437     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucs.so.0.0.0
+14a0e061d000-14a0e0620000 rw-p 00047000 357:2eb56 144117291972390437     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucs.so.0.0.0
+14a0e0620000-14a0e0623000 rw-p 00000000 00:00 0 
+14a0e0623000-14a0e0655000 r-xp 00000000 357:2eb56 144117291972390522     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libuct.so.0.0.0
+14a0e0655000-14a0e0656000 r--p 00031000 357:2eb56 144117291972390522     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libuct.so.0.0.0
+14a0e0656000-14a0e065a000 rw-p 00032000 357:2eb56 144117291972390522     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libuct.so.0.0.0
+14a0e065a000-14a0e06e3000 r-xp 00000000 357:2eb56 144117291972390557     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucp.so.0.0.0
+14a0e06e3000-14a0e06e4000 ---p 00089000 357:2eb56 144117291972390557     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucp.so.0.0.0
+14a0e06e4000-14a0e06e5000 r--p 00089000 357:2eb56 144117291972390557     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucp.so.0.0.0
+14a0e06e5000-14a0e06e9000 rw-p 0008a000 357:2eb56 144117291972390557     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/libucp.so.0.0.0
+14a0e06e9000-14a0e06ef000 r-xp 00000000 fd:00 2557                       /usr/lib64/libuuid.so.1.3.0
+14a0e06ef000-14a0e08ef000 ---p 00006000 fd:00 2557                       /usr/lib64/libuuid.so.1.3.0
+14a0e08ef000-14a0e08f0000 r--p 00006000 fd:00 2557                       /usr/lib64/libuuid.so.1.3.0
+14a0e08f0000-14a0e08f1000 rw-p 00000000 00:00 0 
+14a0e08f1000-14a0e090f000 r-xp 00000000 fd:00 2676                       /usr/lib64/libibverbs.so.1.14.37.2
+14a0e090f000-14a0e0b0f000 ---p 0001e000 fd:00 2676                       /usr/lib64/libibverbs.so.1.14.37.2
+14a0e0b0f000-14a0e0b10000 r--p 0001e000 fd:00 2676                       /usr/lib64/libibverbs.so.1.14.37.2
+14a0e0b10000-14a0e0b11000 rw-p 0001f000 fd:00 2676                       /usr/lib64/libibverbs.so.1.14.37.2
+14a0e0b11000-14a0e0b1a000 r-xp 00000000 fd:00 2674                       /usr/lib64/libefa.so.1.1.37.2
+14a0e0b1a000-14a0e0d19000 ---p 00009000 fd:00 2674                       /usr/lib64/libefa.so.1.1.37.2
+14a0e0d19000-14a0e0d1a000 r--p 00008000 fd:00 2674                       /usr/lib64/libefa.so.1.1.37.2
+14a0e0d1a000-14a0e0d1b000 rw-p 00000000 00:00 0 
+14a0e0d1b000-14a0e0d34000 r-xp 00000000 fd:00 2885                       /usr/lib64/librdmacm.so.1.3.37.2
+14a0e0d34000-14a0e0f33000 ---p 00019000 fd:00 2885                       /usr/lib64/librdmacm.so.1.3.37.2
+14a0e0f33000-14a0e0f34000 r--p 00018000 fd:00 2885                       /usr/lib64/librdmacm.so.1.3.37.2
+14a0e0f34000-14a0e0f35000 rw-p 00019000 fd:00 2885                       /usr/lib64/librdmacm.so.1.3.37.2
+14a0e0f35000-14a0e0f36000 rw-p 00000000 00:00 0 
+14a0e0f36000-14a0e10ba000 r-xp 00000000 357:2eb56 144117291972390620     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1.16.2
+14a0e10ba000-14a0e10bb000 ---p 00184000 357:2eb56 144117291972390620     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1.16.2
+14a0e10bb000-14a0e10bc000 r--p 00184000 357:2eb56 144117291972390620     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1.16.2
+14a0e10bc000-14a0e10c6000 rw-p 00185000 357:2eb56 144117291972390620     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libfabric/1.13.2-GCCcore-11.2.0/lib/libfabric.so.1.16.2
+14a0e10c6000-14a0e10ec000 rw-p 00000000 00:00 0 
+14a0e10ec000-14a0e120f000 r-xp 00000000 357:2eb56 144117744386758503     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80.0.4
+14a0e120f000-14a0e1210000 ---p 00123000 357:2eb56 144117744386758503     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80.0.4
+14a0e1210000-14a0e1213000 r--p 00123000 357:2eb56 144117744386758503     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80.0.4
+14a0e1213000-14a0e1220000 rw-p 00126000 357:2eb56 144117744386758503     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libopen-pal.so.80.0.4
+14a0e1220000-14a0e1226000 rw-p 00000000 00:00 0 
+14a0e1226000-14a0e1545000 r-xp 00000000 357:2eb56 144117744386758540     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40.40.5
+14a0e1545000-14a0e1546000 ---p 0031f000 357:2eb56 144117744386758540     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40.40.5
+14a0e1546000-14a0e154a000 r--p 0031f000 357:2eb56 144117744386758540     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40.40.5
+14a0e154a000-14a0e157c000 rw-p 00323000 357:2eb56 144117744386758540     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi.so.40.40.5
+14a0e157c000-14a0e15cc000 rw-p 00000000 00:00 0 
+14a0e15cc000-14a0e15f4000 r-xp 00000000 357:2eb56 144117744386758631     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi_java.so.40.40.0
+14a0e15f4000-14a0e15f5000 r--p 00027000 357:2eb56 144117744386758631     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi_java.so.40.40.0
+14a0e15f5000-14a0e15f6000 rw-p 00028000 357:2eb56 144117744386758631     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/libmpi_java.so.40.40.0
+14a0e15f6000-14a0e15f7000 ---p 00000000 00:00 0 
+14a0e15f7000-14a0e15fb000 ---p 00000000 00:00 0 
+14a0e15fb000-14a0e16f7000 rw-p 00000000 00:00 0 
+14a0e16f7000-14a0e16f8000 ---p 00000000 00:00 0 
+14a0e16f8000-14a0e16fc000 ---p 00000000 00:00 0 
+14a0e16fc000-14a0e17f8000 rw-p 00000000 00:00 0 
+14a0e17f8000-14a0e17f9000 ---p 00000000 00:00 0 
+14a0e17f9000-14a0e17fd000 ---p 00000000 00:00 0 
+14a0e17fd000-14a0e18f9000 rw-p 00000000 00:00 0 
+14a0e18f9000-14a0e18fa000 ---p 00000000 00:00 0 
+14a0e18fa000-14a0e18fe000 ---p 00000000 00:00 0 
+14a0e18fe000-14a0e19fa000 rw-p 00000000 00:00 0 
+14a0e19fa000-14a0e19fb000 ---p 00000000 00:00 0 
+14a0e19fb000-14a0e19ff000 ---p 00000000 00:00 0 
+14a0e19ff000-14a0e1afb000 rw-p 00000000 00:00 0 
+14a0e1afb000-14a0e1afc000 ---p 00000000 00:00 0 
+14a0e1afc000-14a0e1b00000 ---p 00000000 00:00 0 
+14a0e1b00000-14a0e1bfc000 rw-p 00000000 00:00 0 
+14a0e1bfc000-14a0e1bfd000 ---p 00000000 00:00 0 
+14a0e1bfd000-14a0e1c01000 ---p 00000000 00:00 0 
+14a0e1c01000-14a0e1cfd000 rw-p 00000000 00:00 0 
+14a0e1cfd000-14a0e1cfe000 ---p 00000000 00:00 0 
+14a0e1cfe000-14a0e1d02000 ---p 00000000 00:00 0 
+14a0e1d02000-14a0e1dfe000 rw-p 00000000 00:00 0 
+14a0e1dfe000-14a0e1dff000 ---p 00000000 00:00 0 
+14a0e1dff000-14a0e1e03000 ---p 00000000 00:00 0 
+14a0e1e03000-14a0e1eff000 rw-p 00000000 00:00 0 
+14a0e1eff000-14a0e1f00000 ---p 00000000 00:00 0 
+14a0e1f00000-14a0e1f04000 ---p 00000000 00:00 0 
+14a0e1f04000-14a0e20e0000 rw-p 00000000 00:00 0 
+14a0e20e0000-14a0e2400000 ---p 00000000 00:00 0 
+14a0e2400000-14a0e2450000 rw-p 00000000 00:00 0 
+14a0e2450000-14a0e6000000 ---p 00000000 00:00 0 
+14a0e6000000-14a0e6001000 -w-s 00900000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e6001000-14a0e6002000 r--s 00700000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e6002000-14a0e6003000 r--s 00500000 00:06 29838                      /dev/infiniband/uverbs0
+14a0e6003000-14a0e600e000 r-xp 00000000 357:2eb56 144117291972390545     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_rdmacm.so.0.0.0
+14a0e600e000-14a0e600f000 r--p 0000a000 357:2eb56 144117291972390545     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_rdmacm.so.0.0.0
+14a0e600f000-14a0e6010000 rw-p 0000b000 357:2eb56 144117291972390545     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_rdmacm.so.0.0.0
+14a0e6010000-14a0e6015000 r--p 00000000 357:2eb56 144117743900294551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjsvml.so
+14a0e6015000-14a0e6056000 r-xp 00005000 357:2eb56 144117743900294551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjsvml.so
+14a0e6056000-14a0e60df000 r--p 00046000 357:2eb56 144117743900294551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjsvml.so
+14a0e60df000-14a0e60e0000 r--p 000ce000 357:2eb56 144117743900294551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjsvml.so
+14a0e60e0000-14a0e60e1000 rw-p 000cf000 357:2eb56 144117743900294551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjsvml.so
+14a0e60e1000-14a0e60e2000 ---p 00000000 00:00 0 
+14a0e60e2000-14a0e60e6000 ---p 00000000 00:00 0 
+14a0e60e6000-14a0e61e2000 rw-p 00000000 00:00 0 
+14a0e61e2000-14a0e61e3000 ---p 00000000 00:00 0 
+14a0e61e3000-14a0e61e7000 ---p 00000000 00:00 0 
+14a0e61e7000-14a0e62e3000 rw-p 00000000 00:00 0 
+14a0e62e3000-14a0e62e4000 ---p 00000000 00:00 0 
+14a0e62e4000-14a0e62e8000 ---p 00000000 00:00 0 
+14a0e62e8000-14a0e63e4000 rw-p 00000000 00:00 0 
+14a0e63e4000-14a0e63e5000 ---p 00000000 00:00 0 
+14a0e63e5000-14a0e63e9000 ---p 00000000 00:00 0 
+14a0e63e9000-14a0e64e5000 rw-p 00000000 00:00 0 
+14a0e64e5000-14a0e64e6000 ---p 00000000 00:00 0 
+14a0e64e6000-14a0e64ea000 ---p 00000000 00:00 0 
+14a0e64ea000-14a0e65e6000 rw-p 00000000 00:00 0 
+14a0e65e6000-14a0e65e7000 ---p 00000000 00:00 0 
+14a0e65e7000-14a0e65eb000 ---p 00000000 00:00 0 
+14a0e65eb000-14a0e66e7000 rw-p 00000000 00:00 0 
+14a0e66e7000-14a0e66e8000 ---p 00000000 00:00 0 
+14a0e66e8000-14a0e8000000 rw-p 00000000 00:00 0 
+14a0e8000000-14a0e8021000 rw-p 00000000 00:00 0 
+14a0e8021000-14a0ec000000 ---p 00000000 00:00 0 
+14a0ec000000-14a0ec001000 rw-s 00000000 00:06 21784                      /dev/infiniband/uverbs2
+14a0ec001000-14a0ec009000 r-xp 00000000 357:2eb56 144117291972390858     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libpciaccess/0.16-GCCcore-11.2.0/lib/libpciaccess.so.0.11.1
+14a0ec009000-14a0ec00a000 r--p 00007000 357:2eb56 144117291972390858     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libpciaccess/0.16-GCCcore-11.2.0/lib/libpciaccess.so.0.11.1
+14a0ec00a000-14a0ec00b000 rw-p 00008000 357:2eb56 144117291972390858     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libpciaccess/0.16-GCCcore-11.2.0/lib/libpciaccess.so.0.11.1
+14a0ec00b000-14a0ec016000 r-xp 00000000 357:2eb56 144117291972390376     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/numactl/2.0.14-GCCcore-11.2.0/lib/libnuma.so.1.0.0
+14a0ec016000-14a0ec017000 r--p 0000a000 357:2eb56 144117291972390376     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/numactl/2.0.14-GCCcore-11.2.0/lib/libnuma.so.1.0.0
+14a0ec017000-14a0ec018000 rw-p 0000b000 357:2eb56 144117291972390376     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/numactl/2.0.14-GCCcore-11.2.0/lib/libnuma.so.1.0.0
+14a0ec018000-14a0ec01a000 r--p 00000000 357:2eb56 144117743900294560     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libzip.so
+14a0ec01a000-14a0ec02c000 r-xp 00002000 357:2eb56 144117743900294560     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libzip.so
+14a0ec02c000-14a0ec034000 r--p 00014000 357:2eb56 144117743900294560     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libzip.so
+14a0ec034000-14a0ec035000 r--p 0001b000 357:2eb56 144117743900294560     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libzip.so
+14a0ec035000-14a0ec036000 rw-p 0001c000 357:2eb56 144117743900294560     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libzip.so
+14a0ec036000-14a0f0000000 rw-p 00000000 00:00 0 
+14a0f0000000-14a0f0486000 rw-p 00001000 357:2eb56 144117743900294580     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/classes_nocoops.jsa
+14a0f0486000-14a0f0ca7000 rw-p 00487000 357:2eb56 144117743900294580     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/classes_nocoops.jsa
+14a0f0ca7000-14a0f1000000 ---p 00000000 00:00 0 
+14a0f1000000-14a0f1010000 rw-p 00000000 00:00 0 
+14a0f1010000-14a0f1040000 ---p 00000000 00:00 0 
+14a0f1040000-14a0f1060000 rw-p 00000000 00:00 0 
+14a0f1060000-14a131000000 ---p 00000000 00:00 0 
+14a131000000-14a131001000 rw-s 00000000 00:06 29840                      /dev/infiniband/uverbs1
+14a131001000-14a131002000 -w-s 00900000 00:06 29838                      /dev/infiniband/uverbs0
+14a131002000-14a131003000 r--s 00700000 00:06 29838                      /dev/infiniband/uverbs0
+14a131003000-14a131004000 r--s 00500000 00:06 29838                      /dev/infiniband/uverbs0
+14a131004000-14a13100a000 r-xp 00000000 357:2eb56 144117291972361227     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libatomic.so.1.2.0
+14a13100a000-14a13100b000 ---p 00006000 357:2eb56 144117291972361227     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libatomic.so.1.2.0
+14a13100b000-14a13100c000 r--p 00006000 357:2eb56 144117291972361227     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libatomic.so.1.2.0
+14a13100c000-14a13100d000 rw-p 00007000 357:2eb56 144117291972361227     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64/libatomic.so.1.2.0
+14a13100d000-14a177d15000 rw-p 00000000 00:00 0 
+14a177d15000-14a178000000 ---p 00000000 00:00 0 
+14a178000000-14a178021000 rw-p 00000000 00:00 0 
+14a178021000-14a17c000000 ---p 00000000 00:00 0 
+14a17c000000-14a17c001000 rw-s 00000000 00:06 29840                      /dev/infiniband/uverbs1
+14a17c001000-14a17c002000 -w-s 00900000 00:06 29838                      /dev/infiniband/uverbs0
+14a17c002000-14a17c006000 r-xp 00000000 357:2eb56 144117291972390551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_cma.so.0.0.0
+14a17c006000-14a17c007000 r--p 00003000 357:2eb56 144117291972390551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_cma.so.0.0.0
+14a17c007000-14a17c008000 rw-p 00004000 357:2eb56 144117291972390551     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/UCX/1.11.2-GCCcore-11.2.0/lib/ucx/libuct_cma.so.0.0.0
+14a17c008000-14a17c009000 r-xp 00000000 357:2eb56 144117744386757840     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_pbs.so
+14a17c009000-14a17c00a000 r--p 00000000 357:2eb56 144117744386757840     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_pbs.so
+14a17c00a000-14a17c00b000 rw-p 00001000 357:2eb56 144117744386757840     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_pbs.so
+14a17c00b000-14a17c00c000 r-xp 00000000 357:2eb56 144117744386757837     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_default.so
+14a17c00c000-14a17c00d000 r--p 00000000 357:2eb56 144117744386757837     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_default.so
+14a17c00d000-14a17c00e000 rw-p 00001000 357:2eb56 144117744386757837     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_default.so
+14a17c00e000-14a17c00f000 r-xp 00000000 357:2eb56 144117744386757843     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_slurm.so
+14a17c00f000-14a17c010000 r--p 00001000 357:2eb56 144117744386757843     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_slurm.so
+14a17c010000-14a17c011000 rw-p 00002000 357:2eb56 144117744386757843     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_prm_slurm.so
+14a17c011000-14a17efbf000 rw-p 00000000 00:00 0 
+14a17efbf000-14a17f2a9000 ---p 00000000 00:00 0 
+14a17f2a9000-14a17f3bd000 rw-p 00000000 00:00 0 
+14a17f3bd000-14a180800000 ---p 00000000 00:00 0 
+14a180800000-14a678700000 rw-p 00000000 00:00 0 
+14a678700000-14a6d5d80000 ---p 00000000 00:00 0 
+14a6d5d80000-14a6f8400000 rw-p 00000000 00:00 0 
+14a6f8400000-14a980800000 ---p 00000000 00:00 0 
+14a980800000-14a980801000 r--s 00700000 00:06 29838                      /dev/infiniband/uverbs0
+14a980801000-14a980803000 r-xp 00000000 357:2eb56 144117744386757834     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_pcompress_zlib.so
+14a980803000-14a980804000 r--p 00001000 357:2eb56 144117744386757834     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_pcompress_zlib.so
+14a980804000-14a980805000 rw-p 00002000 357:2eb56 144117744386757834     /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/pmix/pmix_mca_pcompress_zlib.so
+14a980805000-14a980807000 r-xp 00000000 357:2eb56 144117291972363996     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libevent/2.1.12-GCCcore-11.2.0/lib/libevent_pthreads-2.1.so.7.0.1
+14a980807000-14a980808000 r--p 00001000 357:2eb56 144117291972363996     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libevent/2.1.12-GCCcore-11.2.0/lib/libevent_pthreads-2.1.so.7.0.1
+14a980808000-14a980809000 rw-p 00002000 357:2eb56 144117291972363996     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/libevent/2.1.12-GCCcore-11.2.0/lib/libevent_pthreads-2.1.so.7.0.1
+14a980809000-14a98080c000 r--p 00000000 357:2eb56 144117743900294599     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnet.so
+14a98080c000-14a980814000 r-xp 00003000 357:2eb56 144117743900294599     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnet.so
+14a980814000-14a980816000 r--p 0000b000 357:2eb56 144117743900294599     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnet.so
+14a980816000-14a980817000 r--p 0000c000 357:2eb56 144117743900294599     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnet.so
+14a980817000-14a980818000 rw-p 0000d000 357:2eb56 144117743900294599     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnet.so
+14a980818000-14a9808bd000 rw-p 00000000 00:00 0 
+14a9808bd000-14a980b2d000 rwxp 00000000 00:00 0 
+14a980b2d000-14a9838bd000 ---p 00000000 00:00 0 
+14a9838bd000-14a98c000000 r--s 00000000 357:2eb56 144117743900294603     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/modules
+14a98c000000-14a98c2d9000 rw-p 00000000 00:00 0 
+14a98c2d9000-14a98c2da000 rw-p 00000000 00:00 0 
+14a98c2da000-14a98c456000 rw-p 00000000 00:00 0 
+14a98c456000-14a98c476000 rw-p 00000000 00:00 0 
+14a98c476000-14a98c477000 rw-p 00000000 00:00 0 
+14a98c477000-14a98c497000 rw-p 00000000 00:00 0 
+14a98c497000-14a98c498000 rw-p 00000000 00:00 0 
+14a98c498000-14a98c4b8000 rw-p 00000000 00:00 0 
+14a98c4b8000-14a98c4b9000 rw-p 00000000 00:00 0 
+14a98c4b9000-14a98c4d9000 rw-p 00000000 00:00 0 
+14a98c4d9000-14a98c4da000 rw-p 00000000 00:00 0 
+14a98c4da000-14a98c4fa000 rw-p 00000000 00:00 0 
+14a98c4fa000-14a98c4fe000 rw-p 00000000 00:00 0 
+14a98c4fe000-14a98c51e000 rw-p 00000000 00:00 0 
+14a98c51e000-14a98c51f000 rw-p 00000000 00:00 0 
+14a98c51f000-14a98c53f000 rw-p 00000000 00:00 0 
+14a98c53f000-14a98c562000 rw-p 00000000 00:00 0 
+14a98c562000-14a98c582000 rw-p 00000000 00:00 0 
+14a98c582000-14a98c660000 rw-p 00000000 00:00 0 
+14a98c660000-14a98c680000 rw-p 00000000 00:00 0 
+14a98c680000-14a98c81b000 rw-p 00000000 00:00 0 
+14a98c81b000-14a98c83b000 rw-p 00000000 00:00 0 
+14a98c83b000-14a98c850000 rw-p 00000000 00:00 0 
+14a98c850000-14a98c851000 rw-p 00000000 00:00 0 
+14a98c851000-14a98c915000 rw-p 00000000 00:00 0 
+14a98c915000-14a98c967000 rw-p 00000000 00:00 0 
+14a98c967000-14a98c968000 rw-p 00000000 00:00 0 
+14a98c968000-14a98c969000 rw-p 00000000 00:00 0 
+14a98c969000-14a98c9ba000 rw-p 00000000 00:00 0 
+14a98c9ba000-14a98c9bb000 rw-p 00000000 00:00 0 
+14a98c9bb000-14a98c9bc000 rw-p 00000000 00:00 0 
+14a98c9bc000-14a98cd6e000 rw-p 00000000 00:00 0 
+14a98cd6e000-14a98cdae000 rw-p 00000000 00:00 0 
+14a98cdae000-14a98cdaf000 rw-p 00000000 00:00 0 
+14a98cdaf000-14a98cdcf000 rw-p 00000000 00:00 0 
+14a98cdcf000-14a98cdd0000 rw-p 00000000 00:00 0 
+14a98cdd0000-14a98cde0000 rw-p 00000000 00:00 0 
+14a98cde0000-14a98cdef000 rw-p 00000000 00:00 0 
+14a98cdef000-14a98cdf0000 rw-p 00000000 00:00 0 
+14a98cdf0000-14a98ce1a000 rw-p 00000000 00:00 0 
+14a98ce1a000-14a98ce2a000 rw-p 00000000 00:00 0 
+14a98ce2a000-14a98ce53000 rw-p 00000000 00:00 0 
+14a98ce53000-14a98ce54000 rw-p 00000000 00:00 0 
+14a98ce54000-14a98ce55000 rw-p 00000000 00:00 0 
+14a98ce55000-14a98ce57000 rw-p 00000000 00:00 0 
+14a98ce57000-14a98ce5a000 rw-p 00000000 00:00 0 
+14a98ce5a000-14a98ce9a000 rw-p 00000000 00:00 0 
+14a98ce9a000-14a98cebd000 rw-p 00000000 00:00 0 
+14a98cebd000-14a98cebf000 rw-p 00000000 00:00 0 
+14a98cebf000-14a98cedc000 rw-p 00000000 00:00 0 
+14a98cedc000-14a98cf5c000 rw-p 00000000 00:00 0 
+14a98cf5c000-14a98cf8a000 rw-p 00000000 00:00 0 
+14a98cf8a000-14a98cf9a000 rw-p 00000000 00:00 0 
+14a98cf9a000-14a98cf9b000 rw-p 00000000 00:00 0 
+14a98cf9b000-14a98cfa3000 rw-p 00000000 00:00 0 
+14a98cfa3000-14a98cfa6000 rw-p 00000000 00:00 0 
+14a98cfa6000-14a98d026000 rw-p 00000000 00:00 0 
+14a98d026000-14a98d054000 rw-p 00000000 00:00 0 
+14a98d054000-14a98d074000 rw-p 00000000 00:00 0 
+14a98d074000-14a98d075000 rw-p 00000000 00:00 0 
+14a98d075000-14a98d085000 rw-p 00000000 00:00 0 
+14a98d085000-14a98d086000 rw-p 00000000 00:00 0 
+14a98d086000-14a98d096000 rw-p 00000000 00:00 0 
+14a98d096000-14a98d097000 rw-p 00000000 00:00 0 
+14a98d097000-14a98d0a7000 rw-p 00000000 00:00 0 
+14a98d0a7000-14a98d0a8000 rw-p 00000000 00:00 0 
+14a98d0a8000-14a98d0b8000 rw-p 00000000 00:00 0 
+14a98d0b8000-14a98d0b9000 rw-p 00000000 00:00 0 
+14a98d0b9000-14a98d0c9000 rw-p 00000000 00:00 0 
+14a98d0c9000-14a98d0ca000 rw-p 00000000 00:00 0 
+14a98d0ca000-14a98d0da000 rw-p 00000000 00:00 0 
+14a98d0da000-14a98d0db000 rw-p 00000000 00:00 0 
+14a98d0db000-14a98d0eb000 rw-p 00000000 00:00 0 
+14a98d0eb000-14a98d0ec000 rw-p 00000000 00:00 0 
+14a98d0ec000-14a98d0fc000 rw-p 00000000 00:00 0 
+14a98d0fc000-14a98d0fd000 rw-p 00000000 00:00 0 
+14a98d0fd000-14a98d17d000 rw-p 00000000 00:00 0 
+14a98d17d000-14a98d1a7000 rw-p 00000000 00:00 0 
+14a98d1a7000-14a98d227000 rw-p 00000000 00:00 0 
+14a98d227000-14a98d228000 rw-p 00000000 00:00 0 
+14a98d228000-14a98d248000 rw-p 00000000 00:00 0 
+14a98d248000-14a98d249000 rw-p 00000000 00:00 0 
+14a98d249000-14a98d259000 rw-p 00000000 00:00 0 
+14a98d259000-14a98d25a000 rw-p 00000000 00:00 0 
+14a98d25a000-14a98d26a000 rw-p 00000000 00:00 0 
+14a98d26a000-14a98d26b000 rw-p 00000000 00:00 0 
+14a98d26b000-14a98d27b000 rw-p 00000000 00:00 0 
+14a98d27b000-14a98d27f000 rw-p 00000000 00:00 0 
+14a98d27f000-14a98d28f000 rw-p 00000000 00:00 0 
+14a98d28f000-14a98d290000 rw-p 00000000 00:00 0 
+14a98d290000-14a98d2a0000 rw-p 00000000 00:00 0 
+14a98d2a0000-14a98d2a1000 rw-p 00000000 00:00 0 
+14a98d2a1000-14a98d321000 rw-p 00000000 00:00 0 
+14a98d321000-14a98d322000 rw-p 00000000 00:00 0 
+14a98d322000-14a98d342000 rw-p 00000000 00:00 0 
+14a98d342000-14a98d34b000 rw-p 00000000 00:00 0 
+14a98d34b000-14a98d36b000 rw-p 00000000 00:00 0 
+14a98d36b000-14a98d36c000 rw-p 00000000 00:00 0 
+14a98d36c000-14a98d3ec000 rw-p 00000000 00:00 0 
+14a98d3ec000-14a98d3f5000 rw-p 00000000 00:00 0 
+14a98d3f5000-14a98d415000 rw-p 00000000 00:00 0 
+14a98d415000-14a98d600000 rw-p 00000000 00:00 0 
+14a98d600000-14a98dc00000 rw-p 00000000 00:00 0 
+14a98dc00000-14a98e05f000 rw-p 00000000 00:00 0 
+14a98e05f000-14a990000000 ---p 00000000 00:00 0 
+14a990000000-14a990008000 r--p 00000000 357:2eb56 144117743900294544     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+14a990008000-14a990011000 r-xp 00008000 357:2eb56 144117743900294544     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+14a990011000-14a990015000 r--p 00011000 357:2eb56 144117743900294544     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+14a990015000-14a990016000 ---p 00015000 357:2eb56 144117743900294544     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+14a990016000-14a990017000 r--p 00015000 357:2eb56 144117743900294544     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+14a990017000-14a990018000 rw-p 00016000 357:2eb56 144117743900294544     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libnio.so
+14a990018000-14a992147000 rw-p 00000000 00:00 0 
+14a992147000-14a992148000 ---p 00000000 00:00 0 
+14a992148000-14a9925e5000 rw-p 00000000 00:00 0 
+14a9925e5000-14a9925e6000 ---p 00000000 00:00 0 
+14a9925e6000-14a9926e6000 rw-p 00000000 00:00 0 
+14a9926e6000-14a992fba000 r--s 00000000 fd:00 134744548                  /var/lib/sss/mc/passwd
+14a992fba000-14a992fc4000 r-xp 00000000 fd:00 1008098                    /usr/lib64/libnss_sss.so.2
+14a992fc4000-14a9931c3000 ---p 0000a000 fd:00 1008098                    /usr/lib64/libnss_sss.so.2
+14a9931c3000-14a9931c4000 r--p 00009000 fd:00 1008098                    /usr/lib64/libnss_sss.so.2
+14a9931c4000-14a9931c5000 rw-p 0000a000 fd:00 1008098                    /usr/lib64/libnss_sss.so.2
+14a9931c5000-14a993346000 r-xp 00000000 fd:00 2384                       /usr/lib64/libm-2.28.so
+14a993346000-14a993545000 ---p 00181000 fd:00 2384                       /usr/lib64/libm-2.28.so
+14a993545000-14a993546000 r--p 00180000 fd:00 2384                       /usr/lib64/libm-2.28.so
+14a993546000-14a993547000 rw-p 00181000 fd:00 2384                       /usr/lib64/libm-2.28.so
+14a993547000-14a99354e000 r-xp 00000000 fd:00 2398                       /usr/lib64/librt-2.28.so
+14a99354e000-14a99374d000 ---p 00007000 fd:00 2398                       /usr/lib64/librt-2.28.so
+14a99374d000-14a99374e000 r--p 00006000 fd:00 2398                       /usr/lib64/librt-2.28.so
+14a99374e000-14a99374f000 rw-p 00007000 fd:00 2398                       /usr/lib64/librt-2.28.so
+14a99374f000-14a9939e6000 r--p 00000000 357:2eb56 144117743900294579     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so
+14a9939e6000-14a994846000 r-xp 00297000 357:2eb56 144117743900294579     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so
+14a994846000-14a994b1c000 r--p 010f7000 357:2eb56 144117743900294579     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so
+14a994b1c000-14a994b1d000 ---p 013cd000 357:2eb56 144117743900294579     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so
+14a994b1d000-14a994bed000 r--p 013cd000 357:2eb56 144117743900294579     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so
+14a994bed000-14a994c1d000 rw-p 0149d000 357:2eb56 144117743900294579     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/server/libjvm.so
+14a994c1d000-14a994c83000 rw-p 00000000 00:00 0 
+14a994c83000-14a994cbc000 r-xp 00000000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994cbc000-14a994cbe000 r-xp 00039000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994cbe000-14a994da9000 r-xp 0003b000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994da9000-14a994daa000 r-xp 00126000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994daa000-14a994dad000 r-xp 00127000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994dad000-14a994dae000 r-xp 0012a000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994dae000-14a994db3000 r-xp 0012b000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994db3000-14a994db4000 r-xp 00130000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994db4000-14a994e3f000 r-xp 00131000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a994e3f000-14a99503e000 ---p 001bc000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a99503e000-14a995042000 r--p 001bb000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a995042000-14a995044000 rw-p 001bf000 fd:00 2380                       /usr/lib64/libc-2.28.so
+14a995044000-14a995048000 rw-p 00000000 00:00 0 
+14a995048000-14a99504b000 r-xp 00000000 fd:00 2382                       /usr/lib64/libdl-2.28.so
+14a99504b000-14a99524a000 ---p 00003000 fd:00 2382                       /usr/lib64/libdl-2.28.so
+14a99524a000-14a99524b000 r--p 00002000 fd:00 2382                       /usr/lib64/libdl-2.28.so
+14a99524b000-14a99524c000 rw-p 00003000 fd:00 2382                       /usr/lib64/libdl-2.28.so
+14a99524c000-14a995267000 r-xp 00000000 fd:00 2394                       /usr/lib64/libpthread-2.28.so
+14a995267000-14a995466000 ---p 0001b000 fd:00 2394                       /usr/lib64/libpthread-2.28.so
+14a995466000-14a995467000 r--p 0001a000 fd:00 2394                       /usr/lib64/libpthread-2.28.so
+14a995467000-14a995468000 rw-p 0001b000 fd:00 2394                       /usr/lib64/libpthread-2.28.so
+14a995468000-14a99546c000 rw-p 00000000 00:00 0 
+14a99546c000-14a995499000 r-xp 00000000 fd:00 1952                       /usr/lib64/ld-2.28.so
+14a995499000-14a99549a000 r--s 00500000 00:06 29838                      /dev/infiniband/uverbs0
+14a99549a000-14a99549b000 r--p 00000000 fd:00 68146237                   /usr/lib/locale/es_ES.utf8/LC_PAPER
+14a99549b000-14a99549c000 r--p 00000000 fd:00 68146235                   /usr/lib/locale/es_ES.utf8/LC_NAME
+14a99549c000-14a9954a3000 r--s 00000000 fd:00 2004                       /usr/lib64/gconv/gconv-modules.cache
+14a9954a3000-14a9954c9000 rw-p 00000000 00:00 0 
+14a9954c9000-14a995524000 ---p 00000000 00:00 0 
+14a995524000-14a995532000 r--p 00000000 357:2eb56 144117743900294554     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+14a995532000-14a995540000 r-xp 0000e000 357:2eb56 144117743900294554     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+14a995540000-14a995545000 r--p 0001c000 357:2eb56 144117743900294554     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+14a995545000-14a995546000 ---p 00021000 357:2eb56 144117743900294554     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+14a995546000-14a995547000 r--p 00021000 357:2eb56 144117743900294554     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+14a995547000-14a995548000 rw-p 00022000 357:2eb56 144117743900294554     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjava.so
+14a995548000-14a995549000 rw-p 00000000 00:00 0 
+14a995549000-14a99554d000 r--p 00000000 357:2eb56 144117743900294568     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjimage.so
+14a99554d000-14a995560000 r-xp 00004000 357:2eb56 144117743900294568     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjimage.so
+14a995560000-14a995566000 r--p 00017000 357:2eb56 144117743900294568     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjimage.so
+14a995566000-14a995568000 r--p 0001c000 357:2eb56 144117743900294568     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjimage.so
+14a995568000-14a995569000 rw-p 0001e000 357:2eb56 144117743900294568     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjimage.so
+14a995569000-14a99556d000 ---p 00000000 00:00 0 
+14a99556d000-14a99566c000 rw-p 00000000 00:00 0 
+14a99566c000-14a99566d000 r--p 00000000 fd:00 201328234                  /usr/lib/locale/es_ES.utf8/LC_ADDRESS
+14a99566d000-14a99566e000 r--p 00000000 fd:00 202671769                  /usr/lib/locale/es_ES.utf8/LC_TELEPHONE
+14a99566e000-14a99566f000 r--p 00000000 fd:00 68146234                   /usr/lib/locale/es_ES.utf8/LC_MEASUREMENT
+14a99566f000-14a995670000 r--p 00000000 fd:00 202671767                  /usr/lib/locale/es_ES.utf8/LC_IDENTIFICATION
+14a995670000-14a995678000 rw-s 00000000 fd:00 67319458                   /tmp/hsperfdata_ule_formacion_9_4/1756418
+14a995678000-14a995679000 ---p 00000000 00:00 0 
+14a995679000-14a99567a000 r--p 00000000 00:00 0 
+14a99567a000-14a99567b000 ---p 00000000 00:00 0 
+14a99567b000-14a99567e000 r--p 00000000 357:2eb56 144117743900294585     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjli.so
+14a99567e000-14a99568e000 r-xp 00003000 357:2eb56 144117743900294585     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjli.so
+14a99568e000-14a995695000 r--p 00013000 357:2eb56 144117743900294585     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjli.so
+14a995695000-14a995696000 r--p 00019000 357:2eb56 144117743900294585     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjli.so
+14a995696000-14a995697000 rw-p 0001a000 357:2eb56 144117743900294585     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib/libjli.so
+14a995697000-14a995699000 rw-p 00000000 00:00 0 
+14a995699000-14a99569a000 r--p 0002d000 fd:00 1952                       /usr/lib64/ld-2.28.so
+14a99569a000-14a99569c000 rw-p 0002e000 fd:00 1952                       /usr/lib64/ld-2.28.so
+2f5948000000-2f594813b000 rw-s 00000000 fd:00 67355083                   /tmp/2191107/prterun.cn6009.1756391.3033/1/pmix-gds-shmem2.cn6009-prterun-cn6009-1756391@1.session.5777efda.1756391
+4a3aac000000-4a3aac13b000 rw-s 00000000 fd:00 67355051                   /tmp/2191107/prterun.cn6009.1756391.3033/1/pmix-gds-shmem2.cn6009-prterun-cn6009-1756391@1.jobdata.1756391
+55b49b5c5000-55b49b5c6000 r--p 00000000 357:2eb56 144117743900294526     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/bin/java
+55b49b5c6000-55b49b5c7000 r-xp 00001000 357:2eb56 144117743900294526     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/bin/java
+55b49b5c7000-55b49b5c8000 r--p 00002000 357:2eb56 144117743900294526     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/bin/java
+55b49b5c8000-55b49b5c9000 r--p 00002000 357:2eb56 144117743900294526     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/bin/java
+55b49b5c9000-55b49b5ca000 rw-p 00003000 357:2eb56 144117743900294526     /LUSTRE/SOFT/calendula/icelake/rocky8/EB/software/Java/21.0.2/bin/java
+55b49cba7000-55b49cbed000 rw-p 00000000 00:00 0                          [heap]
+7ffe3a0db000-7ffe3a100000 rw-p 00000000 00:00 0                          [stack]
+7ffe3a1db000-7ffe3a1df000 r--p 00000000 00:00 0                          [vvar]
+7ffe3a1df000-7ffe3a1e1000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+Total number of mappings: 936
+
+
+VM Arguments:
+jvm_args: -Djava.library.path=/LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib -XX:+UseParallelGC -XX:-TieredCompilation -Xmx32G 
+java_command: jromp.mpi.examples.gemm.Gemm 28800 32
+java_class_path (initial): /LUSTRE/HOME/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc:/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/build/classes/java/main:/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/build/resources/main:/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/java/commons-lang3-3.16.0.jar:/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/java/jromp-3.0.0.jar:/home/ule_formacion_9/ule_formacion_9_4/jromp-mpi-hpc/libs/ompi/lib/mpi.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 18                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 2147483648                                {product} {ergonomic}
+   size_t MaxHeapSize                              = 34359738368                               {product} {command line}
+   size_t MaxNewSize                               = 11453071360                               {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 524288                                    {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+   size_t NewSize                                  = 715653120                                 {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 4096                                   {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 0                                      {pd product} {ergonomic}
+   size_t OldSize                                  = 1431830528                                {product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 34359738368                            {manageable} {ergonomic}
+     bool TieredCompilation                        = false                                  {pd product} {command line}
+     bool UseParallelGC                            = true                                      {product} {command line}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+JAVA_HOME=/soft/calendula/icelake/rocky8/EB/software/Java/21.0.2
+PATH=/soft/calendula/icelake/rocky8/EB/software/CUDA/12.1.1/nvvm/bin:/soft/calendula/icelake/rocky8/EB/software/CUDA/12.1.1/bin:/soft/calendula/icelake/rocky8/EB/software/binutils/2.37-GCCcore-11.2.0/bin:/soft/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/bin:/soft/calendula/icelake/rocky8/gradle/8.10.2/bin:/soft/calendula/icelake/rocky8/EB/software/Java/21.0.2:/soft/calendula/icelake/rocky8/EB/software/Java/21.0.2/bin:/usr/local/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ule_formacion_9/ule_formacion_9_4/.local/bin:/home/ule_formacion_9/ule_formacion_9_4/bin:/home/ule_formacion_9/ule_formacion_9_4/bin
+LD_LIBRARY_PATH=/soft/calendula/icelake/rocky8/EB/software/CUDA/12.1.1/nvvm/lib64:/soft/calendula/icelake/rocky8/EB/software/CUDA/12.1.1/extras/CUPTI/lib64:/soft/calendula/icelake/rocky8/EB/software/CUDA/12.1.1/lib:/soft/calendula/icelake/rocky8/EB/software/binutils/2.37-GCCcore-11.2.0/lib:/soft/calendula/icelake/rocky8/EB/software/zlib/1.2.11-GCCcore-11.2.0/lib:/soft/calendula/icelake/rocky8/EB/software/GCCcore/11.2.0/lib64:/soft/calendula/icelake/rocky8/EB/software/Java/21.0.2/lib
+SHELL=/bin/zsh
+LANG=en_US.UTF-8
+LC_NUMERIC=es_ES.UTF-8
+LC_TIME=es_ES.UTF-8
+TERM=xterm-256color
+TMPDIR=/tmp/2191107
+
+Active Locale:
+LC_ALL=C
+LC_COLLATE=C
+LC_CTYPE=C
+LC_MESSAGES=C
+LC_MONETARY=C
+LC_NUMERIC=C
+LC_TIME=C
+
+Signal Handlers:
+   SIGSEGV: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGBUS: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGFPE: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGPIPE: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGXFSZ: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGILL: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGUSR2: SR_handler in libjvm.so, mask=00000000000000000000000000000000, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGHUP: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGINT: smr_handle_signal in libfabric.so.1, mask=00000000000000000000000000000000, flags=SA_ONSTACK|SA_SIGINFO, blocked
+   SIGTERM: smr_handle_signal in libfabric.so.1, mask=00000000000000000000000000000000, flags=SA_ONSTACK|SA_SIGINFO, blocked
+   SIGQUIT: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGTRAP: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+Rocky Linux release 8.6 (Green Obsidian)
+uname: Linux 4.18.0-372.32.1.el8_6.x86_64 #1 SMP Thu Oct 27 15:18:36 UTC 2022 x86_64
+OS uptime: 177 days 2:39 hours
+libc: glibc 2.28 NPTL 2.28 
+rlimit (soft/hard): STACK infinity/infinity , CORE infinity/infinity , NPROC 1030057/1030057 , NOFILE 131072/131072 , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK infinity/infinity
+load average: 5.46 3.59 1.58
+
+/proc/meminfo:
+MemTotal:       263744864 kB
+MemFree:        228326916 kB
+MemAvailable:   227376904 kB
+Buffers:             156 kB
+Cached:           546904 kB
+SwapCached:            0 kB
+Active:            62404 kB
+Inactive:       28932284 kB
+Active(anon):       2840 kB
+Inactive(anon): 28626680 kB
+Active(file):      59564 kB
+Inactive(file):   305604 kB
+Unevictable:        3072 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:               188 kB
+Writeback:             0 kB
+AnonPages:      28447488 kB
+Mapped:           197220 kB
+Shmem:            181900 kB
+KReclaimable:     106068 kB
+Slab:             852556 kB
+SReclaimable:     106068 kB
+SUnreclaim:       746488 kB
+KernelStack:       18208 kB
+PageTables:        67788 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    131872432 kB
+Committed_AS:   35038872 kB
+VmallocTotal:   13743895347199 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+Percpu:            73472 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:  28082176 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:     6004528 kB
+DirectMap2M:    251574272 kB
+DirectMap1G:    12582912 kB
+
+/sys/kernel/mm/transparent_hugepage/enabled: [always] madvise never
+/sys/kernel/mm/transparent_hugepage/defrag (defrag/compaction efforts parameter): always defer defer+madvise [madvise] never
+
+Process Memory:
+Virtual Size: 42959228K (peak: 42959288K)
+Resident Set Size: 20335036K (peak: 20335036K) (anon: 20301420K, file: 25244K, shmem: 8372K)
+Swapped out: 0K
+C-Heap outstanding allocations: 352580K, retained: 35151K (may have wrapped)
+glibc malloc tunables: (default)
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads): 2060115
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have): 65530
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers): 4194304
+
+container (cgroup) information:
+container_type: cgroupv1
+cpu_cpuset_cpus: 0-63
+cpu_memory_nodes: 0-1
+active_processor_count: 64
+cpu_quota: no quota
+cpu_period: 100000
+cpu_shares: no shares
+memory_limit_in_bytes: 263577600 k
+memory_and_swap_limit_in_bytes: unlimited
+memory_soft_limit_in_bytes: unlimited
+memory_usage_in_bytes: 27652792 k
+memory_max_usage_in_bytes: 27710684 k
+kernel_memory_usage_in_bytes: 64704 k
+kernel_memory_max_usage_in_bytes: unlimited
+kernel_memory_limit_in_bytes: 64992 k
+maximum number of tasks: unlimited
+current number of tasks: 166
+
+Steal ticks since vm start: 0
+Steal ticks percentage since vm start:  0.000
+
+CPU: total 64 (initial active 64) (32 cores per cpu, 2 threads per core) family 6 model 106 stepping 6 microcode 0xd000363, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, avx512f, avx512dq, avx512cd, avx512bw, avx512vl, sha, fma, vzeroupper, avx512_vpopcntdq, avx512_vpclmulqdq, avx512_vaes, avx512_vnni, clflush, clflushopt, clwb, avx512_vbmi2, avx512_vbmi, rdtscp, rdpid, fsrm, gfni, avx512_bitalg, f16c, pku, ospke, avx512_ifma
+CPU Model and flags from /proc/cpuinfo:
+model name	: Intel(R) Xeon(R) Platinum 8358P CPU @ 2.60GHz
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 invpcid_single intel_ppin ssbd mba ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local split_lock_detect wbnoinvd dtherm ida arat pln pts hwp hwp_act_window hwp_epp hwp_pkg_req avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg tme avx512_vpopcntdq la57 rdpid fsrm md_clear pconfig flush_l1d arch_capabilities
+
+Online cpus: 0-63
+Offline cpus: 
+BIOS frequency limitation: <Not Available>
+Frequency switch latency (ns): 0
+Available cpu frequencies: <Not Available>
+Current governor: performance
+Core performance/turbo boost: <Not Available>
+
+Memory: 4k page, physical 263577600k(235924808k free), swap 0k(0k free)
+Page Sizes: 4k
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.2+13-LTS) for linux-amd64 JRE (21.0.2+13-LTS), built on 2024-01-16T00:00:00Z by "admin" with gcc 11.2.0
+
+END.

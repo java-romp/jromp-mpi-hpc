@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     MPI_Init_thread(&argc, &argv, required, &provided);
 
     if (provided < required) {
-        printf("Error: MPI does not provide the required thread support\n");
+        perror("Error: MPI does not provide the required thread support\n");
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
         exit(EXIT_FAILURE);
     }
@@ -196,4 +196,4 @@ MASTER void matrix_initialization(double *a, double *b, const int n) {
     }
 }
 
-// Last revision (scastd): 16/01/2025 03:38:00
+// Last revision (scastd): 17/01/2025 13:53
