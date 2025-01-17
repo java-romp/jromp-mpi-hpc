@@ -5,14 +5,13 @@ import jromp.var.SharedVariable;
 import jromp.var.Variable;
 import mpi.MPI;
 import mpi.MPIException;
-import mpi.Request;
 import mpi.Status;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.DoubleBuffer;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
@@ -96,7 +95,9 @@ public class Gemm {
             LOG_MASTER("*************************************\n");
 
             double initializationStart = JROMP.getWTime();
+
             matrixInitialization(A, B, N);
+
             double initializationEnd = JROMP.getWTime();
             LOG_MASTER("Time to initialize the matrices: %fs\n", initializationEnd - initializationStart);
 
@@ -104,20 +105,14 @@ public class Gemm {
             LOG_MASTER("****** Sending data to workers ******\n");
             LOG_MASTER("*************************************\n");
             double sendDataStart = MPI.wtime();
-            Request[] requests = new Request[2 * workers];
-
-            DoubleBuffer bufferA = MPI.newDoubleBuffer(N * N).put(A);
-            DoubleBuffer bufferB = MPI.newDoubleBuffer(N * N).put(B);
 
             // Distribute rows of A to workers and send matrix B to all workers
             for (int i = 1; i < size; i++) {
-                DoubleBuffer aSubMatrix = bufferA.slice((i - 1) * rowsPerWorker * N, rowsPerWorker * N);
-
-                requests[i - 1] = MPI.COMM_WORLD.iSend(aSubMatrix, rowsPerWorker * N, MPI.DOUBLE, i, DATA_TAG);
-                requests[workers + i - 1] = MPI.COMM_WORLD.iSend(bufferB, N * N, MPI.DOUBLE, i, DATA_TAG);
+                MPI.COMM_WORLD.send(Arrays.copyOfRange(A, (i - 1) * rowsPerWorker * N, i * rowsPerWorker * N),
+                                    rowsPerWorker * N, MPI.DOUBLE, i, DATA_TAG);
+                MPI.COMM_WORLD.send(B, N * N, MPI.DOUBLE, i, DATA_TAG);
             }
 
-            Request.waitAll(requests);
             double sendDataEnd = MPI.wtime();
             LOG_MASTER("Time to send data to workers: %fs\n", sendDataEnd - sendDataStart);
 
@@ -132,11 +127,12 @@ public class Gemm {
                 status = MPI.COMM_WORLD.probe(MPI.ANY_SOURCE, MPI.ANY_TAG);
 
                 if (status.getTag() == FINISH_TAG) {
-                    DoubleBuffer recvBuffer = MPI.newDoubleBuffer(rowsPerWorker * N);
+                    double[] recvBuffer = new double[rowsPerWorker * N];
+
                     MPI.COMM_WORLD.recv(recvBuffer, rowsPerWorker * N, MPI.DOUBLE, status.getSource(), FINISH_TAG);
 
-                    recvBuffer.get(C, (status.getSource() - 1) * rowsPerWorker * N, rowsPerWorker * N);
-                    recvBuffer.clear();
+                    // Copy the received data to the matrix C
+                    System.arraycopy(recvBuffer, 0, C, (status.getSource() - 1) * rowsPerWorker * N, rowsPerWorker * N);
 
                     LOG_MASTER("Worker %d has finished\n", status.getSource());
                     endedWorkers++;
@@ -162,25 +158,16 @@ public class Gemm {
 
             // No memory allocation check in Java
 
-            DoubleBuffer bufferA = DoubleBuffer.wrap(A);
-            DoubleBuffer bufferB = DoubleBuffer.wrap(B);
-            DoubleBuffer bufferC = DoubleBuffer.wrap(C);
-
             // Receive rows of A and matrix B
-            MPI.COMM_WORLD.recv(bufferA, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, DATA_TAG);
-            MPI.COMM_WORLD.recv(bufferB, N * N, MPI.DOUBLE, MASTER_RANK, DATA_TAG);
+            MPI.COMM_WORLD.recv(A, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, DATA_TAG);
+            MPI.COMM_WORLD.recv(B, N * N, MPI.DOUBLE, MASTER_RANK, DATA_TAG);
 
             // Perform matrix multiplication
             gemm(A, B, C, rowsPerWorker);
-            // bufferC is filled during multiplication
+            // C is filled during multiplication
 
             // Send results back to master process
-            MPI.COMM_WORLD.send(bufferC, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, FINISH_TAG);
-
-            // Free memory
-            bufferA.clear();
-            bufferB.clear();
-            bufferC.clear();
+            MPI.COMM_WORLD.send(C, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, FINISH_TAG);
         }
 
         MPI.Finalize();
