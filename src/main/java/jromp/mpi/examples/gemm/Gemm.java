@@ -17,15 +17,7 @@ import java.util.Objects;
 import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
 import static jromp.mpi.examples.gemm.Tags.FINISH_TAG;
 
-@SuppressWarnings({
-        "java:S100", // Rename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.
-        "java:S106", // Replace the use of System.out by a logger
-        "java:S117", // Local variable should match the regular expression '^[a-z][a-zA-Z0-9]*$'
-        "java:S1192", // String literals should not be duplicated
-        "java:S1450", // Field can be converted to a local variable
-        "java:S1659", // Declare variables on separate lines
-        "java:S3008" // Field name should match the regular expression '^[a-z][a-zA-Z0-9]*$'
-})
+@SuppressWarnings({ "java:S100", "java:S106", "java:S117", "java:S1192", "java:S1450", "java:S1659", "java:S3008", "t" })
 public class Gemm {
     private static final SecureRandom random = new SecureRandom();
     private static final Object printLock = new Object();
@@ -34,6 +26,7 @@ public class Gemm {
     private static int threads;
     private static int rank;
     private static int size;
+    private static int chunkSize;
 
     private static final int MASTER_RANK = 0;
     private static final int EXIT_FAILURE = 1;
@@ -64,6 +57,7 @@ public class Gemm {
         workers = size - 1;
         N = Integer.parseInt(args[0]);
         threads = Integer.parseInt(args[1]);
+        chunkSize = 128 * N;
 
         LOG_MASTER("Information: N = %d, threads per rank = %d\n", N, threads);
         LOG_MASTER("Checking the number of threads in all ranks...\n");
@@ -108,9 +102,10 @@ public class Gemm {
 
             // Distribute rows of A to workers and send matrix B to all workers
             for (int i = 1; i < size; i++) {
-                MPI.COMM_WORLD.send(Arrays.copyOfRange(A, (i - 1) * rowsPerWorker * N, i * rowsPerWorker * N),
-                                    rowsPerWorker * N, MPI.DOUBLE, i, DATA_TAG);
-                MPI.COMM_WORLD.send(B, N * N, MPI.DOUBLE, i, DATA_TAG);
+                double[] offsetA = Arrays.copyOfRange(A, (i - 1) * rowsPerWorker * N, i * rowsPerWorker * N);
+
+                sendBatchedArray(offsetA, i, rowsPerWorker, chunkSize, DATA_TAG);
+                sendBatchedArray(B, i, N, chunkSize, DATA_TAG);
             }
 
             double sendDataEnd = MPI.wtime();
@@ -127,12 +122,11 @@ public class Gemm {
                 status = MPI.COMM_WORLD.probe(MPI.ANY_SOURCE, MPI.ANY_TAG);
 
                 if (status.getTag() == FINISH_TAG) {
-                    double[] recvBuffer = new double[rowsPerWorker * N];
+                    double[] offsetC = new double[rowsPerWorker * N];
+                    recvBatchedArray(offsetC, status.getSource(), rowsPerWorker, chunkSize, FINISH_TAG);
 
-                    MPI.COMM_WORLD.recv(recvBuffer, rowsPerWorker * N, MPI.DOUBLE, status.getSource(), FINISH_TAG);
-
-                    // Copy the received data to the matrix C
-                    System.arraycopy(recvBuffer, 0, C, (status.getSource() - 1) * rowsPerWorker * N, rowsPerWorker * N);
+                    System.arraycopy(offsetC, 0, C, offsetFromRank(status.getSource(), rowsPerWorker),
+                                     rowsPerWorker * N);
 
                     LOG_MASTER("Worker %d has finished\n", status.getSource());
                     endedWorkers++;
@@ -159,15 +153,15 @@ public class Gemm {
             // No memory allocation check in Java
 
             // Receive rows of A and matrix B
-            MPI.COMM_WORLD.recv(A, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, DATA_TAG);
-            MPI.COMM_WORLD.recv(B, N * N, MPI.DOUBLE, MASTER_RANK, DATA_TAG);
+            recvBatchedArray(A, MASTER_RANK, rowsPerWorker, chunkSize, DATA_TAG);
+            recvBatchedArray(B, MASTER_RANK, N, chunkSize, DATA_TAG);
 
             // Perform matrix multiplication
             gemm(A, B, C, rowsPerWorker);
             // C is filled during multiplication
 
             // Send results back to master process
-            MPI.COMM_WORLD.send(C, rowsPerWorker * N, MPI.DOUBLE, MASTER_RANK, FINISH_TAG);
+            sendBatchedArray(C, MASTER_RANK, rowsPerWorker, chunkSize, FINISH_TAG);
         }
 
         MPI.Finalize();
@@ -298,6 +292,30 @@ public class Gemm {
             }
         }
     }
+
+    private static void sendBatchedArray(double[] arr, int toRank, int rowsPerWorker, int chunkSize, int tag) throws MPIException {
+        for (int offset = 0; offset < rowsPerWorker * N; offset += chunkSize) {
+            int sendSize = Math.min(chunkSize, rowsPerWorker * N - offset);
+            double[] offsetArray = Arrays.copyOfRange(arr, offset, offset + sendSize);
+
+            MPI.COMM_WORLD.send(offsetArray, sendSize, MPI.DOUBLE, toRank, tag);
+        }
+    }
+
+    private static void recvBatchedArray(double[] arr, int fromRank, int rowsPerWorker, int chunkSize, int tag) throws MPIException {
+        for (int offset = 0; offset < rowsPerWorker * N; offset += chunkSize) {
+            int recvSize = Math.min(chunkSize, rowsPerWorker * N - offset);
+            double[] local = Arrays.copyOfRange(arr, offset, offset + recvSize);
+
+            MPI.COMM_WORLD.recv(local, recvSize, MPI.DOUBLE, fromRank, tag);
+
+            System.arraycopy(local, 0, arr, offset, recvSize);
+        }
+    }
+
+    private static int offsetFromRank(int rank, int rowsPerWorker) {
+        return (rank - 1) * rowsPerWorker * N;
+    }
 }
 
-// Last revision (scastd): 17/01/2025 13:53
+// Last revision (scastd): 19/01/2025 00:18
