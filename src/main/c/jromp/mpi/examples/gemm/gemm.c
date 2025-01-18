@@ -82,14 +82,21 @@ int main(int argc, char *argv[]) {
         LOG_MASTER("****** Sending data to workers ******\n");
         LOG_MASTER("*************************************\n");
         START_MPI_TIMER(send_data)
+            MPI_Request *requests = malloc(2 * workers * sizeof(MPI_Request));
+
             // Distribute rows of A to workers and send matrix B to all workers
             for (int i = 1; i < size; i++) {
-                MPI_Send(&A[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG,
-                         MPI_COMM_WORLD);
-                MPI_Send(B, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD);
+                MPI_Isend(&A[(i - 1) * rows_per_worker * N], rows_per_worker * N, MPI_DOUBLE, i, DATA_TAG,
+                          MPI_COMM_WORLD, &requests[i - 1]);
+                MPI_Isend(B, N * N, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &requests[workers + i - 1]);
             }
+
+            MPI_Waitall(2 * workers, requests, MPI_STATUSES_IGNORE);
+            free(requests);
         STOP_MPI_TIMER(send_data)
         LOG_MASTER("Time to send data to workers: %fs\n", GET_MPI_TIMER(send_data));
+
+        // Todo: add a message to workers (without body) to indicate the start of the calculations
 
         LOG_MASTER("*************************************\n");
         LOG_MASTER("******* Matrix Multiplication *******\n");
@@ -196,4 +203,4 @@ MASTER void matrix_initialization(double *a, double *b, const int n) {
     }
 }
 
-// Last revision (scastd): 17/01/2025 13:53
+// Last revision (scastd): 19/01/2025 00:18
