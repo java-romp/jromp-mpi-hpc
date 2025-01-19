@@ -201,7 +201,6 @@ MASTER void matrix_initialization(double *a, double *b, const int n) {
     assert_non_null(a);
     assert_non_null(b);
 
-    #pragma omp parallel for shared(a, b, n) num_threads(threads) if(n > 10000)
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             a[i * n + j] = random_in_range(1, 1000);
@@ -210,4 +209,4 @@ MASTER void matrix_initialization(double *a, double *b, const int n) {
     }
 }
 
-// Last revision (scastd): 19/01/2025 00:18
+// Last revision (scastd): 19/01/2025 13:57
