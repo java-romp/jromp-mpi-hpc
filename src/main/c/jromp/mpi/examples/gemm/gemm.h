@@ -42,6 +42,7 @@
 #define MASTER_RANK 0
 #define DATA_TAG 0
 #define FINISH_TAG 1
+#define START_MULTIPLICATION_TAG 2
 
 /**
  * Prints the given message if the current rank is 0 (Master process).

@@ -96,7 +96,10 @@ int main(int argc, char *argv[]) {
         STOP_MPI_TIMER(send_data)
         LOG_MASTER("Time to send data to workers: %fs\n", GET_MPI_TIMER(send_data));
 
-        // Todo: add a message to workers (without body) to indicate the start of the calculations
+        // Send a message to workers (without body) to indicate the start of the calculations
+        for (int i = 1; i < size; i++) {
+            MPI_Send(NULL, 0, MPI_BYTE, i, START_MULTIPLICATION_TAG, MPI_COMM_WORLD);
+        }
 
         LOG_MASTER("*************************************\n");
         LOG_MASTER("******* Matrix Multiplication *******\n");
@@ -147,6 +150,10 @@ int main(int argc, char *argv[]) {
         // Receive rows of A and matrix B
         MPI_Recv(A, rows_per_worker * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         MPI_Recv(B, N * N, MPI_DOUBLE, MASTER_RANK, DATA_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        // Wait for the start message
+        MPI_Recv(NULL, 0, MPI_BYTE, MASTER_RANK, START_MULTIPLICATION_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        LOG_WORKER("Worker %d has started\n", rank);
 
         // Perform matrix multiplication
         gemm(A, B, C, rows_per_worker);
