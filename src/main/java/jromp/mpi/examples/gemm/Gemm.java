@@ -18,7 +18,7 @@ import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
 import static jromp.mpi.examples.gemm.Tags.FINISH_TAG;
 import static jromp.mpi.examples.gemm.Tags.START_MULTIPLICATION_TAG;
 
-@SuppressWarnings({ "java:S100", "java:S106", "java:S117", "java:S1192", "java:S1450", "java:S1659", "java:S3008", "t" })
+@SuppressWarnings({ "java:S100", "java:S106", "java:S117", "java:S1192", "java:S1450", "java:S1659", "java:S3008" })
 public class Gemm {
     private static final SecureRandom random = new SecureRandom();
     private static final Object printLock = new Object();
@@ -31,6 +31,7 @@ public class Gemm {
 
     private static final int MASTER_RANK = 0;
     private static final int EXIT_FAILURE = 1;
+    private static final int BATCH_ROWS = 4096;
 
     public static void main(String[] args) throws MPIException {
         if (args.length != 2) {
@@ -58,7 +59,7 @@ public class Gemm {
         workers = size - 1;
         N = Integer.parseInt(args[0]);
         threads = Integer.parseInt(args[1]);
-        chunkSize = 128 * N;
+        chunkSize = BATCH_ROWS * N;
 
         LOG_MASTER("Information: N = %d, threads per rank = %d\n", N, threads);
         LOG_MASTER("Checking the number of threads in all ranks...\n");
@@ -128,6 +129,8 @@ public class Gemm {
                 status = MPI.COMM_WORLD.probe(MPI.ANY_SOURCE, MPI.ANY_TAG);
 
                 if (status.getTag() == FINISH_TAG) {
+                    // When a finish message is received, I can receive all the following messages of the
+                    // same worker. Then, the probe call will return a new message from another worker.
                     double[] offsetC = new double[rowsPerWorker * N];
                     recvBatchedArray(offsetC, status.getSource(), rowsPerWorker, chunkSize, FINISH_TAG);
 
@@ -236,25 +239,12 @@ public class Gemm {
         Objects.requireNonNull(a);
         Objects.requireNonNull(b);
 
-        SharedVariable<double[]> vA = new SharedVariable<>(a);
-        SharedVariable<double[]> vB = new SharedVariable<>(b);
-        SharedVariable<Integer> vN = new SharedVariable<>(n);
-
-        JROMP.withThreads(threads)
-             .registerVariables(vA, vB, vN)
-             .parallelFor(0, n, false, n > 10_000, (start, end) -> {
-                 double[] A = vA.value();
-                 double[] B = vB.value();
-                 int N = vN.value();
-
-                 for (int i = start; i < end; i++) {
-                     for (int j = 0; j < N; j++) {
-                         A[i * N + j] = randomInRange(1, 1000);
-                         B[i * N + j] = randomInRange(1, 1000);
-                     }
-                 }
-             })
-             .join();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                a[i * n + j] = randomInRange(1, 1000);
+                b[i * n + j] = randomInRange(1, 1000);
+            }
+        }
     }
 
     /**
@@ -328,4 +318,4 @@ public class Gemm {
     }
 }
 
-// Last revision (scastd): 19/01/2025 00:18
+// Last revision (scastd): 19/01/2025 13:57
