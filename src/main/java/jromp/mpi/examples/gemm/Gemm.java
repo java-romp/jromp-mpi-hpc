@@ -34,7 +34,7 @@ public class Gemm {
     // Global constants
     private static final int MASTER_RANK = 0;
     private static final int EXIT_FAILURE = 1;
-    private static final int BATCH_ROWS = 4096;
+    private static final int BATCH_ROWS = 8192; // 2^13
 
     public static void main(String[] args) throws MPIException {
         if (args.length != 2) {
@@ -321,4 +321,4 @@ public class Gemm {
     }
 }
 
-// Last revision (scastd): 19/01/2025 13:57
+// Last revision (scastd): 19/01/2025 15:49
