@@ -14,12 +14,14 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
-import static jromp.mpi.examples.gemm.Tags.FINISH_TAG;
-import static jromp.mpi.examples.gemm.Tags.START_MULTIPLICATION_TAG;
-
 @SuppressWarnings({ "java:S100", "java:S106", "java:S117", "java:S1192", "java:S1450", "java:S1659", "java:S3008" })
 public class Gemm {
+    // Tags for MPI messages
+    public static final int DATA_TAG = 0;
+    public static final int FINISH_TAG = 1;
+    public static final int START_MULTIPLICATION_TAG = 2;
+
+    // Constants/Fields used in program
     private static final SecureRandom random = new SecureRandom();
     private static final Object printLock = new Object();
     private static int workers;
@@ -29,6 +31,7 @@ public class Gemm {
     private static int size;
     private static int chunkSize;
 
+    // Global constants
     private static final int MASTER_RANK = 0;
     private static final int EXIT_FAILURE = 1;
     private static final int BATCH_ROWS = 4096;
