@@ -355,7 +355,7 @@ function parallel_30 {
 
 function main {
   parallel_1
-  sleep 2 # Ensure that the previous jobs are submitted before the next ones
+  sleep 5 # Ensure that the previous jobs are submitted before the next ones
   parallel_5
   parallel_10
   parallel_15
