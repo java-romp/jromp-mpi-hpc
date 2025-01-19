@@ -16,6 +16,7 @@ import java.util.Objects;
 
 import static jromp.mpi.examples.gemm.Tags.DATA_TAG;
 import static jromp.mpi.examples.gemm.Tags.FINISH_TAG;
+import static jromp.mpi.examples.gemm.Tags.START_MULTIPLICATION_TAG;
 
 @SuppressWarnings({ "java:S100", "java:S106", "java:S117", "java:S1192", "java:S1450", "java:S1659", "java:S3008", "t" })
 public class Gemm {
@@ -111,6 +112,11 @@ public class Gemm {
             double sendDataEnd = MPI.wtime();
             LOG_MASTER("Time to send data to workers: %fs\n", sendDataEnd - sendDataStart);
 
+            // Send a message to workers (without body) to indicate the start of the calculations
+            for (int i = 1; i < size; i++) {
+                MPI.COMM_WORLD.send(new byte[0], 0, MPI.BYTE, i, START_MULTIPLICATION_TAG);
+            }
+
             LOG_MASTER("*************************************\n");
             LOG_MASTER("******* Matrix Multiplication *******\n");
             LOG_MASTER("*************************************\n");
@@ -155,6 +161,10 @@ public class Gemm {
             // Receive rows of A and matrix B
             recvBatchedArray(A, MASTER_RANK, rowsPerWorker, chunkSize, DATA_TAG);
             recvBatchedArray(B, MASTER_RANK, N, chunkSize, DATA_TAG);
+
+            // Wait for the start message
+            MPI.COMM_WORLD.recv(new byte[0], 0, MPI.BYTE, MASTER_RANK, START_MULTIPLICATION_TAG);
+            LOG_WORKER("Worker %d has started\n", rank);
 
             // Perform matrix multiplication
             gemm(A, B, C, rowsPerWorker);
