@@ -104,7 +104,7 @@ fun createTaskWithNumProcesses(
                 mpiRun,
                 *mpiRunParameters.toTypedArray(),
                 "-np", "$processes",
-                "java", *jvmParameters.toTypedArray(), "-cp", classpath, pkg.toString(),
+                "java", *jvmParameters.toTypedArray(), "-cp", classpath, "-ea", pkg.toString(),
                 *params.toTypedArray()
             )
 

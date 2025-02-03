@@ -12,7 +12,7 @@
 #SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
 
 # ---------------------------------------------------- #
-# ------- Properties set on run_calendula.bash ------- #
+# ----------- Properties set on run script ----------- #
 # ---------------------------------------------------- #
 # --ntasks=1                                     # Number of tasks (processes)
 # --ntasks-per-node=1                            # Number of task per node
@@ -62,10 +62,7 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 export UCX_NET_DEVICES=mlx5_0:1
 
 # Compile the Java classes
-# ./gradlew compileJava
-
-# Print the SLURM info
-print_slurm_info
+./gradlew clean compileJava
 
 # Get the fully qualified class name
 fq_class_name="$1"
