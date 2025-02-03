@@ -8,7 +8,7 @@
 #SBATCH --qos=normal                                   # QOS to launch this partition (5 days max)
 #SBATCH --time=5-00:00:00                              # Estimated maximum time for the job
 #SBATCH --mail-user=scastd00@estudiantes.unileon.es    # Mail to receive info (start/cancel/end)
-#SBATCH --mail-type=FAIL                               # We want to receive all the failures
+#SBATCH --mail-type=FAIL,END                           # We want to receive all the failures
 #SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
 #SBATCH --ntasks=1                                     # Number of tasks (processes)
 #SBATCH --ntasks-per-node=1                            # Number of task per node
@@ -36,13 +36,13 @@ CC="nvcc"
 CUDA_LINKS="-lcublas"
 RUN_COMMAND=
 matrix_size=
-optimization_level=0
+optimization_level=$1
 
 if [[ $(hostname) == cn* ]]; then
     cuda_module="CUDA/12.1.1"
 
     if ! module is-loaded "$cuda_module"; then
-      module load $cuda_module
+        module load $cuda_module
     fi
 
     RUN_COMMAND="srun"
@@ -55,7 +55,7 @@ fi
 echo "Compiling CUDA..."
 
 # Compile the code
-$CC -o gemm.cu.o gemm.cu -O$optimization_level $CUDA_LINKS
+$CC -o gemm.cu.o gemm.cu -O"$optimization_level" $CUDA_LINKS
 
 # Hide warnings
 export PRTE_MCA_plm_slurm_disable_warning=true
@@ -64,7 +64,7 @@ export PRTE_MCA_plm_slurm_ignore_args=true
 # Use mlx5_0:1 interface for Infiniband
 export UCX_NET_DEVICES=mlx5_0:1
 
-echo "Executing CUDA..."
+echo "Executing CUDA with matrix size $matrix_size and optimization level $optimization_level"
 
 # Execute the code
-$RUN_COMMAND ./gemm.cu.o $matrix_size
+$RUN_COMMAND ./gemm.cu.o $matrix_size "$optimization_level"

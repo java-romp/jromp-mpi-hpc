@@ -111,10 +111,11 @@ inline void setRandomSeedSecure(const int rank) {
  *
  * @param n the matrix size.
  * @param elapsed_time the elapsed time in milliseconds.
+ * @param optimization the optimization level.
  */
-inline void writeExecutionConfigurationToFile(const int n, const double elapsed_time) {
+inline void writeExecutionConfigurationToFile(const int n, const double elapsed_time, const int optimization) {
     std::ofstream file;
-    file.open("execution_configuration_cuda.csv", std::ios_base::app);
+    file.open("execution_configs_cuda.csv", std::ios_base::app);
 
     if (!file.is_open()) {
         std::cerr << "Error: Could not open file" << std::endl;
@@ -122,13 +123,11 @@ inline void writeExecutionConfigurationToFile(const int n, const double elapsed_
     }
 
     if (file.tellp() == 0) {
-        file << "n,elapsed_time" << std::endl;
+        file << "n,optimization,elapsed_time" << std::endl;
     }
 
-    file << n << "," << elapsed_time << std::endl;
+    file << n << "," << optimization << "," << elapsed_time << std::endl;
     file.close();
 }
-
-
 
 #endif // GEMM_CUH

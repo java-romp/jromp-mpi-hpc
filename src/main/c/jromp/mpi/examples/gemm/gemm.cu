@@ -1,12 +1,14 @@
 #include "gemm.cuh"
 
 int main(const int argc, char *argv[]) {
-    if (argc != 2) {
-        std::cout << "Usage: " << argv[0] << " <N>" << std::endl;
+    if (argc != 3) {
+        std::cout << "Usage: " << argv[0] << " <N> <OPTIMIZATION>" << std::endl;
     }
 
     const auto N = static_cast<int>(strtol(argv[1], nullptr, 10));
+    const auto OPTIMIZATION = static_cast<int>(strtol(argv[2], nullptr, 10));
     std::cout << "Matrix size: " << N << std::endl;
+    std::cout << "Optimization: " << OPTIMIZATION << std::endl;
 
     const int m = N;
     const int n = N;
@@ -48,7 +50,7 @@ int main(const int argc, char *argv[]) {
         CUDA_CALL(cudaStreamSynchronize(stream));
     STOP_CUDA_TIMER_PRINT_ELAPSED(Gemm)
 
-    writeExecutionConfigurationToFile(n, GET_CUDA_ELAPSED(Gemm));
+    writeExecutionConfigurationToFile(N, GET_CUDA_ELAPSED(Gemm), OPTIMIZATION);
 
     CUDA_CALL(cudaFree(d_A));
     CUDA_CALL(cudaFree(d_B));
