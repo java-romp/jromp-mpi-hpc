@@ -3,29 +3,31 @@
 # ---------------------------------------------------- #
 # --------------- Immutable properties --------------- #
 # ---------------------------------------------------- #
-#SBATCH --partition=formacion                          # Partition where the Jobs are sent
-#SBATCH --account=ule_formacion_9                      # Account to charge the job
-#SBATCH --qos=normal                                   # QOS to launch this partition (5 days max)
-#SBATCH --time=5-00:00:00                              # Estimated maximum time for the job
-#SBATCH --mail-user=scastd00@estudiantes.unileon.es    # Mail to receive info (start/cancel/end)
-#SBATCH --mail-type=FAIL,END                           # We want to receive all the failures and end information
-#SBATCH --mem=0                                        # Memory required (0 = no limit) Node for me
+#SBATCH --partition=formacion                            # Partition where the Jobs are sent
+#SBATCH --account=ule_formacion_9                        # Account to charge the job
+#SBATCH --qos=normal                                     # QOS to launch this partition (5 days max)
+#SBATCH --time=5-00:00:00                                # Estimated maximum time for the job
+#SBATCH --mail-user=scastd00@estudiantes.unileon.es      # Mail to receive info (start/cancel/end)
+#SBATCH --mail-type=FAIL,END                             # We want to receive all the failures and end information
+#SBATCH --mem=0                                          # Memory required (0 = no limit) Node for me
+#SBATCH --constraint=icelake                             # Node type
+#SBATCH --exclude=cn[6001-6008]                          # Nodes to exclude
 
 # ---------------------------------------------------- #
 # ------- Properties set on run_calendula.bash ------- #
 # ---------------------------------------------------- #
-# --ntasks=1                                     # Number of tasks (processes)
-# --ntasks-per-node=1                            # Number of task per node
-# --cpus-per-task=32                             # Number of cpus per task
-# --nodes=1                                      # Number of nodes
-# --nodelist=cn6009                              # Node where the job is sent
+# --ntasks=1                                             # Number of tasks (processes)
+# --ntasks-per-node=1                                    # Number of task per node
+# --cpus-per-task=32                                     # Number of cpus per task
+# --nodes=1                                              # Number of nodes
+# --nodelist=cn6009                                      # Node where the job is sent
 
 # ---------------------------------------------------- #
 # --------------- Properties to adjust --------------- #
 # ---------------------------------------------------- #
-#SBATCH --job-name=jromp-mpi-c-gemm                           # Name of the job to be sent
-#SBATCH --output=outputs/out/jromp-mpi-c-gemm_%A.out          # Output filename
-#SBATCH --error=outputs/err/jromp-mpi-c-gemm_%A.err           # Error filename
+#SBATCH --job-name=jromp-mpi-c-gemm                      # Name of the job to be sent
+#SBATCH --output=outputs/out/jromp-mpi-c-gemm_%A.out     # Output filename
+#SBATCH --error=outputs/err/jromp-mpi-c-gemm_%A.err      # Error filename
 
 # ---------------------------------------------------- #
 # ------------------ Job execution ------------------- #

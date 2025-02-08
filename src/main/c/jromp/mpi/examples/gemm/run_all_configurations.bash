@@ -28,7 +28,7 @@ function run_config {
   local optimization_level=$4
   local node_list_str=$5
 
-  echo "Running configuration: nodes=$nodes, n_tasks=$n_tasks, cpus_per_task=$cpus_per_task, optimization_level=$optimization_level, node_list=$node_list_str"
+#  echo "Running configuration: nodes=$nodes, n_tasks=$n_tasks, cpus_per_task=$cpus_per_task, optimization_level=$optimization_level, node_list=$node_list_str"
 
   local compiled_file="gemm_${nodes}_${n_tasks}_${MATRIX_SIZE}_${cpus_per_task}_${optimization_level}"
 
@@ -37,7 +37,6 @@ function run_config {
     --ntasks=$n_tasks \
     --ntasks-per-node=2 \
     --cpus-per-task=$cpus_per_task \
-    --nodelist="$node_list_str" \
     run.slurm $n_tasks $MATRIX_SIZE $cpus_per_task $optimization_level $compiled_file
 }
 
