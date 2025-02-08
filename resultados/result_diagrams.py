@@ -68,7 +68,7 @@ def plot_graphs_all_combined(c_data, java_data, cuda_data):
 
     # C -O1
     sns.lineplot(data=c_data[c_data["opt_level"] == 1], x="threads", y="time", hue="workers", style="workers", markers=True, dashes=False,
-                    palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[0, 1])
+                 palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[0, 1])
     axs[0, 1].set_title("Time vs. Thread configuration (C -O1)", fontsize=14)
     axs[0, 1].set_xlabel("Threads")
     axs[0, 1].set_ylabel("Time (s)")
@@ -76,7 +76,7 @@ def plot_graphs_all_combined(c_data, java_data, cuda_data):
 
     # C -O2
     sns.lineplot(data=c_data[c_data["opt_level"] == 2], x="threads", y="time", hue="workers", style="workers", markers=True, dashes=False,
-                    palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[1, 0])
+                 palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[1, 0])
     axs[1, 0].set_title("Time vs. Thread configuration (C -O2)", fontsize=14)
     axs[1, 0].set_xlabel("Threads")
     axs[1, 0].set_ylabel("Time (s)")
@@ -84,19 +84,50 @@ def plot_graphs_all_combined(c_data, java_data, cuda_data):
 
     # C -O3
     sns.lineplot(data=c_data[c_data["opt_level"] == 3], x="threads", y="time", hue="workers", style="workers", markers=True, dashes=False,
-                    palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[1, 1])
+                 palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[1, 1])
     axs[1, 1].set_title("Time vs. Thread configuration (C -O3)", fontsize=14)
     axs[1, 1].set_xlabel("Threads")
     axs[1, 1].set_ylabel("Time (s)")
     axs[1, 1].legend(title="Workers")
 
+    # Ajustar ejes iguales con margen
+    x_min = c_data["threads"].min()
+    x_max = c_data["threads"].max()
+    y_min = c_data["time"].min()
+    y_max = c_data["time"].max()
+
+    x_range = x_max - x_min
+    y_range = y_max - y_min
+    x_ticks = c_data["threads"].unique()
+
+    for ax in axs:
+        for a in ax:
+            a.set_xlim(x_min - x_range * margin_factor, x_max + x_range * margin_factor)
+            a.set_ylim(y_min - y_range * margin_factor, y_max + y_range * margin_factor)
+            a.set_xticks(x_ticks)
+
+    plt.savefig("diagrams/combined/time_vs_threads_all_c.png", dpi=300)
+    plt.close()
+
+    # (time_vs_threads_c0_java) Single plot with C opt level 0 and Java data
+    fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+    fig.tight_layout(pad=5.0)
+
+    # C -O0
+    sns.lineplot(data=c_data[c_data["opt_level"] == 0], x="threads", y="time", hue="workers", style="workers", markers=True, dashes=False,
+                 palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[0])
+    axs[0].set_title("Time vs. Thread configuration (C -O0)", fontsize=14)
+    axs[0].set_xlabel("Threads")
+    axs[0].set_ylabel("Time (s)")
+    axs[0].legend(title="Workers")
+
     # Java
-    # sns.lineplot(data=java_data, x="threads", y="time", hue="workers", style="workers", markers=True, dashes=False,
-    #              palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[1, 1])
-    # axs[1, 1].set_title("Time vs. Thread configuration (Java)", fontsize=14)
-    # axs[1, 1].set_xlabel("Threads")
-    # axs[1, 1].set_ylabel("Time (s)")
-    # axs[1, 1].legend(title="Workers")
+    sns.lineplot(data=java_data, x="threads", y="time", hue="workers", style="workers", markers=True, dashes=False,
+                 palette=custom_palette, linewidth=lw, errorbar=None, ax=axs[1])
+    axs[1].set_title("Time vs. Thread configuration (Java)", fontsize=14)
+    axs[1].set_xlabel("Threads")
+    axs[1].set_ylabel("Time (s)")
+    axs[1].legend(title="Workers")
 
     # Ajustar ejes iguales con margen
     x_min = min(c_data["threads"].min(), java_data["threads"].min())
@@ -109,27 +140,27 @@ def plot_graphs_all_combined(c_data, java_data, cuda_data):
     x_ticks = c_data["threads"].unique()
 
     for ax in axs:
-        for a in ax:
-            a.set_xlim(x_min - x_range * margin_factor, x_max + x_range * margin_factor)
-            a.set_ylim(y_min - y_range * margin_factor, y_max + y_range * margin_factor)
-            a.set_xticks(x_ticks)
+        ax.set_xlim(x_min - x_range * margin_factor, x_max + x_range * margin_factor)
+        ax.set_ylim(y_min - y_range * margin_factor, y_max + y_range * margin_factor)
+        ax.set_xticks(x_ticks)
 
-    plt.savefig("diagrams/combined/time_vs_threads.png", dpi=300)
+    plt.savefig("diagrams/combined/time_vs_threads_c0_java.png", dpi=300)
     plt.close()
 
-    # Single plot with Java data appended to the C data (adding a new column to the java one: opt_level = "Java")
-    # Prepend "C" to the opt_level column of the C data
+    # Time vs. Total CPUs log scale
+    include_cuda = True
     c_data.sort_values(by="opt_level", inplace=True)
     c_data_ = c_data.copy()
     c_data_["opt_level"] = "C -O" + c_data_["opt_level"].astype(str)
     data_ = [c_data_, java_data]
     combined_data = pd.concat(data_, ignore_index=True)
-    fastest_time_cuda = cuda_data["elapsed_time"].min() / 1000  # Convert to seconds
 
     plt.figure(figsize=(10, 6))
     sns.lineplot(data=combined_data, x="total_cpus", y="time", hue="opt_level", style="opt_level", markers=True, dashes=False,
                  palette=custom_palette, linewidth=lw, errorbar=None)
-    # plt.scatter(x=1, y=fastest_time_cuda, color="g", label="CUDA", s=50, marker="x")
+    if include_cuda:
+        fastest_time_cuda = cuda_data["elapsed_time"].min() / 1000  # Convert to seconds
+        plt.scatter(x=1, y=fastest_time_cuda, color="g", label="CUDA", s=50, marker="x")
     plt.title("Time vs. Total CPUs (C and Java)", fontsize=14)
     plt.xlabel("Total CPUs")
     plt.ylabel("Time (s)")
@@ -170,6 +201,7 @@ def plot_graph_all_combined_one_c_optimization(c_data, java_data, cuda_data):
     plt.xticks([1, 200, 400, 600, 800, 960])
     plt.savefig(f"diagrams/combined/time_vs_total_cpus_log_combined_o{optimization}.png", dpi=300)
     plt.close()
+
 
 def c_speedup(data):
     if not os.path.exists("diagrams/c"):
