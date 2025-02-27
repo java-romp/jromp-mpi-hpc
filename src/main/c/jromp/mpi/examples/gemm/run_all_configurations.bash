@@ -80,7 +80,7 @@ function parallel_1 {
   run_config 1 2 32 1 "cn6010"
   run_config 1 2 32 2 "cn6011"
   run_config 1 2 32 3 "cn6012"
-}
+} # OK
 
 function parallel_5 {
   local nodes_9_to_11="cn[6009-6011]"
@@ -128,7 +128,7 @@ function parallel_5 {
   run_config 3 6 32 1 "$nodes_15_to_17"
   run_config 3 6 32 2 "$nodes_18_to_20"
   run_config 3 6 32 3 "$nodes_9_to_11"
-}
+} # OK
 
 function parallel_10 {
   local nodes_9_to_14="cn[6009-6014]"
@@ -173,7 +173,7 @@ function parallel_10 {
   run_config 6 11 32 1 "$nodes_15_to_20"
   run_config 6 11 32 2 "$nodes_9_to_14"
   run_config 6 11 32 3 "$nodes_15_to_20"
-}
+} # OK
 
 function parallel_15 {
   local nodes_9_to_16="cn[6009-6016]"
@@ -218,7 +218,7 @@ function parallel_15 {
   run_config 8 16 32 1 "$nodes_17_to_24"
   run_config 8 16 32 2 "$nodes_9_to_16"
   run_config 8 16 32 3 "$nodes_17_to_24"
-}
+} # OK
 
 function parallel_20 {
   local nodes_9_to_20="cn[6009-6020]"
@@ -262,7 +262,7 @@ function parallel_20 {
   run_config 11 21 32 1 "$nodes_9_to_20"
   run_config 11 21 32 2 "$nodes_9_to_20"
   run_config 11 21 32 3 "$nodes_9_to_20"
-}
+} # OK
 
 function parallel_25 {
   local nodes_9_to_21="cn[6009-6021]"
@@ -306,7 +306,7 @@ function parallel_25 {
   run_config 13 26 32 1 "$nodes_9_to_21"
   run_config 13 26 32 2 "$nodes_9_to_21"
   run_config 13 26 32 3 "$nodes_9_to_21"
-}
+} # OK
 
 function parallel_30 {
   local all_nodes="cn[6009-6024]"
@@ -350,7 +350,7 @@ function parallel_30 {
   run_config 16 31 32 1 "$all_nodes"
   run_config 16 31 32 2 "$all_nodes"
   run_config 16 31 32 3 "$all_nodes"
-}
+} # OK
 
 function main {
   parallel_1

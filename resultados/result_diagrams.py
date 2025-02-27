@@ -15,10 +15,12 @@ def plot_graphs_c(data):
 
     sns.set_theme(style="whitegrid")
 
-    pivot_table = np.log1p(data.pivot_table(values="time", index="workers", columns="threads"))
+    optimization = 0
+    c0_opt = data[data["opt_level"] == optimization]
+    pivot_table = np.log1p(c0_opt.pivot_table(values="time", index="workers", columns="threads"))
     plt.figure(figsize=(10, 6))
     sns.heatmap(pivot_table, annot=True, fmt=".2f", cmap="rocket_r")
-    plt.title("Heatmap C (log scale)", fontsize=14)
+    plt.title(f"Heatmap C -O{optimization} (log scale)", fontsize=14)
     plt.xlabel("Threads")
     plt.ylabel("Workers")
     plt.tight_layout()
@@ -160,8 +162,10 @@ def plot_graphs_all_combined(c_data, java_data, cuda_data):
                  palette=custom_palette, linewidth=lw, errorbar=None)
     if include_cuda:
         fastest_time_cuda = cuda_data["elapsed_time"].min() / 1000  # Convert to seconds
-        plt.scatter(x=1, y=fastest_time_cuda, color="g", label="CUDA", s=50, marker="x")
-    plt.title("Time vs. Total CPUs (C and Java)", fontsize=14)
+        plt.scatter(x=1, y=fastest_time_cuda, color="g", label="CUDA", s=70, marker="x")
+        plt.title("Time vs. Total CPUs (C, Java and CUDA) (log scale)", fontsize=14)
+    else:
+        plt.title("Time vs. Total CPUs (C and Java) (log scale)", fontsize=14)
     plt.xlabel("Total CPUs")
     plt.ylabel("Time (s)")
     plt.legend(title="Execution type")
